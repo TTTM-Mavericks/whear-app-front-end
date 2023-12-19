@@ -42,7 +42,7 @@ const SignInComponent = () => {
     }
 
     if (password) {
-      setPassword('')
+      setPassword('');
     }
   }
 
