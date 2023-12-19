@@ -32,7 +32,7 @@ const SignInComponent = () => {
       // }, 1000)
       // navigation.navigate('Home');
     } else {
-      alert('wrog')
+      alert('wrog');
     }
   };
 
