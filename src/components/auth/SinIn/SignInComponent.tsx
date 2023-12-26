@@ -1,95 +1,203 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import SigInStylesComponent from './SignInStyleComponent';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from '@rneui/themed';
 
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../root/RootStackParams';
-import { ActivityIndicator, IconButton, MD2Colors, MD3Colors } from 'react-native-paper';
-import { Icon, Input } from '@rneui/base';
+import { ActivityIndicator, IconButton, MD2Colors, MD3Colors, TextInput, Icon } from 'react-native-paper';
+import { ButtonGroup, Image, Input } from '@rneui/base';
+import { backgroundColor, primaryColor } from '../../../root/Colors';
+import {
+  signIn as signInAction,
+  moveToForgotPassword as moveToForgotPasswordAction,
+  setEmailSignIned as setEmailSignInedAction
+} from '../AuthState/AuthSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { validateEmail, validatePassword } from '../../Common/Functions/CommonFunctionComponents';
+import { inputTextSize } from '../../../root/Texts';
 
-
-interface SignInComponentProps {
-  onSignIn: (username: string, password: string) => void;
-}
+/**
+ * Image Url
+ */
+const FACBOOK_LOGO = require('../../../assets/img/facebook_logo.png');
+const GOOGLE_LOGO = require('../../../assets/img/google_logo.png');
+const TWITTER_LOGO = require('../../../assets/img/twitter_logo.png');
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 
+interface SignInProps {
+  email: string;
+  password: string;
+  signIn: (email: string, password: string) => void;
+  clearInput: () => void;
+  moveToForgotPassword: (email: string) => void;
+}
 
 const SignInComponent = () => {
-  const [username, setUsername] = useState('');
+
+  /* Declear variable */
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [errorEmailValidate, setEmailErrorValidate] = useState('');
+  const [isEmailValidate, setIsEmailValidate] = useState(true);
+  const [errorPasswordValidate, setPasswordErrorValidate] = useState('');
+  const [isPasswordValidate, setIsPasswordValidate] = useState(true);
+  const [isHidePassword, setIsHidePassword] = useState(true);
+  const dispatch = useDispatch();
   const navigation = useNavigation<SignInScreenNavigationProp>();
-  const input = React.createRef();
 
+  /* UseEffect */
 
-  const handleSignIn = () => {
+  useEffect(() => {
 
-    if (username === '1' && password === 'a') {
-      // setTimeout(() => {
-      <ActivityIndicator animating={true} color={MD2Colors.red800} />
-      // }, 1000)
-      // navigation.navigate('Home');
+  }, [])
+
+  /**
+   * Validate Email
+   */
+  useEffect(() => {
+    const error = validateEmail(email);
+    if (!error.isValid && error.error) {
+      setEmailErrorValidate(error.error);
+      setIsEmailValidate(false);
     } else {
-      alert('wrog');
+      setEmail(email);
+      setIsEmailValidate(true);
     }
+  }, [email]);
+
+  /**
+   * Validate Password
+   */
+  useEffect(() => {
+    const error = validatePassword(password);
+    if (!error.isValid && error.error) {
+      setPasswordErrorValidate(error.error);
+      setIsPasswordValidate(false);
+    } else {
+      setPassword(password);
+      setIsPasswordValidate(true);
+    }
+  }, [password]);
+
+
+
+
+  /* Function handler */
+
+  /**
+   * SignIn
+   */
+  const handleSignIn = () => {
+    if (email === 'a' && password === '1') {
+      dispatch(signInAction({ email: email, password: password }));
+      dispatch(setEmailSignInedAction({ email }))
+    } else {
+      alert('wrong')
+    }
+    navigation.navigate('Home');
   };
 
+  /**
+   * Clear input
+   */
   const handleClearInput = () => {
-    if (username) {
-      setUsername('');
-    }
+    setEmail('');
+  };
 
-    if (password) {
-      setPassword('');
-    }
+  /**
+   * Move to forgot password screen
+   * @param email 
+   */
+  const handleMoveToForgotPassword = (email: string) => {
+    dispatch(moveToForgotPasswordAction({ email }));
+    navigation.navigate('ForgotPassword', { email });
+  };
+
+  /**
+   * Un/Hide password
+   */
+  const handleHidePassword = () => {
+    setIsHidePassword(!isHidePassword);
   }
 
+  
 
   return (
     <View style={SigInStylesComponent.container}>
       <Text style={SigInStylesComponent.title}>Sign In</Text>
-        <Input
-          style={SigInStylesComponent.input}
-          value={username}
-          onChangeText={(text) => setUsername(text)}
-          placeholder='User name'
-          rightIcon={
-            <IconButton
-              icon="close"
-              iconColor={MD3Colors.error50}
-              size={30}
-              onPress={handleClearInput}
+      <TextInput
+        label="Email"
+        value={email}
+        style={SigInStylesComponent.input}
+        onChangeText={text => setEmail(text)}
+        mode='outlined'
+        right={
+          <TextInput.Icon icon="close" onPress={handleClearInput} />
+        }
+      />
+      {!isEmailValidate && (
+        <Text style={SigInStylesComponent.errorValidate}>{errorEmailValidate}</Text>
+      )}
+
+      <TextInput
+        label="Password"
+        value={password}
+        style={SigInStylesComponent.input}
+        secureTextEntry={isHidePassword}
+        mode='outlined'
+        onChangeText={(text) => setPassword(text)}
+        right={
+          <TextInput.Icon icon="eye"
+            onPress={handleHidePassword}
+          />
+        }
+      />
+      {!isPasswordValidate && (
+        <Text style={SigInStylesComponent.errorValidate}>{errorPasswordValidate}</Text>
+      )}
+      <TouchableOpacity onPress={() => handleMoveToForgotPassword(email)}>
+        <Text style={SigInStylesComponent.content}>Forgot password?</Text>
+      </TouchableOpacity>
+      <Button
+        style={SigInStylesComponent.button}
+        onPress={handleSignIn}
+      >
+        Sign In
+      </Button>
+      <Text style={SigInStylesComponent.optionSignIn}>Sign in with</Text>
+      <View style={{ backgroundColor: backgroundColor, alignItems: 'center', justifyContent: 'center' }}>
+        <ButtonGroup
+          containerStyle={SigInStylesComponent.buttonGroupOption}
+          buttons={[
+            <Image
+              source={FACBOOK_LOGO}
+              style={SigInStylesComponent.buttonOption}
+              PlaceholderContent={<ActivityIndicator />}
+            />,
+            <Image
+              source={GOOGLE_LOGO}
+              style={[SigInStylesComponent.buttonOption, SigInStylesComponent.buttonMargin]}
+              PlaceholderContent={<ActivityIndicator />}
+            />,
+            <Image
+              source={TWITTER_LOGO}
+              style={[SigInStylesComponent.buttonOption, SigInStylesComponent.buttonMargin]}
+              PlaceholderContent={<ActivityIndicator />}
             />
-          }
+          ]}
         />
-        <Input
-          style={SigInStylesComponent.input}
-          secureTextEntry={true}
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          placeholder='Password'
-          rightIcon={
-            <IconButton
-              icon="camera"
-              iconColor={MD3Colors.error50}
-              size={30}
-              onPress={() => console.log('Pressed')}
-            />
-          }
-        />
-        <Button
-          linearGradientProps={{
-            colors: ["#FF9800", "#F44336"],
-            start: { x: 0, y: 0.5 },
-            end: { x: 1, y: 0.5 },
-          }}
-          onPress={() => navigation.navigate('Home')}
-        >
-          Sign In
-        </Button>
       </View>
+      <View style={SigInStylesComponent.inlineContainer}>
+        <Text style={SigInStylesComponent.optionSignIn}>You don't have an account?</Text>
+        <TouchableOpacity style={{ width: 70 }}>
+          <Text onPress={() => navigation.navigate('SignUp')} style={SigInStylesComponent.content}>Sign up</Text>
+        </TouchableOpacity>
+      </View>
+
+    </View >
   );
 };
 
