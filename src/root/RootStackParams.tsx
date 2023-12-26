@@ -1,9 +1,16 @@
-// types.ts
 export type RootStackParamList = {
-    SignIn: undefined;
-    Home: undefined;
-    Route: undefined;
+  SignIn: undefined;
+  SignUp: undefined;
+  Home: undefined;
+  Route: undefined;
+  ForgotPassword: { email: String };
 
-    // Add more screens as needed
+};
+
+export interface RootState {
+  auth: {
+    openPolicy: boolean;
+    // ... other auth properties
   };
-  
+  // ... other slices
+}

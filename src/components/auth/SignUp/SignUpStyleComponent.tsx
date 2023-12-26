@@ -1,13 +1,14 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { backgroundColor, primaryColor } from '../../../root/Colors';
-import { errorValidate, titleTextSize } from '../../../root/Texts';
+import { errorValidate, inputTextSize, titleTextSize } from '../../../root/Texts';
 
 const { width, height } = Dimensions.get('window');
 const containerPadding = 16;
 
-const SignInStylesComponent = StyleSheet.create({
+const SignUpStylesComponent = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 100,
     justifyContent: 'center',
     padding: containerPadding,
     backgroundColor: backgroundColor
@@ -22,7 +23,9 @@ const SignInStylesComponent = StyleSheet.create({
     width: 200,
   },
   input: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
+    fontSize: inputTextSize,
+    marginBottom: 10
   },
   button: {
     marginTop: 20,
@@ -30,7 +33,6 @@ const SignInStylesComponent = StyleSheet.create({
   },
   content: {
     fontSize: 15,
-    // marginBottom: 20,
     textAlign: 'right',
     marginRight: 10,
     textDecorationLine: 'underline',
@@ -53,9 +55,9 @@ const SignInStylesComponent = StyleSheet.create({
   buttonOption: {
     width: 40,
     height: 40,
-    borderWidth: 0, 
-    alignItems: 'center', 
-    justifyContent: 'center', 
+    borderWidth: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonMargin: {
     marginRight: 10, // Adjust the margin between buttons as needed
@@ -67,12 +69,17 @@ const SignInStylesComponent = StyleSheet.create({
   },
   errorValidate: {
     color: errorValidate,
-    marginLeft: 15,
-    marginTop: 5,
-    marginBottom: 5
-
+    marginLeft: 20
+  },
+  groupCheckbox: {
+    flexDirection: 'row',
+    marginLeft: -15
+  },
+  checkBoxText: {
+    fontSize: inputTextSize,
+    fontWeight: 'normal'
   }
 
 });
 
-export default SignInStylesComponent;
+export default SignUpStylesComponent;
