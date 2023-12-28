@@ -1,15 +1,17 @@
-import { GET_EMAIL_SIGNINED, MOVE_TO_FORGOT_PASSWORD, OPEN_POLICY, SIGN_IN } from "./AuthAction";
+import { ACCEPTED_POLICY, GET_EMAIL_SIGNINED, MOVE_TO_FORGOT_PASSWORD, OPEN_POLICY, SIGN_IN } from "./AuthAction";
 
 interface AuthState {
   email: string;
   password: string;
   isOpen: boolean;
+  isAcceptedPolicy: boolean;
 }
 
 const initialState: AuthState = {
   email: '',
   password: '',
   isOpen: false,
+  isAcceptedPolicy: false
 };
 
 const authReducer = (state = initialState, action: any): AuthState => {
@@ -33,7 +35,12 @@ const authReducer = (state = initialState, action: any): AuthState => {
     case OPEN_POLICY:
       return {
         ...state,
-        isOpen: action.payload.isOpen,
+        isOpen: action.payload,
+      };
+    case ACCEPTED_POLICY:
+      return {
+        ...state,
+        isAcceptedPolicy: action.payload,
       };
     default:
       return state;

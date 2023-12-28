@@ -30,7 +30,7 @@ const SignInStylesComponent = StyleSheet.create({
   },
   content: {
     fontSize: 15,
-    // marginBottom: 20,
+    marginBottom: 20,
     textAlign: 'right',
     marginRight: 10,
     textDecorationLine: 'underline',
@@ -44,11 +44,13 @@ const SignInStylesComponent = StyleSheet.create({
   },
   buttonGroupOption: {
     flexDirection: 'row',
-    width: 40 * 3 + 10 * 2,
+    width: 40 * 3 + 6 * 8,
     height: 42,
     textAlign: 'center',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'transparent', 
+    borderColor: 'transparent'
   },
   buttonOption: {
     width: 40,
@@ -58,12 +60,14 @@ const SignInStylesComponent = StyleSheet.create({
     justifyContent: 'center', 
   },
   buttonMargin: {
-    marginRight: 10, // Adjust the margin between buttons as needed
+    marginRight: 20, 
   },
   inlineContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20, // Adjust the margin as needed
+    marginTop: 20, 
+    textAlign: 'center',
+    justifyContent: 'center',
   },
   errorValidate: {
     color: errorValidate,

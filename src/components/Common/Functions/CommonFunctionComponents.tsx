@@ -31,6 +31,29 @@ export const validateEmail = (email: string): ValidationResult => {
   };
 }
 
+export const validateString = (string: string): ValidationResult => {
+  const stringRegex = /^[a-zA-Z0-9]{8,20}$/;
+
+  // Check if the password is provided
+  if (!string) {
+    return {
+      isValid: false,
+      error: 'Username is required.',
+    };
+  }
+
+  if (!stringRegex.test(string)) {
+    return {
+      isValid: false,
+      error: 'String must 8-20 characties and not have special characties.',
+    };
+  }
+
+  return {
+    isValid: true,
+  };
+}
+
 /**
  * Password validator
  * @param password 
