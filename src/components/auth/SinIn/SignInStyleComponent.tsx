@@ -25,12 +25,13 @@ const SignInStylesComponent = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   button: {
-    marginTop: 20,
-    backgroundColor: primaryColor
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   content: {
     fontSize: 15,
-    // marginBottom: 20,
+    marginBottom: 20,
     textAlign: 'right',
     marginRight: 10,
     textDecorationLine: 'underline',
@@ -40,30 +41,35 @@ const SignInStylesComponent = StyleSheet.create({
     marginBottom: 20,
     marginTop: 20,
     textAlign: 'center',
-    marginRight: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonGroupOption: {
     flexDirection: 'row',
-    width: 40 * 3 + 10 * 2,
+    width: 40 * 3 + 6 * 8,
     height: 42,
     textAlign: 'center',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'transparent',
+    borderColor: 'transparent'
   },
   buttonOption: {
     width: 40,
     height: 40,
-    borderWidth: 0, 
-    alignItems: 'center', 
-    justifyContent: 'center', 
+    borderWidth: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonMargin: {
-    marginRight: 10, // Adjust the margin between buttons as needed
+    marginRight: 20,
   },
   inlineContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20, // Adjust the margin as needed
+    marginTop: 20,
+    textAlign: 'center',
+    justifyContent: 'center',
   },
   errorValidate: {
     color: errorValidate,

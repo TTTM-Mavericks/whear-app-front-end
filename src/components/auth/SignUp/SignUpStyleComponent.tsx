@@ -35,6 +35,7 @@ const SignUpStylesComponent = StyleSheet.create({
     fontSize: 15,
     textAlign: 'right',
     marginRight: 10,
+    paddingLeft: 10,
     textDecorationLine: 'underline',
   },
   optionSignIn: {
@@ -77,7 +78,7 @@ const SignUpStylesComponent = StyleSheet.create({
   },
   checkBoxText: {
     fontSize: inputTextSize,
-    fontWeight: 'normal'
+    fontWeight: 'normal',
   }
 
 });
