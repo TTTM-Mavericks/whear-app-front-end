@@ -1,21 +1,20 @@
 
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
-import SigInStylesComponent from './HomeStyleComponent';
-import HomeStylesComponent from './HomeStyleComponent';
+import HomeStylesComponent from './HomeStyleScreen';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../root/RootStackParams';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { ActivityIndicator, MD2Colors } from 'react-native-paper';
+import CarouselComponent from '../../components/Common/Carousel/CarouselComponent';
 
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
-const HomeComponent = () => {
+const HomeScreen = () => {
   const navigation = useNavigation<SignInScreenNavigationProp>();
 
 
   return (
-    <View style={SigInStylesComponent.container}>
+    <View style={HomeStylesComponent.container}>
       <Text style={HomeStylesComponent.title}>Home Screen</Text>
       <Button
         title="Go to Sign In"
@@ -29,4 +28,4 @@ const HomeComponent = () => {
 };
 
 
-export default HomeComponent;
+export default HomeScreen;

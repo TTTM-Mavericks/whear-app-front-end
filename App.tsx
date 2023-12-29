@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import SignInComponent from './src/components/auth/SinIn/SignInComponent';
-import HomeComponent from './src/components/Home/HomeComponent';
+import HomeScreen from './src/Screens/Home/HomeScreen';
 import ForgotPasswordComponent from './src/components/auth/ForgotPassword/ForgotPasswordComponent';
 import { backgroundColor } from './src/root/Colors';
 
@@ -12,6 +12,7 @@ import { Provider } from 'react-redux'; // Import Provider
 import store from './src/components/auth/AuthState/AuthStore';
 import SignUpComponent from './src/components/auth/SignUp/SignUpComponent';
 import { PaperProvider } from 'react-native-paper';
+import IntroduceScreen from './src/Screens/Introduce/IntroduceComponent';
 
 const Stack = createStackNavigator();
 
@@ -37,7 +38,13 @@ export default function App() {
 
               <Stack.Screen
                 name="Home"
-                component={HomeComponent}
+                component={HomeScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="Introduce"
+                component={IntroduceScreen}
                 options={{ headerShown: false }}
               />
 

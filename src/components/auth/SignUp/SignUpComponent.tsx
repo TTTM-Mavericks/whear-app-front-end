@@ -14,7 +14,9 @@ import { Icon } from 'react-native-vector-icons/Icon';
 import PolicyComponent from '../Policy/PolicyComponent';
 import { RootState } from '../../../root/RootStackParams'
 import { setOpenPolicy } from '../AuthState/AuthAction';
-import { backgroundColor } from '../../../root/Colors';
+import { backgroundColor, primaryColor } from '../../../root/Colors';
+import ButtonComponent from '../../Button/ButtonDefaultComponent';
+import { buttonHeight, buttonWidth } from '../../Button/ButtonDefaultData';
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 
@@ -370,7 +372,7 @@ const SignUpComponent = () => {
                             textStyle={SignUpStylesComponent.checkBoxText}
                             title={
                                 <>
-                                    <Text style={{fontSize: 15}}> I accept the policy.
+                                    <Text style={{ fontSize: 15 }}> I accept the policy.
                                     </Text>
                                     <TouchableOpacity onPress={handleOpenPolicy}>
                                         <Text style={SignUpStylesComponent.content}>Read more?</Text>
@@ -380,10 +382,18 @@ const SignUpComponent = () => {
                         />
                         <PolicyComponent></PolicyComponent>
                     </View>
-                    <Button
-                        title="Sign Up"
-                        onPress={handleSignUp}
-                        buttonStyle={SignUpStylesComponent.button}
+
+                    <ButtonComponent
+                        title="Press me"
+                        onPress={() => {
+                            handleSignUp();
+                        }}
+                        width={buttonWidth}
+                        height={buttonHeight}
+                        backgroundColor={primaryColor}
+                        textColor='black'
+                        mode="contained"
+                        style={{ marginBottom: 0, color: 'black' }}
                     />
 
 

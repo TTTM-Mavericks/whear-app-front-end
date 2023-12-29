@@ -16,6 +16,8 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { validateEmail, validatePassword } from '../../Common/Functions/CommonFunctionComponents';
 import { inputTextSize } from '../../../root/Texts';
+import ButtonComponent from '../../Button/ButtonDefaultComponent';
+import { buttonHeightDefault, buttonWidth, buttonWidthDefault } from '../../Button/ButtonDefaultData';
 
 /**
  * Image Url
@@ -94,9 +96,9 @@ const SignInComponent = () => {
       dispatch(signInAction({ email: email, password: password }));
       dispatch(setEmailSignInedAction({ email }))
     } else {
-      alert('wrong')
+      // alert('wrong')
     }
-    navigation.navigate('Home');
+    navigation.navigate('Introduce');
   };
 
   /**
@@ -161,13 +163,27 @@ const SignInComponent = () => {
         <TouchableOpacity onPress={() => handleMoveToForgotPassword(email)}>
           <Text style={SigInStylesComponent.content}>Forgot password?</Text>
         </TouchableOpacity>
-        <Button
-          style={SigInStylesComponent.button}
-          onPress={handleSignIn}
-        >
-          Sign In
-        </Button>
-        <Text style={SigInStylesComponent.optionSignIn}>Sign in with</Text>
+        <View style={SigInStylesComponent.button}>
+          <ButtonComponent
+            title="Sign In"
+            onPress={() => {
+              handleSignIn();
+            }}
+            width={buttonWidth}
+            height={buttonHeightDefault}
+            backgroundColor={primaryColor}
+            textColor='black'
+            mode="contained"
+            style={[{
+              marginBottom: 0, color: 'black', textAlign: 'center',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }]}
+          />
+        </View>
+        <View style={SigInStylesComponent.optionSignIn}>
+          <Text style={SigInStylesComponent.optionSignIn}>Sign in with</Text>
+        </View>
         <View style={{ backgroundColor: backgroundColor, alignItems: 'center', justifyContent: 'center' }}>
           <ButtonGroup
             containerStyle={SigInStylesComponent.buttonGroupOption}
@@ -175,17 +191,17 @@ const SignInComponent = () => {
             buttons={[
               <Image
                 source={FACBOOK_LOGO}
-                style={[SigInStylesComponent.buttonOption, {marginLeft: 0, marginRight: 0}]}
+                style={[SigInStylesComponent.buttonOption, { marginLeft: 0, marginRight: 0 }]}
                 PlaceholderContent={<ActivityIndicator />}
               />,
               <Image
                 source={GOOGLE_LOGO}
-                style={[SigInStylesComponent.buttonOption, {marginLeft: 6, marginRight: 6.5}]}
+                style={[SigInStylesComponent.buttonOption, { marginLeft: 6, marginRight: 6.5 }]}
                 PlaceholderContent={<ActivityIndicator />}
               />,
               <Image
                 source={TWITTER_LOGO}
-                style={[SigInStylesComponent.buttonOption, {marginLeft: 6, marginRight: 6.5}]}
+                style={[SigInStylesComponent.buttonOption, { marginLeft: 6, marginRight: 6.5 }]}
                 PlaceholderContent={<ActivityIndicator />}
               />
             ]}
@@ -194,7 +210,7 @@ const SignInComponent = () => {
         <View style={SigInStylesComponent.inlineContainer}>
           <Text style={SigInStylesComponent.optionSignIn}>You don't have an account?</Text>
           <TouchableOpacity style={{ width: 70 }}>
-            <Text onPress={() => navigation.navigate('SignUp')} style={{ textDecorationLine: 'underline', fontSize: 15 }}>Sign up</Text>
+            <Text onPress={() => navigation.navigate('SignUp')} style={{ textDecorationLine: 'underline', fontSize: 15, marginLeft: 10 }}>Sign up</Text>
           </TouchableOpacity>
         </View>
       </View>
