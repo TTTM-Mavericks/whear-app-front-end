@@ -24,7 +24,7 @@ const languages = ['Vietnam', 'USA', 'UK', 'Japan'];
 
 const SignUpComponent = () => {
 
-    /*UseState variable */
+    /*-----------------UseState variable-----------------*/
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -55,7 +55,7 @@ const SignUpComponent = () => {
     const [isConfirmPasswordValidate, setIsConfirmPasswordValidate] = useState(true);
     const [isMatchingPassword, setIsMatchingPassword] = useState(false);
 
-    /*Usable variable */
+    /*-----------------Usable variable-----------------*/
     const dispatch = useDispatch();
     const navigation = useNavigation<SignInScreenNavigationProp>();
     const showCountryPicker = () => setModalVisible(true);
@@ -64,7 +64,7 @@ const SignUpComponent = () => {
     const isAcceptedPolicy = useSelector((state: any) => state.auth.isAcceptedPolicy);
 
 
-    /*UseEffect */
+    /*-----------------UseEffect-----------------*/
     useEffect(() => {
         console.log(isAcceptedPolicy);
         setAcceptPolicy(isAcceptedPolicy);
@@ -131,7 +131,7 @@ const SignUpComponent = () => {
     }, [confirmPassword]);
 
 
-    /* Function handler */
+    /*-----------------Function handler-----------------*/
 
     /**
      * Datepicker handler
