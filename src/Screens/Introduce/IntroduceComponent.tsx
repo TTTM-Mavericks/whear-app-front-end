@@ -14,6 +14,13 @@ import { primaryColor } from '../../root/Colors';
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 const IntroduceScreen = () => {
   const navigation = useNavigation<SignInScreenNavigationProp>();
+  /*-----------------UseState variable-----------------*/
+
+  /*-----------------Usable variable-----------------*/
+
+  /*-----------------UseEffect-----------------*/
+
+  /*-----------------Function handler-----------------*/
 
 
   return (

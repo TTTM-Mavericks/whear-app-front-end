@@ -38,7 +38,7 @@ interface SignInProps {
 
 const SignInComponent = () => {
 
-  /* Declear variable */
+  /*-----------------Declear variable-----------------*/
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [errorEmailValidate, setEmailErrorValidate] = useState('');
@@ -49,7 +49,7 @@ const SignInComponent = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation<SignInScreenNavigationProp>();
 
-  /* UseEffect */
+  /*-----------------UseEffect-----------------*/
 
   useEffect(() => {
 
@@ -85,8 +85,7 @@ const SignInComponent = () => {
 
 
 
-
-  /* Function handler */
+  /*-----------------Function handler----------------- */
 
   /**
    * SignIn

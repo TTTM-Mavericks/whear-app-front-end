@@ -11,17 +11,19 @@ interface PolicyComponentProps {
 }
 
 const PolicyComponent = () => {
+    /*-----------------UseState variable-----------------*/
     const [isOpen, setIsOpen] = React.useState(false);
     const [isAccepted, setIsAccepted] = React.useState(false);
 
+    /*-----------------Usable variable-----------------*/
     const openPolicy = useSelector((state: any) => state.auth.isOpen);
     const isAcceptedPolicy = useSelector((state: any) => state.auth.isAcceptedPolicy);
-
-
     const dispatch = useDispatch();
 
+    /*-----------------UseEffect-----------------*/
     React.useEffect(() => {
         setIsOpen(openPolicy);
+        console.log('-------------',openPolicy);
     }, [openPolicy])
 
     React.useEffect(() => {
@@ -29,6 +31,7 @@ const PolicyComponent = () => {
         setIsAccepted(isAcceptedPolicy);
     }, [isAcceptedPolicy])
 
+    /*-----------------Function handler-----------------*/
     const hideDialog = () => {
         dispatch(setOpenPolicy(false));
         setIsOpen((prevIsOpen: any) => !prevIsOpen);
@@ -49,7 +52,6 @@ const PolicyComponent = () => {
                     </Text>
                 </Dialog.Title>
                 <Dialog.ScrollArea style={{ height: 400 }}>
-
                     <ScrollView contentContainerStyle={{ paddingHorizontal: 20 }}>
                         <Dialog.Content style={PolicyStylesComponent.dialogContent}>
                             <Text style={PolicyStylesComponent.policySectionHeader}>Privacy Policy</Text>
@@ -86,10 +88,7 @@ const PolicyComponent = () => {
                                 for any reason whatsoever.
                             </Text>
                         </Dialog.Content>
-
-
                     </ScrollView>
-
                 </Dialog.ScrollArea>
                 <View style={PolicyStylesComponent.buttonGroup}>
                     <Button mode='outlined' style={{ marginRight: 10 }} onPress={handleAcceptedPolicy}>

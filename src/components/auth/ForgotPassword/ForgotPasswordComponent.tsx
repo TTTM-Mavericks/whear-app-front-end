@@ -19,12 +19,15 @@ interface ForgotPasswordComponentProps {
 }
 
 const ForgotPasswordComponent = () => {
+
+  /*-----------------UseState variable-----------------*/
   const route = useRoute();
-  const {femail} = useSelector((state: any) => state.auth.email);
+  const { femail } = useSelector((state: any) => state.auth.email);
   const emailParam = (route.params as { email?: string })?.email || '';
   const [email, setEmail] = useState(emailParam);
   const navigation = useNavigation<ForgotPasswordScreenNavigationProp>();
 
+  /*-----------------Function handler-----------------*/
   const handleForgotPassword = () => {
     alert(femail)
   };

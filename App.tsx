@@ -9,10 +9,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { Provider } from 'react-redux'; // Import Provider
-import store from './src/components/auth/AuthState/AuthStore';
+import store from './src/redux/State/Store';
 import SignUpComponent from './src/components/auth/SignUp/SignUpComponent';
 import { PaperProvider } from 'react-native-paper';
 import IntroduceScreen from './src/Screens/Introduce/IntroduceComponent';
+import SocialScreen from './src/Screens/Social/SocialScreen';
 
 const Stack = createStackNavigator();
 
@@ -24,7 +25,7 @@ export default function App() {
           <View style={styles.container}>
             <Stack.Navigator>
 
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="SignIn"
                 component={SignInComponent}
                 options={{ headerShown: false }}
@@ -52,6 +53,12 @@ export default function App() {
                 name="ForgotPassword"
                 component={ForgotPasswordComponent}
                 options={{ headerShown: false }}
+              /> */}
+
+              <Stack.Screen
+                name="Social"
+                component={SocialScreen}
+                options={{ headerShown: false }}
               />
             </Stack.Navigator>
           </View>
@@ -67,3 +74,4 @@ const styles = StyleSheet.create({
     backgroundColor: backgroundColor,
   },
 });
+
