@@ -4,7 +4,7 @@ import { backgroundColor } from '../../root/Colors';
 const { width, height } = Dimensions.get('window');
 const containerPadding = 16;
 
-const HomeStylesComponent = StyleSheet.create({
+const SocailStyleScreen = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -35,34 +35,24 @@ const HomeStylesComponent = StyleSheet.create({
     marginBottom: 12,
     padding: 8,
   },
-  iconCard: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-  },
   flatlist: {
     backgroundColor: backgroundColor,
     flex: 1,
     flexDirection: 'row',
 
   },
-  homeSliderHorizotal: {
+  postingEditorContainer:{
     width: width,
-    height: 200
+    textAlign: 'center',
+    alignItems: 'center',
+    alignContent: 'center'
   },
-  homeSliderHorizotalContent: {
-    flexDirection: 'row',
+  postingInput:{
+    width: width*0.9,
     backgroundColor: backgroundColor,
-    flex: 1,
-    borderRadius: 8,
+    height: 30,
+    borderRadius: 8
   },
-  filterGroup: {
-    width: width*0.85,
-    flexDirection: 'row',
-    backgroundColor: backgroundColor,
-    textAlign: 'left',
-    alignItems: 'flex-start'
-  }
 });
 
-export default HomeStylesComponent;
+export default SocailStyleScreen;
