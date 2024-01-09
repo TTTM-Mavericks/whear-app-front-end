@@ -15,6 +15,7 @@ import { PaperProvider } from 'react-native-paper';
 import IntroduceScreen from './src/Screens/Introduce/IntroduceComponent';
 import SocialScreen from './src/Screens/Social/SocialScreen';
 import PostingDetailScreen from './src/Screens/PostingDetail/PostingDetailScreen';
+import CollectionsScreen from './src/Screens/Collections/CollectionsScreen';
 
 const Stack = createStackNavigator();
 
@@ -25,8 +26,13 @@ export default function App() {
         <NavigationContainer>
           <View style={styles.container}>
             <Stack.Navigator>
-
               <Stack.Screen
+                name="Collections"
+                component={CollectionsScreen}
+                options={{ headerShown: false }}
+              />
+
+              {/* <Stack.Screen
                 name="SignIn"
                 component={SignInComponent}
                 options={{ headerShown: false }}
@@ -66,7 +72,9 @@ export default function App() {
                 name="PostingDetail"
                 component={PostingDetailScreen}
                 options={{ headerShown: false }}
-              />
+              /> */}
+
+
             </Stack.Navigator>
           </View>
         </NavigationContainer>

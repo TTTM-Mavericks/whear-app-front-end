@@ -4,6 +4,7 @@ export type RootStackParamList = {
   Home: undefined;
   Social: undefined;
   Introduce: undefined;
+  Collections: undefined;
   Route: undefined;
   ForgotPassword: { email: string };
   PostingDetail: {postID: string};

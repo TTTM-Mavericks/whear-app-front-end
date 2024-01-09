@@ -1,17 +1,21 @@
 import * as React from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { SafeAreaView, StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
 import { width } from '../../../root/ResponsiveSize';
 import { backgroundColor, primaryColor } from '../../../root/Colors';
 
-const ChipGroupComponent = () => {
+interface chipGroupInterface {
+    buttonsData?: {}[];
+    style?: StyleProp<ViewStyle>;
+}
+const ChipGroupComponent: React.FC<chipGroupInterface> = ({style}) => {
     const [value, setValue] = React.useState('');
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container, style]}>
             <SegmentedButtons
                 
-                style={[styles.segmentedButtons]}
+                style={[styles.segmentedButtons, style]}
                 theme={{ roundness: 0 }}
                 value={value}
                 onValueChange={setValue}
