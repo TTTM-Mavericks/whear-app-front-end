@@ -1,11 +1,12 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { backgroundColor } from '../../root/Colors';
+import { backgroundColor, grayBackgroundColor } from '../../root/Colors';
 
 const { width, height } = Dimensions.get('window');
 const containerPadding = 16;
 
-const SocailStyleScreen = StyleSheet.create({
+const PostingDetailStyleScreen = StyleSheet.create({
   container: {
+    height: 'auto',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -71,17 +72,25 @@ const SocailStyleScreen = StyleSheet.create({
   },
   container_groupIconBar: {
     width: width * 0.8,
-    height: height*0.05,
+    height: height * 0.05,
     paddingTop: height,
     backgroundColor: 'blue',
-    
+
   },
   commentInput: {
-    width: width*0.95,
+    width: width * 0.95,
     backgroundColor: backgroundColor,
     height: 30,
-    borderRadius: 50
+    borderRadius: 50,
+
   },
+  commentContent: {
+    width: width * 0.8,
+    marginLeft: 10,
+    marginTop: -5,
+    borderRadius: 10,
+    backgroundColor: grayBackgroundColor
+  }
 });
 
-export default SocailStyleScreen;
+export default PostingDetailStyleScreen;

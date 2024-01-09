@@ -56,6 +56,10 @@ const ListViewStylesComponent = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 20,
     },
+    extendImage: {
+        width: ITEM_WIDTH,
+        height: 'auto',
+    }
 });
 
 export default ListViewStylesComponent;

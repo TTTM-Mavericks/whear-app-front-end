@@ -6,6 +6,7 @@ interface State {
   isOpen: boolean;
   isAddedToCollections: boolean;
   isOpenPostingDialog: boolean;
+  isOpenCommentsDialog: boolean;
 }
 
 const initialState: State = {
@@ -14,6 +15,7 @@ const initialState: State = {
   isOpen: false,
   isAddedToCollections: false,
   isOpenPostingDialog: false,
+  isOpenCommentsDialog: false
 };
 
 const authSlice = createSlice({
@@ -38,6 +40,9 @@ const authSlice = createSlice({
     },
     setOpenUpPostingDialog: (state, action: PayloadAction<{isOpenPostingDialog: boolean}>) => {
       state.isOpenPostingDialog = action.payload.isOpenPostingDialog;
+    },
+    setOpenCommentsDialog: (state, action: PayloadAction<{isOpenCommentsDialog: boolean}>) => {
+      state.isOpenCommentsDialog = action.payload.isOpenCommentsDialog;
     },
   },
 });

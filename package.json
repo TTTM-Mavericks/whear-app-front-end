@@ -10,6 +10,7 @@
     "ts:check": "tsc"
   },
   "dependencies": {
+    "@fortawesome/react-native-fontawesome": "^0.3.0",
     "@react-native-community/datetimepicker": "7.2.0",
     "@react-native-firebase/app": "^18.7.3",
     "@react-native-google-signin/google-signin": "^11.0.0",
