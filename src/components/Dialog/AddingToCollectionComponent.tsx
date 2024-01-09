@@ -6,7 +6,7 @@ import DialogStylesComponent from './DialogStyleComponent';
 import { backgroundColor, primaryColor } from '../../root/Colors';
 import { setOpenAddToCollectionsDialog } from '../../redux/State/Actions';
 import { LinearGradient } from 'expo-linear-gradient';
-import { width } from '../../root/ResponsiveSize';
+import { height, width } from '../../root/ResponsiveSize';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../root/RootStackParams';
 import { useNavigation } from '@react-navigation/native';
@@ -133,12 +133,20 @@ const AddingToCollectionComponent = () => {
         >
             <Portal>
                 <Dialog
-                    style={{
-                        ...DialogStylesComponent.dialogContainer, transform: [{ translateY }], margin: 0, position: 'absolute',
+                    style={[
+                        DialogStylesComponent.dialogContainer,
+                        {
+                        transform: [{ translateY }],
+                        height: height * 0.55,
+                        position: 'absolute',
                         bottom: 0,
                         left: 0,
                         right: 0,
-                    }}
+                        marginBottom: -50,
+                        marginLeft: 0,
+                        marginRight: 0,
+                        borderRadius: 10
+                    }]}
                     visible={isOpen}
                     dismissable={false}
 
@@ -175,7 +183,7 @@ const AddingToCollectionComponent = () => {
                     </View>
 
                     {/* </Dialog.Title> */}
-                    <Dialog.ScrollArea style={{ height: 400 }}>
+                    <Dialog.Content style={{ height: 400 }}>
                         <ScrollView
                             showsVerticalScrollIndicator={false}
                             showsHorizontalScrollIndicator={false}>
@@ -201,8 +209,9 @@ const AddingToCollectionComponent = () => {
                                 ))}
                             </View>
                         </ScrollView>
-                    </Dialog.ScrollArea>
-
+                        
+                    </Dialog.Content>
+                    
                 </Dialog>
             </Portal>
         </View>

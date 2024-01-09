@@ -1,17 +1,20 @@
 import * as React from 'react';
 import { Appbar } from 'react-native-paper';
 import AppBarHeaderStylesComponent from './AppBarHeaderStyleComponent';
+import { useNavigation } from '@react-navigation/native';
 
 interface appBarProps {
-    backAction?: () => void;
-    title?: string;
-    icon?: string;
-    iconChild?: React.ReactNode;
+  backAction?: () => void;
+  title?: string;
+  icon?: string;
+  iconChild?: React.ReactNode;
 
 }
 
-const AppBarHeaderComponent: React.FC<appBarProps> = ({backAction, title, icon, iconChild}) => {
-  const _goBack = () => console.log('Went back');
+const AppBarHeaderComponent: React.FC<appBarProps> = ({ backAction, title, icon, iconChild }) => {
+  const navigation = useNavigation();
+  const _goBack = () => {
+  };
 
   const _handleSearch = () => console.log('Searching');
 

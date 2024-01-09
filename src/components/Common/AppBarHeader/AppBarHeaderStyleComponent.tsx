@@ -18,7 +18,7 @@ const AppBarHeaderStylesComponent = StyleSheet.create({
         width: ITEM_WIDTH,
         height: ITEM_HEIGHT,
         // paddingBottom: 40,
-        shadowColor: 'black',
+        // shadowColor: 'black',
         shadowOffset: {
             width: 0,
             height: 3,
@@ -27,7 +27,7 @@ const AppBarHeaderStylesComponent = StyleSheet.create({
         shadowRadius: 4.65,
         elevation: 7,
         margin: 4,
-        borderBottomColor: 'black'
+        // borderBottomColor: 'black'
     },
     image: {
         width: ITEM_WIDTH,

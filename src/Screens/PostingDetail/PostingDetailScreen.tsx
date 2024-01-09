@@ -1,8 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, FlatList, TouchableOpacity } from 'react-native';
-import SocailStyleScreen from './SocailStyleScreen';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../../root/RootStackParams';
 import { StackNavigationProp } from '@react-navigation/stack';
 import ListViewComponent from '../../components/ListView/ListViewComponent';
@@ -18,6 +17,8 @@ import { iconAvatarPostingSize, iconAvatarSize } from '../../root/Icon';
 import { spanTextSize } from '../../root/Texts';
 import CommentsDetailComponent from '../../components/Dialog/CommentsDetailDialogComponent';
 import CommentsDetailDialogComponent from '../../components/Dialog/CommentsDetailDialogComponent';
+import PostingDetailStyleScreen from './PostingDetailStyleScreen';
+
 
 interface ListItem {
   id: string;
@@ -40,24 +41,64 @@ const data = [
     date: new Date(),
     comment: [
       {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        commentID: '1',
+        userID: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
+        content: 'wowww, this is so crazy, I want to see more of your collection. see more of your collectionsee more of your collectionsee more of your collection',
+        date: new Date(),
       },
       {
-        userID: 'U2',
+        commentID: '2',
+        user: {
+          userID: '3',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
         content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        date: new Date(),
       },
       {
-        userID: 'U2',
+        commentID: '3',
+        user: {
+          userID: '4',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
         content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        date: new Date(),
       },
       {
-        userID: 'U2',
+        commentID: '4',
+        user: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
         content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        date: new Date(),
+      },
+      {
+        commentID: '5',
+        user: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
+        content: 'wowww, this is so crazy, I want to see more of your collection',
+        date: new Date(),
+      },
+      {
+        commentID: '6',
+        user: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
+        content: 'wowww, this is so crazy, I want to see more of your collection',
+        date: new Date(),
       },
 
     ],
@@ -67,175 +108,18 @@ const data = [
       imgUrl: 'https://thejulius.com.vn/wp-content/uploads/2021/06/thoi-trang-mua-he.jpg',
       content: 'Ngày 3/1, cư dân mạng bất ngờ phát hiện Khả Như đã bỏ theo dõi Puka trên Instagram cá nhân. Hành động này của nữ diễn viên khiến netizen nhận định rằng tình bạn của cả hai đã chính thức "toang" và không còn hàn gắn được.'
     }
-  },
-  {
-    postID: '2',
-    userID: {
-      id: '1',
-      imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
-      userName: 'Nguyễn Minh Tú'
-    },
-    typeOfPost: 'Posting',
-    hastash: ['#spring2024', '#hottrend', '#sports'],
-    date: '01/04/2024',
-    comment: [
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: new Date()
-      },
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
-      },
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
-      },
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
-      },
+  }
 
-    ],
-    react: 1203,
-    status: true,
-    content: {
-      imgUrl: 'https://cdn.alongwalk.info/vn/wp-content/uploads/2023/04/12232307/top-10-mon-do-thoi-trang-khong-the-thieu-trong-tu-do-mua-he-cua-nang1681291387.jpg',
-      content: 'Ngày 3/1, cư dân mạng bất ngờ phát hiện Khả Như đã bỏ theo dõi Puka trên Instagram cá nhân. Hành động này của nữ diễn viên khiến netizen nhận định rằng tình bạn của cả hai đã chính thức "toang" và không còn hàn gắn được.'
-    }
-  },
-  {
-    postID: '3',
-    userID: {
-      id: '1',
-      imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
-      userName: 'Nguyễn Minh Tú'
-    },
-    typeOfPost: 'Posting',
-    hastash: ['#spring2024', '#hottrend', '#sports'],
-    date: '01/04/2024',
-    comment: [
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
-      },
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
-      },
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
-      },
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
-      },
-
-    ],
-    react: 1203,
-    status: true,
-    content: {
-      imgUrl: 'https://i.pinimg.com/564x/f2/ff/10/f2ff108f6d63a595a4d9553971c293c1.jpg',
-      content: 'Ngày 3/1, cư dân mạng bất ngờ phát hiện Khả Như đã bỏ theo dõi Puka trên Instagram cá nhân. Hành động này của nữ diễn viên khiến netizen nhận định rằng tình bạn của cả hai đã chính thức "toang" và không còn hàn gắn được.'
-    }
-  },
-  {
-    postID: '4',
-    userID: {
-      id: '1',
-      imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
-      userName: 'Nguyễn Minh Tú'
-    },
-    typeOfPost: 'Posting',
-    hastash: ['#spring2024', '#hottrend', '#sports'],
-    date: '01/04/2024',
-    comment: [
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
-      },
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
-      },
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
-      },
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
-      },
-
-    ],
-    react: 1203,
-    status: true,
-    content: {
-      imgUrl: 'https://i.pinimg.com/736x/34/c7/67/34c767a2c369dd4fdce12d3829b3f457.jpg',
-      content: 'Ngày 3/1, cư dân mạng bất ngờ phát hiện Khả Như đã bỏ theo dõi Puka trên Instagram cá nhân. Hành động này của nữ diễn viên khiến netizen nhận định rằng tình bạn của cả hai đã chính thức "toang" và không còn hàn gắn được.'
-    }
-  },
-  {
-    postID: '5',
-    userID: {
-      id: '1',
-      imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
-      userName: 'Nguyễn Minh Tú'
-    },
-    typeOfPost: 'Posting',
-    hastash: ['#spring2024', '#hottrend', '#sports'],
-    date: '01/04/2024',
-    comment: [
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
-      },
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
-      },
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
-      },
-      {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
-      },
-
-    ],
-    react: 1203,
-    status: true,
-    content: {
-      imgUrl: 'https://stability-images-upload.s3.amazonaws.com/v1_txt2img_cf79b0de-50af-42f1-abf3-0792b5f6b8fa.png',
-      content: 'Ngày 3/1, cư dân mạng bất ngờ phát hiện Khả Như đã bỏ theo dõi Puka trên Instagram cá nhân. Hành động này của nữ diễn viên khiến netizen nhận định rằng tình bạn của cả hai đã chính thức "toang" và không còn hàn gắn được.'
-    }
-  },
 
 ];
 
+const [commentsArray] = data
 
 
-type NavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
-const SocialScreen = () => {
-  const navigation = useNavigation<NavigationProp>();
+
+type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
+const PostingDetailScreen = () => {
+  const navigation = useNavigation<SignInScreenNavigationProp>();
 
   /*-----------------UseState variable-----------------*/
   const [colorIconAdded, setColorIconAdded] = useState('#C90801');
@@ -243,25 +127,29 @@ const SocialScreen = () => {
   const [addedItems, setAddedItems] = useState<string[]>([]);
   const [postingContent, setPostingContent] = useState('What are you thinking?');
   const [showFullContent, setShowFullContent] = useState(false);
+  const [showFullComment, setShowFullComment] = useState(false);
   const [comments, setComments] = useState<{ [key: string]: string }>({});
   const [openCommentsDialogItemId, setOpenCommentsDialogItemId] = useState<{ [key: string]: boolean }>({});
   const [isOpenCommentsDialog, setIsOpenCommentsDialog] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
+  const [selectedComment, setSelectedComment] = useState('')
+
 
 
   /*-----------------Usable variable-----------------*/
   const dispatch = useDispatch();
   const openCommentsDialog = useSelector((state: any) => state.store.isOpenCommentsDialog);
+  const route = useRoute();
+  const postID = (route.params as { postID?: string })?.postID || '';
 
   /*-----------------UseEffect-----------------*/
-  // useEffect(() => {
-  //   dispatch(setOpenCommentsDialog(true));
-  //   console.log(selectedItem);
-  // }, [selectedItem])
+  React.useEffect(() => {
+    console.log('detail: ', openCommentsDialog);
+  }, []);
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
-    alert('back')
+    navigation.navigate('Social');
   }
 
   const handleSearch = () => {
@@ -272,10 +160,6 @@ const SocialScreen = () => {
     alert('handleMore')
   }
 
-  const handleOpenPostingForm = () => {
-    dispatch(setOpenUpPostingDialog(true));
-    setIsOpenCommentsDialog(true);
-  }
 
   const handleOpenCommentsDialog = (postID: string) => {
     const selectedItem = data.find(item => item.postID === postID);
@@ -290,6 +174,9 @@ const SocialScreen = () => {
     setShowFullContent(!showFullContent);
   };
 
+  const handleToggleComment = () => {
+    setShowFullComment(!showFullComment);
+  };
 
 
   const handleSetComment = (text: string, postID: string) => {
@@ -303,14 +190,65 @@ const SocialScreen = () => {
     console.log('post: ', id, ' - ', comments);
   }
 
-  const handleMoveToPostingDetail = (postID: string) => {
-    navigation.navigate('PostingDetail', { postID });
+  /**
+   * Comments group element
+   * @returns ReactNode
+   */
+  const commentsGroup = () => {
+    return (
+      <></>
+      // <View style={[PostingDetailStyleScreen.container_postingBar, { flexDirection: 'column' }]}>
+
+      //   {commentsArray.comment.map((comment, key) => (
+      //     <View key={comment.commentID} style={[PostingDetailStyleScreen.container_postingBar, { marginTop: 20 }]}>
+      //       <View key={comment.commentID} style={{ flexDirection: 'row', width: width * 0.8, height: 'auto' }}>
+      //         <Avatar.Image
+      //           size={iconAvatarPostingSize * 0.8}
+      //           source={{ uri: comment.user.imgUrl }}
+      //           style={{ marginLeft: 10 }} />
+      //         <View key={comment.commentID} style={PostingDetailStyleScreen.commentContent}
+      //         >
+      //           <View key={comment.commentID} style={{ padding: 10 }}>
+      //             <Text
+      //               style=
+      //               {
+      //                 {
+      //                   fontWeight: 'bold',
+      //                   paddingTop: -iconAvatarPostingSize * 1
+      //                 }
+      //               }
+      //             >
+      //               Nguyen Minh Tu
+      //             </Text>
+      //             <Text style={{ fontSize: spanTextSize * 0.8 }}>{comment.date.toLocaleString()}</Text>
+      //             <Text>
+
+      //               {showFullComment ? comment.content : comment.content.substring(0, 100) + '...'}
+      //               {comment.content.length > 100 && (
+      //                 <Text
+      //                   onPress={handleToggleComment}
+      //                   style={{ color: 'black', fontSize: 13, textDecorationLine: 'underline', marginLeft: 10 }}
+      //                 >
+      //                   {showFullComment ? 'See less' : 'See more'}
+      //                 </Text>
+      //               )}
+      //             </Text>
+      //           </View>
+      //         </View>
+      //       </View>
+      //     </View>
+      //   ))}
+      // </View>
+    )
   }
 
+
+
+
   return (
-    <View style={SocailStyleScreen.container}>
+    <View style={PostingDetailStyleScreen.container}>
       <AppBarHeaderComponent
-        title='Social'
+        title='Posting detail'
         backAction={() => hanldeGoBack()}
         iconChild={
           <>
@@ -323,44 +261,25 @@ const SocialScreen = () => {
 
       <ScrollView
         persistentScrollbar={false}
-        style={SocailStyleScreen.scrollView}
+        style={PostingDetailStyleScreen.scrollView}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
-        <View style={SocailStyleScreen.scrollViewContent}>
-          <View style={SocailStyleScreen.postingEditorContainer}>
-            <View style={{ marginTop: 20 }}>
-              <TextInput
-                value="What are you thinking?"
-                mode='outlined'
-                style={SocailStyleScreen.postingInput}
-                contentStyle={{}}
-                onPressIn={handleOpenPostingForm}
-                right={
-                  (
-                    <TextInput.Icon icon={'image'} color={primaryColor}>
-
-                    </TextInput.Icon>
-                  )
-                }
-              />
-            </View>
-          </View>
+        <View style={PostingDetailStyleScreen.scrollViewContent}>
 
           {/* Regular FlatList */}
           <FlatList
-            style={SocailStyleScreen.flatlist}
+            style={PostingDetailStyleScreen.flatlist}
             data={data.slice(0, 10)}
             keyExtractor={(item) => item.postID}
             renderItem={({ item }) => (
               <ListViewComponent
                 data={[{ id: item.postID, imgUrl: '', }]}
                 extendImgUrl={item.content.imgUrl}
-                cardStyleContainer={SocailStyleScreen.container_cardContainer}
-                cardStyleContent={SocailStyleScreen.container_cardContent}
-                onPress={()=> handleMoveToPostingDetail(item.postID)}
+                cardStyleContainer={PostingDetailStyleScreen.container_cardContainer}
+                cardStyleContent={PostingDetailStyleScreen.container_cardContent}
                 extendHeaderChild={
-                  <View style={[SocailStyleScreen.container_postingBar, { marginTop: 25 }]}>
+                  <View style={[PostingDetailStyleScreen.container_postingBar, { marginTop: 25 }]}>
                     <View style={{ flexDirection: 'row', width: width * 0.8, height: 'auto' }}>
                       <Avatar.Image
                         size={iconAvatarPostingSize}
@@ -382,15 +301,17 @@ const SocialScreen = () => {
                               paddingTop: iconAvatarPostingSize * 0.05
                             }
                           }
-                        >Nguyen Minh Tu</Text>
+                        >
+                          Nguyen Minh Tu
+                        </Text>
                         <Text style={{ fontSize: spanTextSize * 0.8 }}>{item.date.toLocaleString()}</Text>
                       </View>
                     </View>
                   </View>
                 }
                 extendChild={
-                  <View>
-                    <View style={SocailStyleScreen.container_postingBar}>
+                  <View style={{ flex: 1 }}>
+                    <View style={PostingDetailStyleScreen.container_postingBar}>
                       <View style={{ flexDirection: 'row', width: 80 }}>
                         <IconButton
                           icon={'heart'}
@@ -426,7 +347,7 @@ const SocialScreen = () => {
                         </View>
                       </View>
                     </View>
-                    <View style={SocailStyleScreen.container_postingBar}>
+                    <View style={PostingDetailStyleScreen.container_postingBar}>
                       <View style={{ flexDirection: 'row', width: width * 0.8, height: 'auto' }}>
                         {item.hastash.map((hastash, key) => (
                           <View key={key} style={{ marginLeft: 10, marginRight: 5 }}>
@@ -435,7 +356,8 @@ const SocialScreen = () => {
                         ))}
                       </View>
                     </View>
-                    <View style={SocailStyleScreen.container_postingBar}>
+
+                    <View style={PostingDetailStyleScreen.container_postingBar}>
                       <View style={{ flexDirection: 'row', width: width * 0.8, height: 'auto', paddingTop: 10, paddingLeft: 10 }}>
                         <View>
                           <Text style={{ color: 'black', fontSize: 15 }}>
@@ -452,12 +374,17 @@ const SocialScreen = () => {
                         </View>
                       </View>
                     </View>
-                    <View style={SocailStyleScreen.container_postingBar}>
-                      <View style={{ flexDirection: 'row', width: width * 0.8, height: 40, paddingTop: 10, paddingLeft: 10 }}>
+                    {/* Comments */}
+                    <View style={{ flexDirection: 'row', width: width * 0.8, height: 'auto', paddingTop: 10, paddingLeft: 10 }}>
+                      <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold' }}>Comments</Text>
+                    </View>
+                    {commentsGroup()}
+                    <View style={PostingDetailStyleScreen.container_postingBar}>
+                      <View style={{ flexDirection: 'row', width: width * 0.8, height: 40, paddingTop: 10, paddingLeft: 10, }}>
                         <TextInput
                           value={comments[item.postID] || ''}
                           mode='outlined'
-                          style={SocailStyleScreen.commentInput}
+                          style={PostingDetailStyleScreen.commentInput}
                           onChangeText={(text: string) => handleSetComment(text, item.postID)}
                           outlineStyle={{ borderRadius: 30, borderColor: grayBorderColor, borderWidth: 1 }}
                           placeholder="Comment at here..."
@@ -475,11 +402,13 @@ const SocialScreen = () => {
                           }
                         />
                         {item.postID === selectedItem && (
-                          <CommentsDetailDialogComponent postId={item.postID} comments={item.comment}></CommentsDetailDialogComponent>
+                          <CommentsDetailDialogComponent commentsChild={commentsGroup()} postId={item.postID} comments={item.comment}></CommentsDetailDialogComponent>
                         )}
+
 
                       </View>
                     </View>
+
                   </View>
                 }
               />
@@ -490,7 +419,8 @@ const SocialScreen = () => {
           />
 
 
-          <PostingDialogComponent></PostingDialogComponent>
+
+
 
 
         </View>
@@ -501,4 +431,6 @@ const SocialScreen = () => {
 };
 
 
-export default SocialScreen;
+
+
+export default PostingDetailScreen;
