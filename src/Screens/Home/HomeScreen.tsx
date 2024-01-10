@@ -18,6 +18,7 @@ import { backgroundColor, primaryColor } from '../../root/Colors';
 import { useDispatch } from 'react-redux';
 import { setOpenAddToCollectionsDialog } from '../../redux/State/Actions';
 import AddingToCollectionComponent from '../../components/Dialog/AddingToCollectionComponent';
+import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarFooterComponents';
 
 interface ListItem {
   id: string;
@@ -152,6 +153,8 @@ const HomeScreen = () => {
   const [colorIconAdded, setColorIconAdded] = useState('#C90801');
   const [addItemToCollection, setAddItemToCollection] = useState(true);
   const [addedItems, setAddedItems] = useState<string[]>([]);
+  const [scrollUp, setScrollUp] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
 
 
   /*-----------------Usable variable-----------------*/
@@ -182,19 +185,22 @@ const HomeScreen = () => {
     setAddItemToCollection(!addItemToCollection);
     handleAddToCollection(id);
 
-    // console.log(!addItemToCollection);
-    // if (addItemToCollection) {
-    //   setAddItemToCollection(true);
-    //   handleAddToCollection(id);
-    //   setAddedItems((prevItems) => prevItems.filter((itemId) => itemId !== id));
-    //   // setColorIconAdded('#C3C3C3');
-    //   setColorIconAdded('#C90801')
-    // } else {
-    //   setColorIconAdded('#C3C3C3')
-    //   setAddItemToCollection(false);
-
-    // }
   }
+
+
+  const handleScroll = (event: any) => {
+    const currentScrollPos = event.nativeEvent.contentOffset.y;
+
+    if (currentScrollPos > prevScrollPos) {
+      setScrollUp(false);
+    } else if (currentScrollPos < prevScrollPos) {
+      setScrollUp(true);
+
+    }
+
+    // Update the previous scroll position
+    setPrevScrollPos(currentScrollPos);
+  };
 
 
 
@@ -217,6 +223,8 @@ const HomeScreen = () => {
         style={HomeStylesComponent.scrollView}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
+        onScroll={(event) => handleScroll(event)}
+        scrollEventThrottle={16} 
       >
         <View style={HomeStylesComponent.scrollViewContent}>
           <HorizontalCarouselComponent></HorizontalCarouselComponent>
@@ -305,6 +313,7 @@ const HomeScreen = () => {
           <AddingToCollectionComponent></AddingToCollectionComponent>
         </View>
       </ScrollView >
+      <AppBarFooterComponents isHide={scrollUp} centerIcon={'plus'}></AppBarFooterComponents>
     </View >
 
   );

@@ -1,9 +1,10 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
 import { backgroundColor, primaryColor } from '../../../root/Colors';
 
 
 const { width, height } = Dimensions.get('window');
 const containerPadding = 16;
+
 export const SLIDER_WIDTH = Dimensions.get('window').width;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH);
 
@@ -88,7 +89,7 @@ const AppBarFooterStyleComponents = StyleSheet.create({
         borderRadius: 90,
         marginBottom: width * 0.1 * 2,
         position: 'absolute',
-        left: '36%',
+        left: Platform.OS !== 'ios' ? '36%' : '31.5%' ,
         top: -width * 0.1 ,
         
     }

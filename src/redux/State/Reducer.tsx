@@ -1,4 +1,4 @@
-import { ADD_TO_COLLECTIONS, GET_EMAIL_SIGNINED, MOVE_TO_FORGOT_PASSWORD, OPEN_ADD_TO_COLLECTIONS_DIALOG, OPEN_COMMENTS_DIALOG, OPEN_UP_POSTING_DIALOG, SIGN_IN } from "./Actions";
+import { ADD_TO_COLLECTIONS, GET_EMAIL_SIGNINED, MOVE_TO_FORGOT_PASSWORD, OPEN_ADD_TO_COLLECTIONS_DIALOG, OPEN_COMMENTS_DIALOG, OPEN_UP_POSTING_DIALOG, SAVE_IMAGE_URL, SIGN_IN } from "./Actions";
 
 interface State {
   email: string;
@@ -7,6 +7,7 @@ interface State {
   isAddedToCollections: boolean;
   isOpenPostingDialog: boolean;
   isOpenCommentsDialog: boolean;
+  imageUrl: string;
 }
 
 const initialState: State = {
@@ -16,6 +17,8 @@ const initialState: State = {
   isAddedToCollections: false,
   isOpenPostingDialog: false,
   isOpenCommentsDialog: false,
+  imageUrl: '../../assets/icon/user.png',
+
 };
 
 const Reducer = (state = initialState, action: any): State => {
@@ -55,6 +58,11 @@ const Reducer = (state = initialState, action: any): State => {
       return {
         ...state,
         isOpenCommentsDialog: action.payload,
+      };
+    case SAVE_IMAGE_URL:
+      return {
+        ...state,
+        imageUrl: action.payload,
       };
     default:
       return state;

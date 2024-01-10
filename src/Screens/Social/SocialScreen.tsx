@@ -18,6 +18,7 @@ import { iconAvatarPostingSize, iconAvatarSize } from '../../root/Icon';
 import { spanTextSize } from '../../root/Texts';
 import CommentsDetailComponent from '../../components/Dialog/CommentsDetailDialogComponent';
 import CommentsDetailDialogComponent from '../../components/Dialog/CommentsDetailDialogComponent';
+import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarFooterComponents';
 
 interface ListItem {
   id: string;
@@ -40,24 +41,64 @@ const data = [
     date: new Date(),
     comment: [
       {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        commentID: '1',
+        userID: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
+        content: 'wowww, this is so crazy, I want to see more of your collection. see more of your collectionsee more of your collectionsee more of your collection',
+        date: new Date(),
       },
       {
-        userID: 'U2',
+        commentID: '2',
+        user: {
+          userID: '3',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
         content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        date: new Date(),
       },
       {
-        userID: 'U2',
+        commentID: '3',
+        user: {
+          userID: '4',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
         content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        date: new Date(),
       },
       {
-        userID: 'U2',
+        commentID: '4',
+        user: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
         content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        date: new Date(),
+      },
+      {
+        commentID: '5',
+        user: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
+        content: 'wowww, this is so crazy, I want to see more of your collection',
+        date: new Date(),
+      },
+      {
+        commentID: '6',
+        user: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
+        content: 'wowww, this is so crazy, I want to see more of your collection',
+        date: new Date(),
       },
 
     ],
@@ -120,24 +161,64 @@ const data = [
     date: '01/04/2024',
     comment: [
       {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        commentID: '1',
+        userID: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
+        content: 'wowww, this is so crazy, I want to see more of your collection. see more of your collectionsee more of your collectionsee more of your collection',
+        date: new Date(),
       },
       {
-        userID: 'U2',
+        commentID: '2',
+        user: {
+          userID: '3',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
         content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        date: new Date(),
       },
       {
-        userID: 'U2',
+        commentID: '3',
+        user: {
+          userID: '4',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
         content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        date: new Date(),
       },
       {
-        userID: 'U2',
+        commentID: '4',
+        user: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
         content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        date: new Date(),
+      },
+      {
+        commentID: '5',
+        user: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
+        content: 'wowww, this is so crazy, I want to see more of your collection',
+        date: new Date(),
+      },
+      {
+        commentID: '6',
+        user: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
+        content: 'wowww, this is so crazy, I want to see more of your collection',
+        date: new Date(),
       },
 
     ],
@@ -160,24 +241,64 @@ const data = [
     date: '01/04/2024',
     comment: [
       {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        commentID: '1',
+        userID: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
+        content: 'wowww, this is so crazy, I want to see more of your collection. see more of your collectionsee more of your collectionsee more of your collection',
+        date: new Date(),
       },
       {
-        userID: 'U2',
+        commentID: '2',
+        user: {
+          userID: '3',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
         content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        date: new Date(),
       },
       {
-        userID: 'U2',
+        commentID: '3',
+        user: {
+          userID: '4',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
         content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        date: new Date(),
       },
       {
-        userID: 'U2',
+        commentID: '4',
+        user: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
         content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        date: new Date(),
+      },
+      {
+        commentID: '5',
+        user: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
+        content: 'wowww, this is so crazy, I want to see more of your collection',
+        date: new Date(),
+      },
+      {
+        commentID: '6',
+        user: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
+        content: 'wowww, this is so crazy, I want to see more of your collection',
+        date: new Date(),
       },
 
     ],
@@ -200,24 +321,64 @@ const data = [
     date: '01/04/2024',
     comment: [
       {
-        userID: 'U2',
-        content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        commentID: '1',
+        userID: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
+        content: 'wowww, this is so crazy, I want to see more of your collection. see more of your collectionsee more of your collectionsee more of your collection',
+        date: new Date(),
       },
       {
-        userID: 'U2',
+        commentID: '2',
+        user: {
+          userID: '3',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
         content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        date: new Date(),
       },
       {
-        userID: 'U2',
+        commentID: '3',
+        user: {
+          userID: '4',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
         content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        date: new Date(),
       },
       {
-        userID: 'U2',
+        commentID: '4',
+        user: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
         content: 'wowww, this is so crazy, I want to see more of your collection',
-        date: '01/04/2024'
+        date: new Date(),
+      },
+      {
+        commentID: '5',
+        user: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
+        content: 'wowww, this is so crazy, I want to see more of your collection',
+        date: new Date(),
+      },
+      {
+        commentID: '6',
+        user: {
+          userID: '2',
+          userName: 'Nguyễn Minh Tú',
+          imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+        },
+        content: 'wowww, this is so crazy, I want to see more of your collection',
+        date: new Date(),
       },
 
     ],
@@ -247,6 +408,8 @@ const SocialScreen = () => {
   const [openCommentsDialogItemId, setOpenCommentsDialogItemId] = useState<{ [key: string]: boolean }>({});
   const [isOpenCommentsDialog, setIsOpenCommentsDialog] = useState(false);
   const [selectedItem, setSelectedItem] = useState({});
+  const [scrollUp, setScrollUp] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
 
 
   /*-----------------Usable variable-----------------*/
@@ -307,6 +470,22 @@ const SocialScreen = () => {
     navigation.navigate('PostingDetail', { postID });
   }
 
+
+
+  const handleScroll = (event: any) => {
+    const currentScrollPos = event.nativeEvent.contentOffset.y;
+
+    if (currentScrollPos > prevScrollPos) {
+      setScrollUp(false);
+    } else if (currentScrollPos < prevScrollPos) {
+      setScrollUp(true);
+
+    }
+
+    // Update the previous scroll position
+    setPrevScrollPos(currentScrollPos);
+  };
+
   return (
     <View style={SocailStyleScreen.container}>
       <AppBarHeaderComponent
@@ -326,6 +505,8 @@ const SocialScreen = () => {
         style={SocailStyleScreen.scrollView}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
+        onScroll={(event) => handleScroll(event)}
+        scrollEventThrottle={16} 
       >
         <View style={SocailStyleScreen.scrollViewContent}>
           <View style={SocailStyleScreen.postingEditorContainer}>
@@ -495,6 +676,8 @@ const SocialScreen = () => {
 
         </View>
       </ScrollView >
+      <AppBarFooterComponents isHide={scrollUp} centerIcon={'plus'}></AppBarFooterComponents>
+
     </View >
 
   );

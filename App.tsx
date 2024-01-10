@@ -16,6 +16,8 @@ import IntroduceScreen from './src/Screens/Introduce/IntroduceComponent';
 import SocialScreen from './src/Screens/Social/SocialScreen';
 import PostingDetailScreen from './src/Screens/PostingDetail/PostingDetailScreen';
 import CollectionsScreen from './src/Screens/Collections/CollectionsScreen';
+import UserProfileScreen from './src/Screens/UserProfile/UserProfileScreen';
+import UserProfileSettingScreen from './src/Screens/UserProfile/UserProfileSettingScreen';
 
 const Stack = createStackNavigator();
 
@@ -27,8 +29,24 @@ export default function App() {
           <View style={styles.container}>
             <Stack.Navigator>
               <Stack.Screen
+                name="Home"
+                component={HomeScreen}
+                options={{ headerShown: false }}
+              />
+              
+              <Stack.Screen
                 name="Collections"
                 component={CollectionsScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="UserProfile"
+                component={UserProfileScreen}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="UserProfileSetting"
+                component={UserProfileSettingScreen}
                 options={{ headerShown: false }}
               />
 
@@ -43,12 +61,9 @@ export default function App() {
                 component={SignUpComponent}
                 options={{ headerShown: false }}
               />
+              */}
 
-              <Stack.Screen
-                name="Home"
-                component={HomeScreen}
-                options={{ headerShown: false }}
-              />
+
 
               <Stack.Screen
                 name="Introduce"
@@ -72,7 +87,7 @@ export default function App() {
                 name="PostingDetail"
                 component={PostingDetailScreen}
                 options={{ headerShown: false }}
-              /> */}
+              />
 
 
             </Stack.Navigator>
