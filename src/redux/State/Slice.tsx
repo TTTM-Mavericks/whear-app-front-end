@@ -7,6 +7,7 @@ interface State {
   isAddedToCollections: boolean;
   isOpenPostingDialog: boolean;
   isOpenCommentsDialog: boolean;
+  imageUrl: string;
 }
 
 const initialState: State = {
@@ -15,7 +16,8 @@ const initialState: State = {
   isOpen: false,
   isAddedToCollections: false,
   isOpenPostingDialog: false,
-  isOpenCommentsDialog: false
+  isOpenCommentsDialog: false,
+  imageUrl: '../../assets/icon/user.png'
 };
 
 const authSlice = createSlice({
@@ -43,6 +45,9 @@ const authSlice = createSlice({
     },
     setOpenCommentsDialog: (state, action: PayloadAction<{isOpenCommentsDialog: boolean}>) => {
       state.isOpenCommentsDialog = action.payload.isOpenCommentsDialog;
+    },
+    saveImageUrl: (state, action: PayloadAction<{imageUrl: string}>) => {
+      state.imageUrl = action.payload.imageUrl;
     },
   },
 });

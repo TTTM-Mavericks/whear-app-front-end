@@ -8,6 +8,8 @@ export type RootStackParamList = {
   Route: undefined;
   ForgotPassword: { email: string };
   PostingDetail: {postID: string};
+  UserProfile: undefined;
+  UserProfileSetting: undefined;
 
 };
 

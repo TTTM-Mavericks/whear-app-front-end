@@ -375,6 +375,49 @@ const PostingDetailScreen = () => {
                       </View>
                     </View>
                     {/* Comments */}
+                    {/* {commentsGroup()} */}
+                    <View style={[PostingDetailStyleScreen.container_postingBar, { flexDirection: 'column' }]}>
+
+                      {commentsArray.comment.map((comment, key) => (
+                        <View key={comment.commentID} style={[PostingDetailStyleScreen.container_postingBar, { marginTop: 20 }]}>
+                          <View key={comment.commentID} style={{ flexDirection: 'row', width: width * 0.8, height: 'auto' }}>
+                            <Avatar.Image
+                              size={iconAvatarPostingSize * 0.8}
+                              source={{ uri: comment.user ? comment.user.imgUrl : '#' }}
+                              style={{ marginLeft: 10 }} />
+                            <View key={comment.commentID} style={PostingDetailStyleScreen.commentContent}
+                            >
+                              <View key={comment.commentID} style={{ padding: 10 }}>
+                                <Text
+                                  style=
+                                  {
+                                    {
+                                      fontWeight: 'bold',
+                                      paddingTop: -iconAvatarPostingSize * 1
+                                    }
+                                  }
+                                >
+                                  Nguyen Minh Tu
+                                </Text>
+                                <Text style={{ fontSize: spanTextSize * 0.8 }}>{comment.date.toLocaleString()}</Text>
+                                <Text>
+
+                                  {showFullComment ? comment.content : comment.content.substring(0, 100) + '...'}
+                                  {comment.content.length > 100 && (
+                                    <Text
+                                      onPress={handleToggleComment}
+                                      style={{ color: 'black', fontSize: 13, textDecorationLine: 'underline', marginLeft: 10 }}
+                                    >
+                                      {showFullComment ? 'See less' : 'See more'}
+                                    </Text>
+                                  )}
+                                </Text>
+                              </View>
+                            </View>
+                          </View>
+                        </View>
+                      ))}
+                    </View>
                     <View style={{ flexDirection: 'row', width: width * 0.8, height: 'auto', paddingTop: 10, paddingLeft: 10 }}>
                       <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold' }}>Comments</Text>
                     </View>
@@ -402,7 +445,7 @@ const PostingDetailScreen = () => {
                           }
                         />
                         {item.postID === selectedItem && (
-                          <CommentsDetailDialogComponent commentsChild={commentsGroup()} postId={item.postID} comments={item.comment}></CommentsDetailDialogComponent>
+                          <CommentsDetailDialogComponent postId={item.postID} comments={item.comment}></CommentsDetailDialogComponent>
                         )}
 
 

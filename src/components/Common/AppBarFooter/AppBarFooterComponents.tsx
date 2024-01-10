@@ -56,13 +56,13 @@ const AppBarFooterComponents: React.FC<footerProperties> = ({ isHide, centerIcon
             <View
                 style={[AppBarFooterStyleComponents.segmentedButtons,]}
             >
-                <IconButton icon={'home'} size={20} style={AppBarFooterStyleComponents.button} />
-                <IconButton icon={'comment'} size={20} style={AppBarFooterStyleComponents.button} />
+                <IconButton icon={require('../../../assets/icon/home.png')} size={20} style={AppBarFooterStyleComponents.button} onPress={()=> navigation.navigate('Home')} />
+                <IconButton icon={require('../../../assets/icon/talking.png')} size={20} style={AppBarFooterStyleComponents.button} onPress={()=> navigation.navigate('Social')} />
                     <IconButton icon={centerIcon ? centerIcon : {uri: urlCenterIcon} } onPress={centerOnPress} style={AppBarFooterStyleComponents.centerButton} />
                 <IconButton icon={{ uri: 'null' }} size={20} style={[AppBarFooterStyleComponents.button, { backgroundColor: 'transparent', marginTop: 0 }]} />
-                <IconButton icon={'heart'} size={20} style={AppBarFooterStyleComponents.button} />
+                <IconButton icon={require('../../../assets/icon/heart.png')}  size={20} style={AppBarFooterStyleComponents.button} onPress={()=> navigation.navigate('Collections')} />
 
-                <IconButton icon={'menu'} size={20} style={AppBarFooterStyleComponents.button} />
+                <IconButton icon={require('../../../assets/icon/user.png')} iconColor='#49454F' size={20} style={AppBarFooterStyleComponents.button} onPress={()=> navigation.navigate('UserProfile')} />
 
             </View>
         </Animated.View>
