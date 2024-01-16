@@ -18,6 +18,7 @@ import PostingDetailScreen from './src/Screens/PostingDetail/PostingDetailScreen
 import CollectionsScreen from './src/Screens/Collections/CollectionsScreen';
 import UserProfileScreen from './src/Screens/UserProfile/UserProfileScreen';
 import UserProfileSettingScreen from './src/Screens/UserProfile/UserProfileSettingScreen';
+import ChooseStyleYouLoveScreen from './src/Screens/ChooseStyleYouLove/ChooseStyleYouLoveScreen';
 
 const Stack = createStackNavigator();
 
@@ -27,14 +28,21 @@ export default function App() {
       <PaperProvider>
         <NavigationContainer>
           <View style={styles.container}>
+          
             <Stack.Navigator>
-              <Stack.Screen
+            <Stack.Screen
+                name="ChooseStyleYouLove"
+                component={ChooseStyleYouLoveScreen}
+                options={{ headerShown: false }}
+              />
+
+              {/* <Stack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{ headerShown: false }}
-              />
+              /> */}
               
-              <Stack.Screen
+               {/*<Stack.Screen
                 name="Collections"
                 component={CollectionsScreen}
                 options={{ headerShown: false }}
@@ -48,7 +56,7 @@ export default function App() {
                 name="UserProfileSetting"
                 component={UserProfileSettingScreen}
                 options={{ headerShown: false }}
-              />
+              /> */}
 
               {/* <Stack.Screen
                 name="SignIn"
@@ -64,7 +72,7 @@ export default function App() {
               */}
 
 
-
+{/* 
               <Stack.Screen
                 name="Introduce"
                 component={IntroduceScreen}
@@ -87,7 +95,7 @@ export default function App() {
                 name="PostingDetail"
                 component={PostingDetailScreen}
                 options={{ headerShown: false }}
-              />
+              /> */}
 
 
             </Stack.Navigator>

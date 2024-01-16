@@ -8,5 +8,5 @@ export const errorColor = '#e74c3c';
 export const textTyporaphy = '#0000';
 export const grayBorderColor= '#929AA2';
 export const grayBackgroundColor= '#F5F5F5'
-
+export const grayText='#D4D4D4'
 
