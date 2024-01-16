@@ -28,76 +28,72 @@ export default function App() {
       <PaperProvider>
         <NavigationContainer>
           <View style={styles.container}>
-          
             <Stack.Navigator>
-            <Stack.Screen
-                name="ChooseStyleYouLove"
-                component={ChooseStyleYouLoveScreen}
+              <Stack.Screen
+                name='Home'
+                component={HomeScreen}
                 options={{ headerShown: false }}
               />
 
-              {/* <Stack.Screen
-                name="Home"
-                component={HomeScreen}
-                options={{ headerShown: false }}
-              /> */}
-              
-               {/*<Stack.Screen
-                name="Collections"
+              <Stack.Screen
+                name='Collections'
                 component={CollectionsScreen}
                 options={{ headerShown: false }}
               />
+
               <Stack.Screen
-                name="UserProfile"
+                name='UserProfile'
                 component={UserProfileScreen}
                 options={{ headerShown: false }}
               />
+
               <Stack.Screen
-                name="UserProfileSetting"
+                name='UserProfileSetting'
                 component={UserProfileSettingScreen}
                 options={{ headerShown: false }}
-              /> */}
+              />
 
-              {/* <Stack.Screen
-                name="SignIn"
+              <Stack.Screen
+                name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name="SignUp"
+                name='SignUp'
                 component={SignUpComponent}
                 options={{ headerShown: false }}
               />
-              */}
 
-
-{/* 
               <Stack.Screen
-                name="Introduce"
+                name='Introduce'
                 component={IntroduceScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name="ForgotPassword"
+                name='ForgotPassword'
                 component={ForgotPasswordComponent}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name="Social"
+                name='Social'
                 component={SocialScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name="PostingDetail"
+                name='PostingDetail'
                 component={PostingDetailScreen}
                 options={{ headerShown: false }}
-              /> */}
+              />
 
-
+              <Stack.Screen
+                name='ChooseStyleYouLove'
+                component={ChooseStyleYouLoveScreen}
+                options={{ headerShown: false }}
+              />
             </Stack.Navigator>
           </View>
         </NavigationContainer>
@@ -112,4 +108,3 @@ const styles = StyleSheet.create({
     backgroundColor: backgroundColor,
   },
 });
-
