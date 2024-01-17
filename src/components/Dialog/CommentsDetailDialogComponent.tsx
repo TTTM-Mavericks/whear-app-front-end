@@ -16,7 +16,7 @@ import { height, width } from '../../root/ResponsiveSize';
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 
 interface CommentsDataProperties {
-    comments: Object[];
+    comments: any;
     postId: string;
     commentsChild?: ReactNode;
 
@@ -35,10 +35,9 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({ comme
     const navigation = useNavigation<SignInScreenNavigationProp>();
     const [textInput, setTextInput] = React.useState('');
     const [lengthText, setLengthText] = React.useState(0);
-    const [openCommentsDialogItemId, setOpenCommentsDialogItemId] = useState<{ [key: string]: boolean }>({});
-    const [commentPosting, setCommentPosting] = useState('');
     const [countOpening, setCountOpening] = useState(0);
     const [showFullComment, setShowFullComment] = useState(false);
+    const [imgUrl, setImgUrl] = useState('#');
 
 
 
@@ -59,11 +58,9 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({ comme
         }
     }, [openDialog]);
 
-    // React.useEffect(() => {
-    //     if (openDialog) {
-    //         dispatch(setOpenCommentsDialog(false));
-    //     }
-    // }, [])
+    React.useEffect(() => {
+        setImgUrl(comments.user.imgUrl)
+    }, [])
 
 
 
@@ -81,7 +78,9 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({ comme
     }
 
 
-
+    /**
+     * Show animation 
+     */
     const showAnimation = () => {
 
         Animated.spring(translateY, {
@@ -90,6 +89,9 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({ comme
         }).start();
     };
 
+    /**
+     * Hide animation
+     */
     const hideAnimation = () => {
         Animated.timing(translateY, {
             toValue: 200,
@@ -99,28 +101,33 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({ comme
         });
     };
 
-
+    /**
+     * onChangeText
+     */
     const handleTextChange = (text: any) => {
         const lines = text.split('\n');
         const truncatedLines = lines.map((line: any) => line.slice(0, MAX_CHARACTERS_PER_LINE));
         const truncatedText = truncatedLines.join('\n');
 
         if (lengthText + truncatedLines.length > MAX_LENGTH) {
-
-
         }
         else {
             setTextInput(truncatedText);
             setLengthText(lengthText + truncatedLines.length)
         }
     };
+    
 
     const handleTouchablePress = () => {
         Keyboard.dismiss();
     };
 
-    function handleSendComment(postID: any): void {
-        throw new Error('Function not implemented.');
+    /**
+     * Send comment
+     * @param postID 
+     */
+    const  handleSendComment = (postID: any) => {
+        //TODO
     }
 
     const handleToggleComment = () => {
@@ -136,7 +143,6 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({ comme
             >
                 <View style={{ height: height * 2, backgroundColor: 'white' }}>
                     <Portal>
-
                         <Dialog
                             visible={isOpen}
                             style={DialogStylesComponent.postingDialogContainer}
@@ -156,13 +162,13 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({ comme
 
                                     <View style={[DialogStylesComponent.container_postingBar, { flexDirection: 'column' }]}>
 
-                                        {comments.map((comment: any, key) => (
+                                        {comments.map((comment: any, key: any) => (
                                             <View key={comment.commentID} style={[DialogStylesComponent.container_postingBar, { marginTop: 20 }]}>
                                                 <View key={comment.commentID} style={{ flexDirection: 'row', width: width * 0.8, height: 'auto' }}>
-                                                    {/* <Avatar.Image
+                                                    <Avatar.Image
                                                         size={iconAvatarPostingSize * 0.8}
-                                                        source={{ uri: comment.user.imgUrl ? comment.user.imgUrl : 'fg' }}
-                                                        style={{ marginLeft: 10 }} /> */}
+                                                        source={{ uri: imgUrl }}
+                                                        style={{ marginLeft: 10 }} />
                                                     <View key={comment.commentID} style={DialogStylesComponent.commentContent}
                                                     >
                                                         <View key={comment.commentID} style={{ padding: 10 }}>
@@ -228,11 +234,8 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({ comme
 
                                 </View>
                             </Dialog.Actions>
-
                         </Dialog>
-
                     </Portal>
-
                 </View>
             </KeyboardAvoidingView >
         </TouchableWithoutFeedback>

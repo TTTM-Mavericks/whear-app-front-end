@@ -158,7 +158,7 @@ const AddingToCollectionComponent = () => {
                             iconColor={MD3Colors.error50}
                             size={10}
                             mode='outlined'
-                            style={{ borderColor: primaryColor }}
+                            style={{ borderColor: 'white' }}
                             containerColor='white'
                             onPress={() => hideDialog()}
                         />

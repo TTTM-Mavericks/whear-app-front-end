@@ -153,14 +153,10 @@ const UserProfileScreen = () => {
 
 
 
-
-
-
-
   return (
     <View style={UserProfileStyleScreen.container}>
       <View style={UserProfileStyleScreen.header}>
-        <IconButton icon={require('../../assets/icon/previous.png')}></IconButton>
+        <IconButton icon={require('../../assets/icon/backarrow.png')}></IconButton>
         <View style={UserProfileStyleScreen.upgradeBanner} >
           <Icon source={require('../../assets/img/logo/logo.png')} size={40}></Icon>
           <Text style={{ fontSize: 12, fontWeight: 'bold', marginRight: 10 }}>Upgrade to Store</Text>
@@ -228,16 +224,6 @@ const UserProfileScreen = () => {
 
       </View>
 
-      {/* <View
-        style={[UserProfileStyleScreen.segmentedButtonsNavbar,]}
-      >
-        <IconButton icon={'image'} size={15} style={UserProfileStyleScreen.navbarButton} />
-        <IconButton icon={'heart'} size={15} style={UserProfileStyleScreen.navbarButton} />
-        <IconButton icon={'history'} size={15} style={UserProfileStyleScreen.navbarButton} />
-        <IconButton icon={'menu'} size={15} style={UserProfileStyleScreen.navbarButton} />
-
-
-      </View> */}
       <SegmentedButtons
         style={[UserProfileStyleScreen.segmentedButtonsNavbar]}
         theme={{ roundness: 2 }}
