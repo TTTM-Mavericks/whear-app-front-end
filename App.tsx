@@ -18,6 +18,7 @@ import PostingDetailScreen from './src/Screens/PostingDetail/PostingDetailScreen
 import CollectionsScreen from './src/Screens/Collections/CollectionsScreen';
 import UserProfileScreen from './src/Screens/UserProfile/UserProfileScreen';
 import UserProfileSettingScreen from './src/Screens/UserProfile/UserProfileSettingScreen';
+import TestUploadImageScreen from './src/Screens/UserProfile/TestUploadImageScreen';
 
 const Stack = createStackNavigator();
 
@@ -28,7 +29,14 @@ export default function App() {
         <NavigationContainer>
           <View style={styles.container}>
             <Stack.Navigator>
+
               <Stack.Screen
+                name="test"
+                component={TestUploadImageScreen}
+                options={{ headerShown: false }}
+              />
+
+              {/* <Stack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{ headerShown: false }}
@@ -48,7 +56,7 @@ export default function App() {
                 name="UserProfileSetting"
                 component={UserProfileSettingScreen}
                 options={{ headerShown: false }}
-              />
+              /> */}
 
               {/* <Stack.Screen
                 name="SignIn"
@@ -65,7 +73,7 @@ export default function App() {
 
 
 
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="Introduce"
                 component={IntroduceScreen}
                 options={{ headerShown: false }}
@@ -87,7 +95,7 @@ export default function App() {
                 name="PostingDetail"
                 component={PostingDetailScreen}
                 options={{ headerShown: false }}
-              />
+              /> */}
 
 
             </Stack.Navigator>

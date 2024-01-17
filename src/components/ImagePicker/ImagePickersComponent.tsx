@@ -1,32 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Image, View, Platform, StyleProp, ViewStyle } from 'react-native';
+import { Platform, StyleProp, ViewStyle } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { MediaTypeOptions } from 'expo-image-picker';
 import { IconButton } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import { saveImageUrl } from '../../redux/State/Actions';
-
-
 interface ImagePickerProps {
   style?: StyleProp<ViewStyle>;
   iconButton?: string;
   urlIconButton?: string;
   onPress?: () => void;
   iconSize?: number;
-  cutWidth?: number,
-  cutHeight?: number
+  cutWidth?: number;
+  cutHeight?: number;
 }
 
-const ImagePickerComponent: React.FC<ImagePickerProps> = (
-  {
-    style,
-    iconButton,
-    urlIconButton,
-    onPress,
-    iconSize,
-    cutWidth,
-    cutHeight }
-) => {
+const ImagePickerComponent: React.FC<ImagePickerProps> = ({
+  style,
+  iconButton,
+  urlIconButton,
+  onPress,
+  iconSize,
+  cutWidth,
+  cutHeight,
+}) => {
   const [imageUrl, setImageUrl] = useState<string>('');
   const dispatch = useDispatch();
 
@@ -42,7 +39,6 @@ const ImagePickerComponent: React.FC<ImagePickerProps> = (
   }, []);
 
   const pickImage = async () => {
-
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: MediaTypeOptions.All,
       allowsEditing: true,
@@ -50,17 +46,22 @@ const ImagePickerComponent: React.FC<ImagePickerProps> = (
       quality: 1,
     });
 
-
     if (!result.canceled) {
-      console.log(result.assets![0].uri);
-      setImageUrl(result.assets![0].uri);
-      dispatch(saveImageUrl(result.assets![0].uri))
+      const uri = result.assets![0].uri;
+      setImageUrl(uri);
+      dispatch(saveImageUrl(uri));
+
     }
   };
 
   return (
-    <IconButton style={style} size={iconSize} icon={iconButton ? iconButton : { uri: urlIconButton ? urlIconButton : '#' }} onPress={pickImage} />
+    <IconButton
+      style={style}
+      size={iconSize}
+      icon={iconButton ? iconButton : { uri: urlIconButton ? urlIconButton : '#' }}
+      onPress={pickImage}
+    />
   );
-}
+};
 
-export default ImagePickerComponent
+export default ImagePickerComponent;
