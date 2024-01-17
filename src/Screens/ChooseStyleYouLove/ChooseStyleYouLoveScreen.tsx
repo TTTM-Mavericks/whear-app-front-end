@@ -1,14 +1,13 @@
 import MaskedView from '@react-native-masked-view/masked-view';
 import React, { useState } from 'react';
 import { FlatList, ScrollView, View } from 'react-native';
-import { Appbar, Text } from 'react-native-paper';
-import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
+import { Text } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
+import IconFA from 'react-native-vector-icons/FontAwesome';
 import ListViewComponent from '../../components/ListView/ListViewComponent';
 import HomeStylesComponent from '../Home/HomeStyleScreen';
 import ChooseStyleYouLoveStyleScreen from './ChooseStyleYouLoveStyleScreen';
-
-import { LinearGradient } from 'expo-linear-gradient';
-import IconFA from 'react-native-vector-icons/FontAwesome';
 import ButtonComponent from '../../components/Button/ButtonDefaultComponent';
 import {
   buttonHeight,
@@ -74,6 +73,7 @@ const styleData = [
     imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
   },
 ];
+
 const ChooseStyleYouLoveScreen = () => {
   const [selectedItems, setSelectedItems] = useState([] as string[]);
   const handleSetSelectedItems = (id: string) => {
@@ -88,29 +88,12 @@ const ChooseStyleYouLoveScreen = () => {
     alert('back');
   }
 
-  const handleSearch = () => {
-    alert('search');
-  };
-
-  const handleMore = () => {
-    alert('handleMore');
-  };
   const handleNext = () => {
     alert('next');
   };
 
   return (
-    <View style={ChooseStyleYouLoveStyleScreen.container}>
-      <AppBarHeaderComponent
-        backAction={() => hanldeGoBack()}
-        iconChild={
-          <>
-            <Appbar.Action icon={'magnify'} onPress={handleSearch} />
-            <Appbar.Action icon='dots-vertical' onPress={handleMore} />
-          </>
-        }
-      ></AppBarHeaderComponent>
-
+    <SafeAreaView style={ChooseStyleYouLoveStyleScreen.container}>
       <ScrollView
         persistentScrollbar={false}
         style={ChooseStyleYouLoveStyleScreen.scrollView}
@@ -149,24 +132,28 @@ const ChooseStyleYouLoveScreen = () => {
             renderItem={({ item }) => (
               <ListViewComponent
                 data={[{ id: item.id, imgUrl: item.imgUrl }]}
+                cardStyleContent={
+                  ChooseStyleYouLoveStyleScreen.cardStyleContainer
+                }
                 child={
-                  selectedItems.includes(item.id) ? (
+                  <View>
+                    <View style={ChooseStyleYouLoveStyleScreen.cardTextView}>
+                      <Text style={ChooseStyleYouLoveStyleScreen.cardText}>
+                        {item.title}
+                      </Text>
+                    </View>
                     <IconFA
-                      name='check-circle'
+                      name={
+                        selectedItems.includes(item.id)
+                          ? 'check-circle'
+                          : 'circle-thin'
+                      }
                       size={30}
                       color={primaryColor}
                       onPress={() => handleSetSelectedItems(item.id)}
                       style={[ChooseStyleYouLoveStyleScreen.iconCard, {}]}
                     />
-                  ) : (
-                    <IconFA
-                      name='circle-thin'
-                      color={'white'}
-                      onPress={() => handleSetSelectedItems(item.id)}
-                      size={30}
-                      style={[ChooseStyleYouLoveStyleScreen.iconCard, {}]}
-                    />
-                  )
+                  </View>
                 }
               />
             )}
@@ -189,7 +176,7 @@ const ChooseStyleYouLoveScreen = () => {
           </View>
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 export default ChooseStyleYouLoveScreen;
