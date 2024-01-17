@@ -1,24 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import SignInComponent from './src/components/auth/SinIn/SignInComponent';
-import HomeScreen from './src/Screens/Home/HomeScreen';
-import ForgotPasswordComponent from './src/components/auth/ForgotPassword/ForgotPasswordComponent';
-import { backgroundColor } from './src/root/Colors';
+import { StatusBar } from "expo-status-bar";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import SignInComponent from "./src/components/auth/SinIn/SignInComponent";
+import HomeScreen from "./src/Screens/Home/HomeScreen";
+import ForgotPasswordComponent from "./src/components/auth/ForgotPassword/ForgotPasswordComponent";
+import { backgroundColor } from "./src/root/Colors";
 
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 
-import { Provider } from 'react-redux'; // Import Provider
-import store from './src/redux/State/Store';
-import SignUpComponent from './src/components/auth/SignUp/SignUpComponent';
-import { PaperProvider } from 'react-native-paper';
-import IntroduceScreen from './src/Screens/Introduce/IntroduceComponent';
-import SocialScreen from './src/Screens/Social/SocialScreen';
-import PostingDetailScreen from './src/Screens/PostingDetail/PostingDetailScreen';
-import CollectionsScreen from './src/Screens/Collections/CollectionsScreen';
-import UserProfileScreen from './src/Screens/UserProfile/UserProfileScreen';
-import UserProfileSettingScreen from './src/Screens/UserProfile/UserProfileSettingScreen';
-import TestUploadImageScreen from './src/Screens/UserProfile/TestUploadImageScreen';
+import TestUploadImageScreen from "./src/Screens/UserProfile/TestUploadImageScreen";
+import { Provider } from "react-redux"; // Import Provider
+import store from "./src/redux/State/Store";
+import SignUpComponent from "./src/components/auth/SignUp/SignUpComponent";
+import { PaperProvider } from "react-native-paper";
+import IntroduceScreen from "./src/Screens/Introduce/IntroduceComponent";
+import SocialScreen from "./src/Screens/Social/SocialScreen";
+import PostingDetailScreen from "./src/Screens/PostingDetail/PostingDetailScreen";
+import CollectionsScreen from "./src/Screens/Collections/CollectionsScreen";
+import UserProfileScreen from "./src/Screens/UserProfile/UserProfileScreen";
+import UserProfileSettingScreen from "./src/Screens/UserProfile/UserProfileSettingScreen";
+import BasicInformationScreen from "./src/Screens/BasicInformation/BasicInformationScreen";
 
 const Stack = createStackNavigator();
 
@@ -29,12 +30,11 @@ export default function App() {
         <NavigationContainer>
           <View style={styles.container}>
             <Stack.Navigator>
-
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="test"
                 component={TestUploadImageScreen}
                 options={{ headerShown: false }}
-              />
+              /> */}
 
               {/* <Stack.Screen
                 name="Home"
@@ -71,8 +71,6 @@ export default function App() {
               />
               */}
 
-
-
               {/* <Stack.Screen
                 name="Introduce"
                 component={IntroduceScreen}
@@ -97,7 +95,11 @@ export default function App() {
                 options={{ headerShown: false }}
               /> */}
 
-
+              <Stack.Screen
+                name="BasicInformationScreen"
+                component={BasicInformationScreen}
+                options={{ headerShown: false }}
+              />
             </Stack.Navigator>
           </View>
         </NavigationContainer>
@@ -112,4 +114,3 @@ const styles = StyleSheet.create({
     backgroundColor: backgroundColor,
   },
 });
-
