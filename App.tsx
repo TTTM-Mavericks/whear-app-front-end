@@ -20,6 +20,7 @@ import CollectionsScreen from "./src/Screens/Collections/CollectionsScreen";
 import UserProfileScreen from "./src/Screens/UserProfile/UserProfileScreen";
 import UserProfileSettingScreen from "./src/Screens/UserProfile/UserProfileSettingScreen";
 import BasicInformationScreen from "./src/Screens/BasicInformation/BasicInformationScreen";
+import ChooseStyleYouLoveScreen from "./src/Screens/ChooseStyleYouLove/ChooseStyleYouLoveScreen";
 
 const Stack = createStackNavigator();
 
@@ -41,35 +42,37 @@ export default function App() {
                 component={HomeScreen}
                 options={{ headerShown: false }}
               />
-              
+
               <Stack.Screen
-                name="Collections"
+                name='Collections'
                 component={CollectionsScreen}
                 options={{ headerShown: false }}
               />
+
               <Stack.Screen
-                name="UserProfile"
+                name='UserProfile'
                 component={UserProfileScreen}
                 options={{ headerShown: false }}
               />
+
               <Stack.Screen
-                name="UserProfileSetting"
+                name='UserProfileSetting'
                 component={UserProfileSettingScreen}
                 options={{ headerShown: false }}
               /> */}
 
               {/* <Stack.Screen
-                name="SignIn"
+                name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name="SignUp"
+                name='SignUp'
                 component={SignUpComponent}
                 options={{ headerShown: false }}
               />
-              */}
+               */}
 
               {/* <Stack.Screen
                 name="Introduce"
@@ -78,26 +81,32 @@ export default function App() {
               />
 
               <Stack.Screen
-                name="ForgotPassword"
+                name='ForgotPassword'
                 component={ForgotPasswordComponent}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name="Social"
+                name='Social'
                 component={SocialScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name="PostingDetail"
+                name='PostingDetail'
                 component={PostingDetailScreen}
                 options={{ headerShown: false }}
               /> */}
 
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="BasicInformationScreen"
                 component={BasicInformationScreen}
+                options={{ headerShown: false }}
+              /> */}
+
+              <Stack.Screen
+                name="ChooseStyleYouLove"
+                component={ChooseStyleYouLoveScreen}
                 options={{ headerShown: false }}
               />
             </Stack.Navigator>
