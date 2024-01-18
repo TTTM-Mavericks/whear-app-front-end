@@ -1,24 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import SignInComponent from './src/components/auth/SinIn/SignInComponent';
-import HomeScreen from './src/Screens/Home/HomeScreen';
-import ForgotPasswordComponent from './src/components/auth/ForgotPassword/ForgotPasswordComponent';
-import { backgroundColor } from './src/root/Colors';
+import { StatusBar } from "expo-status-bar";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import SignInComponent from "./src/components/auth/SinIn/SignInComponent";
+import HomeScreen from "./src/Screens/Home/HomeScreen";
+import ForgotPasswordComponent from "./src/components/auth/ForgotPassword/ForgotPasswordComponent";
+import { backgroundColor } from "./src/root/Colors";
 
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 
-import { Provider } from 'react-redux'; // Import Provider
-import store from './src/redux/State/Store';
-import SignUpComponent from './src/components/auth/SignUp/SignUpComponent';
-import { PaperProvider } from 'react-native-paper';
-import IntroduceScreen from './src/Screens/Introduce/IntroduceComponent';
-import SocialScreen from './src/Screens/Social/SocialScreen';
-import PostingDetailScreen from './src/Screens/PostingDetail/PostingDetailScreen';
-import CollectionsScreen from './src/Screens/Collections/CollectionsScreen';
-import UserProfileScreen from './src/Screens/UserProfile/UserProfileScreen';
-import UserProfileSettingScreen from './src/Screens/UserProfile/UserProfileSettingScreen';
-import ChooseStyleYouLoveScreen from './src/Screens/ChooseStyleYouLove/ChooseStyleYouLoveScreen';
+import TestUploadImageScreen from "./src/Screens/UserProfile/TestUploadImageScreen";
+import { Provider } from "react-redux"; // Import Provider
+import store from "./src/redux/State/Store";
+import SignUpComponent from "./src/components/auth/SignUp/SignUpComponent";
+import { PaperProvider } from "react-native-paper";
+import IntroduceScreen from "./src/Screens/Introduce/IntroduceComponent";
+import SocialScreen from "./src/Screens/Social/SocialScreen";
+import PostingDetailScreen from "./src/Screens/PostingDetail/PostingDetailScreen";
+import CollectionsScreen from "./src/Screens/Collections/CollectionsScreen";
+import UserProfileScreen from "./src/Screens/UserProfile/UserProfileScreen";
+import UserProfileSettingScreen from "./src/Screens/UserProfile/UserProfileSettingScreen";
+import BasicInformationScreen from "./src/Screens/BasicInformation/BasicInformationScreen";
+import ChooseStyleYouLoveScreen from "./src/Screens/ChooseStyleYouLove/ChooseStyleYouLoveScreen";
 
 const Stack = createStackNavigator();
 
@@ -29,8 +31,14 @@ export default function App() {
         <NavigationContainer>
           <View style={styles.container}>
             <Stack.Navigator>
-              <Stack.Screen
-                name='Home'
+              {/* <Stack.Screen
+                name="test"
+                component={TestUploadImageScreen}
+                options={{ headerShown: false }}
+              /> */}
+
+              {/* <Stack.Screen
+                name="Home"
                 component={HomeScreen}
                 options={{ headerShown: false }}
               />
@@ -51,9 +59,9 @@ export default function App() {
                 name='UserProfileSetting'
                 component={UserProfileSettingScreen}
                 options={{ headerShown: false }}
-              />
+              /> */}
 
-              <Stack.Screen
+              {/* <Stack.Screen
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
@@ -64,9 +72,10 @@ export default function App() {
                 component={SignUpComponent}
                 options={{ headerShown: false }}
               />
+               */}
 
-              <Stack.Screen
-                name='Introduce'
+              {/* <Stack.Screen
+                name="Introduce"
                 component={IntroduceScreen}
                 options={{ headerShown: false }}
               />
@@ -87,10 +96,16 @@ export default function App() {
                 name='PostingDetail'
                 component={PostingDetailScreen}
                 options={{ headerShown: false }}
-              />
+              /> */}
+
+              {/* <Stack.Screen
+                name="BasicInformationScreen"
+                component={BasicInformationScreen}
+                options={{ headerShown: false }}
+              /> */}
 
               <Stack.Screen
-                name='ChooseStyleYouLove'
+                name="ChooseStyleYouLove"
                 component={ChooseStyleYouLoveScreen}
                 options={{ headerShown: false }}
               />
