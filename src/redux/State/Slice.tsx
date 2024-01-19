@@ -8,6 +8,8 @@ interface State {
   isOpenPostingDialog: boolean;
   isOpenCommentsDialog: boolean;
   imageUrl: string;
+  isOpenCreateClothesDialog: boolean;
+  imageCreatingUrl: string;
 }
 
 const initialState: State = {
@@ -17,7 +19,9 @@ const initialState: State = {
   isAddedToCollections: false,
   isOpenPostingDialog: false,
   isOpenCommentsDialog: false,
-  imageUrl: '../../assets/icon/user.png'
+  imageUrl: '../../assets/icon/user.png',
+  isOpenCreateClothesDialog: false,
+  imageCreatingUrl: '../../assets/icon/user.png',
 };
 
 const authSlice = createSlice({
@@ -48,6 +52,12 @@ const authSlice = createSlice({
     },
     saveImageUrl: (state, action: PayloadAction<{imageUrl: string}>) => {
       state.imageUrl = action.payload.imageUrl;
+    },
+    setOpenCreateClothesDialog: (state, action: PayloadAction<{isOpenCreateClothesDialog: boolean}>) => {
+      state.isOpenCreateClothesDialog = action.payload.isOpenCreateClothesDialog;
+    },
+    saveImageCreatingUrl: (state, action: PayloadAction<{imageCreatingUrl: string}>) => {
+      state.imageCreatingUrl = action.payload.imageCreatingUrl;
     },
   },
 });
