@@ -21,6 +21,7 @@ import UserProfileScreen from "./src/Screens/UserProfile/UserProfileScreen";
 import UserProfileSettingScreen from "./src/Screens/UserProfile/UserProfileSettingScreen";
 import BasicInformationScreen from "./src/Screens/BasicInformation/BasicInformationScreen";
 import ChooseStyleYouLoveScreen from "./src/Screens/ChooseStyleYouLove/ChooseStyleYouLoveScreen";
+import React from "react";
 
 const Stack = createStackNavigator();
 
