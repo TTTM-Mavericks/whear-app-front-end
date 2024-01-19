@@ -41,17 +41,46 @@ const SocailStyleScreen = StyleSheet.create({
     flexDirection: 'row',
 
   },
-  postingEditorContainer:{
+  postingEditorContainer: {
     width: width,
     textAlign: 'center',
     alignItems: 'center',
     alignContent: 'center'
   },
-  postingInput:{
-    width: width*0.9,
+  postingInput: {
+    width: width * 0.9,
     backgroundColor: backgroundColor,
     height: 30,
     borderRadius: 8
+  },
+  container_cardContainer: {
+    width: width,
+    marginLeft: 0,
+    borderRadius: 0,
+  },
+  container_cardContent: {
+    width: width,
+    borderRadius: 0,
+
+  },
+  container_postingBar: {
+    width: width,
+    flexDirection: 'row',
+    backgroundColor: 'white',
+
+  },
+  container_groupIconBar: {
+    width: width * 0.8,
+    height: height*0.05,
+    paddingTop: height,
+    backgroundColor: 'blue',
+    
+  },
+  commentInput: {
+    width: width*0.95,
+    backgroundColor: backgroundColor,
+    height: 30,
+    borderRadius: 50
   },
 });
 

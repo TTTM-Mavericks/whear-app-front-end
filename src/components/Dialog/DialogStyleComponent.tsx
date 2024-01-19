@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { titleTextDialogSize } from '../../root/Texts';
-import { backgroundColor } from '../../root/Colors';
+import { buttonTextSize, titleTextDialogSize } from '../../root/Texts';
+import { backgroundColor, grayBackgroundColor, primaryColor } from '../../root/Colors';
 
 
 
@@ -10,7 +10,7 @@ const containerPadding = 16;
 const DialogStylesComponent = StyleSheet.create({
     dialogContainer: {
         height: height * 0.7,
-        borderRadius: 8,
+        borderRadius: 10,
         backgroundColor: backgroundColor,
         paddingLeft: 0,
         paddingRight: 0,
@@ -85,7 +85,7 @@ const DialogStylesComponent = StyleSheet.create({
 
     // ----------------------------------------//
     postingDialogContainer: {
-        height: height,
+        height: height * 0.7,
         width: width,
         margin: 0,
         bottom: 0,
@@ -94,7 +94,9 @@ const DialogStylesComponent = StyleSheet.create({
         marginLeft: 0,
         marginBottom: 0,
         marginTop: height * 0.1,
-        backgroundColor: backgroundColor
+        backgroundColor: backgroundColor,
+        borderBottomEndRadius: 0,
+        borderBottomStartRadius: 0
     },
     postingDialogContainer_textInput: {
         borderColor: backgroundColor,
@@ -118,6 +120,66 @@ const DialogStylesComponent = StyleSheet.create({
         flexDirection: 'row',
         marginLeft: 20,
         marginBottom: 20
+    },
+    buttonSubmit: {
+        width: width * 0.1,
+        height: 30,
+        alignItems: 'center',
+        borderRadius: 8,
+        backgroundColor: primaryColor,
+        marginRight: width * 0
+    },
+    contentButton: {
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: 0,
+        marginBottom: 0,
+        fontSize: buttonTextSize
+
+    },
+
+    // -----------------------Comments--------------------------
+
+    commentInput: {
+        width: width * 0.95,
+        backgroundColor: backgroundColor,
+        height: 30,
+        borderRadius: 50
+    },
+    commentDialogContent: {
+        marginLeft: -20,
+        width: width
+    },
+    container_cardContainer: {
+        width: width,
+        marginLeft: 0,
+        borderRadius: 0,
+    },
+    container_cardContent: {
+        width: width,
+        borderRadius: 0,
+
+    },
+    container_postingBar: {
+        width: width,
+        flexDirection: 'row',
+        backgroundColor: 'white',
+
+    },
+    container_groupIconBar: {
+        width: width * 0.8,
+        height: height * 0.05,
+        paddingTop: height,
+        backgroundColor: 'blue',
+
+    },
+
+    commentContent: {
+        width: width * 0.8,
+        marginLeft: 10,
+        marginTop: -5,
+        borderRadius: 10,
+        backgroundColor: grayBackgroundColor
     }
 
 });
