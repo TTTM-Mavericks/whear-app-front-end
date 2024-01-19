@@ -12,9 +12,22 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
 import { primaryColor, secondaryColor } from "../../root/Colors";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../root/RootStackParams";
+
+type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
+
 
 export default function BasicInformationScreen() {
   const [checked, setChecked] = React.useState("first");
+
+  const navigation = useNavigation<ScreenNavigationProp>();
+
+
+  const handleMoveToChooseStyleYouLoveScreen = () => {
+    navigation.navigate('ChooseStyleYouLove')
+  }
   return (
     <View style={BasicInformationStyle.container}>
       <View style={BasicInformationStyle.headerText}>
@@ -106,7 +119,7 @@ export default function BasicInformationScreen() {
           onPress={() => console.log("Right pressed")}
         />
       </View>
-      <Button style={BasicInformationStyle.buttonCSS}>
+      <Button style={BasicInformationStyle.buttonCSS} onPress={handleMoveToChooseStyleYouLoveScreen}>
         <Text style={BasicInformationStyle.textButton}>Next</Text>
       </Button>
     </View>

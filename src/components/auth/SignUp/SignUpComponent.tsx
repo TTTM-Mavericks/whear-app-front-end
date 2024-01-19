@@ -17,10 +17,13 @@ import { setOpenPolicy } from '../AuthState/AuthAction';
 import { backgroundColor, primaryColor } from '../../../root/Colors';
 import ButtonComponent from '../../Button/ButtonDefaultComponent';
 import { buttonHeight, buttonWidth } from '../../Button/ButtonDefaultData';
+import api from '../../../api/AxiosApiConfig';
+import { UserInterFace } from '../../../models/ObjectInterface';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 
-const languages = ['Vietnam', 'USA', 'UK', 'Japan'];
+const languages = ['VIETNAM', 'USA', 'UK', 'Japan'];
 
 const SignUpComponent = () => {
 
@@ -54,6 +57,9 @@ const SignUpComponent = () => {
     const [errorConfirmPasswordValidate, setErrorConfirmPasswordValidate] = useState('');
     const [isConfirmPasswordValidate, setIsConfirmPasswordValidate] = useState(true);
     const [isMatchingPassword, setIsMatchingPassword] = useState(false);
+
+    const [userResponse, setUserResponse] = useState<UserInterFace>();
+
 
     /*-----------------Usable variable-----------------*/
     const dispatch = useDispatch();
@@ -158,22 +164,46 @@ const SignUpComponent = () => {
         hideCountryPicker();
     };
 
+    function convertDateFormat(inputDate: any) {
+        const birthday = new Date(inputDate);
+        const year = birthday.getFullYear();
+        const month = (birthday.getMonth() + 1).toString().padStart(2, '0');
+        const day = birthday.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
     /**
      * SignUp handler
      */
-    const handleSignUp = () => {
-        const emailValidation = validateEmail(email);
-        const passwordValidation = validatePassword(password);
+    const handleSignUp = async () => {
+        try {
+            const requestData = {
+                username: username,
+                password: password,
+                dateOfBirth: convertDateFormat(birthday),
+                phone: phone,
+                email: email,
+                gender: JSON.stringify(gender),
+                imgUrl: "ddddddddd",
+                language: language
+            }
 
-        // if (emailValidation.isValid && passwordValidation.isValid) {
-        // Additional validation for other fields and confirmation logic
-        // dispatch(signUpAction({ email, username, password, gender, birthday, country }));
-        // dispatch(setEmailSignedInAction({ email }));
-        navigation.navigate('SignIn'); // Navigate to Home screen after successful sign-up
-        // } else {
-        //     setErrorEmail(emailValidation.error || '');
-        //     setErrorPassword(passwordValidation.error || '');
-        // }
+            console.log("requestData", requestData);
+
+            const response = await api.post('/api/v1/user/create-new-user', requestData);
+            if (response.success === 200) {
+                setUserResponse(response.data);
+                console.log("response: ", response);
+                AsyncStorage.setItem('userData', JSON.stringify(response.data));
+                navigation.navigate('Introduce');
+            } else {
+                console.log(response.message);
+            }
+        } catch (error) {
+            console.error('Error posting data:', error);
+        }
+
+
     };
 
 

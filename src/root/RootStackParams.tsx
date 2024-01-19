@@ -10,6 +10,9 @@ export type RootStackParamList = {
   PostingDetail: {postID: string};
   UserProfile: undefined;
   UserProfileSetting: undefined;
+  ClothesDetailScreen: undefined;
+  BasicInformationScreen: undefined;
+  ChooseStyleYouLove: undefined;
 
 };
 

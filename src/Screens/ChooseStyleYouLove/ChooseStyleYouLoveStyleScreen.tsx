@@ -55,8 +55,8 @@ const ChooseStyleYouLoveStyleScreen = StyleSheet.create({
   },
   cardStyleContainer: {
     position: 'relative',
-    textAlign: 'center',
-    color: 'white',
+    // textAlign: 'center',
+    // color: 'white',
     opacity: 0.7,
   },
   cardTextView: {

@@ -38,9 +38,19 @@ export default function App() {
               /> */}
 
               {/* <Stack.Screen
+                name='SignIn'
+                component={SignInComponent}
+                options={{ headerShown: false }}
+              /> */}
+
+              <Stack.Screen
                 name="Home"
                 component={HomeScreen}
-                options={{ headerShown: false }}
+                options={{
+                  headerShown: false,
+                  presentation: 'modal',
+                  animationTypeForReplace: 'pop',
+                }}
               />
 
               <Stack.Screen
@@ -59,22 +69,18 @@ export default function App() {
                 name='UserProfileSetting'
                 component={UserProfileSettingScreen}
                 options={{ headerShown: false }}
-              /> */}
-
-              {/* <Stack.Screen
-                name='SignIn'
-                component={SignInComponent}
-                options={{ headerShown: false }}
               />
+
+
 
               <Stack.Screen
                 name='SignUp'
                 component={SignUpComponent}
                 options={{ headerShown: false }}
               />
-               */}
 
-              {/* <Stack.Screen
+
+              <Stack.Screen
                 name="Introduce"
                 component={IntroduceScreen}
                 options={{ headerShown: false }}
@@ -96,13 +102,13 @@ export default function App() {
                 name='PostingDetail'
                 component={PostingDetailScreen}
                 options={{ headerShown: false }}
-              /> */}
+              />
 
-              {/* <Stack.Screen
+              <Stack.Screen
                 name="BasicInformationScreen"
                 component={BasicInformationScreen}
                 options={{ headerShown: false }}
-              /> */}
+              />
 
               <Stack.Screen
                 name="ChooseStyleYouLove"

@@ -9,11 +9,13 @@ import IntroduceStylesComponent from './IntroduceStyleComponent';
 import ButtonComponent from '../../components/Button/ButtonDefaultComponent';
 import { buttonHeightDefault, buttonWidthDefault } from '../../components/Button/ButtonDefaultData';
 import { primaryColor } from '../../root/Colors';
+import dataSlider from '../../components/Common/Carousel/Data';
 
 
-type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
+
+type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 const IntroduceScreen = () => {
-  const navigation = useNavigation<SignInScreenNavigationProp>();
+  const navigation = useNavigation<ScreenNavigationProp>();
   /*-----------------UseState variable-----------------*/
 
   /*-----------------Usable variable-----------------*/
@@ -21,16 +23,18 @@ const IntroduceScreen = () => {
   /*-----------------UseEffect-----------------*/
 
   /*-----------------Function handler-----------------*/
-
+  const handleMoveToBasicInforScreen = () => {
+    navigation.navigate('BasicInformationScreen')
+  }
 
   return (
     <View style={IntroduceStylesComponent.container}>
       <View>
-        <CarouselComponent child={
+        <CarouselComponent dataObj={dataSlider} child={
           <ButtonComponent
             title="Press me"
             onPress={() => {
-              navigation.navigate('Home');
+              handleMoveToBasicInforScreen();
             }}
             width={buttonWidthDefault}
             height={buttonHeightDefault}

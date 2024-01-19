@@ -18,6 +18,9 @@ import { validateEmail, validatePassword } from '../../Common/Functions/CommonFu
 import { inputTextSize } from '../../../root/Texts';
 import ButtonComponent from '../../Button/ButtonDefaultComponent';
 import { buttonHeightDefault, buttonWidth, buttonWidthDefault } from '../../Button/ButtonDefaultData';
+import api from '../../../api/AxiosApiConfig';
+import { UserInterFace } from '../../../models/ObjectInterface';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /**
  * Image Url
@@ -46,8 +49,10 @@ const SignInComponent = () => {
   const [errorPasswordValidate, setPasswordErrorValidate] = useState('');
   const [isPasswordValidate, setIsPasswordValidate] = useState(true);
   const [isHidePassword, setIsHidePassword] = useState(true);
+  const [userResponse, setUserResponse] = useState<UserInterFace>();
   const dispatch = useDispatch();
   const navigation = useNavigation<SignInScreenNavigationProp>();
+  const [isLoading, setIsLoading] = useState(false);
 
   /*-----------------UseEffect-----------------*/
 
@@ -90,15 +95,36 @@ const SignInComponent = () => {
   /**
    * SignIn
    */
-  const handleSignIn = () => {
-    if (email === 'a' && password === '1') {
-      dispatch(signInAction({ email: email, password: password }));
-      dispatch(setEmailSignInedAction({ email }))
+  const handleSignIn = async () => {
+    if (isEmailValidate && isPasswordValidate) {
+      setIsLoading(true);
+      try {
+        const requestData = {
+          email: email,
+          password: password
+        };
+
+        const response = await api.post('/api/v1/user/get-user-by-email-and-password', requestData);
+        if (response.success === 200) {
+          setUserResponse(response.data);
+          console.log("Login");
+          AsyncStorage.setItem('userData', JSON.stringify(response.data));
+          setIsLoading(false);
+          navigation.navigate('Home');
+        } else {
+          console.log(response.message);
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.error('Error posting data:', error);
+      }
     } else {
-      // alert('wrong')
+      setEmailErrorValidate(errorEmailValidate);
+      setPasswordErrorValidate(errorPasswordValidate);
+      navigation.navigate('SignIn'); // Navigate to SignIn screen after validation failure
     }
-    navigation.navigate('Introduce');
   };
+
 
   /**
    * Clear input
@@ -212,6 +238,9 @@ const SignInComponent = () => {
             <Text onPress={() => navigation.navigate('SignUp')} style={{ textDecorationLine: 'underline', fontSize: 15, marginLeft: 10 }}>Sign up</Text>
           </TouchableOpacity>
         </View>
+      </View>
+      <View>
+        <ActivityIndicator animating={isLoading} color={MD2Colors.red800} />
       </View>
     </View >
   );
