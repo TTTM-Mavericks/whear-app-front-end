@@ -10,12 +10,14 @@ import AppBarFooterStyleComponents from './AppBarFooterStyleComponents';
 import { backgroundColor, primaryColor } from '../../../root/Colors';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../root/RootStackParams';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { UserInterFace } from '../../../models/ObjectInterface';
 
 
 
 interface footerProperties {
     isHide?: boolean
-    centerOnPress?: ()=> void;
+    centerOnPress?: () => void;
     centerIcon?: string;
     urlCenterIcon?: string,
     centerLocalIcon?: string,
@@ -43,6 +45,24 @@ const AppBarFooterComponents: React.FC<footerProperties> = ({ isHide, centerIcon
         [{ nativeEvent: { contentOffset: { y: scrollY } } }],
         { useNativeDriver: false }
     );
+
+    const handleMoveToUserProfile = async () => {
+        try {
+          const userString = await AsyncStorage.getItem('userData');
+      
+          if (userString) {
+            const user = JSON.parse(userString);
+            const userID = user.userID;
+            navigation.replace('UserProfile', { userID });
+          } else {
+            console.warn('User data not found in AsyncStorage.');
+          }
+        } catch (error) {
+          console.error('Error retrieving user data from AsyncStorage:', error);
+        }
+      };
+      
+
     return (
 
         <Animated.View
@@ -56,13 +76,13 @@ const AppBarFooterComponents: React.FC<footerProperties> = ({ isHide, centerIcon
             <View
                 style={[AppBarFooterStyleComponents.segmentedButtons,]}
             >
-                <IconButton icon={require('../../../assets/icon/home.png')} size={20} style={AppBarFooterStyleComponents.button} onPress={()=> navigation.navigate('Home')} />
-                <IconButton icon={require('../../../assets/icon/talking.png')} size={20} style={AppBarFooterStyleComponents.button} onPress={()=> navigation.navigate('Social')} />
-                    <IconButton icon={centerIcon ? centerIcon : {uri: urlCenterIcon} } onPress={centerOnPress} style={AppBarFooterStyleComponents.centerButton} />
+                <IconButton icon={require('../../../assets/icon/home.png')} size={20} style={AppBarFooterStyleComponents.button} onPress={() => navigation.navigate('Home')} />
+                <IconButton icon={require('../../../assets/icon/talking.png')} size={20} style={AppBarFooterStyleComponents.button} onPress={() => navigation.navigate('Social')} />
+                <IconButton icon={centerIcon ? centerIcon : { uri: urlCenterIcon }} onPress={centerOnPress} style={AppBarFooterStyleComponents.centerButton} />
                 <IconButton icon={{ uri: 'null' }} size={20} style={[AppBarFooterStyleComponents.button, { backgroundColor: 'transparent', marginTop: 0 }]} />
-                <IconButton icon={require('../../../assets/icon/heart.png')}  size={20} style={AppBarFooterStyleComponents.button} onPress={()=> navigation.navigate('Collections')} />
+                <IconButton icon={require('../../../assets/icon/heart.png')} size={20} style={AppBarFooterStyleComponents.button} onPress={() => navigation.navigate('Collections')} />
 
-                <IconButton icon={require('../../../assets/icon/user.png')} iconColor='#49454F' size={20} style={AppBarFooterStyleComponents.button} onPress={()=> navigation.navigate('UserProfile')} />
+                <IconButton icon={require('../../../assets/icon/user.png')} iconColor='#49454F' size={20} style={AppBarFooterStyleComponents.button} onPress={() => handleMoveToUserProfile()} />
 
             </View>
         </Animated.View>

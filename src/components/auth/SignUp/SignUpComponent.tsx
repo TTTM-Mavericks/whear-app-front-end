@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../root/RootStackParams';
 import { useDispatch, useSelector } from 'react-redux';
-import { validateEmail, validatePassword, validateString } from '../../Common/Functions/CommonFunctionComponents';
+import { convertDateFormat, validateEmail, validatePassword, validateString } from '../../Common/Functions/CommonFunctionComponents';
 import SignUpStylesComponent from './SignUpStyleComponent';
 import { HelperText, IconButton, List, Modal, Portal, TextInput } from 'react-native-paper';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -20,6 +20,8 @@ import { buttonHeight, buttonWidth } from '../../Button/ButtonDefaultData';
 import api from '../../../api/AxiosApiConfig';
 import { UserInterFace } from '../../../models/ObjectInterface';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import LoadingComponent from '../../Common/Loading/LoadingComponent';
+import Toast from 'react-native-toast-message';
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 
@@ -44,6 +46,7 @@ const SignUpComponent = () => {
     const [errorPassword, setErrorPassword] = useState('');
     const [isModalVisible, setModalVisible] = useState(false);
     const [isOpenPolicy, setIsOpenPolicy] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [errorEmailValidate, setEmailErrorValidate] = useState('');
     const [isEmailValidate, setIsEmailValidate] = useState(true);
@@ -61,6 +64,7 @@ const SignUpComponent = () => {
     const [userResponse, setUserResponse] = useState<UserInterFace>();
 
 
+
     /*-----------------Usable variable-----------------*/
     const dispatch = useDispatch();
     const navigation = useNavigation<SignInScreenNavigationProp>();
@@ -72,7 +76,6 @@ const SignUpComponent = () => {
 
     /*-----------------UseEffect-----------------*/
     useEffect(() => {
-        console.log(isAcceptedPolicy);
         setAcceptPolicy(isAcceptedPolicy);
     }, [isAcceptedPolicy]);
 
@@ -164,18 +167,13 @@ const SignUpComponent = () => {
         hideCountryPicker();
     };
 
-    function convertDateFormat(inputDate: any) {
-        const birthday = new Date(inputDate);
-        const year = birthday.getFullYear();
-        const month = (birthday.getMonth() + 1).toString().padStart(2, '0');
-        const day = birthday.getDate().toString().padStart(2, '0');
-        return `${year}-${month}-${day}`;
-    }
+
 
     /**
      * SignUp handler
      */
     const handleSignUp = async () => {
+
         try {
             const requestData = {
                 username: username,
@@ -184,23 +182,38 @@ const SignUpComponent = () => {
                 phone: phone,
                 email: email,
                 gender: JSON.stringify(gender),
-                imgUrl: "ddddddddd",
+                imgUrl: "",
                 language: language
             }
 
-            console.log("requestData", requestData);
-
+            setIsLoading(true);
             const response = await api.post('/api/v1/user/create-new-user', requestData);
             if (response.success === 200) {
                 setUserResponse(response.data);
-                console.log("response: ", response);
                 AsyncStorage.setItem('userData', JSON.stringify(response.data));
-                navigation.navigate('Introduce');
+                setIsLoading(true);
+                setTimeout(() => {
+                    setIsLoading(false);
+                    navigation.navigate('Introduce');
+
+                }, 1000)
             } else {
-                console.log(response.message);
+                Toast.show({
+                    type: 'error',
+                    text1: JSON.stringify(response.message),
+                    position: 'top'
+                });
+                setIsLoading(false);
+
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error('Error posting data:', error);
+            Toast.show({
+                type: 'error',
+                text1: JSON.stringify(error.message),
+                position: 'top'
+            });
+            setIsLoading(false);
         }
 
 
@@ -429,6 +442,12 @@ const SignUpComponent = () => {
 
                 </View>
             </ScrollView>
+            <LoadingComponent spinner={isLoading}></LoadingComponent>
+            <Toast
+                position='top'
+                bottomOffset={20}
+
+            />
         </View>
     );
 };

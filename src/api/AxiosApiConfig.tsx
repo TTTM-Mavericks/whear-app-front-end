@@ -5,16 +5,16 @@ const baseURL = 'https://whear-app.azurewebsites.net';
 
 const axiosInstance = axios.create({
   baseURL,
-  timeout: 1000, 
+  timeout: 10000, 
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 const api = {
-  get: async (url: any, params: any) => {
+  get: async (url: any, params?: any) => {
     try {
-      const response = await axiosInstance.get(url, { params });
+      const response = await axiosInstance.get(url);
       return response.data;
     } catch (error) {
       handleRequestError(error);

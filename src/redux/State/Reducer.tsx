@@ -1,6 +1,7 @@
 import {
   ADD_TO_COLLECTIONS,
   GET_EMAIL_SIGNINED,
+  IS_UPLOADED_IMAGE_TO_FIREBASE,
   MOVE_TO_FORGOT_PASSWORD,
   OPEN_ADD_TO_COLLECTIONS_DIALOG,
   OPEN_COMMENTS_DIALOG, 
@@ -21,6 +22,7 @@ interface State {
   imageUrl: string;
   isOpenCreateClothesDialog: boolean;
   imageCreatingUrl: string;
+  isUploadedImageToFireBase: boolean;
 }
 
 const initialState: State = {
@@ -33,6 +35,7 @@ const initialState: State = {
   imageUrl: '../../assets/icon/user.png',
   isOpenCreateClothesDialog: false,
   imageCreatingUrl: '../../assets/icon/user.png',
+  isUploadedImageToFireBase: false,
 
 };
 
@@ -88,6 +91,11 @@ const Reducer = (state = initialState, action: any): State => {
       return {
         ...state,
         imageCreatingUrl: action.payload,
+      };
+      case IS_UPLOADED_IMAGE_TO_FIREBASE:
+      return {
+        ...state,
+        isUploadedImageToFireBase: action.payload,
       };
     default:
       return state;
