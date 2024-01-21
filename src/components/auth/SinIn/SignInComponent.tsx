@@ -21,6 +21,8 @@ import { buttonHeightDefault, buttonWidth, buttonWidthDefault } from '../../Butt
 import api from '../../../api/AxiosApiConfig';
 import { UserInterFace } from '../../../models/ObjectInterface';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import LoadingComponent from '../../Common/Loading/LoadingComponent';
+import Toast from 'react-native-toast-message'
 
 /**
  * Image Url
@@ -107,16 +109,28 @@ const SignInComponent = () => {
         const response = await api.post('/api/v1/user/get-user-by-email-and-password', requestData);
         if (response.success === 200) {
           setUserResponse(response.data);
-          console.log("Login");
           AsyncStorage.setItem('userData', JSON.stringify(response.data));
-          setIsLoading(false);
-          navigation.navigate('Home');
+          console.log('userData: ', JSON.stringify(response.data));
+          setIsLoading(true);
+          setTimeout(() => {
+            setIsLoading(false);
+            navigation.navigate('Home');
+          }, 1000)
         } else {
-          console.log(response.message);
           setIsLoading(false);
+          Toast.show({
+            type: 'error',
+            text1: response.message
+          });
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error posting data:', error);
+        setIsLoading(false);
+        Toast.show({
+          type: 'error',
+          text1: JSON.stringify(error.message), 
+          position: 'top'
+        });
       }
     } else {
       setEmailErrorValidate(errorEmailValidate);
@@ -239,9 +253,12 @@ const SignInComponent = () => {
           </TouchableOpacity>
         </View>
       </View>
-      <View>
-        <ActivityIndicator animating={isLoading} color={MD2Colors.red800} />
-      </View>
+      <LoadingComponent spinner={isLoading}></LoadingComponent>
+      <Toast
+        position='top'
+        bottomOffset={20}
+        
+      />
     </View >
   );
 };

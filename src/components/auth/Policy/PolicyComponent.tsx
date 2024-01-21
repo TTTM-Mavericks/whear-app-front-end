@@ -23,11 +23,9 @@ const PolicyComponent = () => {
     /*-----------------UseEffect-----------------*/
     React.useEffect(() => {
         setIsOpen(openPolicy);
-        console.log('-------------',openPolicy);
     }, [openPolicy])
 
     React.useEffect(() => {
-        console.log(isAcceptedPolicy);
         setIsAccepted(isAcceptedPolicy);
     }, [isAcceptedPolicy])
 

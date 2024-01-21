@@ -66,7 +66,6 @@ const ClothesDetailScreen = () => {
 
   /*-----------------UseEffect-----------------*/
   React.useEffect(() => {
-    console.log('detail: ', openCommentsDialog);
   }, []);
 
   /*-----------------Function handler-----------------*/

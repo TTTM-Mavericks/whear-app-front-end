@@ -49,7 +49,6 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({ comme
 
     /*-----------------UseEffect-----------------*/
     React.useEffect(() => {
-        console.log('dialog: ', openDialog);
         if (openDialog) {
             showAnimation()
             setIsOpen(true);
@@ -69,7 +68,6 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({ comme
         dispatch(setOpenCommentsDialog(false));
         setIsOpen(false);
         setCountOpening(0);
-        console.log('hide');
     };
 
     const handleAcceptedPolicy = () => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, TouchableOpacity, Image, FlatList, Platform } from "react-native";
+import { View, TouchableOpacity, Image, FlatList, Platform, StyleProp, ViewStyle, ImageSourcePropType } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -8,7 +8,7 @@ import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { Video } from "expo-av";
 import { db, storage } from "../../../FireBaseConfig";
 import { useDispatch } from "react-redux";
-import { saveImageCreatingUrl } from "../../redux/State/Actions";
+import { saveImageCreatingUrl, saveImageUrl, setUploadToFireBase } from "../../redux/State/Actions";
 import { IconButton } from "react-native-paper";
 // import UploadingAndroid from "../../components/ImagePicker/UploadingAndroid";
 
@@ -19,10 +19,15 @@ interface File {
 }
 
 interface ImageButtonProps {
-    icon?: string,
+    icon?: ImageSourcePropType ,
+    isUserAvatar?: boolean,
+    isAddNewImage?: boolean,
+    style?: StyleProp<ViewStyle>,
+    onPress?: ()=> void,
+    iconColor?: string
 }
 
- const AddImageButtonComponent: React.FC<ImageButtonProps> = ({icon}) => {
+ const AddImageButtonComponent: React.FC<ImageButtonProps> = ({icon, isUserAvatar, isAddNewImage, style, onPress, iconColor}) => {
   const [image, setImage] = useState<string>("");
   const [video, setVideo] = useState<string>("");
   const [progress, setProgress] = useState<number>(0);
@@ -34,13 +39,17 @@ interface ImageButtonProps {
     const unsubscribe = onSnapshot(collection(db, "files"), (snapshot: any) => {
       snapshot.docChanges().forEach((change: any) => {
         if (change.type === "added") {
-          console.log("New file", change.doc.data());
           setFiles((prevFiles: any) => [...prevFiles, change.doc.data()]);
+          
         }
       });
     });
     return () => unsubscribe();
   }, []);
+
+  useEffect (()=>{
+    
+  }, [files])
 
   async function pickImage() {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -52,7 +61,12 @@ interface ImageButtonProps {
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
-      dispatch(saveImageCreatingUrl(result.assets[0].uri))
+      // if (isAddNewImage) {
+      //   dispatch(saveImageCreatingUrl(result.assets[0].uri))
+      // }
+      // if (isUserAvatar) {
+      //   dispatch(saveImageUrl(result.assets[0].uri));
+      // }
       await uploadImage(result.assets[0].uri, "image");
     }
   }
@@ -91,6 +105,13 @@ interface ImageButtonProps {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL: string) => {
           console.log("File available at", downloadURL);
+          dispatch(setUploadToFireBase(true));
+          if (isAddNewImage) {
+            dispatch(saveImageCreatingUrl(downloadURL));
+          }
+          if (isUserAvatar) {
+            dispatch(saveImageUrl(downloadURL));
+          }
           await saveRecord(fileType, downloadURL, new Date().toISOString());
           setImage("");
           setVideo("");
@@ -113,7 +134,7 @@ interface ImageButtonProps {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={[{ flex: 1 }, style]} >
       {/* {image && (Platform.OS === "ios" ? (
         <UploadingAndroid image={image} video={video} progress={progress} />
       ) : (
@@ -129,7 +150,7 @@ interface ImageButtonProps {
           borderRadius: 25,
         }}
       >
-        <IconButton icon={icon ? {uri: icon} : 'image'} size={24} iconColor="white" />
+        <IconButton icon={icon ? icon : 'image'} size={24} iconColor={iconColor ? iconColor : 'white'} />
       </TouchableOpacity>
       
     </View>
