@@ -50,7 +50,6 @@ const CreateClothesDialogComponent = () => {
 
     /*-----------------UseEffect-----------------*/
     React.useEffect(() => {
-        console.log('dialog: ', openDialog);
         if (openDialog) {
             showAnimation()
             setIsOpen(true);
@@ -67,7 +66,6 @@ const CreateClothesDialogComponent = () => {
         dispatch(setOpenCreateClothesDialog(false));
         setIsOpen(false);
         setCountOpening(0);
-        console.log('hide');
     };
 
     const handleAcceptedPolicy = () => {
@@ -155,7 +153,7 @@ const CreateClothesDialogComponent = () => {
                                 <View style={DialogStylesComponent.pictureArea} >
                                     <Image source={{ uri: imageUrlState }} style={DialogStylesComponent.pictureArea}></Image>
                                     <View style={DialogStylesComponent.iconUploadPicture}>
-                                        <AddImageButtonComponent></AddImageButtonComponent>
+                                        <AddImageButtonComponent isAddNewImage = {true}></AddImageButtonComponent>
                                     </View>
                                 </View>
                                 <View style={DialogStylesComponent.clothesPropsArea}>

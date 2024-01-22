@@ -2,14 +2,17 @@ export interface UserInterFace {
     userID?: number;
     username?: string;
     password?: string;
-    dateOfBirth?: Date;
+    dateOfBirth?:  string ;
     phone?: string;
     email?: string;
     gender?: string;
     role?: string;
+    subRole?: string;
     imgUrl?: string;
     status?: string;
     language?: string;
+    isFirstLogin?: boolean;
+    followed?:boolean;
 }
 
 interface CustomerInterface {
@@ -27,6 +30,7 @@ interface BrandStoreInterface {
 
 
 interface ClothesInterface {
+    clothesID: string
     userID?: string;
     nameOfProduct?: string;
     typeOfClothes?: string;

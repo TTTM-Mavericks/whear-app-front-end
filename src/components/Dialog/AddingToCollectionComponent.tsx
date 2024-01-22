@@ -84,7 +84,6 @@ const AddingToCollectionComponent = () => {
 
     /*-----------------UseEffect-----------------*/
     React.useEffect(() => {
-        console.log('sdfsdfsdf', openDialog);
         if (openDialog) {
             showAnimation()
             setIsOpen(openDialog);

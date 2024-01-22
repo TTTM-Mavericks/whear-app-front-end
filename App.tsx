@@ -1,6 +1,4 @@
-import { StatusBar } from "expo-status-bar";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import SignInComponent from "./src/components/auth/SinIn/SignInComponent";
 import HomeScreen from "./src/Screens/Home/HomeScreen";
 import ForgotPasswordComponent from "./src/components/auth/ForgotPassword/ForgotPasswordComponent";
 import { backgroundColor } from "./src/root/Colors";
@@ -8,7 +6,6 @@ import { backgroundColor } from "./src/root/Colors";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
-import TestUploadImageScreen from "./src/Screens/UserProfile/TestUploadImageScreen";
 import { Provider } from "react-redux"; // Import Provider
 import store from "./src/redux/State/Store";
 import SignUpComponent from "./src/components/auth/SignUp/SignUpComponent";
@@ -23,6 +20,7 @@ import BasicInformationScreen from "./src/Screens/BasicInformation/BasicInformat
 import ChooseStyleYouLoveScreen from "./src/Screens/ChooseStyleYouLove/ChooseStyleYouLoveScreen";
 import React from "react";
 import NewsScreen from "./src/Screens/News/NewsScreen";
+import SignInComponent from "./src/components/auth/SinIn/SignInComponent";
 
 const Stack = createStackNavigator();
 
@@ -33,17 +31,12 @@ export default function App() {
         <NavigationContainer>
           <View style={styles.container}>
             <Stack.Navigator>
-              {/* <Stack.Screen
-                name="test"
-                component={TestUploadImageScreen}
-                options={{ headerShown: false }}
-              /> */}
 
-              {/* <Stack.Screen
+              <Stack.Screen
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
-              /> */}
+              />
 
               {/* <Stack.Screen
                 name="Home"

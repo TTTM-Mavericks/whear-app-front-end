@@ -49,7 +49,7 @@ const ImagePickerComponent: React.FC<ImagePickerProps> = ({
     if (!result.canceled) {
       const uri = result.assets![0].uri;
       setImageUrl(uri);
-      dispatch(saveImageUrl(uri));
+      // dispatch(saveImageUrl(uri));
 
     }
   };
