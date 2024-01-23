@@ -6,7 +6,7 @@ import { StyleProp, ViewStyle } from 'react-native';
 
 interface appBarProps {
   backAction?: () => void;
-  title?: string;
+  title?: string | React.ReactNode;
   icon?: string;
   iconChild?: React.ReactNode;
   styles?: StyleProp<ViewStyle>
