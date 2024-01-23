@@ -166,7 +166,7 @@ const HomeScreen = () => {
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
-    alert('back')
+    navigation.goBack();
   }
 
   const handleSearch = () => {
@@ -214,12 +214,6 @@ const HomeScreen = () => {
       <AppBarHeaderComponent
         title='Home'
         backAction={() => hanldeGoBack()}
-        iconChild={
-          <>
-            <Appbar.Action icon={'magnify'} onPress={handleSearch} />
-            <Appbar.Action icon="dots-vertical" onPress={handleMore} />
-          </>
-        }
       >
       </AppBarHeaderComponent>
 

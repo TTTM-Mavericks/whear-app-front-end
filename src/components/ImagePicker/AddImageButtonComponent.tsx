@@ -19,15 +19,27 @@ interface File {
 }
 
 interface ImageButtonProps {
-    icon?: ImageSourcePropType ,
-    isUserAvatar?: boolean,
-    isAddNewImage?: boolean,
-    style?: StyleProp<ViewStyle>,
-    onPress?: ()=> void,
-    iconColor?: string
+  icon?: ImageSourcePropType,
+  isUserAvatar?: boolean,
+  isAddNewImage?: boolean,
+  style?: StyleProp<ViewStyle>,
+  onPress?: () => void,
+  iconColor?: string,
+  width?: number,
+  height?: number,
 }
 
- const AddImageButtonComponent: React.FC<ImageButtonProps> = ({icon, isUserAvatar, isAddNewImage, style, onPress, iconColor}) => {
+const AddImageButtonComponent: React.FC<ImageButtonProps> = (
+  {
+    icon,
+    isUserAvatar,
+    isAddNewImage,
+    style,
+    onPress,
+    iconColor,
+    width,
+    height
+  }) => {
   const [image, setImage] = useState<string>("");
   const [video, setVideo] = useState<string>("");
   const [progress, setProgress] = useState<number>(0);
@@ -40,22 +52,22 @@ interface ImageButtonProps {
       snapshot.docChanges().forEach((change: any) => {
         if (change.type === "added") {
           setFiles((prevFiles: any) => [...prevFiles, change.doc.data()]);
-          
+
         }
       });
     });
     return () => unsubscribe();
   }, []);
 
-  useEffect (()=>{
-    
+  useEffect(() => {
+
   }, [files])
 
   async function pickImage() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [3, 4],
+      aspect: [width ? width : 9, height ? height : 16],
       quality: 1,
     });
 
@@ -152,7 +164,7 @@ interface ImageButtonProps {
       >
         <IconButton icon={icon ? icon : 'image'} size={24} iconColor={iconColor ? iconColor : 'white'} />
       </TouchableOpacity>
-      
+
     </View>
   );
 }

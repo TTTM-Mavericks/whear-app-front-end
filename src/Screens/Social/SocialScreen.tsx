@@ -424,7 +424,7 @@ const SocialScreen = () => {
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
-    alert('back')
+    navigation.goBack();
   }
 
   const handleSearch = () => {
@@ -495,12 +495,6 @@ const SocialScreen = () => {
       <AppBarHeaderComponent
         title='Social'
         backAction={() => hanldeGoBack()}
-        iconChild={
-          <>
-            <Appbar.Action icon={'magnify'} onPress={handleSearch} />
-            <Appbar.Action icon="dots-vertical" onPress={handleMore} />
-          </>
-        }
       >
       </AppBarHeaderComponent>
 

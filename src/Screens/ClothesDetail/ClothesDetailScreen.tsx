@@ -97,12 +97,6 @@ const ClothesDetailScreen = () => {
       <AppBarHeaderComponent
         title='Results'
         backAction={() => hanldeGoBack()}
-        iconChild={
-          <>
-            <Appbar.Action icon={'magnify'} onPress={handleSearch} />
-            <Appbar.Action icon="dots-vertical" onPress={handleMore} />
-          </>
-        }
       >
       </AppBarHeaderComponent>
 

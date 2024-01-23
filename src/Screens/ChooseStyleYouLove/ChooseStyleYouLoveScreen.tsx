@@ -96,7 +96,7 @@ const handleMoveToHomeScreen = () => {
   };
 
   function hanldeGoBack(): void {
-    alert('back');
+    navigation.goBack();
   }
 
   const handleNext = () => {

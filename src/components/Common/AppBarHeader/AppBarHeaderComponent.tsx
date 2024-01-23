@@ -26,6 +26,8 @@ const AppBarHeaderComponent: React.FC<appBarProps> = ({ backAction, title, icon,
     <Appbar.Header style={[AppBarHeaderStylesComponent.container, styles]}>
       <Appbar.BackAction onPress={backAction} style={styles} />
       <Appbar.Content title={title} />
+        <Appbar.Action icon={require('../../../assets/icon/loupe.png')}  />
+        <Appbar.Action icon={require('../../../assets/icon/bell.png')} />
       {iconChild}
     </Appbar.Header>
   );
