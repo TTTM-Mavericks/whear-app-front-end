@@ -1,17 +1,11 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { IconButton, SegmentedButtons } from 'react-native-paper';
-import HomeScreen from '../../../Screens/Home/HomeScreen';
-import SocialScreen from '../../../Screens/Social/SocialScreen';
-import CollectionsScreen from '../../../Screens/Collections/CollectionsScreen';
-import { Animated, SafeAreaView, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { IconButton } from 'react-native-paper';
+import { Animated, View } from 'react-native';
 import AppBarFooterStyleComponents from './AppBarFooterStyleComponents';
-import { backgroundColor, primaryColor } from '../../../root/Colors';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../root/RootStackParams';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { UserInterFace } from '../../../models/ObjectInterface';
 
 
 
@@ -81,7 +75,6 @@ const AppBarFooterComponents: React.FC<footerProperties> = ({ isHide, centerIcon
                 <IconButton icon={centerIcon ? centerIcon : { uri: urlCenterIcon }} onPress={centerOnPress} style={AppBarFooterStyleComponents.centerButton} />
                 <IconButton icon={{ uri: 'null' }} size={20} style={[AppBarFooterStyleComponents.button, { backgroundColor: 'transparent', marginTop: 0 }]} />
                 <IconButton icon={require('../../../assets/icon/heart.png')} size={20} style={AppBarFooterStyleComponents.button} onPress={() => navigation.navigate('Collections')} />
-
                 <IconButton icon={require('../../../assets/icon/user.png')} iconColor='#49454F' size={20} style={AppBarFooterStyleComponents.button} onPress={() => handleMoveToUserProfile()} />
 
             </View>

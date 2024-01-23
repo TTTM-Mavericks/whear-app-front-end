@@ -165,7 +165,7 @@ const CollectionsScreen = () => {
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
-    alert('back')
+    navigation.goBack();
   }
 
   const handleSearch = () => {
@@ -215,12 +215,6 @@ const CollectionsScreen = () => {
       <AppBarHeaderComponent
         title='Your Collections'
         backAction={() => hanldeGoBack()}
-        iconChild={
-          <>
-            <Appbar.Action icon={'magnify'} onPress={handleSearch} />
-            <Appbar.Action icon="dots-vertical" onPress={handleMore} />
-          </>
-        }
       >
       </AppBarHeaderComponent>
       {/* )} */}
