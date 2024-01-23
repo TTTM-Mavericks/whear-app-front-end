@@ -21,6 +21,7 @@ import ChooseStyleYouLoveScreen from "./src/Screens/ChooseStyleYouLove/ChooseSty
 import React from "react";
 import SignInComponent from "./src/components/auth/SinIn/SignInComponent";
 import HotStoreScreen from "./src/Screens/HotStore/HotStoreScreen";
+import EventScreen from "./src/Screens/Event/EventScreen";
 
 const Stack = createStackNavigator();
 
@@ -31,12 +32,12 @@ export default function App() {
         <NavigationContainer>
           <View style={styles.container}>
             <Stack.Navigator>
-
+{/* 
               <Stack.Screen
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
-              />
+              /> */}
 
               <Stack.Screen
                 name="Home"
@@ -109,14 +110,19 @@ export default function App() {
                 name="ChooseStyleYouLove"
                 component={ChooseStyleYouLoveScreen}
                 options={{ headerShown: false }}
-              />
+              /> 
 
-              <Stack.Screen
+               <Stack.Screen
                 name='HotStore'
                 component={HotStoreScreen}
                 options={{ headerShown: false }}
               />
 
+              <Stack.Screen
+                name='Event'
+                component={EventScreen}
+                options={{ headerShown: false }}
+              />
               
             </Stack.Navigator>
           </View>
