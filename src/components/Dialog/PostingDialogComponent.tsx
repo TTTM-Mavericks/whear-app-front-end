@@ -36,7 +36,6 @@ const PostingDialogComponent = () => {
 
     /*-----------------UseEffect-----------------*/
     React.useEffect(() => {
-        console.log('posting', openDialog);
         if (openDialog) {
             showAnimation()
             setIsOpen(openDialog);

@@ -85,7 +85,7 @@ const DialogStylesComponent = StyleSheet.create({
 
     // ----------------------------------------//
     postingDialogContainer: {
-        height: height * 0.7,
+        height: height,
         width: width,
         margin: 0,
         bottom: 0,
@@ -180,7 +180,39 @@ const DialogStylesComponent = StyleSheet.create({
         marginTop: -5,
         borderRadius: 10,
         backgroundColor: grayBackgroundColor
+    },
+    clothesAddingArea: {
+        width: width,
+        flexDirection: 'row',
+        backgroundColor: 'green',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    pictureArea: {
+        position: 'relative',
+        width: width * 0.47,
+        height: height * 0.4,
+        borderWidth: 1,
+        borderColor: "black",
+        marginLeft: 2,
+        marginRight: 1,
+
+    },
+    clothesPropsArea: {
+        width: width * 0.47,
+        height: height * 0.4,
+        backgroundColor: 'yellow',
+        marginLeft: 1,
+        marginRight: 2
+    },
+    iconUploadPicture: {
+        position: 'absolute',
+        bottom: 0,
+        right: 0
     }
+
+
 
 });
 

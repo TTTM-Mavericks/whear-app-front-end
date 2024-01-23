@@ -16,9 +16,11 @@ import { width } from '../../root/ResponsiveSize';
 import SmallChipGroupComponent from '../../components/Common/ChipGroup/SmallChipGroupComponent';
 import { backgroundColor, primaryColor } from '../../root/Colors';
 import { useDispatch } from 'react-redux';
-import { setOpenAddToCollectionsDialog } from '../../redux/State/Actions';
+import { setOpenAddToCollectionsDialog, setOpenCreateClothesDialog } from '../../redux/State/Actions';
 import AddingToCollectionComponent from '../../components/Dialog/AddingToCollectionComponent';
 import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarFooterComponents';
+import CreateClothesDialogComponent from '../../components/Dialog/CreateClothesDialogComponent';
+import dataSlider from '../../components/Common/Carousel/Data';
 
 interface ListItem {
   id: string;
@@ -164,7 +166,7 @@ const HomeScreen = () => {
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
-    alert('back')
+    navigation.goBack();
   }
 
   const handleSearch = () => {
@@ -202,6 +204,9 @@ const HomeScreen = () => {
     setPrevScrollPos(currentScrollPos);
   };
 
+  const handleOpenCreateClothesDialog = () => {
+    dispatch(setOpenCreateClothesDialog(true));
+  }
 
 
   return (
@@ -209,12 +214,6 @@ const HomeScreen = () => {
       <AppBarHeaderComponent
         title='Home'
         backAction={() => hanldeGoBack()}
-        iconChild={
-          <>
-            <Appbar.Action icon={'magnify'} onPress={handleSearch} />
-            <Appbar.Action icon="dots-vertical" onPress={handleMore} />
-          </>
-        }
       >
       </AppBarHeaderComponent>
 
@@ -224,10 +223,10 @@ const HomeScreen = () => {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         onScroll={(event) => handleScroll(event)}
-        scrollEventThrottle={16} 
+        scrollEventThrottle={16}
       >
         <View style={HomeStylesComponent.scrollViewContent}>
-          <HorizontalCarouselComponent></HorizontalCarouselComponent>
+          <HorizontalCarouselComponent data={dataSlider}></HorizontalCarouselComponent>
           <ChipGroupComponent></ChipGroupComponent>
 
           {/* Horizontal FlatList */}
@@ -311,9 +310,10 @@ const HomeScreen = () => {
 
 
           <AddingToCollectionComponent></AddingToCollectionComponent>
+          <CreateClothesDialogComponent></CreateClothesDialogComponent>
         </View>
       </ScrollView >
-      <AppBarFooterComponents isHide={scrollUp} centerIcon={'plus'}></AppBarFooterComponents>
+      <AppBarFooterComponents isHide={scrollUp} centerIcon={'plus'} centerOnPress={handleOpenCreateClothesDialog}></AppBarFooterComponents>
     </View >
 
   );

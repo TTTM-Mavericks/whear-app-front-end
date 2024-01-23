@@ -1,18 +1,29 @@
-import React, { ReactNode, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem';
-import data from './Data';
+// import data from './Data';
 import { width } from '../../../root/ResponsiveSize';
 
 
 interface CarouselCardsProps {
-    child?: ReactNode
+    child?: ReactNode,
+    dataObj: any,
 }
 
-const CarouselCards: React.FC<CarouselCardsProps> = ({ child }) => {
+const CarouselCards: React.FC<CarouselCardsProps> = ({ child, dataObj }) => {
     const [index, setIndex] = useState<number>(0);
     const isCarousel = useRef<Carousel<any>>(null);
+
+    const [convertObj, setConvertObj] = useState([]);
+
+    // useEffect(() => {
+    //     const isStringArr: boolean = Array.isArray(dataObj);
+    //     if (isStringArr) {
+    //         const convertedData = dataObj.map((imgUrl: any,) => ({ imgUrl }));
+    //         setConvertObj(convertedData)
+    //     }
+    // }, [])
 
     return (
         <View style={styles.containerStyle}>
@@ -20,7 +31,7 @@ const CarouselCards: React.FC<CarouselCardsProps> = ({ child }) => {
                 layout="tinder"
                 layoutCardOffset={9}
                 ref={isCarousel}
-                data={data}
+                data={dataObj}
                 renderItem={({ item, index }) => <CarouselCardItem item={item} index={index} />}
                 sliderWidth={SLIDER_WIDTH}
                 itemWidth={ITEM_WIDTH}
@@ -28,7 +39,7 @@ const CarouselCards: React.FC<CarouselCardsProps> = ({ child }) => {
                 useScrollView={true}
             />
             <Pagination
-                dotsLength={data.length}
+                dotsLength={dataObj.length}
                 activeDotIndex={index}
                 carouselRef={isCarousel as any}
                 dotStyle={styles.dotStyle}

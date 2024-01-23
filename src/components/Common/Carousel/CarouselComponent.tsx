@@ -4,13 +4,16 @@ import CarouselCards from './CarouselCards'
 import { Button } from 'react-native-paper';
 
 interface childrenInterface {
-    child?: ReactNode
+    child?: ReactNode,
+    dataObj: any,
+
+
 }
-const CarouselComponent: React.FC<childrenInterface> = ({ child }) => {
+const CarouselComponent: React.FC<childrenInterface> = ({ child, dataObj }) => {
     return (
         <View style={styles.container}>
             <SafeAreaView >
-                <CarouselCards child={child} />
+                <CarouselCards child={child} dataObj={dataObj} />
             </SafeAreaView>
         </View>
     );

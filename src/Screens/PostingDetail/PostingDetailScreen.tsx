@@ -144,7 +144,6 @@ const PostingDetailScreen = () => {
 
   /*-----------------UseEffect-----------------*/
   React.useEffect(() => {
-    console.log('detail: ', openCommentsDialog);
   }, []);
 
   /*-----------------Function handler-----------------*/
@@ -250,12 +249,7 @@ const PostingDetailScreen = () => {
       <AppBarHeaderComponent
         title='Posting detail'
         backAction={() => hanldeGoBack()}
-        iconChild={
-          <>
-            <Appbar.Action icon={'magnify'} onPress={handleSearch} />
-            <Appbar.Action icon="dots-vertical" onPress={handleMore} />
-          </>
-        }
+        
       >
       </AppBarHeaderComponent>
 

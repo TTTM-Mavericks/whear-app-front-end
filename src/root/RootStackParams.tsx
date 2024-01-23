@@ -7,9 +7,12 @@ export type RootStackParamList = {
   Collections: undefined;
   Route: undefined;
   ForgotPassword: { email: string };
-  PostingDetail: {postID: string};
-  UserProfile: undefined;
+  PostingDetail: { postID: string };
+  UserProfile: { userID: any };
   UserProfileSetting: undefined;
+  ClothesDetailScreen: undefined;
+  BasicInformationScreen: undefined;
+  ChooseStyleYouLove: undefined;
 
 };
 

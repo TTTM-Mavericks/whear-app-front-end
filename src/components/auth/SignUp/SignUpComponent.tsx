@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../root/RootStackParams';
 import { useDispatch, useSelector } from 'react-redux';
-import { validateEmail, validatePassword, validateString } from '../../Common/Functions/CommonFunctionComponents';
+import { convertDateFormat, validateEmail, validatePassword, validateString } from '../../Common/Functions/CommonFunctionComponents';
 import SignUpStylesComponent from './SignUpStyleComponent';
 import { HelperText, IconButton, List, Modal, Portal, TextInput } from 'react-native-paper';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -17,10 +17,15 @@ import { setOpenPolicy } from '../AuthState/AuthAction';
 import { backgroundColor, primaryColor } from '../../../root/Colors';
 import ButtonComponent from '../../Button/ButtonDefaultComponent';
 import { buttonHeight, buttonWidth } from '../../Button/ButtonDefaultData';
+import api from '../../../api/AxiosApiConfig';
+import { UserInterFace } from '../../../models/ObjectInterface';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import LoadingComponent from '../../Common/Loading/LoadingComponent';
+import Toast from 'react-native-toast-message';
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 
-const languages = ['Vietnam', 'USA', 'UK', 'Japan'];
+const languages = ['VIETNAM', 'USA', 'UK', 'Japan'];
 
 const SignUpComponent = () => {
 
@@ -41,6 +46,7 @@ const SignUpComponent = () => {
     const [errorPassword, setErrorPassword] = useState('');
     const [isModalVisible, setModalVisible] = useState(false);
     const [isOpenPolicy, setIsOpenPolicy] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const [errorEmailValidate, setEmailErrorValidate] = useState('');
     const [isEmailValidate, setIsEmailValidate] = useState(true);
@@ -55,6 +61,10 @@ const SignUpComponent = () => {
     const [isConfirmPasswordValidate, setIsConfirmPasswordValidate] = useState(true);
     const [isMatchingPassword, setIsMatchingPassword] = useState(false);
 
+    const [userResponse, setUserResponse] = useState<UserInterFace>();
+
+
+
     /*-----------------Usable variable-----------------*/
     const dispatch = useDispatch();
     const navigation = useNavigation<SignInScreenNavigationProp>();
@@ -66,7 +76,6 @@ const SignUpComponent = () => {
 
     /*-----------------UseEffect-----------------*/
     useEffect(() => {
-        console.log(isAcceptedPolicy);
         setAcceptPolicy(isAcceptedPolicy);
     }, [isAcceptedPolicy]);
 
@@ -158,22 +167,56 @@ const SignUpComponent = () => {
         hideCountryPicker();
     };
 
+
+
     /**
      * SignUp handler
      */
-    const handleSignUp = () => {
-        const emailValidation = validateEmail(email);
-        const passwordValidation = validatePassword(password);
+    const handleSignUp = async () => {
 
-        // if (emailValidation.isValid && passwordValidation.isValid) {
-        // Additional validation for other fields and confirmation logic
-        // dispatch(signUpAction({ email, username, password, gender, birthday, country }));
-        // dispatch(setEmailSignedInAction({ email }));
-        navigation.navigate('SignIn'); // Navigate to Home screen after successful sign-up
-        // } else {
-        //     setErrorEmail(emailValidation.error || '');
-        //     setErrorPassword(passwordValidation.error || '');
-        // }
+        try {
+            const requestData = {
+                username: username,
+                password: password,
+                dateOfBirth: convertDateFormat(birthday),
+                phone: phone,
+                email: email,
+                gender: JSON.stringify(gender),
+                imgUrl: "",
+                language: language
+            }
+
+            setIsLoading(true);
+            const response = await api.post('/api/v1/user/create-new-user', requestData);
+            if (response.success === 200) {
+                setUserResponse(response.data);
+                AsyncStorage.setItem('userData', JSON.stringify(response.data));
+                setIsLoading(true);
+                setTimeout(() => {
+                    setIsLoading(false);
+                    navigation.navigate('Introduce');
+
+                }, 1000)
+            } else {
+                Toast.show({
+                    type: 'error',
+                    text1: JSON.stringify(response.message),
+                    position: 'top'
+                });
+                setIsLoading(false);
+
+            }
+        } catch (error: any) {
+            console.error('Error posting data:', error);
+            Toast.show({
+                type: 'error',
+                text1: JSON.stringify(error.message),
+                position: 'top'
+            });
+            setIsLoading(false);
+        }
+
+
     };
 
 
@@ -399,6 +442,12 @@ const SignUpComponent = () => {
 
                 </View>
             </ScrollView>
+            <LoadingComponent spinner={isLoading}></LoadingComponent>
+            <Toast
+                position='top'
+                bottomOffset={20}
+
+            />
         </View>
     );
 };

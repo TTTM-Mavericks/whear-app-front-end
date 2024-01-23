@@ -32,7 +32,7 @@ const data = [
   {
     postID: '1',
     userID: {
-      id: '1',
+      id: 1,
       imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
       userName: 'Nguyễn Minh Tú'
     },
@@ -63,7 +63,7 @@ const data = [
       {
         commentID: '3',
         user: {
-          userID: '4',
+          userID: '1',
           userName: 'Nguyễn Minh Tú',
           imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
         },
@@ -112,7 +112,7 @@ const data = [
   {
     postID: '2',
     userID: {
-      id: '1',
+      id: 2,
       imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
       userName: 'Nguyễn Minh Tú'
     },
@@ -152,7 +152,7 @@ const data = [
   {
     postID: '3',
     userID: {
-      id: '1',
+      id: 3,
       imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
       userName: 'Nguyễn Minh Tú'
     },
@@ -232,7 +232,7 @@ const data = [
   {
     postID: '4',
     userID: {
-      id: '1',
+      id: 1,
       imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
       userName: 'Nguyễn Minh Tú'
     },
@@ -312,7 +312,7 @@ const data = [
   {
     postID: '5',
     userID: {
-      id: '1',
+      id: 1,
       imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
       userName: 'Nguyễn Minh Tú'
     },
@@ -424,7 +424,7 @@ const SocialScreen = () => {
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
-    alert('back')
+    navigation.goBack();
   }
 
   const handleSearch = () => {
@@ -486,17 +486,15 @@ const SocialScreen = () => {
     setPrevScrollPos(currentScrollPos);
   };
 
+  const handleMoveToUserProfile = (userID: any) => {
+    navigation.replace('UserProfile', {userID})
+  }
+
   return (
     <View style={SocailStyleScreen.container}>
       <AppBarHeaderComponent
         title='Social'
         backAction={() => hanldeGoBack()}
-        iconChild={
-          <>
-            <Appbar.Action icon={'magnify'} onPress={handleSearch} />
-            <Appbar.Action icon="dots-vertical" onPress={handleMore} />
-          </>
-        }
       >
       </AppBarHeaderComponent>
 
@@ -506,7 +504,7 @@ const SocialScreen = () => {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         onScroll={(event) => handleScroll(event)}
-        scrollEventThrottle={16} 
+        scrollEventThrottle={16}
       >
         <View style={SocailStyleScreen.scrollViewContent}>
           <View style={SocailStyleScreen.postingEditorContainer}>
@@ -539,34 +537,40 @@ const SocialScreen = () => {
                 extendImgUrl={item.content.imgUrl}
                 cardStyleContainer={SocailStyleScreen.container_cardContainer}
                 cardStyleContent={SocailStyleScreen.container_cardContent}
-                onPress={()=> handleMoveToPostingDetail(item.postID)}
+                onPress={() => handleMoveToPostingDetail(item.postID)}
                 extendHeaderChild={
                   <View style={[SocailStyleScreen.container_postingBar, { marginTop: 25 }]}>
-                    <View style={{ flexDirection: 'row', width: width * 0.8, height: 'auto' }}>
-                      <Avatar.Image
-                        size={iconAvatarPostingSize}
-                        source={{ uri: item.userID.imgUrl }}
-                        style={{ marginLeft: 10 }} />
-                      <View style=
-                        {
-                          {
-                            marginLeft: 10,
-                            marginTop: 5
-                          }
-                        }
+                    <TouchableOpacity onPress={()=> handleMoveToUserProfile(item.userID.id)}>
+                      <View
+                        style={{ flexDirection: 'row', width: width * 0.8, height: 'auto' }}
                       >
-                        <Text
-                          style=
+                        <Avatar.Image
+                          size={iconAvatarPostingSize}
+                          source={{ uri: item.userID.imgUrl }}
+                          style={{ marginLeft: 10 }}
+
+                        />
+                        <View style=
                           {
                             {
-                              fontWeight: 'bold',
-                              paddingTop: iconAvatarPostingSize * 0.05
+                              marginLeft: 10,
+                              marginTop: 5
                             }
                           }
-                        >Nguyen Minh Tu</Text>
-                        <Text style={{ fontSize: spanTextSize * 0.8 }}>{item.date.toLocaleString()}</Text>
+                        >
+                          <Text
+                            style=
+                            {
+                              {
+                                fontWeight: 'bold',
+                                paddingTop: iconAvatarPostingSize * 0.05
+                              }
+                            }
+                          >Nguyen Minh Tu</Text>
+                          <Text style={{ fontSize: spanTextSize * 0.8 }}>{item.date.toLocaleString()}</Text>
+                        </View>
                       </View>
-                    </View>
+                    </TouchableOpacity>
                   </View>
                 }
                 extendChild={

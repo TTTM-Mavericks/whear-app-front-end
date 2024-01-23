@@ -6,9 +6,9 @@ export const SLIDER_WIDTH = Dimensions.get('window').width + 80;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
 interface HorizontalCarouselItem {
-  title: string;
-  body: string;
-  imgUrl: ImageSourcePropType;
+  title?: string;
+  body?: string;
+  imgUrl: any;
 }
 
 interface HorizontalCarouselItemProps {
@@ -19,7 +19,14 @@ interface HorizontalCarouselItemProps {
 const HorizontalCarouselCardItem: React.FC<HorizontalCarouselItemProps> = ({ item, index }) => {
   return (
     <View style={styles.container} key={index}>
-      <Image source={item.imgUrl} style={styles.image} />
+      <Image source={{ uri: item.imgUrl }} style={styles.image} />
+      {/* {item.body || item.title && (
+        <>
+          <Text style={styles.header}>{item.title}</Text>
+          <Text style={styles.body}>{item.body}</Text>
+        </>
+      )} */}
+
     </View>
   );
 };
