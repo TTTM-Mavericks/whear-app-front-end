@@ -144,7 +144,6 @@ const PostingDetailScreen = () => {
 
   /*-----------------UseEffect-----------------*/
   React.useEffect(() => {
-    console.log('detail: ', openCommentsDialog);
   }, []);
 
   /*-----------------Function handler-----------------*/

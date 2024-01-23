@@ -67,7 +67,6 @@ const UserProfileSettingScreen = () => {
 
     /*-----------------UseEffect-----------------*/
     useEffect(() => {
-        console.log(isAcceptedPolicy);
         setAcceptPolicy(isAcceptedPolicy);
     }, [isAcceptedPolicy]);
 
@@ -193,7 +192,6 @@ const UserProfileSettingScreen = () => {
     }
 
     const hanldeGoBack = () => {
-        navigation.navigate('UserProfile')
     }
 
 

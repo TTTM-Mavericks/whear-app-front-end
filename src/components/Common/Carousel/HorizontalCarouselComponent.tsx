@@ -4,13 +4,14 @@ import HorizontalCarouselCards from './HorizontalCarouselCards';
 import { backgroundColor } from '../../../root/Colors';
 
 interface childrenInterface {
-    child?: ReactNode
+    child?: ReactNode,
+    data: any
 }
-const HorizontalCarouselComponent: React.FC<childrenInterface> = ({ child }) => {
+const HorizontalCarouselComponent: React.FC<childrenInterface> = ({ child, data }) => {
     return (
         <View style={styles.container}>
             <SafeAreaView >
-                <HorizontalCarouselCards child={child} />
+                <HorizontalCarouselCards child={child} data={data} />
             </SafeAreaView>
         </View>
     );

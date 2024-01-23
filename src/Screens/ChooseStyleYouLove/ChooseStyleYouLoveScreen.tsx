@@ -14,6 +14,9 @@ import {
   buttonWidth,
 } from '../../components/Button/ButtonDefaultData';
 import { primaryColor, secondaryColor } from '../../root/Colors';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../root/RootStackParams';
+import { useNavigation } from '@react-navigation/native';
 
 const styleData = [
   {
@@ -74,8 +77,16 @@ const styleData = [
   },
 ];
 
+type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
+
 const ChooseStyleYouLoveScreen = () => {
   const [selectedItems, setSelectedItems] = useState([] as string[]);
+  const navigation = useNavigation<ScreenNavigationProp>();
+
+
+const handleMoveToHomeScreen = () => {
+    navigation.navigate('Home')
+  }
   const handleSetSelectedItems = (id: string) => {
     if (selectedItems.includes(id)) {
       setSelectedItems(selectedItems.filter((item) => item !== id));
@@ -165,7 +176,7 @@ const ChooseStyleYouLoveScreen = () => {
           <View style={ChooseStyleYouLoveStyleScreen.buttonView}>
             <ButtonComponent
               title='Next'
-              onPress={handleNext}
+              onPress={handleMoveToHomeScreen}
               width={buttonWidth}
               height={buttonHeight}
               backgroundColor={primaryColor}

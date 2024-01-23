@@ -1,4 +1,16 @@
-import { ADD_TO_COLLECTIONS, GET_EMAIL_SIGNINED, MOVE_TO_FORGOT_PASSWORD, OPEN_ADD_TO_COLLECTIONS_DIALOG, OPEN_COMMENTS_DIALOG, OPEN_UP_POSTING_DIALOG, SAVE_IMAGE_URL, SIGN_IN } from "./Actions";
+import {
+  ADD_TO_COLLECTIONS,
+  GET_EMAIL_SIGNINED,
+  IS_UPLOADED_IMAGE_TO_FIREBASE,
+  MOVE_TO_FORGOT_PASSWORD,
+  OPEN_ADD_TO_COLLECTIONS_DIALOG,
+  OPEN_COMMENTS_DIALOG, 
+  OPEN_CREATE_CLOTHES_DIALOG,
+  OPEN_UP_POSTING_DIALOG,
+  SAVE_IMAGE_CREATING_URL,
+  SAVE_IMAGE_URL,
+  SIGN_IN
+} from "./Actions";
 
 interface State {
   email: string;
@@ -8,6 +20,9 @@ interface State {
   isOpenPostingDialog: boolean;
   isOpenCommentsDialog: boolean;
   imageUrl: string;
+  isOpenCreateClothesDialog: boolean;
+  imageCreatingUrl: string;
+  isUploadedImageToFireBase: boolean;
 }
 
 const initialState: State = {
@@ -18,6 +33,9 @@ const initialState: State = {
   isOpenPostingDialog: false,
   isOpenCommentsDialog: false,
   imageUrl: '../../assets/icon/user.png',
+  isOpenCreateClothesDialog: false,
+  imageCreatingUrl: '../../assets/icon/user.png',
+  isUploadedImageToFireBase: false,
 
 };
 
@@ -63,6 +81,21 @@ const Reducer = (state = initialState, action: any): State => {
       return {
         ...state,
         imageUrl: action.payload,
+      };
+    case OPEN_CREATE_CLOTHES_DIALOG:
+      return {
+        ...state,
+        isOpenCreateClothesDialog: action.payload,
+      };
+      case SAVE_IMAGE_CREATING_URL:
+      return {
+        ...state,
+        imageCreatingUrl: action.payload,
+      };
+      case IS_UPLOADED_IMAGE_TO_FIREBASE:
+      return {
+        ...state,
+        isUploadedImageToFireBase: action.payload,
       };
     default:
       return state;

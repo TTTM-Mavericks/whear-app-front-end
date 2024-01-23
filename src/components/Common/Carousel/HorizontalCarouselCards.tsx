@@ -2,16 +2,16 @@ import React, { ReactNode, useRef, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem';
-import data from './Data';
 import { width } from '../../../root/ResponsiveSize';
 import HorizontalCarouselCardItem from './HorizontalCarouselCardItem';
 
 
 interface HorizontalCarouselCardProps {
-    child?: ReactNode
+    child?: ReactNode,
+    data: any
 }
 
-const HorizontalCarouselCards: React.FC<HorizontalCarouselCardProps> = ({ child }) => {
+const HorizontalCarouselCards: React.FC<HorizontalCarouselCardProps> = ({ child, data }) => {
     const [index, setIndex] = useState<number>(0);
     const isCarousel = useRef<Carousel<any>>(null);
 

@@ -18,6 +18,11 @@ import { validateEmail, validatePassword } from '../../Common/Functions/CommonFu
 import { inputTextSize } from '../../../root/Texts';
 import ButtonComponent from '../../Button/ButtonDefaultComponent';
 import { buttonHeightDefault, buttonWidth, buttonWidthDefault } from '../../Button/ButtonDefaultData';
+import api from '../../../api/AxiosApiConfig';
+import { UserInterFace } from '../../../models/ObjectInterface';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import LoadingComponent from '../../Common/Loading/LoadingComponent';
+import Toast from 'react-native-toast-message'
 
 /**
  * Image Url
@@ -46,8 +51,10 @@ const SignInComponent = () => {
   const [errorPasswordValidate, setPasswordErrorValidate] = useState('');
   const [isPasswordValidate, setIsPasswordValidate] = useState(true);
   const [isHidePassword, setIsHidePassword] = useState(true);
+  const [userResponse, setUserResponse] = useState<UserInterFace>();
   const dispatch = useDispatch();
   const navigation = useNavigation<SignInScreenNavigationProp>();
+  const [isLoading, setIsLoading] = useState(false);
 
   /*-----------------UseEffect-----------------*/
 
@@ -90,15 +97,48 @@ const SignInComponent = () => {
   /**
    * SignIn
    */
-  const handleSignIn = () => {
-    if (email === 'a' && password === '1') {
-      dispatch(signInAction({ email: email, password: password }));
-      dispatch(setEmailSignInedAction({ email }))
+  const handleSignIn = async () => {
+    if (isEmailValidate && isPasswordValidate) {
+      setIsLoading(true);
+      try {
+        const requestData = {
+          email: email,
+          password: password
+        };
+
+        const response = await api.post('/api/v1/user/get-user-by-email-and-password', requestData);
+        if (response.success === 200) {
+          setUserResponse(response.data);
+          AsyncStorage.setItem('userData', JSON.stringify(response.data));
+          console.log('userData: ', JSON.stringify(response.data));
+          setIsLoading(true);
+          setTimeout(() => {
+            setIsLoading(false);
+            navigation.navigate('Home');
+          }, 1000)
+        } else {
+          setIsLoading(false);
+          Toast.show({
+            type: 'error',
+            text1: response.message
+          });
+        }
+      } catch (error: any) {
+        console.error('Error posting data:', error);
+        setIsLoading(false);
+        Toast.show({
+          type: 'error',
+          text1: JSON.stringify(error.message), 
+          position: 'top'
+        });
+      }
     } else {
-      // alert('wrong')
+      setEmailErrorValidate(errorEmailValidate);
+      setPasswordErrorValidate(errorPasswordValidate);
+      navigation.navigate('SignIn'); // Navigate to SignIn screen after validation failure
     }
-    navigation.navigate('Introduce');
   };
+
 
   /**
    * Clear input
@@ -213,6 +253,12 @@ const SignInComponent = () => {
           </TouchableOpacity>
         </View>
       </View>
+      <LoadingComponent spinner={isLoading}></LoadingComponent>
+      <Toast
+        position='top'
+        bottomOffset={20}
+        
+      />
     </View >
   );
 };

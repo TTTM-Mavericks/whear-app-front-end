@@ -5,7 +5,12 @@ export const OPEN_ADD_TO_COLLECTIONS_DIALOG = 'OPEN_ADD_TO_COLLECTIONS_DIALOG';
 export const ADD_TO_COLLECTIONS = 'ADD_TO_COLLECTIONS';
 export const OPEN_UP_POSTING_DIALOG = 'OPEN_UP_POSTING_DIALOG';
 export const OPEN_COMMENTS_DIALOG = 'OPEN_COMMENTS_DIALOG';
+export const OPEN_CREATE_CLOTHES_DIALOG = 'OPEN_CREATE_CLOTHES_DIALOG';
 export const SAVE_IMAGE_URL = 'SAVE_IMAGE_URL';
+export const SAVE_IMAGE_CREATING_URL = 'SAVE_IMAGE_CREATING_URL';
+export const IS_UPLOADED_IMAGE_TO_FIREBASE = 'IS_UPLOADED_IMAGE_TO_FIREBASE';
+
+
 
 
 
@@ -42,6 +47,11 @@ export const setOpenCommentsDialog = (isOpenCommentsDialog: boolean) => ({
   payload: isOpenCommentsDialog,
 });
 
+export const setOpenCreateClothesDialog = (isOpenCreateClothesDialog: boolean) => ({
+  type: OPEN_CREATE_CLOTHES_DIALOG,
+  payload: isOpenCreateClothesDialog,
+});
+
 export const setAddToCollections = (isAddedToCollection: boolean) => ({
   type: ADD_TO_COLLECTIONS,
   payload: isAddedToCollection,
@@ -51,5 +61,16 @@ export const saveImageUrl = (imageUrl: string) => ({
   type: SAVE_IMAGE_URL,
   payload: imageUrl,
 });
+
+export const saveImageCreatingUrl = (imageCreatingUrl: string) => ({
+  type: SAVE_IMAGE_CREATING_URL,
+  payload: imageCreatingUrl,
+});
+
+export const setUploadToFireBase = (isUploadedImageToFireBase: boolean) => ({
+  type: IS_UPLOADED_IMAGE_TO_FIREBASE,
+  payload: isUploadedImageToFireBase,
+});
+
 
 
