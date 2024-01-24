@@ -1,26 +1,24 @@
 
-import React, { useCallback, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, FlatList, TouchableOpacity, Image, Platform } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, ScrollView, FlatList, Image, Platform } from 'react-native';
 
-import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../../root/RootStackParams';
 import { StackNavigationProp } from '@react-navigation/stack';
 import ListViewComponent from '../../components/ListView/ListViewComponent';
-import { Appbar, Avatar, Button, Chip, Icon, IconButton, MD3Colors, SegmentedButtons, TextInput } from 'react-native-paper';
+import { Button, Dialog, Icon, IconButton, Portal, SegmentedButtons } from 'react-native-paper';
 import { height, width } from '../../root/ResponsiveSize';
 import { backgroundColor, grayBackgroundColor, grayBorderColor, primaryColor } from '../../root/Colors';
 import { useDispatch, useSelector } from 'react-redux';
 import PostingDialogComponent from '../../components/Dialog/PostingDialogComponent';
 import UserProfileStyleScreen from './UserProfileStyleScreen';
 import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarFooterComponents';
-import ImagePickerComponent from '../../components/ImagePicker/ImagePickersComponent';
 import AddImageButtonComponent from '../../components/ImagePicker/AddImageButtonComponent';
 import api from '../../api/AxiosApiConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UserInterFace } from '../../models/ObjectInterface';
-import { convertDateFormat, formatDate, parseDateString } from '../../components/Common/Functions/CommonFunctionComponents';
 import { setUploadToFireBase } from '../../redux/State/Actions';
-import { useFocus } from '../../hooks/UseFocusHookCustom';
+import { spanTextSize } from '../../root/Texts';
 
 interface ListItem {
   id: string;
@@ -136,11 +134,18 @@ const UserProfileScreen = () => {
   const [userStorage, setUserStorage] = useState<UserInterFace>();
   const [currentUser, setCurrentUser] = useState<UserInterFace>();
   const [follower, setFollower] = useState<UserInterFace[]>([]);
-  const [flollowing, setFollowing] = useState<UserInterFace[]>([]);
+  const [flollowing, setFollowing] = useState([]);
   const [userParam, setUserParam] = useState(userIDParam);
   const [refresh, setRefresh] = React.useState(false);
   const [isFolowed, setIsFollowed] = useState(false);
   const [countFollower, setCountFollower] = useState(0);
+  const [visibleFollowingDialog, setVisibleFollowingDialog] = useState(false);
+  const [visibleFollowerDialog, setVisibleFollowerDialog] = useState(false);
+  const [isFollowedInFollowingUser, setIsFollowedInFollowingUser] = useState(true);
+  const [selectedItems, setSelectedItems] = useState([] as string[]);
+
+
+
 
 
   /*-----------------Usable variable-----------------*/
@@ -250,17 +255,24 @@ const UserProfileScreen = () => {
    */
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const userIDParam = (route.params as { userID?: string })?.userID;
-        const response = await api.get(`/api/v1/follow/get-all-following-user?userid=${userIDParam}`);
-        if (response.success === 200) {
-          setFollowing(response.data);
-        } else {
-          console.log(response.message);
-        }
+      const userStorage = await AsyncStorage.getItem("userData");
+      if (userStorage) {
+        const userParse: UserInterFace = JSON.parse(userStorage);
+        setUserStorage(userParse);
 
-      } catch (error) {
-        console.error("An error occurred during data fetching:", error);
+        try {
+          const userIDParam = (route.params as { userID?: string })?.userID;
+          const response = await api.get(`/api/v1/follow/get-all-following-user?userid=${userIDParam}&base_userid=${userParse?.userID}`);
+          if (response.success === 200) {
+            setFollowing(response.data);
+            console.log(response.data);
+          } else {
+            console.log(response.message);
+          }
+
+        } catch (error) {
+          console.error("An error occurred during data fetching:", error);
+        }
       }
     };
 
@@ -326,12 +338,65 @@ const UserProfileScreen = () => {
 
   }
 
+  const handleFollowInDialog = async (tagertUserID: any) => {
+    const userStorage = await AsyncStorage.getItem("userData");
+    if (userStorage) {
+      const userParse: UserInterFace = JSON.parse(userStorage);
+      try {
+        const requestBody =
+        {
+          baseUserID: userParse?.userID,
+          targetUserID: tagertUserID
+        }
+
+        const fetchData = async () => {
+          const response = await api.post('/api/v1/follow/un-follow', requestBody);
+          if (response.success === 200) {
+            setUserStorage(response.data);
+            const data = response.data
+            setIsFollowedInFollowingUser(!isFollowedInFollowingUser);
+            handleSetSelectedItems(tagertUserID);
+
+          } else {
+            console.log(response.message);
+          }
+        }
+        fetchData();
+
+
+      } catch (error) {
+        console.error('Error posting data:', error);
+      }
+    }
+
+  }
+
+  const handleHideDialog = () => {
+    setVisibleFollowingDialog(false);
+    setVisibleFollowerDialog(false);
+  }
+
+  const handleOpenFollowingUser = () => {
+    setVisibleFollowingDialog(true);
+  }
+
+  const handleOpenFollowerUser = () => {
+    setVisibleFollowerDialog(true);
+  }
+
+  const handleSetSelectedItems = (id: string) => {
+    if (selectedItems.includes(id)) {
+      setSelectedItems(selectedItems.filter((item) => item !== id));
+    } else {
+      setSelectedItems([...selectedItems, id]);
+    }
+  };
 
 
   return (
     <View style={UserProfileStyleScreen.container}>
       <View style={UserProfileStyleScreen.header}>
-        <IconButton icon={require('../../assets/icon/backarrow.png')}></IconButton>
+        <IconButton icon={require('../../assets/icon/backarrow.png')} onPress={() => navigation.goBack()}></IconButton>
         <View style={UserProfileStyleScreen.upgradeBanner} >
           <Icon source={require('../../assets/img/logo/logo.png')} size={40}></Icon>
           <Text style={{ fontSize: 12, fontWeight: 'bold', marginRight: 10 }}>Upgrade to Store</Text>
@@ -347,7 +412,16 @@ const UserProfileScreen = () => {
             iconColor='black' ></IconButton> */}
           {currentUser?.userID === userStorage?.userID && (
 
-            <AddImageButtonComponent icon={require('../../assets/icon/photo-camera.png')} style={UserProfileStyleScreen.iconImg} iconColor='black' isUserAvatar={true}></AddImageButtonComponent>
+            <AddImageButtonComponent
+              icon={require('../../assets/icon/photo-camera.png')}
+              style={UserProfileStyleScreen.iconImg}
+              iconColor='black'
+              isUserAvatar={true}
+              width={3}
+              height={3}
+            />
+
+
           )}
           {/* <ImagePickerComponent style={UserProfileStyleScreen.iconImg} cutWidth={3} cutHeight={3} iconButton={require('../../assets/icon/photo-camera.png')}></ImagePickerComponent> */}
         </View>
@@ -379,10 +453,16 @@ const UserProfileScreen = () => {
             onPress={() => {
               if (currentUser?.userID !== userStorage?.userID) {
                 handleFollow(currentUser?.userID);
+              } else {
+                handleOpenFollowerUser();
               }
             }}
           >
-            <Text style={{ fontWeight: '500', fontSize: 12 }}>{countFollower} Follower</Text>
+            <Text style={{ fontWeight: '500', fontSize: 12 }}>{countFollower}
+              {currentUser?.userID !== userStorage?.userID && isFolowed ? ' Followed'
+                : currentUser?.userID !== userStorage?.userID && !isFolowed && ' Follower'}
+              {currentUser?.userID === userStorage?.userID && ' Follower'}
+            </Text>
           </Button>
 
           <Button
@@ -390,8 +470,9 @@ const UserProfileScreen = () => {
             contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
             style={[UserProfileStyleScreen.buttonGroup_button, { backgroundColor: grayBackgroundColor }]}
             labelStyle={[UserProfileStyleScreen.buttonGroup_button_lable,]}
+            onPress={() => handleOpenFollowingUser()}
           >
-            <Text style={{ fontWeight: '500', fontSize: 12 }}>{countFollower} Following</Text>
+            <Text style={{ fontWeight: '500', fontSize: 12 }}>{flollowing.length} Following</Text>
           </Button>
 
 
@@ -507,6 +588,95 @@ const UserProfileScreen = () => {
 
         </View>
       </ScrollView >
+
+      {/* FLOLLOWING USER LIST */}
+      <Portal>
+        <Dialog
+          visible={visibleFollowingDialog}
+          onDismiss={handleHideDialog}
+          style={{ width: width * 0.85, height: height * 0.8, backgroundColor: backgroundColor }}
+        >
+          <Dialog.Content>
+            {follower.length > 0 ? (
+              <FlatList
+                style={{ backgroundColor: backgroundColor }}
+                data={flollowing}
+                keyExtractor={(item: any) => item.userResponse.userID}
+                renderItem={({ item }) => (
+                  <View>
+                    <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+                      <Image source={{ uri: item.userResponse.imgUrl }} style={{ width: 40, height: 40, borderRadius: 90 }}></Image>
+                      <Text style={{ marginLeft: 10, marginTop: 40 * 0.3, fontSize: 13 }}> {item.userResponse.username}</Text>
+                      <Button
+                        mode='outlined'
+                        contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
+                        style={[UserProfileStyleScreen.buttonGroup_button, { backgroundColor: !item.followed || !isFollowedInFollowingUser ? grayBackgroundColor : primaryColor, width: 100, marginLeft: 5, marginRight: 5, marginTop: 30 * 0.25, position: 'absolute', right: 0 }]}
+                        labelStyle={[UserProfileStyleScreen.buttonGroup_button_lable,]}
+                        onPress={() => handleFollowInDialog(item.userResponse.userID)}
+                      >
+                        <Text style={{ fontWeight: '500', fontSize: 12, color: !item.followed || !isFollowedInFollowingUser ? "black" : "white" }}>{!item.followed || !isFollowedInFollowingUser ? "Follow" : "Following"}</Text>
+                      </Button>
+                    </View>
+                  </View>
+                )}
+              >
+
+              </FlatList>
+            ) : (
+              <View style={{ alignContent: 'center', alignItems: 'center' }}>
+                <Text style={{ fontSize: 12, fontWeight: '300', color: 'black' }}>You do not follow any user</Text>
+              </View>
+            )}
+
+          </Dialog.Content>
+        </Dialog>
+      </Portal>
+
+      {/* FOLLOWER USER LIST */}
+      {currentUser?.userID === userStorage?.userID && (
+        <Portal>
+          <Dialog
+            visible={visibleFollowerDialog}
+            onDismiss={handleHideDialog}
+            style={{ width: width * 0.85, height: height * 0.8, backgroundColor: backgroundColor }}
+          >
+            <Dialog.Content>
+              {follower.length > 0 ? (
+                <FlatList
+                  style={{ backgroundColor: backgroundColor }}
+                  data={follower}
+                  keyExtractor={(item: any) => item.userID}
+                  renderItem={({ item }) => (
+                    <View>
+                      <View style={{ flexDirection: 'row', marginBottom: 10 }}>
+                        <Image source={{ uri: item.imgUrl }} style={{ width: 40, height: 40, borderRadius: 90 }}></Image>
+                        <Text style={{ marginLeft: 10, marginTop: 40 * 0.3, fontSize: 13 }}> {item.username}</Text>
+                        <Button
+                          mode='outlined'
+                          contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
+                          style={[UserProfileStyleScreen.buttonGroup_button, { backgroundColor: !isFolowed ? grayBackgroundColor : primaryColor, width: 100, marginLeft: 5, marginRight: 5, marginTop: 30 * 0.25, position: 'absolute', right: 0 }]}
+                          labelStyle={[UserProfileStyleScreen.buttonGroup_button_lable,]}
+                        >
+                          <Text style={{ fontWeight: '500', fontSize: 12 }}>{isFolowed ? ' Following' : 'Follow'}</Text>
+                        </Button>
+                      </View>
+                    </View>
+                  )}
+                >
+                </FlatList>
+
+              ) : (
+                <View style={{ alignContent: 'center', alignItems: 'center' }}>
+                  <Text style={{ fontSize: 12, fontWeight: '300', color: 'black' }}>Do not have any user follow you</Text>
+                </View>
+              )
+              }
+
+
+            </Dialog.Content>
+          </Dialog>
+        </Portal>
+      )}
       <AppBarFooterComponents isHide={scrollUp} centerIcon={require('../../assets/img/logo/logo.png')}></AppBarFooterComponents>
     </View >
 

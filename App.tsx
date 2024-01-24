@@ -21,6 +21,7 @@ import ChooseStyleYouLoveScreen from "./src/Screens/ChooseStyleYouLove/ChooseSty
 import React from "react";
 import NewsScreen from "./src/Screens/News/NewsScreen";
 import SignInComponent from "./src/components/auth/SinIn/SignInComponent";
+import HotStoreScreen from "./src/Screens/HotStore/HotStoreScreen";
 
 const Stack = createStackNavigator();
 
@@ -115,6 +116,14 @@ export default function App() {
                 component={NewsScreen}
                 options={{ headerShown: false }}
               />
+
+              <Stack.Screen
+                name='HotStore'
+                component={HotStoreScreen}
+                options={{ headerShown: false }}
+              />
+
+              
             </Stack.Navigator>
           </View>
         </NavigationContainer>

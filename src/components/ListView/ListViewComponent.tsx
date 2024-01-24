@@ -19,10 +19,11 @@ interface ListViewProps {
     extendChild?: ReactNode
     extendImgUrl?: string;
     extendHeaderChild?: ReactNode,
+    isHorizontal?: boolean,
     onPress?: () => void,
 }
 
-const ListViewComponent: React.FC<ListViewProps> = ({ data, child, cardStyleContent, cardStyleContainer, extendChild, extendImgUrl, extendHeaderChild, onPress }) => {
+const ListViewComponent: React.FC<ListViewProps> = ({ data, child, cardStyleContent, cardStyleContainer, extendChild, extendImgUrl, extendHeaderChild, isHorizontal = false, onPress }) => {
     const styleContent = {
         ...(cardStyleContent as object),
     };
@@ -87,7 +88,8 @@ const ListViewComponent: React.FC<ListViewProps> = ({ data, child, cardStyleCont
                 data={data}
                 keyExtractor={(item) => item.id}
                 renderItem={renderRow}
-                numColumns={2}
+                numColumns={isHorizontal ? 1 : 2}
+                horizontal={isHorizontal}
             />
         </View>
     );

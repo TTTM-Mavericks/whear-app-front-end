@@ -40,32 +40,45 @@ const authSlice = createSlice({
     setEmailSignIned: (state, action: PayloadAction<{ email: string }>) => {
       state.email = action.payload.email;
     },
-    setOpenAddToCollectionsDialog: (state, action: PayloadAction<{isOpen: boolean}>) => {
+    setOpenAddToCollectionsDialog: (state, action: PayloadAction<{ isOpen: boolean }>) => {
       state.isOpen = action.payload.isOpen;
     },
-    setAddToCollections: (state, action: PayloadAction<{isAddedToCollections: boolean}>) => {
+    setAddToCollections: (state, action: PayloadAction<{ isAddedToCollections: boolean }>) => {
       state.isAddedToCollections = action.payload.isAddedToCollections;
     },
-    setOpenUpPostingDialog: (state, action: PayloadAction<{isOpenPostingDialog: boolean}>) => {
+    setOpenUpPostingDialog: (state, action: PayloadAction<{ isOpenPostingDialog: boolean }>) => {
       state.isOpenPostingDialog = action.payload.isOpenPostingDialog;
     },
-    setOpenCommentsDialog: (state, action: PayloadAction<{isOpenCommentsDialog: boolean}>) => {
+    setOpenCommentsDialog: (state, action: PayloadAction<{ isOpenCommentsDialog: boolean }>) => {
       state.isOpenCommentsDialog = action.payload.isOpenCommentsDialog;
     },
-    saveImageUrl: (state, action: PayloadAction<{imageUrl: string}>) => {
+    saveImageUrl: (state, action: PayloadAction<{ imageUrl: string }>) => {
       state.imageUrl = action.payload.imageUrl;
     },
-    setOpenCreateClothesDialog: (state, action: PayloadAction<{isOpenCreateClothesDialog: boolean}>) => {
+    setOpenCreateClothesDialog: (state, action: PayloadAction<{ isOpenCreateClothesDialog: boolean }>) => {
       state.isOpenCreateClothesDialog = action.payload.isOpenCreateClothesDialog;
     },
-    saveImageCreatingUrl: (state, action: PayloadAction<{imageCreatingUrl: string}>) => {
+    saveImageCreatingUrl: (state, action: PayloadAction<{ imageCreatingUrl: string }>) => {
       state.imageCreatingUrl = action.payload.imageCreatingUrl;
     },
-    setUploadToFireBase: (state, action: PayloadAction<{isUploadedImageToFireBase: boolean}>) => {
+    setUploadToFireBase: (state, action: PayloadAction<{ isUploadedImageToFireBase: boolean }>) => {
       state.isUploadedImageToFireBase = action.payload.isUploadedImageToFireBase;
     },
   },
 });
 
-export const { signIn, moveToForgotPassword, setEmailSignIned } = authSlice.actions;
+export const { 
+  signIn, 
+  moveToForgotPassword, 
+  setEmailSignIned, 
+  saveImageCreatingUrl, 
+  saveImageUrl, 
+  setAddToCollections, 
+  setOpenAddToCollectionsDialog, 
+  setOpenCommentsDialog, 
+  setOpenCreateClothesDialog, 
+  setOpenUpPostingDialog, 
+  setUploadToFireBase, 
+
+} = authSlice.actions;
 export default authSlice.reducer;

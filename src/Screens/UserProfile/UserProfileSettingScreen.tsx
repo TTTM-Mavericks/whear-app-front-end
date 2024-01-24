@@ -200,12 +200,6 @@ const UserProfileSettingScreen = () => {
             <AppBarHeaderComponent
                 title='Profile'
                 backAction={() => hanldeGoBack()}
-                iconChild={
-                    <>
-                        <Appbar.Action icon={'magnify'}  />
-                        <Appbar.Action icon="dots-vertical"  />
-                    </>
-                }
             >
             </AppBarHeaderComponent>
             <ScrollView contentContainerStyle={{ backgroundColor: backgroundColor }}>

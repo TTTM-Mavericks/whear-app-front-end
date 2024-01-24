@@ -11,12 +11,6 @@ export const SAVE_IMAGE_CREATING_URL = 'SAVE_IMAGE_CREATING_URL';
 export const IS_UPLOADED_IMAGE_TO_FIREBASE = 'IS_UPLOADED_IMAGE_TO_FIREBASE';
 
 
-
-
-
-
-
-
 export const signIn = (email: string, password: string) => ({
   type: SIGN_IN,
   payload: { email, password },
