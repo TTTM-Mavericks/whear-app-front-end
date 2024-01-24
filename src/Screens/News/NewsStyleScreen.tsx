@@ -24,7 +24,7 @@ const NewsStyle = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 10,
+    gap: 8,
   },
   chipStyles: {
     justifyContent: "center",
