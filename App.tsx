@@ -19,6 +19,7 @@ import UserProfileSettingScreen from "./src/Screens/UserProfile/UserProfileSetti
 import BasicInformationScreen from "./src/Screens/BasicInformation/BasicInformationScreen";
 import ChooseStyleYouLoveScreen from "./src/Screens/ChooseStyleYouLove/ChooseStyleYouLoveScreen";
 import React from "react";
+import NewsScreen from "./src/Screens/News/NewsScreen";
 import SignInComponent from "./src/components/auth/SinIn/SignInComponent";
 import HotStoreScreen from "./src/Screens/HotStore/HotStoreScreen";
 
@@ -32,13 +33,13 @@ export default function App() {
           <View style={styles.container}>
             <Stack.Navigator>
 
-              <Stack.Screen
+              {/* <Stack.Screen
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
-              />
+              /> */}
 
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{
@@ -108,6 +109,11 @@ export default function App() {
               <Stack.Screen
                 name="ChooseStyleYouLove"
                 component={ChooseStyleYouLoveScreen}
+                options={{ headerShown: false }}
+              /> */}
+              <Stack.Screen
+                name="NewsScreen"
+                component={NewsScreen}
                 options={{ headerShown: false }}
               />
 
