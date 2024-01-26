@@ -12,7 +12,9 @@ import { iconAvatarPostingSize, iconAvatarSize } from '../../root/Icon';
 import ClothesDetailStyleScreen from './ClothesDetailStyleScreen';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import Swiper from 'react-native-swiper';
-import { grayBackgroundColor, primaryColor } from '../../root/Colors';
+import { grayBackgroundColor, primaryColor, secondaryColor } from '../../root/Colors';
+import MaskedView from '@react-native-masked-view/masked-view';
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 
@@ -49,9 +51,9 @@ const data =
 
 
 
-type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
+type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 const ClothesDetailScreen = () => {
-  const navigation = useNavigation<SignInScreenNavigationProp>();
+  const navigation = useNavigation<ScreenNavigationProp>();
 
   /*-----------------UseState variable-----------------*/
   const [showFullContent, setShowFullContent] = useState(false);
@@ -95,7 +97,24 @@ const ClothesDetailScreen = () => {
   return (
     <View style={ClothesDetailStyleScreen.container}>
       <AppBarHeaderComponent
-        title='Results'
+        title={
+          <View>
+            <MaskedView
+              maskElement={
+                <Text style={ClothesDetailStyleScreen.titlePage}>Details</Text>
+              }
+            >
+              <LinearGradient
+                colors={[secondaryColor, primaryColor]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                style={ClothesDetailStyleScreen.linearBackground}
+              >
+                <Text style={{ opacity: 0 }}>Details</Text>
+              </LinearGradient>
+            </MaskedView>
+          </View>
+        }
         backAction={() => hanldeGoBack()}
       >
       </AppBarHeaderComponent>

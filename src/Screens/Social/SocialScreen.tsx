@@ -9,7 +9,7 @@ import ListViewComponent from '../../components/ListView/ListViewComponent';
 import { Appbar, Avatar, Button, Chip, Icon, IconButton, MD3Colors, TextInput } from 'react-native-paper';
 import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
 import { height, width } from '../../root/ResponsiveSize';
-import { backgroundColor, grayBorderColor, primaryColor } from '../../root/Colors';
+import { backgroundColor, grayBorderColor, primaryColor, secondaryColor } from '../../root/Colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpenAddToCollectionsDialog, setOpenCommentsDialog, setOpenUpPostingDialog } from '../../redux/State/Actions';
 import AddingToCollectionComponent from '../../components/Dialog/AddingToCollectionComponent';
@@ -19,6 +19,8 @@ import { spanTextSize } from '../../root/Texts';
 import CommentsDetailComponent from '../../components/Dialog/CommentsDetailDialogComponent';
 import CommentsDetailDialogComponent from '../../components/Dialog/CommentsDetailDialogComponent';
 import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarFooterComponents';
+import MaskedView from '@react-native-masked-view/masked-view';
+import { LinearGradient } from 'expo-linear-gradient';
 
 interface ListItem {
   id: string;
@@ -493,7 +495,24 @@ const SocialScreen = () => {
   return (
     <View style={SocailStyleScreen.container}>
       <AppBarHeaderComponent
-        title='Social'
+        title={
+          <View>
+            <MaskedView
+              maskElement={
+                <Text style={SocailStyleScreen.titlePage}>Social</Text>
+              }
+            >
+              <LinearGradient
+                colors={[secondaryColor, primaryColor]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                style={SocailStyleScreen.linearBackground}
+              >
+                <Text style={{ opacity: 0 }}>Social</Text>
+              </LinearGradient>
+            </MaskedView>
+          </View>
+        }
         backAction={() => hanldeGoBack()}
       >
       </AppBarHeaderComponent>
