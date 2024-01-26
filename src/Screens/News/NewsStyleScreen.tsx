@@ -4,6 +4,8 @@ import {
   greenSpringColor,
   backgroundColor,
 } from "../../root/Colors";
+import { ITEM_HEIGHT } from "../../components/ListView/ListViewStyleComponent";
+import { ITEM_WIDTH } from "../../components/Common/AppBarHeader/AppBarHeaderStyleComponent";
 
 const { width, height } = Dimensions.get("window");
 const containerPadding = 0;
@@ -68,6 +70,17 @@ const NewsStyle = StyleSheet.create({
   row: {
     flex: 1,
     justifyContent: "space-between",
+  },
+  titlePage: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    paddingTop: 12,
+    height: ITEM_HEIGHT,
+  },
+  linearBackground: {
+    height: ITEM_HEIGHT,
+    width: ITEM_WIDTH,
   },
 });
 

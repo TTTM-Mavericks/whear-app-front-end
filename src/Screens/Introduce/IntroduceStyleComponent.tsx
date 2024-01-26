@@ -33,7 +33,6 @@ const IntroduceStylesComponent = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: 'red', // Set the desired color
     transform: [{ scaleX: 3.5 }, {scaleY: 3}],
   },
 });

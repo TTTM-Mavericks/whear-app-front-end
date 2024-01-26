@@ -1,5 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { backgroundColor, grayBackgroundColor } from '../../root/Colors';
+import { ITEM_HEIGHT, ITEM_WIDTH } from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
 
 const { width, height } = Dimensions.get('window');
 const containerPadding = 16;
@@ -90,7 +91,18 @@ const ClothesDetailStyleScreen = StyleSheet.create({
     marginTop: -5,
     borderRadius: 10,
     backgroundColor: grayBackgroundColor
-  }
+  },
+  titlePage: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    paddingTop: 12,
+    height: ITEM_HEIGHT,
+  },
+  linearBackground: {
+    height: ITEM_HEIGHT,
+    width: ITEM_WIDTH,
+  },
 });
 
 export default ClothesDetailStyleScreen;

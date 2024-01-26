@@ -13,6 +13,9 @@ export type RootStackParamList = {
   ClothesDetailScreen: undefined;
   BasicInformationScreen: undefined;
   ChooseStyleYouLove: undefined;
+  SearchScreen: {keyWord: any};
+  // SearchScreen: undefined;
+
 
 };
 

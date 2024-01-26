@@ -10,12 +10,15 @@ import { Appbar, Button, Chip, Icon, IconButton, MD3Colors } from 'react-native-
 import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
 import ChipGroupComponent from '../../components/Common/ChipGroup/ChipGroupComponent';
 import { height, width } from '../../root/ResponsiveSize';
-import { backgroundColor, grayBackgroundColor, primaryColor } from '../../root/Colors';
+import { backgroundColor, grayBackgroundColor, primaryColor, secondaryColor } from '../../root/Colors';
 import { useDispatch } from 'react-redux';
 import { setOpenAddToCollectionsDialog } from '../../redux/State/Actions';
 import AddingToCollectionComponent from '../../components/Dialog/AddingToCollectionComponent';
 import CollectionsStyleScreen from './CollectionsStyleScreen';
 import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarFooterComponents';
+import { LinearGradient } from 'expo-linear-gradient';
+import MaskedView from '@react-native-masked-view/masked-view';
+
 
 interface ListItem {
   id: string;
@@ -213,7 +216,24 @@ const CollectionsScreen = () => {
     <View style={CollectionsStyleScreen.container}>
       {/* {scrollUp && ( */}
       <AppBarHeaderComponent
-        title='Your Collections'
+        title={
+          <View>
+            <MaskedView
+              maskElement={
+                <Text style={CollectionsStyleScreen.titlePage}>Your collections</Text>
+              }
+            >
+              <LinearGradient
+                colors={[secondaryColor, primaryColor]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                style={CollectionsStyleScreen.linearBackground}
+              >
+                <Text style={{ opacity: 0 }}>Your collections</Text>
+              </LinearGradient>
+            </MaskedView>
+          </View>
+        }
         backAction={() => hanldeGoBack()}
       >
       </AppBarHeaderComponent>

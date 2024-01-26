@@ -4,6 +4,9 @@ import { Appbar, Chip } from "react-native-paper";
 import NewsStyle from "./NewsStyleScreen";
 import { Item } from "react-native-paper/lib/typescript/components/Drawer/Drawer";
 import AppBarHeaderComponent from "../../components/Common/AppBarHeader/AppBarHeaderComponent";
+import MaskedView from "@react-native-masked-view/masked-view";
+import { LinearGradient } from "expo-linear-gradient";
+import { primaryColor, secondaryColor } from "../../root/Colors";
 
 interface NewsItems {
   id: number;
@@ -176,17 +179,35 @@ export default function NewsScreen() {
     </View>
   );
 
+  function hanldeGoBack(): void {
+
+  }
+
   return (
     <View style={NewsStyle.container}>
       <AppBarHeaderComponent
-        title="NEWS"
-        iconChild={
-          <>
-            <Appbar.Action icon={"magnify"} />
-            <Appbar.Action icon="dots-vertical" />
-          </>
+        title={
+          <View>
+            <MaskedView
+              maskElement={
+                <Text style={NewsStyle.titlePage}>News</Text>
+              }
+            >
+              <LinearGradient
+                colors={[secondaryColor, primaryColor]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                style={NewsStyle.linearBackground}
+              >
+                <Text style={{ opacity: 0 }}>News</Text>
+              </LinearGradient>
+            </MaskedView>
+          </View>
         }
-      />
+        isHideIcon1 = {true}
+        backAction={() => hanldeGoBack()}
+      >
+      </AppBarHeaderComponent>
       <View style={NewsStyle.chipButton}>
         {chipItems.map((i) => (
           <Chip
