@@ -8,10 +8,8 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import {
-  Avatar,
-  TextInput
-} from 'react-native-paper';
+
+import { Avatar, TextInput } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarFooterComponents';
 import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
@@ -23,9 +21,10 @@ import {
   setOpenCommentsDialog,
   setOpenUpPostingDialog
 } from '../../redux/State/Actions';
-import {
-  primaryColor
-} from '../../root/Colors';
+import { primaryColor, secondaryColor } from '../../root/Colors';
+
+import MaskedView from '@react-native-masked-view/masked-view';
+import { LinearGradient } from 'expo-linear-gradient';
 import { iconAvatarPostingSize } from '../../root/Icon';
 import { width } from '../../root/ResponsiveSize';
 import { RootStackParamList } from '../../root/RootStackParams';
@@ -384,7 +383,24 @@ const SocialScreen = () => {
   return (
     <View style={SocailStyleScreen.container}>
       <AppBarHeaderComponent
-        title='Social'
+        title={
+          <View>
+            <MaskedView
+              maskElement={
+                <Text style={SocailStyleScreen.titlePage}>Social</Text>
+              }
+            >
+              <LinearGradient
+                colors={[secondaryColor, primaryColor]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                style={SocailStyleScreen.linearBackground}
+              >
+                <Text style={{ opacity: 0 }}>Social</Text>
+              </LinearGradient>
+            </MaskedView>
+          </View>
+        }
         backAction={() => hanldeGoBack()}
       ></AppBarHeaderComponent>
 

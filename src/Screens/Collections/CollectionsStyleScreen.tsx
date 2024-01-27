@@ -1,5 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { backgroundColor } from '../../root/Colors';
+import { ITEM_HEIGHT } from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
+import { ITEM_WIDTH } from '../../components/ListView/ListViewStyleComponent';
 
 const { width, height } = Dimensions.get('window');
 const containerPadding = 16;
@@ -98,6 +100,17 @@ const CollectionsStyleScreen = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 8
 
+  },
+  titlePage: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    paddingTop: 12,
+    height: ITEM_HEIGHT,
+  },
+  linearBackground: {
+    height: ITEM_HEIGHT,
+    width: ITEM_WIDTH,
   },
 
 });

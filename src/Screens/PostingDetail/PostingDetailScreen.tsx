@@ -5,14 +5,26 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar, TextInput } from 'react-native-paper';
 import { useDispatch } from 'react-redux';
 import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
+<<<<<<< HEAD
 import CommentComponent from '../../components/Common/Comment/CommentComponent';
 import PostContentComponent from '../../components/Common/PostContent/PostContentComponent';
 import { grayBorderColor, primaryColor } from '../../root/Colors';
 import { iconAvatarPostingSize } from '../../root/Icon';
 import { width } from '../../root/ResponsiveSize';
 import { RootStackParamList } from '../../root/RootStackParams';
+=======
+import { height, width } from '../../root/ResponsiveSize';
+import { backgroundColor, grayBorderColor, primaryColor, secondaryColor } from '../../root/Colors';
+import { useDispatch, useSelector } from 'react-redux';
+import { setOpenAddToCollectionsDialog, setOpenCommentsDialog, setOpenUpPostingDialog } from '../../redux/State/Actions';
+import AddingToCollectionComponent from '../../components/Dialog/AddingToCollectionComponent';
+import PostingDialogComponent from '../../components/Dialog/PostingDialogComponent';
+import { iconAvatarPostingSize, iconAvatarSize } from '../../root/Icon';
+>>>>>>> aab25f2403adaca783c8a88d162a479fbd15de09
 import { spanTextSize } from '../../root/Texts';
 import PostingDetailStyleScreen from './PostingDetailStyleScreen';
+import MaskedView from '@react-native-masked-view/masked-view';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export interface Comment {
   commentID: string;
@@ -184,9 +196,31 @@ const PostingDetailScreen = () => {
   return (
     <View style={PostingDetailStyleScreen.container}>
       <AppBarHeaderComponent
-        title='Posting detail'
+        title={
+          <View>
+            <MaskedView
+              maskElement={
+                <Text style={PostingDetailStyleScreen.titlePage}>Posting</Text>
+              }
+            >
+              <LinearGradient
+                colors={[secondaryColor, primaryColor]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                style={PostingDetailStyleScreen.linearBackground}
+              >
+                <Text style={{ opacity: 0 }}>Posting</Text>
+              </LinearGradient>
+            </MaskedView>
+          </View>
+        }
         backAction={() => hanldeGoBack()}
+<<<<<<< HEAD
       ></AppBarHeaderComponent>
+=======
+      >
+      </AppBarHeaderComponent>
+>>>>>>> aab25f2403adaca783c8a88d162a479fbd15de09
 
       <ScrollView
         persistentScrollbar={false}

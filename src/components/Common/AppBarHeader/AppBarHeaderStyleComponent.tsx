@@ -7,7 +7,6 @@ const containerPadding = 16;
 export const SLIDER_WIDTH = Dimensions.get('window').width;
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH);
 
-// export const SLIDER_HEIGHT = Dimensions.get('window').height;
 export const ITEM_HEIGHT = Math.round(50);
 
 const AppBarHeaderStylesComponent = StyleSheet.create({
@@ -17,17 +16,9 @@ const AppBarHeaderStylesComponent = StyleSheet.create({
         borderRadius: 8,
         width: ITEM_WIDTH,
         height: ITEM_HEIGHT,
-        // paddingBottom: 40,
-        // shadowColor: 'black',
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
         elevation: 7,
         margin: 4,
-        // borderBottomColor: 'black'
+        marginTop: -20
     },
     image: {
         width: ITEM_WIDTH,
@@ -41,7 +32,6 @@ const AppBarHeaderStylesComponent = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         paddingLeft: 20,
-        // paddingTop: 20,
     },
     body: {
         color: '#222',

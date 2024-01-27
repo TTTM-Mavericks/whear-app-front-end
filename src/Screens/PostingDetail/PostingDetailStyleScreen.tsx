@@ -1,5 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { backgroundColor } from '../../root/Colors';
+import { backgroundColor, grayBackgroundColor } from '../../root/Colors';
+import { ITEM_WIDTH } from '../../components/ListView/ListViewStyleComponent';
+import { ITEM_HEIGHT } from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
+
 
 const { width, height } = Dimensions.get('window');
 const containerPadding = 16;
@@ -55,8 +58,24 @@ const PostingDetailStyleScreen = StyleSheet.create({
     height: 40,
     borderRadius: 50,
   },
- 
-  
+  commentContent: {
+    width: width * 0.8,
+    marginLeft: 10,
+    marginTop: -5,
+    borderRadius: 10,
+    backgroundColor: grayBackgroundColor
+  },
+  titlePage: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    paddingTop: 12,
+    height: ITEM_HEIGHT,
+  },
+  linearBackground: {
+    height: ITEM_HEIGHT,
+    width: ITEM_WIDTH,
+  },
 });
 
 export default PostingDetailStyleScreen;
