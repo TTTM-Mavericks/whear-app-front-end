@@ -32,11 +32,11 @@ export default function App() {
           <View style={styles.container}>
             <Stack.Navigator>
 
-              <Stack.Screen
+              {/* <Stack.Screen
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
-              />
+              /> */}
 
               <Stack.Screen
                 name="Home"
