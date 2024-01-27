@@ -12,7 +12,7 @@ const ClothesDetailStyleScreen = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: containerPadding,
-    backgroundColor: backgroundColor
+    backgroundColor: backgroundColor,
   },
   scrollView: {
     width: width,

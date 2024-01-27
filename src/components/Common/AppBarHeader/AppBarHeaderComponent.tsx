@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Appbar } from 'react-native-paper';
+import { Appbar, Badge, Icon } from 'react-native-paper';
 import AppBarHeaderStylesComponent from './AppBarHeaderStyleComponent';
 import { useNavigation } from '@react-navigation/native';
 import { StyleProp, View, ViewStyle } from 'react-native';
@@ -19,9 +19,24 @@ interface appBarProps {
 
 }
 type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
+const notificationCount = 3;
 
-const AppBarHeaderComponent: React.FC<appBarProps> = ({ backAction, title, icon, iconChild, styles, isHideIcon1, isHideIcon2, isLogo }) => {
+const AppBarHeaderComponent: React.FC<appBarProps> = (
+  {
+    backAction,
+    title,
+    icon,
+    iconChild,
+    styles,
+    isHideIcon1,
+    isHideIcon2,
+    isLogo
+  }) => {
+
   const navigation = useNavigation<ScreenNavigationProp>();
+
+  const [numberOfNotification, setNumberOfNotification] = React.useState(3);
+
   const _goBack = () => {
   };
 
@@ -30,7 +45,9 @@ const AppBarHeaderComponent: React.FC<appBarProps> = ({ backAction, title, icon,
     navigation.navigate('SearchScreen', { keyWord });
   };
 
-  const _handleNotification = () => console.log('Shown more');
+  const _handleNotification = () => {
+    navigation.navigate('NotificationScreen');
+  };
 
   return (
     <Appbar.Header style={[AppBarHeaderStylesComponent.container, styles]}>
@@ -50,7 +67,12 @@ const AppBarHeaderComponent: React.FC<appBarProps> = ({ backAction, title, icon,
       ) : (
         <Appbar.Action onPress={_handleSearch} style={isHideIcon1 && { display: 'none' }} icon={require('../../../assets/icon/loupe.png')} />
       )}
-      <Appbar.Action onPress={_handleNotification} style={isHideIcon2 && { display: 'none' }} icon={require('../../../assets/icon/bell.png')} />
+      <View style={{ position: 'relative' }}>
+        <Appbar.Action onPress={_handleNotification} style={isHideIcon2 && { display: 'none' }} icon={require('../../../assets/icon/bell.png')} />
+        {numberOfNotification > 0 && (
+          <Badge style={{ position: 'absolute', top: 5, right: 5 }}>{numberOfNotification}</Badge>
+        )}
+      </View>
       {iconChild}
     </Appbar.Header>
   );
