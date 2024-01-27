@@ -26,18 +26,7 @@ const SocailStyleScreen = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  title: {
-    fontSize: width * 0.1,
-    marginBottom: 16,
-  },
-  input: {
-    height: height * 0.05,
-    width: width * 0.6,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 12,
-    padding: 8,
-  },
+
   flatlist: {
     backgroundColor: backgroundColor,
     flex: 1,
@@ -72,18 +61,39 @@ const SocailStyleScreen = StyleSheet.create({
     backgroundColor: 'white',
 
   },
-  container_groupIconBar: {
-    width: width * 0.8,
-    height: height*0.05,
-    paddingTop: height,
-    backgroundColor: 'blue',
-    
-  },
   commentInput: {
-    width: width*0.95,
+    width: width - containerPadding*2,
     backgroundColor: backgroundColor,
-    height: 30,
+    height: 40,
     borderRadius: 50
+  },
+  post__content: {
+    paddingHorizontal: containerPadding,
+    paddingVertical: containerPadding - 10
+  },
+  post__content_child : {
+    flexDirection: 'row',
+    marginVertical: 3,
+    flexWrap: 'wrap',
+    width: width - containerPadding
+  },
+  post__content_interaction: {
+    flexDirection: 'row', 
+    alignItems:'center', 
+    marginRight: 20
+
+  },
+  interaction_icon: {
+    paddingRight: 5,
+
+  },
+  interaction_number: {
+    color: 'black', 
+    fontSize: 15 
+  },
+  post__content_hashtag: {
+    color: 'black', fontSize: 15,
+    marginRight: 5
   },
   titlePage: {
     fontSize: 20,
