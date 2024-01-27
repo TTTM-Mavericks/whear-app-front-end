@@ -14,7 +14,7 @@ export type RootStackParamList = {
   BasicInformationScreen: undefined;
   ChooseStyleYouLove: undefined;
   SearchScreen: {keyWord: any};
-  // SearchScreen: undefined;
+  NotificationScreen: undefined;
 
 
 };
