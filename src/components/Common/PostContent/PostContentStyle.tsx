@@ -6,7 +6,7 @@ const PostContentStyle = StyleSheet.create({
         flexDirection: 'row',
         marginVertical: 3,
         flexWrap: 'wrap',
-        width: width - containerPadding
+        width: width - containerPadding*2
       },
       post__content_interaction: {
         flexDirection: 'row', 

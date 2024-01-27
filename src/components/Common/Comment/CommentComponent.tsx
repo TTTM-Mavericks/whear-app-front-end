@@ -16,7 +16,7 @@ const CommentComponent: React.FC<Comment> = (props: Comment) => {
   return (
     <View
       key={props.commentID}
-      style={[CommentStyle.container_postingBar, { marginBottom: 25 }]}
+      style={[CommentStyle.container_postingBar, { marginTop: 20 }]}
     >
       <View
         key={props.commentID}

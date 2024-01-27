@@ -489,7 +489,8 @@ const SocialScreen = () => {
                 }
                 extendChild={
                   <View style={SocailStyleScreen.post__content}>
-                    <PostContentComponent props={item} />
+
+                    <PostContentComponent key={item.postID} props={item} />
 
                     <View style={SocailStyleScreen.post__content_child}>
                       <Text style={{ color: 'black', fontSize: 15 }}>

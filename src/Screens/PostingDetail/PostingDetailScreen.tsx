@@ -3,28 +3,21 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar, TextInput } from 'react-native-paper';
-import { useDispatch } from 'react-redux';
-import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
-<<<<<<< HEAD
 import CommentComponent from '../../components/Common/Comment/CommentComponent';
 import PostContentComponent from '../../components/Common/PostContent/PostContentComponent';
-import { grayBorderColor, primaryColor } from '../../root/Colors';
-import { iconAvatarPostingSize } from '../../root/Icon';
-import { width } from '../../root/ResponsiveSize';
 import { RootStackParamList } from '../../root/RootStackParams';
-=======
 import { height, width } from '../../root/ResponsiveSize';
 import { backgroundColor, grayBorderColor, primaryColor, secondaryColor } from '../../root/Colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { setOpenAddToCollectionsDialog, setOpenCommentsDialog, setOpenUpPostingDialog } from '../../redux/State/Actions';
 import AddingToCollectionComponent from '../../components/Dialog/AddingToCollectionComponent';
 import PostingDialogComponent from '../../components/Dialog/PostingDialogComponent';
-import { iconAvatarPostingSize, iconAvatarSize } from '../../root/Icon';
->>>>>>> aab25f2403adaca783c8a88d162a479fbd15de09
 import { spanTextSize } from '../../root/Texts';
 import PostingDetailStyleScreen from './PostingDetailStyleScreen';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
+import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
+import { iconAvatarPostingSize } from '../../root/Icon';
 
 export interface Comment {
   commentID: string;
@@ -181,7 +174,6 @@ const PostingDetailScreen = () => {
 
   const handleSetComment = (text: string) => {
     setComment(text);
-    console.log('text', text);
   };
 
   // const handleSendComment = (id: string) => {
@@ -215,12 +207,8 @@ const PostingDetailScreen = () => {
           </View>
         }
         backAction={() => hanldeGoBack()}
-<<<<<<< HEAD
-      ></AppBarHeaderComponent>
-=======
       >
       </AppBarHeaderComponent>
->>>>>>> aab25f2403adaca783c8a88d162a479fbd15de09
 
       <ScrollView
         persistentScrollbar={false}
@@ -281,7 +269,7 @@ const PostingDetailScreen = () => {
           </View>
           <View style={[PostingDetailStyleScreen.post__content_child, { flexDirection: 'column', marginTop: 20 }]}>          
              <View>
-              <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', paddingBottom: 20 }}
+              <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold'}}
               >{data.comment.length} comments</Text>
               </View>
               {data.comment.map((comment: Comment, key: any) => (

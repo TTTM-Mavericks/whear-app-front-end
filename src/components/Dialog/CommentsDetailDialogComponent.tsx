@@ -190,12 +190,7 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
                   style={DialogStylesComponent.commentDialogContent}
                 >
                   {commentsChild}
-                  <View
-                    style={[
-                      DialogStylesComponent.container_postingBar,
-                      { flexDirection: 'column' },
-                    ]}
-                  >
+                  
                     {comments.map((comment: Comment, key: any) => (
                       <CommentComponent
                         key={comment.commentID}
@@ -205,7 +200,6 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
                         date={comment.date}
                       />
                     ))}
-                  </View>
                 </ScrollView>
               </Dialog.ScrollArea>
 
