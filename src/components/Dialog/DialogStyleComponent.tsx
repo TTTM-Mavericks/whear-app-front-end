@@ -45,7 +45,6 @@ const DialogStylesComponent = StyleSheet.create({
     },
     dialogContent: {
         width: '100%',
-        backgroundColor: 'red'
     },
     groupCard: {
         flexDirection: 'row',

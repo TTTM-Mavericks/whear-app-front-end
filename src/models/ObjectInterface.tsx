@@ -2,7 +2,7 @@ export interface UserInterFace {
     userID?: number;
     username?: string;
     password?: string;
-    dateOfBirth?:  string ;
+    dateOfBirth?: string;
     phone?: string;
     email?: string;
     gender?: string;
@@ -12,16 +12,16 @@ export interface UserInterFace {
     status?: string;
     language?: string;
     isFirstLogin?: boolean;
-    followed?:boolean;
+    followed?: boolean;
 }
 
-interface CustomerInterface {
+export interface CustomerInterface {
     customerID?: string;
     isFirstLogin?: boolean;
     subRoleID?: string;
 }
 
-interface BrandStoreInterface {
+export interface BrandStoreInterface {
     brandID?: string;
     description?: string;
     address?: string;
@@ -29,7 +29,7 @@ interface BrandStoreInterface {
 }
 
 
-interface ClothesInterface {
+export interface ClothesInterface {
     clothesID: string
     userID?: string;
     nameOfProduct?: string;
@@ -46,14 +46,31 @@ interface ClothesInterface {
     clothesImages?: string[];
 }
 
-interface CollectionInterface {
-    userID: string;
-    nameOfCollection: string;
-    typeOfCollection: string;
-    numberOfClothes: number;
-    collectionStatus: string;
-    imgUrl: string;
-  }
-  
+export interface CollectionInterface {
+    userID?: string;
+    nameOfCollection?: string;
+    typeOfCollection?: string;
+    numberOfClothes?: number;
+    collectionStatus?: string;
+    imgUrl?: string;
+}
+
+
+export interface NotificationInterface {
+    notiID?: string;
+    baseUserID?: string;
+    targetUserID?: string;
+    messageType?: string;
+    content?: string;
+    sender?: string;
+    action?: string;
+    actionID?: number;
+    message?: string;
+    status?: string;
+    dateTime?: string;
+}
+
+
+
 
 

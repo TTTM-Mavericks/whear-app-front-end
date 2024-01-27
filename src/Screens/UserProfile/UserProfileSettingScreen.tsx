@@ -12,11 +12,13 @@ import { Icon } from 'react-native-vector-icons/Icon';
 import { RootStackParamList } from '../../root/RootStackParams';
 import { validateEmail, validatePassword, validateString } from '../../components/Common/Functions/CommonFunctionComponents';
 import { setOpenPolicy } from '../../components/auth/AuthState/AuthAction';
-import { backgroundColor, primaryColor } from '../../root/Colors';
+import { backgroundColor, primaryColor, secondaryColor } from '../../root/Colors';
 import UserProfileSettingStyleScreen from './UserProfileSettingStyleScreen';
 import ButtonComponent from '../../components/Button/ButtonDefaultComponent';
 import { buttonHeight, buttonWidth } from '../../components/Button/ButtonDefaultData';
 import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
+import MaskedView from '@react-native-masked-view/masked-view';
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
@@ -196,9 +198,26 @@ const UserProfileSettingScreen = () => {
 
 
     return (
-        <View style={{ backgroundColor: backgroundColor}}>
+        <View style={{ backgroundColor: backgroundColor }}>
             <AppBarHeaderComponent
-                title='Profile'
+                title={
+                    <View>
+                        <MaskedView
+                            maskElement={
+                                <Text style={UserProfileSettingStyleScreen.titlePage}>Posting</Text>
+                            }
+                        >
+                            <LinearGradient
+                                colors={[secondaryColor, primaryColor]}
+                                start={{ x: 0, y: 0 }}
+                                end={{ x: 0, y: 1 }}
+                                style={UserProfileSettingStyleScreen.linearBackground}
+                            >
+                                <Text style={{ opacity: 0 }}>HOT STORE</Text>
+                            </LinearGradient>
+                        </MaskedView>
+                    </View>
+                }
                 backAction={() => hanldeGoBack()}
             >
             </AppBarHeaderComponent>

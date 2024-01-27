@@ -1,12 +1,11 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { backgroundColor } from '../../root/Colors';
-import { ITEM_HEIGHT } from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
-import { ITEM_WIDTH } from '../../components/ListView/ListViewStyleComponent';
+import { ITEM_HEIGHT, ITEM_WIDTH } from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
 
 const { width, height } = Dimensions.get('window');
 const containerPadding = 16;
 
-const HomeStylesComponent = StyleSheet.create({
+const SearchStyleScreen = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -18,6 +17,7 @@ const HomeStylesComponent = StyleSheet.create({
     width: width,
     flex: 1,
     backgroundColor: backgroundColor,
+    marginTop: 20
 
   },
   scrollViewContent: {
@@ -25,9 +25,16 @@ const HomeStylesComponent = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  title: {
-    fontSize: width * 0.1,
-    marginBottom: 16,
+  titlePage: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    paddingTop: 12,
+    height: ITEM_HEIGHT,
+  },
+  linearBackground: {
+    height: ITEM_HEIGHT,
+    width: ITEM_WIDTH,
   },
   input: {
     height: height * 0.05,
@@ -59,23 +66,39 @@ const HomeStylesComponent = StyleSheet.create({
     borderRadius: 8,
   },
   filterGroup: {
-    width: width*0.85,
+    width: width * 0.85,
     flexDirection: 'row',
     backgroundColor: backgroundColor,
     textAlign: 'left',
     alignItems: 'flex-start'
   },
-  titlePage: {
-    fontSize: 20,
+  postingInput: {
+    width: width * 0.9,
+    backgroundColor: backgroundColor,
+    height: 30,
+    borderTopEndRadius: 20
+  },
+  mostSearchKeyword: {
+    position: 'relative',
+    marginTop: 10,
+    width: width * 0.9,
+
+  },
+  segmentedButtonsNavbar: {
+    height: 40,
+    position: 'relative',
+    borderColor: 'transparent',
+    borderWidth: 0,
     fontWeight: 'bold',
-    alignSelf: 'center',
-    paddingTop: 12,
-    height: ITEM_HEIGHT,
+    marginTop: 5,
+    flexDirection: 'row',
+    textAlign: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    zIndex: 1,
+
   },
-  linearBackground: {
-    height: ITEM_HEIGHT,
-    width: ITEM_WIDTH,
-  },
+  
 });
 
-export default HomeStylesComponent;
+export default SearchStyleScreen;
