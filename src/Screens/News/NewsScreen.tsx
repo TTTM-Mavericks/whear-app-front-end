@@ -2,7 +2,6 @@ import React from "react";
 import { Dimensions, FlatList, Image, View, Text } from "react-native";
 import { Appbar, Chip } from "react-native-paper";
 import NewsStyle from "./NewsStyleScreen";
-import { Item } from "react-native-paper/lib/typescript/components/Drawer/Drawer";
 import AppBarHeaderComponent from "../../components/Common/AppBarHeader/AppBarHeaderComponent";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
@@ -179,9 +178,7 @@ export default function NewsScreen() {
     </View>
   );
 
-  function hanldeGoBack(): void {
-
-  }
+  function hanldeGoBack(): void {}
 
   return (
     <View style={NewsStyle.container}>
@@ -189,9 +186,7 @@ export default function NewsScreen() {
         title={
           <View>
             <MaskedView
-              maskElement={
-                <Text style={NewsStyle.titlePage}>News</Text>
-              }
+              maskElement={<Text style={NewsStyle.titlePage}>News</Text>}
             >
               <LinearGradient
                 colors={[secondaryColor, primaryColor]}
@@ -204,10 +199,9 @@ export default function NewsScreen() {
             </MaskedView>
           </View>
         }
-        isHideIcon1 = {true}
+        isHideIcon1={true}
         backAction={() => hanldeGoBack()}
-      >
-      </AppBarHeaderComponent>
+      ></AppBarHeaderComponent>
       <View style={NewsStyle.chipButton}>
         {chipItems.map((i) => (
           <Chip
