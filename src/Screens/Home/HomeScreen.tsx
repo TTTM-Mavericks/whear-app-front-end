@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, ScrollView, FlatList } from 'react-native';
 import HomeStylesComponent from './HomeStyleScreen';
 import { useNavigation } from '@react-navigation/native';
@@ -23,6 +23,12 @@ import CreateClothesDialogComponent from '../../components/Dialog/CreateClothesD
 import dataSlider from '../../components/Common/Carousel/Data';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
+import TouchabaleActiveActionButton from '../../components/Common/TouchableActive/TouchabaleActiveActionButton';
+import { ClothesInterface } from '../../models/ObjectInterface';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from '../../api/AxiosApiConfig';
+import axios from 'axios';
+import { clothesLogoUrlDefault } from '../../root/Texts';
 
 interface ListItem {
   id: string;
@@ -159,12 +165,37 @@ const HomeScreen = () => {
   const [addedItems, setAddedItems] = useState<string[]>([]);
   const [scrollUp, setScrollUp] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [clothesData, setClothesData] = useState<ClothesInterface[]>([])
 
 
   /*-----------------Usable variable-----------------*/
   const dispatch = useDispatch();
 
   /*-----------------UseEffect-----------------*/
+  useEffect(() => {
+    const fetchData = async () => {
+      const tokenStorage = await AsyncStorage.getItem('access_token');
+      if (tokenStorage) {
+        const tokenString = JSON.parse(tokenStorage);
+        console.log('userParse: ', tokenString);
+        const params = {}
+        try {
+          const getData = await api.get('/api/v1/clothes/get-all-clothes', params, tokenString);
+
+          if (getData.success === 200) {
+            console.log(getData.data);
+            setClothesData(getData.data);
+          }
+          else {
+            console.log(getData.data);
+          }
+        } catch (error) {
+          console.error("An error occurred during data fetching:", error);
+        }
+      }
+    }
+    fetchData();
+  }, []);
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
@@ -207,7 +238,12 @@ const HomeScreen = () => {
   };
 
   const handleOpenCreateClothesDialog = () => {
-    dispatch(setOpenCreateClothesDialog(true));
+    // dispatch(setOpenCreateClothesDialog(true));
+    navigation.navigate('AddingClothesScreen')
+  }
+
+  const hanldeMoveToDetail = (clothID: string) => {
+    navigation.navigate('ClothesDetailScreen', {clothID});
   }
 
 
@@ -293,19 +329,21 @@ const HomeScreen = () => {
           {/* Regular FlatList */}
           <FlatList
             style={HomeStylesComponent.flatlist}
-            data={data.slice(0, 10)}
-            keyExtractor={(item) => item.id}
+            data={clothesData}
+            keyExtractor={(item) => item.clothesID}
             numColumns={2}
             renderItem={({ item }) => (
-              <ListViewComponent data={[{ id: item.id, imgUrl: item.imgUrl, }]} child={
+              <ListViewComponent data={[{ id: item.clothesID, imgUrl: item.clothesImages ? item.clothesImages[0] : clothesLogoUrlDefault , }]} 
+              onPress={()=>hanldeMoveToDetail(item.clothesID)}
+              child={
                 <IconButton
                   mode='outlined'
                   icon={'heart'}
                   style={[HomeStylesComponent.iconCard, {}]}
                   size={15}
-                  iconColor={addedItems.includes(item.id) ? '#C90801' : '#C3C3C3'}
+                  iconColor={addedItems.includes(item.clothesID) ? '#C90801' : '#C3C3C3'}
                   onPress={() => {
-                    handleChangeIconAdded(item.id);
+                    handleChangeIconAdded(item.clothesID);
                   }}
 
                 />
@@ -333,7 +371,7 @@ const HomeScreen = () => {
           <CreateClothesDialogComponent></CreateClothesDialogComponent>
         </View>
       </ScrollView >
-      <AppBarFooterComponents isHide={scrollUp} centerIcon={'plus'} centerOnPress={handleOpenCreateClothesDialog}></AppBarFooterComponents>
+      <AppBarFooterComponents isHide={scrollUp} centerIcon={'plus'} ></AppBarFooterComponents>
     </View >
 
   );

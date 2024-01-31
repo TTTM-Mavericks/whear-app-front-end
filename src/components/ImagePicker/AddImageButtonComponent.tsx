@@ -10,6 +10,9 @@ import { db, storage } from "../../../FireBaseConfig";
 import { useDispatch } from "react-redux";
 import { saveImageCreatingUrl, saveImageUrl, setUploadToFireBase } from "../../redux/State/Actions";
 import { IconButton } from "react-native-paper";
+import UploadingAndroid from "./UploadingAndroid";
+import * as ImageManipulator from 'expo-image-manipulator';
+
 // import UploadingAndroid from "../../components/ImagePicker/UploadingAndroid";
 
 
@@ -25,8 +28,8 @@ interface ImageButtonProps {
   style?: StyleProp<ViewStyle>,
   onPress?: () => void,
   iconColor?: string,
-  width?: number,
-  height?: number,
+  width: number,
+  height: number,
 }
 
 const AddImageButtonComponent: React.FC<ImageButtonProps> = (
@@ -63,23 +66,58 @@ const AddImageButtonComponent: React.FC<ImageButtonProps> = (
 
   }, [files])
 
-  async function pickImage() {
+  async function pickImageAndroid() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [width ? width : 9, height ? height : 16],
+      aspect: [width, height],
       quality: 1,
     });
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
-      // if (isAddNewImage) {
-      //   dispatch(saveImageCreatingUrl(result.assets[0].uri))
-      // }
-      // if (isUserAvatar) {
-      //   dispatch(saveImageUrl(result.assets[0].uri));
-      // }
       await uploadImage(result.assets[0].uri, "image");
+    }
+  }
+
+  async function pickImageIOS() {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      quality: 1,
+    });
+  
+    if (!result.canceled) {
+      let uri: string | undefined;
+      let width: number | undefined;
+      let height: number | undefined;
+  
+      if (result.assets && result.assets.length > 0) {
+        const selectedAsset = result.assets[0];
+        uri = selectedAsset.uri;
+        width = selectedAsset.width;
+        height = selectedAsset.height;
+      } else {
+        console.error("Invalid image result");
+        return;
+      }
+  
+      // Check if width and height are defined before using them
+      if (width !== undefined && height !== undefined) {
+        // Use ImageManipulator to crop the image based on your desired aspect ratio
+        const croppedImage = await ImageManipulator.manipulateAsync(
+          uri,
+          [
+            { crop: { originX: 0, originY: 0, width, height } },
+          ],
+          { compress: 1, format: ImageManipulator.SaveFormat.PNG }
+        );
+  
+        setImage(croppedImage.uri);
+        await uploadImage(croppedImage.uri, "image");
+      } else {
+        console.error("Width or height is undefined");
+      }
     }
   }
 
@@ -110,6 +148,7 @@ const AddImageButtonComponent: React.FC<ImageButtonProps> = (
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress + "% done");
         setProgress(progress.toFixed() as any);
+        dispatch(setUploadToFireBase(false));
       },
       (error: any) => {
         console.error("Error uploading:", error);
@@ -152,8 +191,11 @@ const AddImageButtonComponent: React.FC<ImageButtonProps> = (
       ) : (
         <UploadingAndroid image={image} video={video} progress={progress} />
       ))} */}
+
       <TouchableOpacity
-        onPress={pickImage}
+        onPress={Platform.OS === 'ios' ? pickImageIOS : pickImageAndroid}
+        // onPress={pickImageAndroid}
+
         style={{
           width: 44,
           height: 44,
@@ -164,6 +206,7 @@ const AddImageButtonComponent: React.FC<ImageButtonProps> = (
       >
         <IconButton icon={icon ? icon : 'image'} size={24} iconColor={iconColor ? iconColor : 'white'} />
       </TouchableOpacity>
+
 
     </View>
   );

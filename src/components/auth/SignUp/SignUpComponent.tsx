@@ -187,10 +187,12 @@ const SignUpComponent = () => {
             }
 
             setIsLoading(true);
-            const response = await api.post('/api/v1/user/create-new-user', requestData);
+            const response = await api.post('/api/v1/auth/register', requestData);
             if (response.success === 200) {
-                setUserResponse(response.data);
-                AsyncStorage.setItem('userData', JSON.stringify(response.data));
+                setUserResponse(response.data.user);
+                AsyncStorage.setItem('userData', JSON.stringify(response.data.user));
+                AsyncStorage.setItem('access_token', JSON.stringify(response.data.access_token));
+                AsyncStorage.setItem('refresh_token', JSON.stringify(response.data.refresh_token));
                 setIsLoading(true);
                 setTimeout(() => {
                     setIsLoading(false);

@@ -18,6 +18,7 @@ import CollectionsStyleScreen from './CollectionsStyleScreen';
 import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarFooterComponents';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaskedView from '@react-native-masked-view/masked-view';
+import TouchabaleActiveActionButton from '../../components/Common/TouchableActive/TouchabaleActiveActionButton';
 
 
 interface ListItem {
@@ -214,6 +215,8 @@ const CollectionsScreen = () => {
 
   return (
     <View style={CollectionsStyleScreen.container}>
+      <TouchabaleActiveActionButton ></TouchabaleActiveActionButton>
+
       {/* {scrollUp && ( */}
       <AppBarHeaderComponent
         title={
@@ -340,7 +343,7 @@ const CollectionsScreen = () => {
         )}
       </ScrollView >
 
-      {(<AppBarFooterComponents centerIcon='plus' centerOnPress={handleOpenAddNewCollection} isHide={scrollUp} ></AppBarFooterComponents>)}
+      {(<AppBarFooterComponents centerIcon='plus' isHide={scrollUp} ></AppBarFooterComponents>)}
       <View>
 
       </View>

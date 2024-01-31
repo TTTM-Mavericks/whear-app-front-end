@@ -133,7 +133,7 @@ const NotificationScreen = () => {
 
         </View>
       </ScrollView >
-      <AppBarFooterComponents isHide={scrollUp} centerIcon={'plus'} centerOnPress={handleOpenCreateClothesDialog}></AppBarFooterComponents>
+      <AppBarFooterComponents isHide={scrollUp} centerIcon={'plus'} ></AppBarFooterComponents>
     </View >
 
   );
