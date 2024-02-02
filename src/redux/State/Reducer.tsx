@@ -1,3 +1,4 @@
+import { clothesLogoUrlDefault } from "../../root/Texts";
 import {
   ADD_TO_COLLECTIONS,
   GET_EMAIL_SIGNINED,
@@ -34,7 +35,7 @@ const initialState: State = {
   isOpenCommentsDialog: false,
   imageUrl: '../../assets/icon/user.png',
   isOpenCreateClothesDialog: false,
-  imageCreatingUrl: '../../assets/icon/user.png',
+  imageCreatingUrl: clothesLogoUrlDefault,
   isUploadedImageToFireBase: false,
 
 };

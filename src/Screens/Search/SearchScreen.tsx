@@ -24,6 +24,7 @@ import SearchStyleScreen from './SearchStyleScreen';
 import { spanTextSize } from '../../root/Texts';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
+import TouchabaleActiveActionButton from '../../components/Common/TouchableActive/TouchabaleActiveActionButton';
 
 interface ListItem {
   id: string;
@@ -283,6 +284,8 @@ const SearchScreen = () => {
 
   return (
     <View style={SearchStyleScreen.container}>
+      <TouchabaleActiveActionButton ></TouchabaleActiveActionButton>
+
       <AppBarHeaderComponent
         title={
           <View>
@@ -502,7 +505,7 @@ const SearchScreen = () => {
           <CreateClothesDialogComponent></CreateClothesDialogComponent>
         </View>
       </ScrollView >
-      <AppBarFooterComponents isHide={scrollUp} centerIcon={'plus'} centerOnPress={handleOpenCreateClothesDialog}></AppBarFooterComponents>
+      <AppBarFooterComponents isHide={scrollUp} centerIcon={'plus'} ></AppBarFooterComponents>
     </View >
 
   );

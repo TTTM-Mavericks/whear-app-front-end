@@ -19,6 +19,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UserInterFace } from '../../models/ObjectInterface';
 import { setUploadToFireBase } from '../../redux/State/Actions';
 import { spanTextSize } from '../../root/Texts';
+import Toast from 'react-native-toast-message';
 
 interface ListItem {
   id: string;
@@ -211,8 +212,18 @@ const UserProfileScreen = () => {
             const data = response.data
             AsyncStorage.setItem('userData', JSON.stringify(data));
             dispatch(setUploadToFireBase(false));
+            Toast.show({
+              type: 'success',
+              text1: JSON.stringify(response.message),
+              position: 'top'
+            });
           } else {
             console.log(response.message);
+            Toast.show({
+              type: 'error',
+              text1: JSON.stringify(response.message),
+              position: 'top'
+            });
           }
         }
         fetchData();
@@ -266,12 +277,21 @@ const UserProfileScreen = () => {
           if (response.success === 200) {
             setFollowing(response.data);
             console.log(response.data);
+            Toast.show({
+              type: 'success',
+              text1: response.message
+            });
           } else {
             console.log(response.message);
+            Toast.show({
+              type: 'error',
+              text1: response.message
+            });
           }
 
         } catch (error) {
           console.error("An error occurred during data fetching:", error);
+          
         }
       }
     };
@@ -395,6 +415,11 @@ const UserProfileScreen = () => {
 
   return (
     <View style={UserProfileStyleScreen.container}>
+      <Toast
+        position='top'
+        bottomOffset={20}
+
+      />
       <View style={UserProfileStyleScreen.header}>
         <IconButton icon={require('../../assets/icon/backarrow.png')} onPress={() => navigation.goBack()}></IconButton>
         <View style={UserProfileStyleScreen.upgradeBanner} >

@@ -49,10 +49,12 @@ const SocailStyleScreen = StyleSheet.create({
     width: width,
     marginLeft: 0,
     borderRadius: 0,
+
   },
   container_cardContent: {
     width: width,
     borderRadius: 0,
+
 
   },
   container_postingBar: {
@@ -69,7 +71,9 @@ const SocailStyleScreen = StyleSheet.create({
   },
   post__content: {
     paddingHorizontal: containerPadding,
-    paddingVertical: containerPadding - 10
+    paddingVertical: containerPadding - 10,
+    borderBottomWidth: 4.5,
+    borderColor: '#F7F7F7'
   },
   post__content_child : {
     flexDirection: 'row',

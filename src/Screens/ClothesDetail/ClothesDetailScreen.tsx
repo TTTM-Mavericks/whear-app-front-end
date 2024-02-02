@@ -15,6 +15,11 @@ import Swiper from 'react-native-swiper';
 import { grayBackgroundColor, primaryColor, secondaryColor } from '../../root/Colors';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
+import TouchabaleActiveActionButton from '../../components/Common/TouchableActive/TouchabaleActiveActionButton';
+import { ClothesInterface, UserInterFace } from '../../models/ObjectInterface';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from '../../api/AxiosApiConfig';
+import LoadingComponent from '../../components/Common/Loading/LoadingComponent';
 
 
 
@@ -58,17 +63,53 @@ const ClothesDetailScreen = () => {
   /*-----------------UseState variable-----------------*/
   const [showFullContent, setShowFullContent] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [clothData, setClothData] = useState<ClothesInterface>();
+  const [isLoading, setIsLoading] = useState(true);
 
 
   /*-----------------Usable variable-----------------*/
   const dispatch = useDispatch();
   const openCommentsDialog = useSelector((state: any) => state.store.isOpenCommentsDialog);
   const route = useRoute();
-  const clothesID = (route.params as { clothesID?: string })?.clothesID || '';
+  const clothID = (route.params as { clothID?: string })?.clothID || '';
 
   /*-----------------UseEffect-----------------*/
-  React.useEffect(() => {
-  }, []);
+  useEffect(() => {
+    console.log('clothID: ', clothID);
+    const fetchData = async () => {
+      const tokenStorage = await AsyncStorage.getItem('access_token');
+      const userStorage = await AsyncStorage.getItem('userData');
+      setIsLoading(true);
+      if (userStorage) {
+        const userParse: UserInterFace = JSON.parse(userStorage);
+        if (tokenStorage) {
+          const tokenString = JSON.parse(tokenStorage);
+          console.log('userParse: ', tokenString);
+          const params = {}
+          try {
+            const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=4&based_userid=${userParse.userID}`, params, tokenString);
+            if (getData.success === 200) {
+              console.log(getData.data);
+              setClothData(getData.data.clothes);
+              console.log('image: ', getData.data.clothes.clothesImages);
+              setTimeout(() => {
+                setIsLoading(false);
+              }, 1000)
+            }
+            else {
+              console.log(getData.data);
+              setTimeout(() => {
+                setIsLoading(false);
+              }, 1000)
+            }
+          } catch (error) {
+            console.error("An error occurred during data fetching:", error);
+          }
+        }
+      }
+    }
+    fetchData();
+  }, [clothID]);
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
@@ -121,6 +162,7 @@ const ClothesDetailScreen = () => {
 
 
 
+
       <ScrollView
         persistentScrollbar={false}
         style={ClothesDetailStyleScreen.scrollView}
@@ -128,135 +170,147 @@ const ClothesDetailScreen = () => {
         showsHorizontalScrollIndicator={false}
       >
 
-        <View style={ClothesDetailStyleScreen.scrollViewContent}>
+        {!isLoading ? (
+          <View style={ClothesDetailStyleScreen.scrollViewContent}>
 
-          <View style={[ClothesDetailStyleScreen.container_postingBar, { marginTop: 25 }]}>
-            <View style={{ flexDirection: 'row', width: width * 0.8, height: 'auto', marginBottom: 20 }}>
-              <Avatar.Image
-                size={iconAvatarPostingSize}
-                source={{ uri: data.userID.imgUrl }}
-                style={{ marginLeft: 10 }} />
-              <View style=
-                {
-                  {
-                    marginLeft: 10,
-                    marginTop: 5
-                  }
+            <View style={{ flex: 1, }}>
+              <Swiper
+                style={{ height: height * 0.65 }}
+                showsButtons
+                showsPagination
+                loop
+                index={currentIndex}
+                onIndexChanged={(index: any) => setCurrentIndex(index)}
+                dotColor={grayBackgroundColor}
+                activeDotColor={primaryColor}
+                nextButton={
+                  <IconButton style={{ marginLeft: -35 }} iconColor={primaryColor} icon={require('../../assets/icon/next.png')}></IconButton>
+                }
+                prevButton={
+                  <IconButton style={{ marginRight: -35, }} iconColor={primaryColor} icon={require('../../assets/icon/back.png')}></IconButton>
                 }
               >
-                <Text
-                  style=
-                  {
-                    {
-                      fontWeight: 'bold',
-                      paddingTop: iconAvatarPostingSize * 0.05
-                    }
-                  }
-                >
-                  Nguyen Minh Tu
-                </Text>
-              </View>
-            </View>
-
-          </View>
-          <View style={{ flex: 1, }}>
-            <Swiper
-              style={{ height: height * 0.65 }}
-              showsButtons
-              showsPagination
-              loop
-              index={currentIndex}
-              onIndexChanged={(index: any) => setCurrentIndex(index)}
-              dotColor={grayBackgroundColor}
-              activeDotColor={primaryColor}
-              nextButton={
-                <IconButton style={{ marginLeft: -35 }} iconColor={primaryColor} icon={require('../../assets/icon/next.png')}></IconButton>
-              }
-              prevButton={
-                <IconButton style={{ marginRight: -35, }} iconColor={primaryColor} icon={require('../../assets/icon/back.png')}></IconButton>
-              }
-            >
-              {data.clothesImages.map((image, index) => (
-                <View key={index}>
-                  <Image
-                    style={{ height: height * 0.65, borderRadius: 5 }}
-                    resizeMode="cover"
-                    source={{ uri: image }}
-                  />
-                </View>
-              ))}
-            </Swiper>
-
-            <ScrollView horizontal>
-              {data.clothesImages.map((image, index) => (
-                <TouchableOpacity key={index} onPress={() => changeMainImage(index)}>
-                  <View style={{ margin: 5 }}>
+                {clothData?.clothesImages?.map((image, index) => (
+                  <View key={index}>
                     <Image
-                      style={{ width: 80, height: 80, borderRadius: 5 }}
+                      style={{ height: height * 0.65, borderRadius: 5 }}
                       resizeMode="cover"
                       source={{ uri: image }}
                     />
                   </View>
+                ))}
+
+
+              </Swiper>
+
+              <ScrollView horizontal>
+                {clothData?.clothesImages?.map((image, index) => (
+                  <TouchableOpacity key={index} onPress={() => changeMainImage(index)}>
+                    <View style={{ margin: 5 }}>
+                      <Image
+                        style={{ width: 80, height: 80, borderRadius: 5 }}
+                        resizeMode="cover"
+                        source={{ uri: image }}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                ))}
+                <TouchableOpacity >
+                  <View style={{ margin: 5, alignItems: 'center', justifyContent: 'center' }}>
+                    <View
+                      style={{ width: 50, height: 80, borderRadius: 5, backgroundColor: grayBackgroundColor, alignItems: 'center', justifyContent: 'center' }}
+                    >
+                      <Icon size={20} source={'plus'} color={primaryColor}></Icon>
+                    </View>
+                  </View>
                 </TouchableOpacity>
-              ))}
-            </ScrollView>
-          </View>
-
-          <View style={{ flex: 1 }}>
-
-            <View style={ClothesDetailStyleScreen.container_postingBar}>
-              <View style={{ flexDirection: 'row', width: 80 }}>
-                <IconButton
-                  icon={'heart'}
-                  iconColor={'black'}
-                  size={25}
-                  borderless
-                ></IconButton>
-                <View>
-                  <Text style={{ color: 'black', fontSize: 15, marginLeft: -10, paddingTop: width * 0.04 }}>
-                    {/* {item.react} */}
-                  </Text>
-                </View>
-              </View>
-              <View style={{ flexDirection: 'row', width: 80 }}>
-                <IconButton
-                  icon={'share'}
-                  iconColor={'black'}
-                  size={25}
-                  borderless></IconButton>
-                <View>
-                  <Text style={{ color: 'black', fontSize: 15, marginLeft: -10, paddingTop: width * 0.04 }}>
-                    {/* {item.react} */}
-                  </Text>
-                </View>
-              </View>
+              </ScrollView>
             </View>
 
-            <View style={ClothesDetailStyleScreen.container_postingBar}>
-              <View style={{ flexDirection: 'row', width: width * 0.8, height: 'auto', paddingTop: 10, paddingLeft: 10 }}>
-                <View>
-                  <Text style={{ color: 'black', fontSize: 15 }}>
-                    {showFullContent ? data.description : data.description.substring(0, 150) + '...'}
-                    {data.description.length > 150 && (
-                      <Text
-                        onPress={handleToggleContent}
-                        style={{ color: 'black', fontSize: 13, }}
-                      >
-                        {showFullContent ? ' See less' : ' See more'}
-                      </Text>
-                    )}
-                  </Text>
+            <View style={{ flex: 1 }}>
+              <View style={[ClothesDetailStyleScreen.container_postingBar, { marginTop: 10 }]}>
+                <View style={{ flexDirection: 'row', width: width * 0.8, height: 'auto', marginBottom: 20 }}>
+                  <View style=
+                    {
+                      {
+                        marginLeft: 10,
+                      }
+                    }
+                  >
+                    <Text
+                      style=
+                      {
+                        {
+                          fontWeight: 'bold',
+                          paddingTop: iconAvatarPostingSize * 0.05,
+                          fontSize: 18
+                        }
+                      }
+                    >
+                      {clothData?.nameOfProduct}
+                    </Text>
+                  </View>
+                </View>
+
+              </View>
+
+              <View style={ClothesDetailStyleScreen.container_postingBar}>
+
+
+                <View style={{ flexDirection: 'row', width: 80 }}>
+                  <IconButton
+                    icon={'heart'}
+                    iconColor={'black'}
+                    size={25}
+                    borderless
+                  ></IconButton>
+                  <View>
+                    <Text style={{ color: 'black', fontSize: 15, marginLeft: -10, paddingTop: width * 0.04 }}>
+                      {/* {item.react} */}
+                    </Text>
+                  </View>
+                </View>
+
+                <View style={{ flexDirection: 'row', width: 80 }}>
+                  <IconButton
+                    icon={'share'}
+                    iconColor={'black'}
+                    size={25}
+                    borderless></IconButton>
+                  <View>
+                    <Text style={{ color: 'black', fontSize: 15, marginLeft: -10, paddingTop: width * 0.04 }}>
+                      {/* {item.react} */}
+                    </Text>
+                  </View>
                 </View>
               </View>
+
+              <View style={ClothesDetailStyleScreen.container_postingBar}>
+                <View style={{ flexDirection: 'row', width: width * 0.8, height: 'auto', paddingTop: 10, paddingLeft: 10 }}>
+                  <View>
+                    <Text style={{ color: 'black', fontSize: 15 }}>
+                      {showFullContent ? data.description : data.description.substring(0, 150) + '...'}
+                      {data.description.length > 150 && (
+                        <Text
+                          onPress={handleToggleContent}
+                          style={{ color: 'black', fontSize: 13, }}
+                        >
+                          {showFullContent ? ' See less' : ' See more'}
+                        </Text>
+                      )}
+                    </Text>
+                  </View>
+                </View>
+              </View>
+
             </View>
 
-
           </View>
-
-
-
-        </View>
+        ) : (
+          <LoadingComponent spinner={true}></LoadingComponent>
+        )}
       </ScrollView >
+
     </View >
 
   );
