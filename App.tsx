@@ -25,6 +25,7 @@ import HotStoreScreen from "./src/Screens/HotStore/HotStoreScreen";
 import SearchScreen from "./src/Screens/Search/SearchScreen";
 import NotificationScreen from "./src/Screens/Notifictation/NotificationScreen";
 import ConnectStomp from "./src/Screens/Notifictation/Config";
+import MessageScreen from "./src/Screens/Message/MessageScreen";
 import AddingClothesScreen from "./src/Screens/AddingClothes/AddingClothesScreen";
 import ClothesDetailScreen from "./src/Screens/ClothesDetail/ClothesDetailScreen";
 
@@ -37,14 +38,13 @@ export default function App() {
         <NavigationContainer>
           <View style={styles.container}>
             <Stack.Navigator>
-
               {/* <Stack.Screen
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
               />
 
-              <Stack.Screen
+              {/* <Stack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{
@@ -139,13 +139,13 @@ export default function App() {
                 name='NotificationScreen'
                 component={NotificationScreen}
                 options={{ headerShown: false }}
-              />
+              /> */}
 
               <Stack.Screen
                 name='AddingClothesScreen'
                 component={AddingClothesScreen}
                 options={{ headerShown: false }}
-              /> */}
+              /> 
 
               <Stack.Screen
                 name='ClothesDetailScreen'
