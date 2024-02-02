@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { clothesLogoUrlDefault } from '../../root/Texts';
 
 interface State {
   email: string;
@@ -22,7 +23,7 @@ const initialState: State = {
   isOpenCommentsDialog: false,
   imageUrl: '../../assets/icon/user.png',
   isOpenCreateClothesDialog: false,
-  imageCreatingUrl: '../../assets/icon/user.png',
+  imageCreatingUrl: clothesLogoUrlDefault,
   isUploadedImageToFireBase: false,
 };
 

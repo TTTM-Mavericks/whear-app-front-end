@@ -4,7 +4,7 @@ import { ITEM_HEIGHT } from '../../components/Common/AppBarHeader/AppBarHeaderSt
 import { ITEM_WIDTH } from '../../components/ListView/ListViewStyleComponent';
 
 const { width, height } = Dimensions.get('window');
-const containerPadding = 16;
+const containerPadding = 26;
 
 const HomeStylesComponent = StyleSheet.create({
   container: {

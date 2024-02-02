@@ -5,7 +5,7 @@ import { backgroundColor, grayBackgroundColor, primaryColor } from '../../root/C
 
 
 const { width, height } = Dimensions.get('window');
-const containerPadding = 16;
+const containerPadding = 10;
 
 const DialogStylesComponent = StyleSheet.create({
     dialogContainer: {
@@ -84,6 +84,7 @@ const DialogStylesComponent = StyleSheet.create({
 
     // ----------------------------------------//
     postingDialogContainer: {
+        flex: 1,
         height: height,
         width: width,
         margin: 0,
@@ -95,7 +96,8 @@ const DialogStylesComponent = StyleSheet.create({
         marginTop: height * 0.1,
         backgroundColor: backgroundColor,
         borderBottomEndRadius: 0,
-        borderBottomStartRadius: 0
+        borderBottomStartRadius: 0,
+        padding: containerPadding
     },
     postingDialogContainer_textInput: {
         borderColor: backgroundColor,
@@ -139,15 +141,11 @@ const DialogStylesComponent = StyleSheet.create({
 
     // -----------------------Comments--------------------------
 
-    commentInput: {
-        width: width * 0.95,
-        backgroundColor: backgroundColor,
-        height: 30,
-        borderRadius: 50
-    },
+    
     commentDialogContent: {
         marginLeft: -20,
-        width: width
+        width: width,
+        // marginBottom: 20
     },
     container_cardContainer: {
         width: width,
@@ -209,7 +207,18 @@ const DialogStylesComponent = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         right: 0
-    }
+    },
+    commentActionContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    commentInput: {
+        width: width * 0.75,
+        backgroundColor: backgroundColor,
+        height: 40,
+        borderRadius: 50
+    },
 
 
 
