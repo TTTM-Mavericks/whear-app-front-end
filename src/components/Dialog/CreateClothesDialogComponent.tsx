@@ -97,38 +97,10 @@ const CreateClothesDialogComponent = () => {
         });
     };
 
-    /**
-     * onChangeText
-     */
-    const handleTextChange = (text: any) => {
-        const lines = text.split('\n');
-        const truncatedLines = lines.map((line: any) => line.slice(0, MAX_CHARACTERS_PER_LINE));
-        const truncatedText = truncatedLines.join('\n');
-
-        if (lengthText + truncatedLines.length > MAX_LENGTH) {
-        }
-        else {
-            setTextInput(truncatedText);
-            setLengthText(lengthText + truncatedLines.length)
-        }
-    };
-
-
     const handleTouchablePress = () => {
         Keyboard.dismiss();
     };
 
-    /**
-     * Send comment
-     * @param postID 
-     */
-    const handleSendComment = (postID: any) => {
-        //TODO
-    }
-
-    const handleToggleComment = () => {
-        setShowFullComment(!showFullComment);
-    };
 
     return (
         <TouchableWithoutFeedback onPress={handleTouchablePress}>

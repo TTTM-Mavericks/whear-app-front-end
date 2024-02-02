@@ -6,6 +6,7 @@ import AppBarHeaderComponent from "../../components/Common/AppBarHeader/AppBarHe
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
 import { primaryColor, secondaryColor } from "../../root/Colors";
+import TouchabaleActiveActionButton from "../../components/Common/TouchableActive/TouchabaleActiveActionButton";
 
 interface NewsItems {
   id: number;
@@ -182,6 +183,8 @@ export default function NewsScreen() {
 
   return (
     <View style={NewsStyle.container}>
+      <TouchabaleActiveActionButton ></TouchabaleActiveActionButton>
+
       <AppBarHeaderComponent
         title={
           <View>

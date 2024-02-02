@@ -10,11 +10,12 @@ export type RootStackParamList = {
   PostingDetail: { postID: string };
   UserProfile: { userID: any };
   UserProfileSetting: undefined;
-  ClothesDetailScreen: undefined;
+  ClothesDetailScreen: { clothID: any };
   BasicInformationScreen: undefined;
   ChooseStyleYouLove: undefined;
   SearchScreen: {keyWord: any};
   NotificationScreen: undefined;
+  AddingClothesScreen: undefined;
 
 
 };

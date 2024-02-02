@@ -106,10 +106,12 @@ const SignInComponent = () => {
           password: password
         };
 
-        const response = await api.post('/api/v1/user/get-user-by-email-and-password', requestData);
+        const response = await api.post('/api/v1/auth/login', requestData);
         if (response.success === 200) {
           setUserResponse(response.data);
-          AsyncStorage.setItem('userData', JSON.stringify(response.data));
+          AsyncStorage.setItem('userData', JSON.stringify(response.data.user));
+          AsyncStorage.setItem('access_token', JSON.stringify(response.data.access_token));
+          AsyncStorage.setItem('refresh_token', JSON.stringify(response.data.refresh_token));
           console.log('userData: ', JSON.stringify(response.data));
           setIsLoading(true);
           setTimeout(() => {
@@ -128,7 +130,7 @@ const SignInComponent = () => {
         setIsLoading(false);
         Toast.show({
           type: 'error',
-          text1: JSON.stringify(error.message), 
+          text1: JSON.stringify(error.message),
           position: 'top'
         });
       }
@@ -257,7 +259,7 @@ const SignInComponent = () => {
       <Toast
         position='top'
         bottomOffset={20}
-        
+
       />
     </View >
   );
