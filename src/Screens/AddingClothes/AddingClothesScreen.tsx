@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, FlatList, TouchableOpacity, Dimensions, Image, Platform } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, FlatList, TouchableOpacity, Dimensions, Image, Platform, Keyboard } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../../root/RootStackParams';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -30,7 +30,8 @@ import { ClothesInterface } from '../../models/ObjectInterface';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RadioButtonAndroid from 'react-native-paper/lib/typescript/components/RadioButton/RadioButtonAndroid';
 import api from '../../api/AxiosApiConfig';
-import Toast from 'react-native-toast-message';
+import Toast from 'react-native-toast-message'
+
 
 const colors = [
   'RED', 'ORANGE', 'YELLOW', 'GREEN', 'BLUE', 'PURPLE', 'PINK', 'BROWN',
@@ -194,6 +195,9 @@ const AddingClothesScreen = () => {
   const [openSeason, setOpenSeason] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [accessToken, setAccessToken] = useState('');
+  const [canAdd, setCanAdd] = useState(false);
+  const [isKeyBoardOpen, setIskeyboardOpen] = useState(false);
+  const [heightOfKeyBoard, setHeightOfKeyBoard] = useState(0);
 
 
 
@@ -227,6 +231,7 @@ const AddingClothesScreen = () => {
   const clothesID = (route.params as { clothesID?: string })?.clothesID || '';
 
   /*-----------------UseEffect-----------------*/
+
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -264,7 +269,7 @@ const AddingClothesScreen = () => {
   React.useEffect(() => {
     if (isUploadedImage) {
       setIsLoadingImage(false);
-      setClothesImageUrl((prev)=> [imageUrlState]);
+      setClothesImageUrl((prev) => [imageUrlState]);
     } else {
       setIsLoadingImage(true);
     }
@@ -273,8 +278,38 @@ const AddingClothesScreen = () => {
 
 
   React.useEffect(() => {
+    if (
+      selectedTypeOfClothes &&
+      selectedShape &&
+      selectedSeason.length > 0 &&
+      selectedMaterial &&
+      selectedClothesSize.length > 0 &&
+      selectedColor.length > 0 &&
+      nameOfProduct
+    ) {
+      setCanAdd(true);
+    }
 
-  }, [newCloth])
+    setCanAdd(false);
+  }, [canAdd]);
+
+  useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', e => {
+      setHeightOfKeyBoard(e.endCoordinates.height)
+      console.log(e.endCoordinates.height);
+      setIskeyboardOpen(true);
+    }
+    );
+    const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
+      setIskeyboardOpen(false);
+      setHeightOfKeyBoard(0);
+    }
+    );
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    }
+  }, [heightOfKeyBoard]);
 
 
 
@@ -345,7 +380,7 @@ const AddingClothesScreen = () => {
      * SignUp handler
      */
   const handleCreateCloth = async () => {
-
+    setIsLoading(true);
     try {
       const hashtagArray = hashtagTxt.split(',');
       const clothRequest = {
@@ -379,7 +414,7 @@ const AddingClothesScreen = () => {
         const clothID = response.data.clothesID
         setTimeout(() => {
           navigation.navigate('ClothesDetailScreen', { clothID });
-        }, 5000)
+        }, 1000)
       } else {
         Toast.show({
           type: 'error',
@@ -403,10 +438,8 @@ const AddingClothesScreen = () => {
   };
 
 
-
-
   return (
-    <View style={AddingClothesStyleScreen.container}>
+    <View style={[AddingClothesStyleScreen.container, ]}>
       <Toast
         position='top'
         bottomOffset={20}
@@ -437,7 +470,7 @@ const AddingClothesScreen = () => {
 
       <ScrollView
         persistentScrollbar={false}
-        style={AddingClothesStyleScreen.scrollView}
+        style={[AddingClothesStyleScreen.scrollView, Platform.OS === 'ios' && isKeyBoardOpen && { position: 'absolute', bottom: heightOfKeyBoard , backgroundColor: backgroundColor }]}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
@@ -454,6 +487,7 @@ const AddingClothesScreen = () => {
                   style={[AddingClothesStyleScreen.buttondropDownStyle, { width: width * 0.9 }]}
                   mode='outlined'
                   outlineStyle={{ display: 'none' }}
+                  contentStyle={{ fontSize: 13 }}
                 />
               </View>
               <View style={{ flexDirection: 'row', width: width * 0.8, height: 'auto', marginLeft: width * 0.05 }}>

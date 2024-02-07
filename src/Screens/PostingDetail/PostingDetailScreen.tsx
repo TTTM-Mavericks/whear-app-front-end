@@ -1,7 +1,7 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Keyboard, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { Avatar, TextInput } from 'react-native-paper';
 import CommentComponent from '../../components/Common/Comment/CommentComponent';
 import PostContentComponent from '../../components/Common/PostContent/PostContentComponent';
@@ -145,6 +145,8 @@ const PostingDetailScreen = () => {
   /*-----------------UseState variable-----------------*/
 
   const [comment, setComment] = useState('');
+  const [isKeyBoardOpen, setIskeyboardOpen] = useState(false);
+  const [heightOfKeyBoard, setHeightOfKeyBoard] = useState(0);
 
   /*-----------------Usable variable-----------------*/
   const dispatch = useDispatch();
@@ -154,6 +156,24 @@ const PostingDetailScreen = () => {
 
   /*-----------------UseEffect-----------------*/
   React.useEffect(() => {}, []);
+
+  React.useEffect(() => {
+    const showSubscription = Keyboard.addListener('keyboardDidShow', e => {
+      setHeightOfKeyBoard(e.endCoordinates.height)
+      console.log(e.endCoordinates.height);
+      setIskeyboardOpen(true);
+    }
+    );
+    const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
+      setIskeyboardOpen(false);
+      setHeightOfKeyBoard(0);
+    }
+    );
+    return () => {
+      showSubscription.remove();
+      hideSubscription.remove();
+    }
+  }, [heightOfKeyBoard]);
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
@@ -212,11 +232,11 @@ const PostingDetailScreen = () => {
 
       <ScrollView
         persistentScrollbar={false}
-        style={PostingDetailStyleScreen.scrollView}
+        style={[PostingDetailStyleScreen.scrollView, ]}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
-        <View style={[{ marginTop: 20, marginBottom: 10, flex: 1 }]}>
+        <View style={[{ marginTop: 20, marginBottom: 10, flex: 1,  }, ]}>
           <TouchableOpacity
             onPress={() => handleMoveToUserProfile(data.user.userID)}
           >
@@ -286,11 +306,11 @@ const PostingDetailScreen = () => {
       </ScrollView>
 
       <View
-        style={{
+        style={[{
           paddingVertical: 20,
           borderTopWidth: 0.5,
           borderTopColor: grayBorderColor,
-        }}
+        }, Platform.OS === 'ios' && isKeyBoardOpen && { position: 'absolute', bottom: heightOfKeyBoard, backgroundColor: backgroundColor }]}
       >
         <View
           style={[

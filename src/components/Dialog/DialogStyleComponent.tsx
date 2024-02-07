@@ -84,8 +84,7 @@ const DialogStylesComponent = StyleSheet.create({
 
     // ----------------------------------------//
     postingDialogContainer: {
-        flex: 1,
-        height: height,
+        height: height*0.9,
         width: width,
         margin: 0,
         bottom: 0,
@@ -219,6 +218,29 @@ const DialogStylesComponent = StyleSheet.create({
         height: 40,
         borderRadius: 50
     },
+
+    container: {
+        flex: 1,
+      },
+      inner: {
+        padding: 24,
+        flex: 1,
+        justifyContent: 'space-around',
+      },
+      header: {
+        fontSize: 36,
+        marginBottom: 48,
+      },
+      textInput: {
+        height: 40,
+        borderColor: '#000000',
+        borderBottomWidth: 1,
+        marginBottom: 36,
+      },
+      btnContainer: {
+        backgroundColor: 'white',
+        marginTop: 12,
+      },
 
 
 
