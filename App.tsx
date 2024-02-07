@@ -38,13 +38,14 @@ export default function App() {
         <NavigationContainer>
           <View style={styles.container}>
             <Stack.Navigator>
-              {/* <Stack.Screen
+
+              <Stack.Screen
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
               />
 
-              {/* <Stack.Screen
+              <Stack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{
@@ -139,13 +140,13 @@ export default function App() {
                 name='NotificationScreen'
                 component={NotificationScreen}
                 options={{ headerShown: false }}
-              /> */}
+              />
 
               <Stack.Screen
                 name='AddingClothesScreen'
                 component={AddingClothesScreen}
                 options={{ headerShown: false }}
-              /> 
+              />
 
               <Stack.Screen
                 name='ClothesDetailScreen'

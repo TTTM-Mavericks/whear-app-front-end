@@ -3,6 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import {
   FlatList,
+  SafeAreaView,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -518,10 +519,12 @@ const SocialScreen = () => {
                       </View>
 
                       {item.postID === selectedItem && (
-                        <CommentsDetailDialogComponent
-                          postId={item.postID}
-                          comments={item.comment as Comment[]}
-                        ></CommentsDetailDialogComponent>
+                        <SafeAreaView >
+                          <CommentsDetailDialogComponent
+                            postId={item.postID}
+                            comments={item.comment as Comment[]}
+                          ></CommentsDetailDialogComponent>
+                        </SafeAreaView>
                       )}
                     </View>
                   </View>
