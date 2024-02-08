@@ -2,6 +2,8 @@
 
 export const primaryColor = "#A2DE52";
 export const secondaryColor = "#5151C6";
+export const thirthColor = "#FFC41F";
+export const fourthColor = "#E53109";
 export const textColor = "#333";
 export const backgroundColor = "#ffffffff";
 export const errorColor = "#e74c3c";

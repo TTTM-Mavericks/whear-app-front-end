@@ -442,7 +442,7 @@ const AddingClothesScreen = () => {
     <View style={[AddingClothesStyleScreen.container, ]}>
       <Toast
         position='top'
-        bottomOffset={20}
+        topOffset={30}
 
       />
       <AppBarHeaderComponent
@@ -798,8 +798,6 @@ const AddingClothesScreen = () => {
 
                       />
                     )}
-
-
 
                     <Text style={{ fontSize: 13 }}>{season.label}</Text>
                   </View>

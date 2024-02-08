@@ -8,7 +8,7 @@ import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { Video } from "expo-av";
 import { db, storage } from "../../../FireBaseConfig";
 import { useDispatch } from "react-redux";
-import { saveImageCreatingUrl, saveImageUrl, setUploadToFireBase } from "../../redux/State/Actions";
+import { saveImageCreatingUrl, saveImagePostingUrl, saveImageUrl, setUploadToFireBase } from "../../redux/State/Actions";
 import { IconButton } from "react-native-paper";
 import UploadingAndroid from "./UploadingAndroid";
 import * as ImageManipulator from 'expo-image-manipulator';
@@ -30,6 +30,9 @@ interface ImageButtonProps {
   iconColor?: string,
   width: number,
   height: number,
+  isAddNewImagePosting?: boolean,
+  iconSize?: number,
+  iconStyle?: StyleProp<ViewStyle>,
 }
 
 const AddImageButtonComponent: React.FC<ImageButtonProps> = (
@@ -41,7 +44,10 @@ const AddImageButtonComponent: React.FC<ImageButtonProps> = (
     onPress,
     iconColor,
     width,
-    height
+    height,
+    isAddNewImagePosting,
+    iconSize,
+    iconStyle
   }) => {
   const [image, setImage] = useState<string>("");
   const [video, setVideo] = useState<string>("");
@@ -86,12 +92,12 @@ const AddImageButtonComponent: React.FC<ImageButtonProps> = (
       allowsEditing: true,
       quality: 1,
     });
-  
+
     if (!result.canceled) {
       let uri: string | undefined;
       let width: number | undefined;
       let height: number | undefined;
-  
+
       if (result.assets && result.assets.length > 0) {
         const selectedAsset = result.assets[0];
         uri = selectedAsset.uri;
@@ -101,7 +107,7 @@ const AddImageButtonComponent: React.FC<ImageButtonProps> = (
         console.error("Invalid image result");
         return;
       }
-  
+
       // Check if width and height are defined before using them
       if (width !== undefined && height !== undefined) {
         // Use ImageManipulator to crop the image based on your desired aspect ratio
@@ -112,7 +118,7 @@ const AddImageButtonComponent: React.FC<ImageButtonProps> = (
           ],
           { compress: 1, format: ImageManipulator.SaveFormat.PNG }
         );
-  
+
         setImage(croppedImage.uri);
         await uploadImage(croppedImage.uri, "image");
       } else {
@@ -163,6 +169,9 @@ const AddImageButtonComponent: React.FC<ImageButtonProps> = (
           if (isUserAvatar) {
             dispatch(saveImageUrl(downloadURL));
           }
+          if (isAddNewImagePosting) {
+            dispatch(saveImagePostingUrl(downloadURL));
+          }
           await saveRecord(fileType, downloadURL, new Date().toISOString());
           setImage("");
           setVideo("");
@@ -186,28 +195,7 @@ const AddImageButtonComponent: React.FC<ImageButtonProps> = (
 
   return (
     <View style={[{ flex: 1 }, style]} >
-      {/* {image && (Platform.OS === "ios" ? (
-        <UploadingAndroid image={image} video={video} progress={progress} />
-      ) : (
-        <UploadingAndroid image={image} video={video} progress={progress} />
-      ))} */}
-
-      <TouchableOpacity
-        onPress={Platform.OS === 'ios' ? pickImageIOS : pickImageAndroid}
-        // onPress={pickImageAndroid}
-
-        style={{
-          width: 44,
-          height: 44,
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: 25,
-        }}
-      >
-        <IconButton icon={icon ? icon : 'image'} size={24} iconColor={iconColor ? iconColor : 'white'} />
-      </TouchableOpacity>
-
-
+      <IconButton style={iconStyle} onPress={Platform.OS === 'ios' ? pickImageIOS : pickImageAndroid} icon={icon ? icon : 'image'} size={iconSize ? iconSize : 24} iconColor={iconColor ? iconColor : 'white'} />
     </View>
   );
 }

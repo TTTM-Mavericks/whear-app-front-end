@@ -318,7 +318,7 @@ const SocialScreen = () => {
   // }, [selectedItem])
 
   /*-----------------Function handler-----------------*/
-  function hanldeGoBack(): void {
+  const hanldeGoBack = () => {
     navigation.goBack();
   }
 
@@ -331,8 +331,9 @@ const SocialScreen = () => {
   };
 
   const handleOpenPostingForm = () => {
-    dispatch(setOpenUpPostingDialog(true));
-    setIsOpenCommentsDialog(true);
+    // dispatch(setOpenUpPostingDialog(true));
+    // setIsOpenCommentsDialog(true);
+    navigation.navigate('AddingPostingsScreen')
   };
 
   const handleOpenCommentsDialog = (postID: string) => {
@@ -402,7 +403,7 @@ const SocialScreen = () => {
             </MaskedView>
           </View>
         }
-        backAction={() => hanldeGoBack()}
+        backAction={hanldeGoBack}
       ></AppBarHeaderComponent>
 
       <ScrollView

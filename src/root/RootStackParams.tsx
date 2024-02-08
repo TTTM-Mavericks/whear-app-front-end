@@ -16,6 +16,7 @@ export type RootStackParamList = {
   SearchScreen: {keyWord: any};
   NotificationScreen: undefined;
   AddingClothesScreen: undefined;
+  AddingPostingsScreen: undefined;
 
 
 };

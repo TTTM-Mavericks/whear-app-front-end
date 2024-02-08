@@ -12,6 +12,7 @@ interface State {
   isOpenCreateClothesDialog: boolean;
   imageCreatingUrl: string;
   isUploadedImageToFireBase: boolean;
+  imagePostingUrl: string;
 }
 
 const initialState: State = {
@@ -25,6 +26,7 @@ const initialState: State = {
   isOpenCreateClothesDialog: false,
   imageCreatingUrl: clothesLogoUrlDefault,
   isUploadedImageToFireBase: false,
+  imagePostingUrl: '#'
 };
 
 const authSlice = createSlice({
@@ -65,6 +67,9 @@ const authSlice = createSlice({
     setUploadToFireBase: (state, action: PayloadAction<{ isUploadedImageToFireBase: boolean }>) => {
       state.isUploadedImageToFireBase = action.payload.isUploadedImageToFireBase;
     },
+    saveImagePostingUrl: (state, action: PayloadAction<{ imagePostingUrl: string }>) => {
+      state.imagePostingUrl = action.payload.imagePostingUrl;
+    },
   },
 });
 
@@ -80,6 +85,7 @@ export const {
   setOpenCreateClothesDialog, 
   setOpenUpPostingDialog, 
   setUploadToFireBase, 
+  saveImagePostingUrl
 
 } = authSlice.actions;
 export default authSlice.reducer;
