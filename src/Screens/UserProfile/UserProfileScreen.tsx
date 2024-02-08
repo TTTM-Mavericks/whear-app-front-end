@@ -242,23 +242,23 @@ const UserProfileScreen = () => {
    * Fetch data to get follower User
    */
   useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const userIDParam = (route.params as { userID?: string })?.userID;
-    //     const response = await api.get(`/api/v1/follow/get-all-follower-user?userid=${userIDParam}`);
-    //     if (response.success === 200) {
-    //       setFollower(response.data);
-    //       setCountFollower(response.data.length);
-    //     } else {
-    //       // console.log(response.message);
-    //     }
+    const fetchData = async () => {
+      try {
+        const userIDParam = (route.params as { userID?: string })?.userID;
+        const response = await api.get(`/api/v1/follow/get-all-follower-user?userid=${userIDParam}`);
+        if (response.success === 200) {
+          setFollower(response.data);
+          setCountFollower(response.data.length);
+        } else {
+          // console.log(response.message);
+        }
 
-    //   } catch (error) {
-    //     console.error("An error occurred during data fetching:", error);
-    //   }
-    // };
+      } catch (error) {
+        console.error("An error occurred during data fetching:", error);
+      }
+    };
 
-    // fetchData();
+    fetchData();
   }, []);
 
 

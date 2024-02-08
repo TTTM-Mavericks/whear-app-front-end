@@ -40,7 +40,7 @@ export default function App() {
           <View style={styles.container}>
             <Stack.Navigator>
 
-              {/* <Stack.Screen
+              <Stack.Screen
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
@@ -151,7 +151,7 @@ export default function App() {
                 name='ClothesDetailScreen'
                 component={ClothesDetailScreen}
                 options={{ headerShown: false }}
-              /> */}
+              />
 
               <Stack.Screen
                 name='AddingPostingsScreen'
