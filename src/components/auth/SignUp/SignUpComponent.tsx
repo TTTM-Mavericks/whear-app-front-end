@@ -183,7 +183,7 @@ const SignUpComponent = () => {
                 phone: phone,
                 email: email,
                 gender: JSON.stringify(gender),
-                imgUrl: "",
+                imgUrl: "https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2Flogo.png?alt=media&token=1e7dd6fd-2841-4079-b208-6487b3934a02https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2Flogo.png?alt=media&token=1e7dd6fd-2841-4079-b208-6487b3934a02",
                 language: language
             }
 

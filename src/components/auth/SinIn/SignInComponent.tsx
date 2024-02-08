@@ -122,12 +122,12 @@ const SignInComponent = () => {
           setTimeout(() => {
             setIsLoading(false);
             navigation.navigate('Home');
-          }, 1000)
+          }, 500)
         } else {
           setIsLoading(false);
           Toast.show({
             type: 'error',
-            text1: response.message
+            text1: 'Wrong email or password'
           });
         }
       } catch (error: any) {
@@ -138,6 +138,7 @@ const SignInComponent = () => {
           text1: JSON.stringify(error.message),
           position: 'top'
         });
+        navigation.navigate('SignIn'); // Navigate to SignIn screen after validation failure
       }
     } else {
       setEmailErrorValidate(errorEmailValidate);

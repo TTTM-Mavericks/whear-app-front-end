@@ -59,7 +59,7 @@ export const validateUsername = (username: string): ValidationResult => {
 }
 
 export const validateString = (string: string): ValidationResult => {
-  const stringRegex = /^[a-zA-Z0-9\s]{8,20}$/;
+  const stringRegex = /^[a-zA-Z0-9\u0102\u0103\u0110\u0111\u0128\u0129\u0168\u0169\u01A0\u01A1\u01AF\u01B0\u1EA0-\u1EF9\s!@#$%^&*()-_=+{}[]|;:'",.<>?`~]*$/;
 
   if (!string) {
     return {
