@@ -28,6 +28,7 @@ import ConnectStomp from "./src/Screens/Notifictation/Config";
 import MessageScreen from "./src/Screens/Message/MessageScreen";
 import AddingClothesScreen from "./src/Screens/AddingClothes/AddingClothesScreen";
 import ClothesDetailScreen from "./src/Screens/ClothesDetail/ClothesDetailScreen";
+import AddingPostingsScreen from "./src/Screens/AddingPostings/AddingPostingsScreen";
 
 const Stack = createStackNavigator();
 
@@ -38,19 +39,18 @@ export default function App() {
         <NavigationContainer>
           <View style={styles.container}>
             <Stack.Navigator>
+
               {/* <Stack.Screen
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
               />
 
-              {/* <Stack.Screen
+              <Stack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{
                   headerShown: false,
-                  presentation: 'modal',
-                  animationTypeForReplace: 'pop',
                 }}
               />
 
@@ -139,17 +139,23 @@ export default function App() {
                 name='NotificationScreen'
                 component={NotificationScreen}
                 options={{ headerShown: false }}
-              /> */}
+              />
 
               <Stack.Screen
                 name='AddingClothesScreen'
                 component={AddingClothesScreen}
                 options={{ headerShown: false }}
-              /> 
+              />
 
               <Stack.Screen
                 name='ClothesDetailScreen'
                 component={ClothesDetailScreen}
+                options={{ headerShown: false }}
+              /> */}
+
+              <Stack.Screen
+                name='AddingPostingsScreen'
+                component={AddingPostingsScreen}
                 options={{ headerShown: false }}
               />
 

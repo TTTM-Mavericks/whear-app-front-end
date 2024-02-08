@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import { Input, CheckBox, Button } from '@rneui/base';
+import { View, Text, ScrollView, TouchableOpacity, Platform } from 'react-native';
+import { Input, CheckBox } from '@rneui/base';
 import DatePicker from 'react-native-date-picker';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -8,7 +8,7 @@ import { RootStackParamList } from '../../../root/RootStackParams';
 import { useDispatch, useSelector } from 'react-redux';
 import { convertDateFormat, validateEmail, validatePassword, validateString } from '../../Common/Functions/CommonFunctionComponents';
 import SignUpStylesComponent from './SignUpStyleComponent';
-import { HelperText, IconButton, List, Modal, Portal, TextInput } from 'react-native-paper';
+import { Button, HelperText, IconButton, List, Modal, Portal, TextInput } from 'react-native-paper';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Icon } from 'react-native-vector-icons/Icon';
 import PolicyComponent from '../Policy/PolicyComponent';
@@ -22,10 +22,11 @@ import { UserInterFace } from '../../../models/ObjectInterface';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingComponent from '../../Common/Loading/LoadingComponent';
 import Toast from 'react-native-toast-message';
+import { height, width } from '../../../root/ResponsiveSize';
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 
-const languages = ['VIETNAM', 'USA', 'UK', 'Japan'];
+const languages = ['VIETNAM', 'USA', 'UK', 'JAPAN'];
 
 const SignUpComponent = () => {
 
@@ -38,7 +39,7 @@ const SignUpComponent = () => {
     const [gender, setGender] = useState(true);
     const [birthday, setBirthday] = useState(new Date());
     const [isDatePickerVisible, setDatePickerVisible] = useState(false);
-    const [language, setLanguage] = useState('Vietnam');
+    const [language, setLanguage] = useState('VIETNAM');
     const [acceptPolicy, setAcceptPolicy] = useState(false);
     const [isHidePassword, setIsHidePassword] = useState(true);
     const [isHideConfirmPassword, setIsHideConfirmPassword] = useState(true);
@@ -182,7 +183,7 @@ const SignUpComponent = () => {
                 phone: phone,
                 email: email,
                 gender: JSON.stringify(gender),
-                imgUrl: "",
+                imgUrl: "https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2Flogo.png?alt=media&token=1e7dd6fd-2841-4079-b208-6487b3934a02https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2Flogo.png?alt=media&token=1e7dd6fd-2841-4079-b208-6487b3934a02",
                 language: language
             }
 
@@ -242,13 +243,14 @@ const SignUpComponent = () => {
 
 
     return (
-        <View style={{ backgroundColor: backgroundColor, height: 'auto' }}>
+        <View style={{ backgroundColor: backgroundColor, height: 'auto', flex: 1 }}>
             <ScrollView contentContainerStyle={{ backgroundColor: backgroundColor, height: 'auto' }}>
 
                 <View style={SignUpStylesComponent.container}>
                     <Text style={SignUpStylesComponent.title}>Sign Up</Text>
                     <TextInput
                         label="Email"
+                        activeOutlineColor={primaryColor}
                         value={email}
                         onChangeText={text => setEmail(text)}
                         style={SignUpStylesComponent.input}
@@ -265,6 +267,7 @@ const SignUpComponent = () => {
 
                     <TextInput
                         label="Username"
+                        activeOutlineColor={primaryColor}
                         value={username}
                         onChangeText={text => setUsername(text)}
                         style={SignUpStylesComponent.input}
@@ -282,6 +285,7 @@ const SignUpComponent = () => {
                     <TextInput
                         focusable={false}
                         label="Password"
+                        activeOutlineColor={primaryColor}
                         value={password}
                         style={SignUpStylesComponent.input}
                         secureTextEntry={isHidePassword}
@@ -300,6 +304,7 @@ const SignUpComponent = () => {
                     <TextInput
                         label="Confirm Password"
                         value={confirmPassword}
+                        activeOutlineColor={primaryColor}
                         style={SignUpStylesComponent.input}
                         secureTextEntry={isHideConfirmPassword}
                         mode='outlined'
@@ -317,6 +322,7 @@ const SignUpComponent = () => {
                     <TextInput
                         label="Phone"
                         value={phone}
+                        activeOutlineColor={primaryColor}
                         onChangeText={text => setPhone(text)}
                         style={SignUpStylesComponent.input}
                         mode='outlined'
@@ -359,6 +365,7 @@ const SignUpComponent = () => {
                     {/* Birthday */}
                     <TextInput
                         label="Birthday"
+                        activeOutlineColor={primaryColor}
                         value={birthday.toLocaleDateString()}
                         style={SignUpStylesComponent.input}
                         mode='outlined'
@@ -382,6 +389,7 @@ const SignUpComponent = () => {
                     <View>
                         <TextInput
                             label="Country"
+                            activeOutlineColor={primaryColor}
                             value={language}
                             style={SignUpStylesComponent.input}
                             mode='outlined'
@@ -393,19 +401,19 @@ const SignUpComponent = () => {
                             editable={false}
                         />
                         <Portal>
-                            <Modal visible={isModalVisible} onDismiss={hideCountryPicker}>
-                                <List.Section style={{ backgroundColor: 'white' }}>
-                                    <List.Subheader>Select a language</List.Subheader>
-                                    {languages.map((language) => (
-                                        <List.Item
-                                            style={{ backgroundColor: '#fffff' }}
-                                            key={language}
-                                            title={language}
-                                            onPress={() => handleChangeLaguage(language)}
-                                        />
-                                    ))}
-                                </List.Section>
-                            </Modal>
+                                <Modal visible={isModalVisible} onDismiss={hideCountryPicker} >
+                                    <List.Section style={{ backgroundColor: 'white', borderRadius: 8, width: '80%', marginLeft: '10%' }}>
+                                        <List.Subheader>Select a language</List.Subheader>
+                                        {languages.map((language) => (
+                                            <List.Item
+                                                style={{ backgroundColor: '#fffff' }}
+                                                key={language}
+                                                title={language}
+                                                onPress={() => handleChangeLaguage(language)}
+                                            />
+                                        ))}
+                                    </List.Section>
+                                </Modal>
                         </Portal>
                     </View>
 
@@ -428,7 +436,7 @@ const SignUpComponent = () => {
                         <PolicyComponent></PolicyComponent>
                     </View>
 
-                    <ButtonComponent
+                    {/* <ButtonComponent
                         title="Press me"
                         onPress={() => {
                             handleSignUp();
@@ -439,7 +447,16 @@ const SignUpComponent = () => {
                         textColor='black'
                         mode="contained"
                         style={{ marginBottom: 0, color: 'black' }}
-                    />
+                    /> */}
+                    <Button
+                        mode='outlined'
+                        contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
+                        style={[SignUpStylesComponent.buttonGroup_button, { backgroundColor: primaryColor }]}
+                        labelStyle={[SignUpStylesComponent.buttonGroup_button_lable,]}
+                        onPress={() => handleSignUp()}
+                    >
+                        <Text style={{ fontWeight: '500', fontSize: 15 }}>Sign Up</Text>
+                    </Button>
 
 
                 </View>

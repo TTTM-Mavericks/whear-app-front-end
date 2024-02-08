@@ -77,22 +77,33 @@ const AppBarFooterStyleComponents = StyleSheet.create({
     button: {
         width: 30,
         height: 30,
-        marginLeft: 20,
-        marginRight: 20
-    },
-    centerButton: {
-        width: 50,
-        height: 50,
-        backgroundColor: primaryColor,
-        marginLeft: 20,
+        marginLeft: 15,
         marginRight: 20,
-        borderRadius: 90,
-        marginBottom: width * 0.1 * 2,
-        position: 'absolute',
-        left: Platform.OS !== 'ios' ? '36%' : '31.5%' ,
-        top: -width * 0.1 ,
-        
+        marginTop: -20
+    },
+    // centerButton: {
+    //     width: 50,
+    //     height: 50,
+    //     backgroundColor: primaryColor,
+    //     marginLeft: 20,
+    //     marginRight: 20,
+    //     borderRadius: 90,
+    //     marginBottom: width * 0.1 * 2,
+    //     position: 'absolute',
+    //     left: Platform.OS !== 'ios' ? '36%' : '31.5%' ,
+    //     top: -width * 0.1 ,
+
+    // }
+    centerButton: {
+        width: width*0.15, // Use a percentage of the screen width
+        height: width*0.15, // Use a percentage of the screen width
+        aspectRatio: 1, // Ensure the button maintains a square shape
+        backgroundColor: primaryColor,
+        borderRadius: 90, // Make the button circular
+        left: '40%', // Center the button horizontally
+        top: '-10%', // Move the button up by 10% of the screen height
     }
+
 
 });
 

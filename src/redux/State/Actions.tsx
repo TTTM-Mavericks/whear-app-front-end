@@ -8,6 +8,8 @@ export const OPEN_COMMENTS_DIALOG = 'OPEN_COMMENTS_DIALOG';
 export const OPEN_CREATE_CLOTHES_DIALOG = 'OPEN_CREATE_CLOTHES_DIALOG';
 export const SAVE_IMAGE_URL = 'SAVE_IMAGE_URL';
 export const SAVE_IMAGE_CREATING_URL = 'SAVE_IMAGE_CREATING_URL';
+export const SAVE_IMAGE_POSTING_URL = 'SAVE_IMAGE_POSTING_URL';
+
 export const IS_UPLOADED_IMAGE_TO_FIREBASE = 'IS_UPLOADED_IMAGE_TO_FIREBASE';
 
 
@@ -64,6 +66,11 @@ export const saveImageCreatingUrl = (imageCreatingUrl: string) => ({
 export const setUploadToFireBase = (isUploadedImageToFireBase: boolean) => ({
   type: IS_UPLOADED_IMAGE_TO_FIREBASE,
   payload: isUploadedImageToFireBase,
+});
+
+export const saveImagePostingUrl = (imagePostingUrl: string) => ({
+  type: SAVE_IMAGE_POSTING_URL,
+  payload: imagePostingUrl,
 });
 
 

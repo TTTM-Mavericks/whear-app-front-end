@@ -66,9 +66,10 @@ const ClothesDetailStyleScreen = StyleSheet.create({
 
   },
   container_postingBar: {
-    width: width,
+    width: width*0.95,
     flexDirection: 'row',
     backgroundColor: 'white',
+    position :'relative'
 
   },
   container_groupIconBar: {

@@ -44,6 +44,7 @@ export interface ClothesInterface {
     clothesColors?: string[];
     clothesSizes?: string[];
     clothesImages: string[];
+    react?:number
 }
 
 export interface CollectionInterface {

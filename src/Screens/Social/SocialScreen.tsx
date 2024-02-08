@@ -3,6 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import {
   FlatList,
+  SafeAreaView,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -317,7 +318,7 @@ const SocialScreen = () => {
   // }, [selectedItem])
 
   /*-----------------Function handler-----------------*/
-  function hanldeGoBack(): void {
+  const hanldeGoBack = () => {
     navigation.goBack();
   }
 
@@ -330,8 +331,9 @@ const SocialScreen = () => {
   };
 
   const handleOpenPostingForm = () => {
-    dispatch(setOpenUpPostingDialog(true));
-    setIsOpenCommentsDialog(true);
+    // dispatch(setOpenUpPostingDialog(true));
+    // setIsOpenCommentsDialog(true);
+    navigation.navigate('AddingPostingsScreen')
   };
 
   const handleOpenCommentsDialog = (postID: string) => {
@@ -401,7 +403,7 @@ const SocialScreen = () => {
             </MaskedView>
           </View>
         }
-        backAction={() => hanldeGoBack()}
+        backAction={hanldeGoBack}
       ></AppBarHeaderComponent>
 
       <ScrollView
@@ -518,10 +520,12 @@ const SocialScreen = () => {
                       </View>
 
                       {item.postID === selectedItem && (
-                        <CommentsDetailDialogComponent
-                          postId={item.postID}
-                          comments={item.comment as Comment[]}
-                        ></CommentsDetailDialogComponent>
+                        <SafeAreaView >
+                          <CommentsDetailDialogComponent
+                            postId={item.postID}
+                            comments={item.comment as Comment[]}
+                          ></CommentsDetailDialogComponent>
+                        </SafeAreaView>
                       )}
                     </View>
                   </View>
