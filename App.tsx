@@ -41,7 +41,7 @@ export default function App() {
           <View style={styles.container}>
             <Stack.Navigator>
 
-              {/* <Stack.Screen
+              <Stack.Screen
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
@@ -140,14 +140,14 @@ export default function App() {
                 name='NotificationScreen'
                 component={NotificationScreen}
                 options={{ headerShown: false }}
-              />  */}
+              /> 
                <Stack.Screen
                 name='Event'
                 component={EventScreen}
                 options={{ headerShown: false }}
               />
 
-              {/* <Stack.Screen
+              <Stack.Screen
                 name='AddingClothesScreen'
                 component={AddingClothesScreen}
                 options={{ headerShown: false }}
@@ -163,7 +163,7 @@ export default function App() {
                 name='AddingPostingsScreen'
                 component={AddingPostingsScreen}
                 options={{ headerShown: false }}
-              /> */}
+              />
 
 
 
