@@ -35,7 +35,7 @@ export interface ClothesInterface {
     nameOfProduct?: string;
     typeOfClothes?: string;
     shape?: string;
-    seasons?: string;
+    clothesSeasons?: string[];
     description?: string;
     link?: string;
     rating?: number;
@@ -43,7 +43,8 @@ export interface ClothesInterface {
     hashtag?: string[];
     clothesColors?: string[];
     clothesSizes?: string[];
-    clothesImages?: string[];
+    clothesImages: string[];
+    react?:number
 }
 
 export interface CollectionInterface {

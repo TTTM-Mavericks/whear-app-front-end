@@ -3,6 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useState } from 'react';
 import {
   FlatList,
+  SafeAreaView,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -182,7 +183,7 @@ const data: Post[] = [
     status: true,
     content: {
       imgUrl:
-        'https://thejulius.com.vn/wp-content/uploads/2021/06/thoi-trang-mua-he.jpg',
+        'https://i.imgur.com/uvNCUfX.jpeg',
       content:
         'Ngày 3/1, cư dân mạng bất ngờ phát hiện Khả Như đã bỏ theo dõi Puka trên Instagram cá nhân. Hành động này của nữ diễn viên khiến netizen nhận định rằng tình bạn của cả hai đã chính thức "toang" và không còn hàn gắn được.',
     },
@@ -190,7 +191,7 @@ const data: Post[] = [
   {
     postID: '2',
     user: {
-      userID: '1',
+      userID: '2',
       imgUrl:
         'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
       userName: 'Nguyễn Minh Tú',
@@ -276,7 +277,7 @@ const data: Post[] = [
     status: true,
     content: {
       imgUrl:
-        'https://thejulius.com.vn/wp-content/uploads/2021/06/thoi-trang-mua-he.jpg',
+        'https://i.imgur.com/E9C2u4c.jpeg',
       content:
         'Ngày 3/1, cư dân mạng bất ngờ phát hiện Khả Như đã bỏ theo dõi Puka trên Instagram cá nhân. Hành động này của nữ diễn viên khiến netizen nhận định rằng tình bạn của cả hai đã chính thức "toang" và không còn hàn gắn được.',
     },
@@ -317,7 +318,7 @@ const SocialScreen = () => {
   // }, [selectedItem])
 
   /*-----------------Function handler-----------------*/
-  function hanldeGoBack(): void {
+  const hanldeGoBack = () => {
     navigation.goBack();
   }
 
@@ -330,8 +331,9 @@ const SocialScreen = () => {
   };
 
   const handleOpenPostingForm = () => {
-    dispatch(setOpenUpPostingDialog(true));
-    setIsOpenCommentsDialog(true);
+    // dispatch(setOpenUpPostingDialog(true));
+    // setIsOpenCommentsDialog(true);
+    navigation.navigate('AddingPostingsScreen')
   };
 
   const handleOpenCommentsDialog = (postID: string) => {
@@ -401,7 +403,7 @@ const SocialScreen = () => {
             </MaskedView>
           </View>
         }
-        backAction={() => hanldeGoBack()}
+        backAction={hanldeGoBack}
       ></AppBarHeaderComponent>
 
       <ScrollView
@@ -438,6 +440,7 @@ const SocialScreen = () => {
             keyExtractor={(item) => item.postID}
             renderItem={({ item }) => (
               <ListViewComponent
+                key={item.postID}
                 data={[{ id: item.postID, imgUrl: '' }]}
                 extendImgUrl={item.content.imgUrl}
                 cardStyleContainer={SocailStyleScreen.container_cardContainer}
@@ -497,13 +500,13 @@ const SocialScreen = () => {
                         {showFullContent
                           ? item.content.content
                           : item.content.content.substring(0, 150) + '...'}
-                          {"  "} 
+                        {"  "}
                         {item.content.content.length > 150 && (
                           <Text
                             onPress={handleToggleContent}
                             style={{ color: 'black', fontSize: 15, textDecorationLine: 'underline' }}
                           >
-                           {showFullContent ? 'See less' : 'See more'}
+                            {showFullContent ? 'See less' : 'See more'}
                           </Text>
                         )}
                       </Text>
@@ -517,10 +520,12 @@ const SocialScreen = () => {
                       </View>
 
                       {item.postID === selectedItem && (
-                        <CommentsDetailDialogComponent
-                          postId={item.postID}
-                          comments={item.comment as Comment[]}
-                        ></CommentsDetailDialogComponent>
+                        <SafeAreaView >
+                          <CommentsDetailDialogComponent
+                            postId={item.postID}
+                            comments={item.comment as Comment[]}
+                          ></CommentsDetailDialogComponent>
+                        </SafeAreaView>
                       )}
                     </View>
                   </View>

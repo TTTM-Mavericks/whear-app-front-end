@@ -19,6 +19,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UserInterFace } from '../../models/ObjectInterface';
 import { setUploadToFireBase } from '../../redux/State/Actions';
 import { spanTextSize } from '../../root/Texts';
+import Toast from 'react-native-toast-message';
 
 interface ListItem {
   id: string;
@@ -160,17 +161,18 @@ const UserProfileScreen = () => {
    * Fetch data to get user by ID
    */
   useEffect(() => {
+    
     const fetchData = async () => {
       const userStorage = await AsyncStorage.getItem("userData");
       if (userStorage) {
         const userParse: UserInterFace = JSON.parse(userStorage);
         setUserStorage(userParse);
-
         if (userParam !== 0) {
           try {
             const userIDParam = (route.params as { userID?: any })?.userID
             const response = await api.get(`/api/v1/user/get-user-by-userid?userid=${userIDParam}&base_userid=${userParse?.userID}`);
             if (response.success === 200) {
+              console.log('hihihihi', response.data);
               setCurrentUser(response.data);
               if (response.followed) {
                 setIsFollowed(true);
@@ -178,7 +180,7 @@ const UserProfileScreen = () => {
                 setIsFollowed(false);
               }
             } else {
-              console.log(response.message);
+              // console.log(response.message);
             }
           } catch (error) {
             console.error("An error occurred during data fetching:", error);
@@ -211,8 +213,18 @@ const UserProfileScreen = () => {
             const data = response.data
             AsyncStorage.setItem('userData', JSON.stringify(data));
             dispatch(setUploadToFireBase(false));
+            Toast.show({
+              type: 'success',
+              text1: JSON.stringify(response.message),
+              position: 'top'
+            });
           } else {
-            console.log(response.message);
+            // console.log(response.message);
+            Toast.show({
+              type: 'error',
+              text1: JSON.stringify(response.message),
+              position: 'top'
+            });
           }
         }
         fetchData();
@@ -238,7 +250,7 @@ const UserProfileScreen = () => {
           setFollower(response.data);
           setCountFollower(response.data.length);
         } else {
-          console.log(response.message);
+          // console.log(response.message);
         }
 
       } catch (error) {
@@ -265,13 +277,22 @@ const UserProfileScreen = () => {
           const response = await api.get(`/api/v1/follow/get-all-following-user?userid=${userIDParam}&base_userid=${userParse?.userID}`);
           if (response.success === 200) {
             setFollowing(response.data);
-            console.log(response.data);
+            // console.log(response.data);
+            Toast.show({
+              type: 'success',
+              text1: response.message
+            });
           } else {
             console.log(response.message);
+            Toast.show({
+              type: 'error',
+              text1: response.message
+            });
           }
 
         } catch (error) {
           console.error("An error occurred during data fetching:", error);
+          
         }
       }
     };
@@ -395,6 +416,11 @@ const UserProfileScreen = () => {
 
   return (
     <View style={UserProfileStyleScreen.container}>
+      <Toast
+        position='top'
+        bottomOffset={20}
+
+      />
       <View style={UserProfileStyleScreen.header}>
         <IconButton icon={require('../../assets/icon/backarrow.png')} onPress={() => navigation.goBack()}></IconButton>
         <View style={UserProfileStyleScreen.upgradeBanner} >
@@ -404,7 +430,7 @@ const UserProfileScreen = () => {
       </View>
       <View style={[UserProfileStyleScreen.backGroundImg, Platform.OS === 'ios' ? { marginTop: -width * 0.88 } : { marginTop: -width * 1.05 }]}>
         <View style={UserProfileStyleScreen.avatarImg}>
-          <Image source={currentUser?.imgUrl !== '' ? { uri: currentUser?.imgUrl } : require('../../assets/icon/user.png')} style={UserProfileStyleScreen.img}></Image>
+          <Image source={currentUser?.imgUrl !== '#' ? { uri: currentUser?.imgUrl } : require('../../assets/icon/user.png')} style={UserProfileStyleScreen.img}></Image>
           {/* <IconButton
             icon={'camera'}
             size={25}

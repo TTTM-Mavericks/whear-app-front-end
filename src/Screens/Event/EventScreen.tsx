@@ -6,6 +6,7 @@ import { Appbar, Chip, Text } from 'react-native-paper';
 import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
 import { primaryColor, secondaryColor } from '../../root/Colors';
 import EventStyleScreen from './EventStyleScreen';
+import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarFooterComponents';
 
 interface Event {
   id: string;
@@ -64,6 +65,8 @@ const filters = [
 const EventScreen = () => {
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [filterEvents, setFilterEvents] = useState(EVENT_DATA);
+  const [scrollUp, setScrollUp] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
 
   const handleSelectFilter = (value: string) => {
     setSelectedFilter(value);
@@ -87,6 +90,18 @@ const EventScreen = () => {
 
   const handleSearch = () => {
     alert('search');
+  };
+  const handleScroll = (event: any) => {
+    const currentScrollPos = event.nativeEvent.contentOffset.y;
+
+    if (currentScrollPos > prevScrollPos) {
+      setScrollUp(false);
+    } else if (currentScrollPos < prevScrollPos) {
+      setScrollUp(true);
+
+    }
+
+    setPrevScrollPos(currentScrollPos);
   };
 
   const FiltersBar = () => {
@@ -150,12 +165,16 @@ const EventScreen = () => {
 
       <View style={EventStyleScreen.scroll__view}>
         <FlatList
+          onScroll={(event) => handleScroll(event)}
+
           data={filterEvents}
           ListHeaderComponent={FiltersBar}
           keyExtractor={(item) => item.id}
           renderItem={renderRow}
         />
       </View>
+      <AppBarFooterComponents isHide={scrollUp} centerIcon={'plus'} ></AppBarFooterComponents>
+
     </View>
   );
 };

@@ -1,3 +1,4 @@
+import { clothesLogoUrlDefault } from "../../root/Texts";
 import {
   ADD_TO_COLLECTIONS,
   GET_EMAIL_SIGNINED,
@@ -8,6 +9,7 @@ import {
   OPEN_CREATE_CLOTHES_DIALOG,
   OPEN_UP_POSTING_DIALOG,
   SAVE_IMAGE_CREATING_URL,
+  SAVE_IMAGE_POSTING_URL,
   SAVE_IMAGE_URL,
   SIGN_IN
 } from "./Actions";
@@ -23,6 +25,7 @@ interface State {
   isOpenCreateClothesDialog: boolean;
   imageCreatingUrl: string;
   isUploadedImageToFireBase: boolean;
+  imagePostingUrl: string;
 }
 
 const initialState: State = {
@@ -34,8 +37,10 @@ const initialState: State = {
   isOpenCommentsDialog: false,
   imageUrl: '../../assets/icon/user.png',
   isOpenCreateClothesDialog: false,
-  imageCreatingUrl: '../../assets/icon/user.png',
+  imageCreatingUrl: clothesLogoUrlDefault,
   isUploadedImageToFireBase: false,
+  imagePostingUrl: '#',
+
 
 };
 
@@ -96,6 +101,11 @@ const Reducer = (state = initialState, action: any): State => {
       return {
         ...state,
         isUploadedImageToFireBase: action.payload,
+      };
+      case SAVE_IMAGE_POSTING_URL:
+      return {
+        ...state,
+        imagePostingUrl: action.payload,
       };
     default:
       return state;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import SigInStylesComponent from './SignInStyleComponent';
 import { useNavigation } from '@react-navigation/native';
 
@@ -23,6 +23,7 @@ import { UserInterFace } from '../../../models/ObjectInterface';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingComponent from '../../Common/Loading/LoadingComponent';
 import Toast from 'react-native-toast-message'
+import { height } from '../../../root/ResponsiveSize';
 
 /**
  * Image Url
@@ -106,21 +107,27 @@ const SignInComponent = () => {
           password: password
         };
 
-        const response = await api.post('/api/v1/user/get-user-by-email-and-password', requestData);
+        const response = await api.post('/api/v1/auth/login', requestData);
         if (response.success === 200) {
           setUserResponse(response.data);
-          AsyncStorage.setItem('userData', JSON.stringify(response.data));
+          AsyncStorage.setItem('userData', JSON.stringify(response.data.user));
+          AsyncStorage.setItem('access_token', JSON.stringify(response.data.access_token));
+          AsyncStorage.setItem('refresh_token', JSON.stringify(response.data.refresh_token));
+          if (response.data.user.role === 'CUSTOMER') {
+            AsyncStorage.setItem('subrole', JSON.stringify(response.subrole));
+          }
+
           console.log('userData: ', JSON.stringify(response.data));
           setIsLoading(true);
           setTimeout(() => {
             setIsLoading(false);
             navigation.navigate('Home');
-          }, 1000)
+          }, 500)
         } else {
           setIsLoading(false);
           Toast.show({
             type: 'error',
-            text1: response.message
+            text1: 'Wrong email or password'
           });
         }
       } catch (error: any) {
@@ -128,9 +135,10 @@ const SignInComponent = () => {
         setIsLoading(false);
         Toast.show({
           type: 'error',
-          text1: JSON.stringify(error.message), 
+          text1: JSON.stringify(error.message),
           position: 'top'
         });
+        navigation.navigate('SignIn'); // Navigate to SignIn screen after validation failure
       }
     } else {
       setEmailErrorValidate(errorEmailValidate);
@@ -171,6 +179,7 @@ const SignInComponent = () => {
         <Text style={SigInStylesComponent.title}>Sign In</Text>
         <TextInput
           label="Email"
+          activeOutlineColor={primaryColor}
           value={email}
           style={SigInStylesComponent.input}
           onChangeText={text => setEmail(text)}
@@ -185,6 +194,7 @@ const SignInComponent = () => {
 
         <TextInput
           label="Password"
+          activeOutlineColor={primaryColor}
           value={password}
           style={SigInStylesComponent.input}
           secureTextEntry={isHidePassword}
@@ -203,7 +213,7 @@ const SignInComponent = () => {
           <Text style={SigInStylesComponent.content}>Forgot password?</Text>
         </TouchableOpacity>
         <View style={SigInStylesComponent.button}>
-          <ButtonComponent
+          {/* <ButtonComponent
             title="Sign In"
             onPress={() => {
               handleSignIn();
@@ -218,7 +228,17 @@ const SignInComponent = () => {
               justifyContent: 'center',
               alignItems: 'center',
             }]}
-          />
+          /> */}
+
+          <Button
+            mode='outlined'
+            contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
+            style={[SigInStylesComponent.buttonGroup_button, { backgroundColor: primaryColor }]}
+            labelStyle={[SigInStylesComponent.buttonGroup_button_lable,]}
+            onPress={() => handleSignIn()}
+          >
+            <Text style={{ fontWeight: '500', fontSize: 15 }}>Sign In</Text>
+          </Button>
         </View>
         <View style={SigInStylesComponent.optionSignIn}>
           <Text style={SigInStylesComponent.optionSignIn}>Sign in with</Text>
@@ -257,7 +277,7 @@ const SignInComponent = () => {
       <Toast
         position='top'
         bottomOffset={20}
-        
+
       />
     </View >
   );

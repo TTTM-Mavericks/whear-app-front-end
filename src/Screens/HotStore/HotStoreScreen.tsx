@@ -9,6 +9,7 @@ import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHe
 import ListViewComponent from '../../components/ListView/ListViewComponent';
 import { primaryColor, secondaryColor } from '../../root/Colors';
 import HotStoreStyleScreen from './HotStoreStyleScreen';
+import TouchabaleActiveActionButton from '../../components/Common/TouchableActive/TouchabaleActiveActionButton';
 
 interface Clothes {
   clothesId: string;
@@ -136,6 +137,8 @@ const HotStoreScreen = () => {
   };
   return (
     <View style={HotStoreStyleScreen.container}>
+      <TouchabaleActiveActionButton ></TouchabaleActiveActionButton>
+
       <AppBarHeaderComponent
         backAction={() => hanldeGoBack()}
         title={
