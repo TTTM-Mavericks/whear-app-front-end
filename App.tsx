@@ -19,10 +19,13 @@ import UserProfileSettingScreen from "./src/Screens/UserProfile/UserProfileSetti
 import BasicInformationScreen from "./src/Screens/BasicInformation/BasicInformationScreen";
 import ChooseStyleYouLoveScreen from "./src/Screens/ChooseStyleYouLove/ChooseStyleYouLoveScreen";
 import React from "react";
+import NewsScreen from "./src/Screens/News/NewsScreen";
 import SignInComponent from "./src/components/auth/SinIn/SignInComponent";
 import HotStoreScreen from "./src/Screens/HotStore/HotStoreScreen";
-import EventScreen from "./src/Screens/Event/EventScreen";
-
+import SearchScreen from "./src/Screens/Search/SearchScreen";
+import NotificationScreen from "./src/Screens/Notifictation/NotificationScreen";
+import ConnectStomp from "./src/Screens/Notifictation/Config";
+import EventScreen from "./src/Screens/Event/EventScreen"
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -32,14 +35,14 @@ export default function App() {
         <NavigationContainer>
           <View style={styles.container}>
             <Stack.Navigator>
-{/* 
-              <Stack.Screen
+
+               <Stack.Screen
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
-              /> */}
+              /> 
 
-              <Stack.Screen
+               <Stack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{
@@ -48,6 +51,7 @@ export default function App() {
                   animationTypeForReplace: 'pop',
                 }}
               />
+
 
               <Stack.Screen
                 name='Collections'
@@ -110,20 +114,37 @@ export default function App() {
                 name="ChooseStyleYouLove"
                 component={ChooseStyleYouLoveScreen}
                 options={{ headerShown: false }}
-              /> 
+              />
+              <Stack.Screen
+                name="NewsScreen"
+                component={NewsScreen}
+                options={{ headerShown: false }}
+              />
 
-               <Stack.Screen
+              <Stack.Screen
                 name='HotStore'
                 component={HotStoreScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
+                name='SearchScreen'
+                component={SearchScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name='NotificationScreen'
+                component={NotificationScreen}
+                options={{ headerShown: false }}
+              /> 
+               <Stack.Screen
                 name='Event'
                 component={EventScreen}
                 options={{ headerShown: false }}
               />
-              
+
+
             </Stack.Navigator>
           </View>
         </NavigationContainer>

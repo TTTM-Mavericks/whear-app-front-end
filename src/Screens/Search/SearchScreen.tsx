@@ -1,26 +1,27 @@
 
-import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, ScrollView, FlatList } from 'react-native';
-import HomeStylesComponent from './HomeStyleScreen';
-import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useRef, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, FlatList, Animated, TouchableOpacity, Platform } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../../root/RootStackParams';
 import { StackNavigationProp } from '@react-navigation/stack';
 import CarouselComponent from '../../components/Common/Carousel/CarouselComponent';
 import ListViewComponent from '../../components/ListView/ListViewComponent';
-import { Appbar, Button, Chip, Icon, IconButton, MD3Colors } from 'react-native-paper';
+import { Appbar, Button, Chip, Icon, IconButton, MD3Colors, SegmentedButtons, TextInput } from 'react-native-paper';
 import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
 import AppBarHeaderStylesComponent from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
 import HorizontalCarouselComponent from '../../components/Common/Carousel/HorizontalCarouselComponent';
 import ChipGroupComponent from '../../components/Common/ChipGroup/ChipGroupComponent';
-import { width } from '../../root/ResponsiveSize';
+import { height, width } from '../../root/ResponsiveSize';
 import SmallChipGroupComponent from '../../components/Common/ChipGroup/SmallChipGroupComponent';
-import { backgroundColor, primaryColor, secondaryColor } from '../../root/Colors';
+import { backgroundColor, grayBorderColor, primaryColor, secondaryColor } from '../../root/Colors';
 import { useDispatch } from 'react-redux';
 import { setOpenAddToCollectionsDialog, setOpenCreateClothesDialog } from '../../redux/State/Actions';
 import AddingToCollectionComponent from '../../components/Dialog/AddingToCollectionComponent';
 import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarFooterComponents';
 import CreateClothesDialogComponent from '../../components/Dialog/CreateClothesDialogComponent';
 import dataSlider from '../../components/Common/Carousel/Data';
+import SearchStyleScreen from './SearchStyleScreen';
+import { spanTextSize } from '../../root/Texts';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -145,13 +146,16 @@ const data1 = [
   },
 ];
 
-const chipData = ['#Minimalism', '#Girly', '#Sporty', '#Vintage', '#Manly'];
+const topKeyWord = ['Minimalism', 'Girly', 'Sporty', 'Vintage', 'Manly'];
 
 
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
-const HomeScreen = () => {
+const SearchScreen = () => {
   const navigation = useNavigation<SignInScreenNavigationProp>();
+  const route = useRoute();
+  const keyWord = (route.params as { keyWord?: string })?.keyWord || '';
+
 
   /*-----------------UseState variable-----------------*/
   const [colorIconAdded, setColorIconAdded] = useState('#C90801');
@@ -159,20 +163,69 @@ const HomeScreen = () => {
   const [addedItems, setAddedItems] = useState<string[]>([]);
   const [scrollUp, setScrollUp] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [value, setValue] = React.useState('');
+  const [currentScrollPos, setCurrentScrollPos] = useState(0);
+  const [isHidden, setIsHidden] = useState(false);
+  const [keyWordSearch, setKeyWordSearch] = useState('');
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [isHideSearch, setIsHideSearch] = useState(true);
+
+
 
 
   /*-----------------Usable variable-----------------*/
   const dispatch = useDispatch();
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+  const translateY = new Animated.Value(0);
+
+
+
+
+
+
 
   /*-----------------UseEffect-----------------*/
+  useEffect(() => {
+    if (currentScrollPos === 0) {
+      hideElement();
+      setIsHidden(true);
+    } else {
+      const timeout = setTimeout(() => {
+        unhideElement();
+        setIsHidden(false);
+      }, 100);
+      return () => clearTimeout(timeout);
+    }
+  }, [currentScrollPos]);
+
+  useEffect(() => {
+    setIsHideSearch(false);
+    const filteredSuggestions = mockSuggestions.filter(
+      (item) => item.toLowerCase().includes(keyWordSearch.toLowerCase())
+    );
+    setSuggestions(filteredSuggestions);
+  }, [keyWordSearch])
+
 
   /*-----------------Function handler-----------------*/
+  const hideElement = () => {
+    Animated.timing(translateY, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const unhideElement = () => {
+    Animated.timing(translateY, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
   function hanldeGoBack(): void {
     navigation.goBack();
-  }
-
-  const handleSearch = () => {
-    alert('search')
   }
 
   const handleMore = () => {
@@ -194,10 +247,10 @@ const HomeScreen = () => {
 
   const handleScroll = (event: any) => {
     const currentScrollPos = event.nativeEvent.contentOffset.y;
-
-    if (currentScrollPos > prevScrollPos) {
+    setCurrentScrollPos(currentScrollPos);
+    if ((currentScrollPos > prevScrollPos) && (currentScrollPos > 0)) {
       setScrollUp(false);
-    } else if (currentScrollPos < prevScrollPos) {
+    } else if ((currentScrollPos < prevScrollPos) && (currentScrollPos > 0)) {
       setScrollUp(true);
 
     }
@@ -211,88 +264,211 @@ const HomeScreen = () => {
   }
 
 
+
+  // Mock data for suggestions
+  const mockSuggestions: string[] = ['Keyword 1', 'Keyword 2', 'Keyword 3'];
+
+  const handleSearch = (text: string) => {
+
+  };
+
+  const handleSelectSuggestion = (selectedKeyword: string) => {
+    // Set the selected keyword in the search input
+    setKeyWordSearch(selectedKeyword);
+    // Clear the suggestions
+    setSuggestions([]);
+  };
+
+
+
   return (
-    <View style={HomeStylesComponent.container}>
+    <View style={SearchStyleScreen.container}>
       <AppBarHeaderComponent
         title={
           <View>
             <MaskedView
               maskElement={
-                <Text style={HomeStylesComponent.titlePage}>Home</Text>
+                <Text style={SearchStyleScreen.titlePage}>Search</Text>
               }
             >
               <LinearGradient
                 colors={[secondaryColor, primaryColor]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0, y: 1 }}
-                style={HomeStylesComponent.linearBackground}
+                style={SearchStyleScreen.linearBackground}
               >
-                <Text style={{ opacity: 0 }}>Home</Text>
+                <Text style={{ opacity: 0 }}>Search</Text>
               </LinearGradient>
             </MaskedView>
           </View>
         }
-        isLogo={true}
+        isHideIcon1={true}
         backAction={() => hanldeGoBack()}
       >
       </AppBarHeaderComponent>
+      <View>
+        <View style={{ marginTop: 20, alignItems: 'center', alignContent: 'center', position: 'relative' }}>
+          <TextInput
+            mode='outlined'
+            style={SearchStyleScreen.postingInput}
+            onChangeText={setKeyWordSearch}
+            activeOutlineColor={'black'}
+            outlineStyle={{ borderWidth: 0.5 }}
+            right={
+              (
+                <TextInput.Icon icon={require('../../assets/icon/loupe.png')} color={primaryColor}>
+
+                </TextInput.Icon>
+              )
+            }
+          />
+          {Platform.OS === 'android' ? (
+            <View
+              style={[
+                {
+                  position: 'absolute',
+                  top: 30,
+                  width: '100%',
+                  backgroundColor: 'white',
+                  elevation: 5,
+                  zIndex: 99,
+                  borderBottomRightRadius: 8,
+                  borderBottomLeftRadius: 8,
+                },
+
+                isHideSearch && {
+                  display: 'none',
+                },
+              ]}
+            >
+              {suggestions.length > 0 && keyWordSearch.length > 0 && (
+                <FlatList
+                  data={suggestions}
+                  keyExtractor={(item) => item}
+                  renderItem={({ item }) => (
+                    <TouchableOpacity onPress={() => handleSelectSuggestion(item)}>
+                      <Text style={{ padding: 10 }}>{item}</Text>
+                    </TouchableOpacity>
+                  )}
+                />
+              )}
+            </View>
+          )
+            :
+            (
+              <View style={{}}>
+                {suggestions.length > 0 && keyWordSearch.length > 0 && (
+                  <FlatList
+                    data={suggestions}
+                    keyExtractor={(item) => item}
+                    renderItem={({ item }) => (
+                      <TouchableOpacity onPress={() => handleSelectSuggestion(item)}>
+                        <Text style={{ padding: 10 }}>{item}</Text>
+                      </TouchableOpacity>
+                    )}
+                    style={{position: 'absolute', zIndex: 50, height: height*0.2}}
+                  />
+                )}
+              </View>
+            )
+          }
+
+        </View>
+        <View style={SearchStyleScreen.mostSearchKeyword}>
+          {currentScrollPos === 0 && (
+            <Animated.View style={{ transform: [{ translateY }] }}>
+              <View>
+                <Text style={{ fontSize: spanTextSize + 0.5, fontWeight: '400' }}>Most searched keyword</Text>
+                <View style={{ flexDirection: 'row', flexWrap: 'wrap', width: width * 0.9, marginTop: 10 }}>
+                  {topKeyWord.map((item: any, key: number) => (
+                    <View key={key} style={{ marginRight: 20, flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
+                      <Text style={{ fontSize: 14, fontWeight: '300' }}>{key + 1}. {item}</Text>
+                      <Icon source={require('../../assets/icon/right-up.png')} size={13} color={primaryColor}></Icon>
+                    </View>
+                  ))}
+                </View>
+              </View>
+            </Animated.View>
+          )}
+          <SegmentedButtons
+            style={[SearchStyleScreen.segmentedButtonsNavbar]}
+            theme={{ roundness: 2 }}
+            value={value}
+            onValueChange={setValue}
+            buttons={[
+              {
+                value: 'all',
+                label: 'Clothes',
+                icon: 'image',
+                style: {
+                  marginTop: 0,
+                  borderRadius: 0,
+                  borderColor: grayBorderColor,
+                  borderTopWidth: 0,
+                  borderBottomWidth: 0,
+                  borderRightWidth: 0,
+                  borderLeftWidth: 0,
+                  backgroundColor: backgroundColor,
+                },
+                checkedColor: primaryColor,
+                uncheckedColor: 'black',
+              },
+              {
+                value: 'hotStore',
+                label: 'Collections',
+                icon: 'heart',
+                style: {
+                  borderRadius: 0,
+                  borderColor: grayBorderColor,
+                  borderTopWidth: 0,
+                  borderBottomWidth: 0,
+                  borderRightWidth: 0,
+                  borderLeftWidth: 0,
+                  backgroundColor: backgroundColor,
+                },
+                checkedColor: primaryColor,
+                uncheckedColor: 'black',
+              },
+              {
+                value: 'events',
+                label: 'History',
+                icon: 'history',
+                style: {
+                  borderRadius: 0,
+                  borderColor: grayBorderColor,
+                  borderTopWidth: 0,
+                  borderBottomWidth: 0,
+                  borderRightWidth: 0,
+                  borderLeftWidth: 0,
+                  backgroundColor: backgroundColor,
+                },
+                checkedColor: primaryColor,
+                uncheckedColor: 'black',
+              },
+
+            ]}
+          />
+
+        </View>
+
+      </View>
 
       <ScrollView
         persistentScrollbar={false}
-        style={HomeStylesComponent.scrollView}
+        style={SearchStyleScreen.scrollView}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         onScroll={(event) => handleScroll(event)}
-        scrollEventThrottle={16}
+        scrollEventThrottle={30}
       >
-        <View style={HomeStylesComponent.scrollViewContent}>
-          <HorizontalCarouselComponent data={dataSlider}></HorizontalCarouselComponent>
-          <ChipGroupComponent></ChipGroupComponent>
 
-          {/* Horizontal FlatList */}
-          <FlatList
-            horizontal={true}
-            style={HomeStylesComponent.homeSliderHorizotalContent}
-            data={data1}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <ListViewComponent cardStyleContent={{ width: (width + 55) * 0.4, height: 300, borderRadius: 8 }} cardStyleContainer={{ margin: 5, alignContent: 'center', width: (width + 55) * 0.4, height: 300, borderRadius: 8 }} data={[{ id: item.id, imgUrl: item.imgUrl, }]} />
-            )}
-            contentContainerStyle={{ paddingRight: 0 }}
-            showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}
-            scrollEnabled={true}
-          />
+        <View style={SearchStyleScreen.scrollViewContent}>
 
-          <View style={{ alignItems: 'center', justifyContent: 'center', margin: 15 }}>
-            <Text style={{ textDecorationLine: 'underline', fontSize: 18 }}>Explore More</Text>
-          </View>
-          <View style={HomeStylesComponent.filterGroup}>
-            <View style={{ paddingTop: 10, marginRight: 5, flexDirection: 'row' }}>
-              <Icon
-                source={'filter'}
-                color={primaryColor}
-                size={20}
-              >
-              </Icon>
-              <Text style={{ fontSize: 16, fontWeight: 'bold', }}>Filter</Text>
-            </View>
-            <SmallChipGroupComponent chipData={chipData} />
-          </View>
-
-          <View style={{ width: width * 0.9, display: 'flex', flexDirection: 'row' }}>
-            <View style={{ alignItems: 'flex-start' }}>
-              <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#000000' }}>New Style</Text>
-            </View>
-            <View style={{ flex: 1, alignItems: 'flex-end' }}>
-              <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#808991' }}>Sponsor</Text>
-            </View>
-          </View>
 
 
           {/* Regular FlatList */}
           <FlatList
-            style={HomeStylesComponent.flatlist}
+            style={SearchStyleScreen.flatlist}
             data={data.slice(0, 10)}
             keyExtractor={(item) => item.id}
             numColumns={2}
@@ -301,7 +477,7 @@ const HomeScreen = () => {
                 <IconButton
                   mode='outlined'
                   icon={'heart'}
-                  style={[HomeStylesComponent.iconCard, {}]}
+                  style={[SearchStyleScreen.iconCard, {}]}
                   size={15}
                   iconColor={addedItems.includes(item.id) ? '#C90801' : '#C3C3C3'}
                   onPress={() => {
@@ -322,13 +498,6 @@ const HomeScreen = () => {
             </Text>
           </Button>
 
-          <View style={{ width: width * 0.9, display: 'flex', flexDirection: 'row', }}>
-            <View style={{ alignItems: 'flex-start' }}>
-              <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#000000' }}>Store Recommendation</Text>
-            </View>
-          </View>
-
-
           <AddingToCollectionComponent></AddingToCollectionComponent>
           <CreateClothesDialogComponent></CreateClothesDialogComponent>
         </View>
@@ -340,4 +509,4 @@ const HomeScreen = () => {
 };
 
 
-export default HomeScreen;
+export default SearchScreen;

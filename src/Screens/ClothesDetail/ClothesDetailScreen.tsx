@@ -12,7 +12,9 @@ import { iconAvatarPostingSize, iconAvatarSize } from '../../root/Icon';
 import ClothesDetailStyleScreen from './ClothesDetailStyleScreen';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import Swiper from 'react-native-swiper';
-import { grayBackgroundColor, primaryColor } from '../../root/Colors';
+import { grayBackgroundColor, primaryColor, secondaryColor } from '../../root/Colors';
+import MaskedView from '@react-native-masked-view/masked-view';
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 
@@ -31,7 +33,7 @@ const data =
   nameOfProduct: "Áo thun con Thỏ",
   userID: {
     id: '1',
-    imgUrl: 'https://scontent.fsgn1-1.fna.fbcdn.net/v/t39.30808-1/411970383_4067132546846769_7576527316672886889_n.jpg?stp=dst-jpg_p160x160&_nc_cat=100&ccb=1-7&_nc_sid=5740b7&_nc_eui2=AeFdH0Zl_x8UG__6xk9JqkvOTkdekksELqhOR16SSwQuqPp3MbXMtwIjMDfbg_FqItxdVm9YuwNtmnQDyMQUjHAn&_nc_ohc=L7I68-6qhyAAX-5tuGQ&_nc_ht=scontent.fsgn1-1.fna&oh=00_AfA1o72hPWbzg8h2O5RgMax4bXfv7tJRC-Y_aJ_gYse9Hw&oe=6599FDA5',
+    imgUrl: 'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
     userName: 'Nguyễn Minh Tú'
   },
   typeOfClothes: "Áo thun",
@@ -49,9 +51,9 @@ const data =
 
 
 
-type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
+type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 const ClothesDetailScreen = () => {
-  const navigation = useNavigation<SignInScreenNavigationProp>();
+  const navigation = useNavigation<ScreenNavigationProp>();
 
   /*-----------------UseState variable-----------------*/
   const [showFullContent, setShowFullContent] = useState(false);
@@ -95,7 +97,24 @@ const ClothesDetailScreen = () => {
   return (
     <View style={ClothesDetailStyleScreen.container}>
       <AppBarHeaderComponent
-        title='Results'
+        title={
+          <View>
+            <MaskedView
+              maskElement={
+                <Text style={ClothesDetailStyleScreen.titlePage}>Details</Text>
+              }
+            >
+              <LinearGradient
+                colors={[secondaryColor, primaryColor]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0, y: 1 }}
+                style={ClothesDetailStyleScreen.linearBackground}
+              >
+                <Text style={{ opacity: 0 }}>Details</Text>
+              </LinearGradient>
+            </MaskedView>
+          </View>
+        }
         backAction={() => hanldeGoBack()}
       >
       </AppBarHeaderComponent>

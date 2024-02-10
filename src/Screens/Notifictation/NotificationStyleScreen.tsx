@@ -6,7 +6,7 @@ import { ITEM_WIDTH } from '../../components/ListView/ListViewStyleComponent';
 const { width, height } = Dimensions.get('window');
 const containerPadding = 16;
 
-const HomeStylesComponent = StyleSheet.create({
+const NotificationStyleScreen = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -78,4 +78,4 @@ const HomeStylesComponent = StyleSheet.create({
   },
 });
 
-export default HomeStylesComponent;
+export default NotificationStyleScreen;

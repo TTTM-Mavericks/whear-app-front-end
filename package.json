@@ -24,6 +24,7 @@
     "@reduxjs/toolkit": "^2.0.1",
     "@rneui/base": "^0.0.0-edge.2",
     "@rneui/themed": "^0.0.0-edge.2",
+    "@stomp/stompjs": "^7.0.0",
     "axios": "^1.6.5",
     "cloudinary-react-native": "^0.2.0",
     "deprecated-react-native-prop-types": "^5.0.0",
@@ -54,6 +55,8 @@
     "react-native-vector-icons": "^10.0.3",
     "react-redux": "^9.0.4",
     "redux": "^5.0.0",
+    "sockjs-client": "^1.6.1",
+    "stompjs": "^2.3.3",
     "sync-storage": "^0.4.2"
   },
   "devDependencies": {
@@ -61,6 +64,7 @@
     "@types/react": "~18.2.14",
     "@types/react-native": "^0.73.0",
     "@types/react-native-snap-carousel": "^3.8.10",
+    "@types/sockjs-client": "^1.5.4",
     "miragejs": "^0.1.48",
     "typescript": "^5.3.3"
   },
