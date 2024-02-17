@@ -4,6 +4,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 interface AppState {
     spinner: boolean;
+    title?: string
 }
 
 const instructions = Platform.select({
@@ -13,14 +14,14 @@ const instructions = Platform.select({
         'Shake or press menu button for dev menu',
 });
 
-const LoadingComponent: React.FC<AppState> = ({ spinner }) => {
+const LoadingComponent: React.FC<AppState> = ({ spinner, title }) => {
 
 
 
     return (
         <Spinner
             visible={spinner}
-            textContent={'Loading...'}
+            textContent={title ? title : 'Loading...'}
             textStyle={styles.spinnerTextStyle}
         />
 

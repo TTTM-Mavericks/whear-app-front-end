@@ -10,6 +10,9 @@ import ListViewComponent from '../../components/ListView/ListViewComponent';
 import { primaryColor, secondaryColor } from '../../root/Colors';
 import HotStoreStyleScreen from './HotStoreStyleScreen';
 import TouchabaleActiveActionButton from '../../components/Common/TouchableActive/TouchabaleActiveActionButton';
+import { RootStackParamList } from '../../root/RootStackParams';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { useNavigation } from '@react-navigation/native';
 
 interface Clothes {
   clothesId: string;
@@ -107,13 +110,16 @@ const HOST_STORE_DATA: HotStore[] = [
     ],
   },
 ];
+type RouteNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 
 const HotStoreScreen = () => {
   const [scrollUp, setScrollUp] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const navigation = useNavigation<RouteNavigationProp>();
+
 
   function hanldeGoBack(): void {
-    alert('back');
+    navigation.goBack();
   }
 
   const handleScroll = (event: any) => {
@@ -137,8 +143,6 @@ const HotStoreScreen = () => {
   };
   return (
     <View style={HotStoreStyleScreen.container}>
-      <TouchabaleActiveActionButton ></TouchabaleActiveActionButton>
-
       <AppBarHeaderComponent
         backAction={() => hanldeGoBack()}
         title={
@@ -159,12 +163,7 @@ const HotStoreScreen = () => {
             </MaskedView>
           </View>
         }
-        iconChild={
-          <>
-            <Appbar.Action icon={'magnify'} onPress={handleSearch} />
-            {/* <Appbar.Action icon='dots-vertical' onPress={handleMore} /> */}
-          </>
-        }
+        
       ></AppBarHeaderComponent>
 
       <View style={HotStoreStyleScreen.scrollView}>

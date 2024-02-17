@@ -215,8 +215,6 @@ const CollectionsScreen = () => {
 
   return (
     <View style={CollectionsStyleScreen.container}>
-      <TouchabaleActiveActionButton ></TouchabaleActiveActionButton>
-
       {/* {scrollUp && ( */}
       <AppBarHeaderComponent
         title={

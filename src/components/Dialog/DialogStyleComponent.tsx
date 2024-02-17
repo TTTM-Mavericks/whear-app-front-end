@@ -84,7 +84,7 @@ const DialogStylesComponent = StyleSheet.create({
 
     // ----------------------------------------//
     postingDialogContainer: {
-        height: height*0.9,
+        height: height * 0.9,
         width: width,
         margin: 0,
         bottom: 0,
@@ -140,7 +140,7 @@ const DialogStylesComponent = StyleSheet.create({
 
     // -----------------------Comments--------------------------
 
-    
+
     commentDialogContent: {
         marginLeft: -20,
         width: width,
@@ -221,28 +221,55 @@ const DialogStylesComponent = StyleSheet.create({
 
     container: {
         flex: 1,
-      },
-      inner: {
+    },
+    inner: {
         padding: 24,
         flex: 1,
         justifyContent: 'space-around',
-      },
-      header: {
+    },
+    header: {
         fontSize: 36,
         marginBottom: 48,
-      },
-      textInput: {
+    },
+    textInput: {
         height: 40,
         borderColor: '#000000',
         borderBottomWidth: 1,
         marginBottom: 36,
-      },
-      btnContainer: {
+    },
+    btnContainer: {
         backgroundColor: 'white',
         marginTop: 12,
-      },
+    },
+
+    // --------------UpGrade Dialog---------------------
+    buttonGroup_button: {
+        width: width * 0.5,
+        height: height * 0.05,
+        marginLeft: 5,
+        marginRight: 5,
+        borderRadius: 5,
+        borderWidth: 0,
 
 
+    },
+    buttonGroup_button_lable: {
+        height: height * 0.045,
+        marginTop: height * 0.05 * 0.8,
+        fontSize: 13,
+        fontWeight: '400',
+        color: backgroundColor,
+        flexDirection: 'row-reverse',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 8
+
+    },
+    contentText: {
+        fontSize: 13,
+        marginBottom: 5,
+        marginTop: 5
+    }
 
 });
 

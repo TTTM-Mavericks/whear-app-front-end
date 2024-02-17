@@ -1,11 +1,13 @@
 import React from 'react';
-import { Button as PaperButton } from 'react-native-paper';
-import { StyleProp, Text, ViewStyle } from 'react-native';
+import { Button, Button as PaperButton } from 'react-native-paper';
+import { Platform, StyleProp, Text, View, ViewStyle } from 'react-native';
+import { primaryColor } from '../../root/Colors';
+import ButtonDefaultStyleComponent from './ButtonDefaultStyleComponent';
+import { height } from '../../root/ResponsiveSize';
 
 interface ButtonComponentProps {
   title?: string;
   width?: number;
-  height: number;
   backgroundColor?: string;
   textColor?: string;
   mode?: "text" | "outlined" | "contained" | "elevated";
@@ -13,7 +15,7 @@ interface ButtonComponentProps {
   onPress: () => void;
 }
 
-const ButtonComponent: React.FC<ButtonComponentProps> = ({ title, width, height, backgroundColor, textColor, mode, style, onPress }) => {
+const ButtonDefaultComponent: React.FC<ButtonComponentProps> = ({ title, width, backgroundColor, textColor, mode, style, onPress }) => {
   const buttonStyle = {
     width,
     height,
@@ -22,10 +24,17 @@ const ButtonComponent: React.FC<ButtonComponentProps> = ({ title, width, height,
   };
 
   return (
-    <PaperButton mode={mode} onPress={onPress} style={buttonStyle}>
-        <Text style={{color: textColor}}>{title}</Text>
-    </PaperButton>
+    <View style={ButtonDefaultStyleComponent.buttonArea}>
+        <Button
+          mode='outlined'
+          contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
+          style={[ButtonDefaultStyleComponent.buttonGroup_button, { backgroundColor: primaryColor, marginBottom: 20 }, style]}
+          labelStyle={[ButtonDefaultStyleComponent.buttonGroup_button_lable,]}
+        >
+          <Text style={{ fontWeight: 'bold', fontSize: 13, color: 'black' }}>{title}</Text>
+        </Button>
+      </View>
   );
 };
 
-export default ButtonComponent;
+export default ButtonDefaultComponent;

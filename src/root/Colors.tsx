@@ -12,6 +12,12 @@ export const grayBorderColor = "#929AA2";
 export const grayBackgroundColor = "#F5F5F5";
 export const greenSpringColor = "#BAF667";
 export const grayText='#D4D4D4'
+export const pinkColor='#EA4262'
+export const purpleColor='#9C9DE9'
+export const grayColor='#707B85'
+
+
+
 export const colorsArayList = [
     { value: 'RED', label: '#FF0000' },
     { value: 'ORANGE', label: '#FFA500' },

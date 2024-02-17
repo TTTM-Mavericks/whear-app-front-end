@@ -39,6 +39,7 @@ const ChooseStyleYouLoveStyleScreen = StyleSheet.create({
     fontSize: 22,
     color: grayText,
     lineHeight: 33,
+    marginTop: 10
   },
   iconCard: {
     position: 'absolute',
@@ -72,7 +73,18 @@ const ChooseStyleYouLoveStyleScreen = StyleSheet.create({
     fontSize: cardTextFontSize,
     textTransform: 'uppercase',
     fontWeight: '600',
-  }
+  },
+  textDescription: {
+    marginTop: 20,
+    color: "#D4D4D4",
+    width: 306,
+    height: 100,
+    fontSize: 28,
+    fontStyle: "normal",
+    fontWeight: "400",
+    lineHeight: 33,
+    letterSpacing: -1,
+  },
 });
 
 export default ChooseStyleYouLoveStyleScreen;

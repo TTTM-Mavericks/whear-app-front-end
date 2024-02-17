@@ -77,9 +77,8 @@ const AppBarFooterStyleComponents = StyleSheet.create({
     button: {
         width: 30,
         height: 30,
-        marginLeft: 15,
-        marginRight: 20,
-        marginTop: -20
+        marginLeft: '6%',
+        marginRight: '6%',
     },
     // centerButton: {
     //     width: 50,
@@ -102,7 +101,22 @@ const AppBarFooterStyleComponents = StyleSheet.create({
         borderRadius: 90, // Make the button circular
         left: '40%', // Center the button horizontally
         top: '-10%', // Move the button up by 10% of the screen height
-    }
+    },
+    rhombusContainer: {
+        width: 40,
+        height: 40,
+        backgroundColor: primaryColor,
+        transform: [{ rotate: '45deg' }],
+        overflow: 'hidden',
+        alignContent: 'center',
+        alignItems: 'center',
+        marginLeft: '6%',
+        marginRight: '6%',
+      },
+      iconButton: {
+        width: '100%',
+        height: '100%',
+      },
 
 
 });
