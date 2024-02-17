@@ -125,7 +125,7 @@ const CreateClothesDialogComponent = () => {
                                 <View style={DialogStylesComponent.pictureArea} >
                                     <Image source={{ uri: imageUrlState }} style={DialogStylesComponent.pictureArea}></Image>
                                     <View style={DialogStylesComponent.iconUploadPicture}>
-                                        <AddImageButtonComponent isAddNewImage = {true}></AddImageButtonComponent>
+                                        {/* <AddImageButtonComponent isAddNewImage = {true}></AddImageButtonComponent> */}
                                     </View>
                                 </View>
                                 <View style={DialogStylesComponent.clothesPropsArea}>

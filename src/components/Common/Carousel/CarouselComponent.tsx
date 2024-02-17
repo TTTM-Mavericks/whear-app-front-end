@@ -11,11 +11,9 @@ interface childrenInterface {
 }
 const CarouselComponent: React.FC<childrenInterface> = ({ child, dataObj }) => {
     return (
-        <View style={styles.container}>
-            <SafeAreaView >
-                <CarouselCards child={child} dataObj={dataObj} />
-            </SafeAreaView>
-        </View>
+            <View style={{marginBottom: 20}}>
+                    <CarouselCards child={child} dataObj={dataObj} />
+            </View>
     );
 }
 

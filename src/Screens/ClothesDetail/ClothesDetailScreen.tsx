@@ -425,6 +425,12 @@ const ClothesDetailScreen = () => {
                 </View>
               )}
 
+              <View style={[ClothesDetailStyleScreen.container_postingBar, {marginTop: 10}]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10, paddingLeft: 10 }}>
+                  {clothData?.hashtag?.map((item, key) => (<Chip style={{ marginRight: 5, backgroundColor: grayBackgroundColor }} key={key} mode='flat'>{item}</Chip>))}
+                </View>
+              </View>
+
               <View style={ClothesDetailStyleScreen.container_postingBar}>
                 <View style={{ flexDirection: 'row', width: width * 0.8, height: 'auto', paddingTop: 10, paddingLeft: 10 }}>
                   <View>
@@ -536,7 +542,7 @@ const ClothesDetailScreen = () => {
                             <Image
                               style={{ width: 100, height: 150, borderRadius: 5 }}
                               resizeMode="cover"
-                              source={ image.imgUrl }
+                              source={image.imgUrl}
                             />
                           </View>
                         </TouchableOpacity>

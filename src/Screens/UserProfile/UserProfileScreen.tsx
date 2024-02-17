@@ -242,23 +242,23 @@ const UserProfileScreen = () => {
    * Fetch data to get follower User
    */
   useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const userIDParam = (route.params as { userID?: string })?.userID;
-    //     const response = await api.get(`/api/v1/follow/get-all-follower-user?userid=${userIDParam}`);
-    //     if (response.success === 200) {
-    //       setFollower(response.data);
-    //       setCountFollower(response.data.length);
-    //     } else {
-    //       // console.log(response.message);
-    //     }
+    const fetchData = async () => {
+      try {
+        const userIDParam = (route.params as { userID?: string })?.userID;
+        const response = await api.get(`/api/v1/follow/get-all-follower-user?userid=${userIDParam}`);
+        if (response.success === 200) {
+          setFollower(response.data);
+          setCountFollower(response.data.length);
+        } else {
+          // console.log(response.message);
+        }
 
-    //   } catch (error) {
-    //     console.error("An error occurred during data fetching:", error);
-    //   }
-    // };
+      } catch (error) {
+        console.error("An error occurred during data fetching:", error);
+      }
+    };
 
-    // fetchData();
+    fetchData();
   }, []);
 
 
@@ -592,11 +592,9 @@ const UserProfileScreen = () => {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         onScroll={(event) => handleScroll(event)}
-        scrollEventThrottle={16} // Adjust as needed
+        scrollEventThrottle={16}
       >
         <View style={UserProfileStyleScreen.scrollViewContent}>
-
-
           <FlatList
             style={UserProfileStyleScreen.flatlist}
             data={data.slice(0, 10)}
@@ -609,9 +607,7 @@ const UserProfileScreen = () => {
             showsVerticalScrollIndicator={false}
             scrollEnabled={false}
           />
-
           <PostingDialogComponent></PostingDialogComponent>
-
         </View>
       </ScrollView >
 
@@ -646,14 +642,12 @@ const UserProfileScreen = () => {
                   </View>
                 )}
               >
-
               </FlatList>
             ) : (
               <View style={{ alignContent: 'center', alignItems: 'center' }}>
                 <Text style={{ fontSize: 12, fontWeight: '300', color: 'black' }}>You do not follow any user</Text>
               </View>
             )}
-
           </Dialog.Content>
         </Dialog>
       </Portal>

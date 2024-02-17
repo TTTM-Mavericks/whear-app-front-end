@@ -4,20 +4,19 @@ import {
   greenSpringColor,
   backgroundColor,
 } from "../../root/Colors";
-import { ITEM_HEIGHT } from "../../components/ListView/ListViewStyleComponent";
-import { ITEM_WIDTH } from "../../components/Common/AppBarHeader/AppBarHeaderStyleComponent";
+import { ITEM_HEIGHT } from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
+import { ITEM_WIDTH } from '../../components/ListView/ListViewStyleComponent';
 
 const { width, height } = Dimensions.get("window");
-const containerPadding = 0;
+const containerPadding = 16;
 
 const NewsStyle = StyleSheet.create({
   container: {
-    height: "auto",
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: containerPadding,
-    backgroundColor: backgroundColor,
+    backgroundColor: backgroundColor
   },
   chipButton: {
     marginLeft: width * 0.02,
@@ -73,10 +72,10 @@ const NewsStyle = StyleSheet.create({
   },
   titlePage: {
     fontSize: 20,
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    paddingTop: 12,
+    fontWeight: "700",
+    alignSelf: "center",
     height: ITEM_HEIGHT,
+    paddingTop: 8
   },
   linearBackground: {
     height: ITEM_HEIGHT,

@@ -1,10 +1,10 @@
 import { StyleSheet, Dimensions } from "react-native";
 import { backgroundColor } from "../../root/Colors";
-import { ITEM_HEIGHT } from "../../components/ListView/ListViewStyleComponent";
-import { ITEM_WIDTH } from "../../components/Common/AppBarHeader/AppBarHeaderStyleComponent";
+import { ITEM_HEIGHT } from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
+import { ITEM_WIDTH } from '../../components/ListView/ListViewStyleComponent';
 
 const { width, height } = Dimensions.get("window");
-const containerPadding = 0;
+const containerPadding = 16;
 
 const MessageStyle = StyleSheet.create({
   mainContainer: {
@@ -13,15 +13,15 @@ const MessageStyle = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: containerPadding,
-    paddingTop: height * 0.07,
+    paddingTop: height * 0.05,
     backgroundColor: backgroundColor,
   },
   titleTopBar: {
     fontSize: 20,
     fontWeight: "700",
     alignSelf: "center",
-    paddingTop: 12,
     height: ITEM_HEIGHT,
+    paddingTop: 10
   },
   linearBackground: {
     height: ITEM_HEIGHT,
