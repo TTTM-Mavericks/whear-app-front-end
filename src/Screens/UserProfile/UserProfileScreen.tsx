@@ -592,11 +592,9 @@ const UserProfileScreen = () => {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         onScroll={(event) => handleScroll(event)}
-        scrollEventThrottle={16} // Adjust as needed
+        scrollEventThrottle={16}
       >
         <View style={UserProfileStyleScreen.scrollViewContent}>
-
-
           <FlatList
             style={UserProfileStyleScreen.flatlist}
             data={data.slice(0, 10)}
@@ -609,9 +607,7 @@ const UserProfileScreen = () => {
             showsVerticalScrollIndicator={false}
             scrollEnabled={false}
           />
-
           <PostingDialogComponent></PostingDialogComponent>
-
         </View>
       </ScrollView >
 
@@ -646,14 +642,12 @@ const UserProfileScreen = () => {
                   </View>
                 )}
               >
-
               </FlatList>
             ) : (
               <View style={{ alignContent: 'center', alignItems: 'center' }}>
                 <Text style={{ fontSize: 12, fontWeight: '300', color: 'black' }}>You do not follow any user</Text>
               </View>
             )}
-
           </Dialog.Content>
         </Dialog>
       </Portal>

@@ -6,7 +6,9 @@ import AppBarHeaderComponent from "../../components/Common/AppBarHeader/AppBarHe
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
 import { primaryColor, secondaryColor } from "../../root/Colors";
-import TouchabaleActiveActionButton from "../../components/Common/TouchableActive/TouchabaleActiveActionButton";
+import { RootStackParamList } from "../../root/RootStackParams";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 
 interface NewsItems {
   id: number;
@@ -14,9 +16,13 @@ interface NewsItems {
   title: string;
   description: string;
 }
+type RouteNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
+
 
 export default function NewsScreen() {
   const { height, width } = Dimensions.get("window");
+  const navigation = useNavigation<RouteNavigationProp>();
+
 
   const chipItems = [
     {
@@ -179,17 +185,20 @@ export default function NewsScreen() {
     </View>
   );
 
-  function hanldeGoBack(): void {}
+  function hanldeGoBack(): void {
+    navigation.goBack();
+  }
 
   return (
     <View style={NewsStyle.container}>
-      <TouchabaleActiveActionButton ></TouchabaleActiveActionButton>
 
       <AppBarHeaderComponent
         title={
-          <View>
+          <View style={NewsStyle.titlePage}>
             <MaskedView
-              maskElement={<Text style={NewsStyle.titlePage}>News</Text>}
+              maskElement={
+                <Text style={NewsStyle.titlePage}>Hot News</Text>
+              }
             >
               <LinearGradient
                 colors={[secondaryColor, primaryColor]}
@@ -197,14 +206,14 @@ export default function NewsScreen() {
                 end={{ x: 0, y: 1 }}
                 style={NewsStyle.linearBackground}
               >
-                <Text style={{ opacity: 0 }}>News</Text>
+                <Text style={{ opacity: 0 }}>Hot News</Text>
               </LinearGradient>
             </MaskedView>
           </View>
         }
-        isHideIcon1={true}
         backAction={() => hanldeGoBack()}
-      ></AppBarHeaderComponent>
+      >
+      </AppBarHeaderComponent>
       <View style={NewsStyle.chipButton}>
         {chipItems.map((i) => (
           <Chip

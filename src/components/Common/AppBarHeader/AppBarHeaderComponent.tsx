@@ -70,7 +70,7 @@ const AppBarHeaderComponent: React.FC<appBarProps> = (
       <View style={{ position: 'relative' }}>
         <Appbar.Action onPress={_handleNotification} style={isHideIcon2 && { display: 'none' }} icon={require('../../../assets/icon/bell.png')} />
         {numberOfNotification > 0 && (
-          <Badge style={{ position: 'absolute', top: 5, right: 5 }}>{numberOfNotification}</Badge>
+          <Badge style={{ position: 'absolute', top: 5, right: 5,  display: isHideIcon2 ? 'none' : 'flex' }}>{numberOfNotification}</Badge>
         )}
       </View>
       {iconChild}
