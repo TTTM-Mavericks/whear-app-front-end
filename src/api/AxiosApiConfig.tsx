@@ -121,7 +121,6 @@ const getRequestConfig = (accessToken?: string, params?: any): AxiosRequestConfi
 
   if (accessToken) {
     headers['Authorization'] =  "Bearer " + `${accessToken}`;
-    console.log('headers: ', headers);
   }
 
   return {

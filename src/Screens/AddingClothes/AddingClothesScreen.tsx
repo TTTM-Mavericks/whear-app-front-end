@@ -246,7 +246,6 @@ const AddingClothesScreen = () => {
 
   const handleSubmit = () => {
     // Handle the submission logic here
-    console.log('Multiline Text:', clothDetail);
   };
 
   const [state, setState] = React.useState({ open: false });
@@ -272,7 +271,6 @@ const AddingClothesScreen = () => {
       const tokenStorage = await AsyncStorage.getItem('access_token');
       if (tokenStorage) {
         const tokenString = JSON.parse(tokenStorage);
-        console.log('userParse: ', tokenString);
         setAccessToken(tokenString);
       }
     }
@@ -330,7 +328,6 @@ const AddingClothesScreen = () => {
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', e => {
       setHeightOfKeyBoard(e.endCoordinates.height)
-      console.log(e.endCoordinates.height);
       setIskeyboardOpen(true);
     }
     );
@@ -446,7 +443,6 @@ const AddingClothesScreen = () => {
 
       }
 
-      console.log('clothReq', clothRequest);
 
       setIsLoading(true);
       const response = await api.post('/api/v1/clothes/create-clothes', clothRequest, accessToken);
@@ -545,7 +541,7 @@ const AddingClothesScreen = () => {
                 <Image source={{ uri: imageUrlState }} style={AddingClothesStyleScreen.picture}></Image>
                 <ActivityIndicator animating={isLoadingImage && isUploadedImage} color={primaryColor} style={{ position: 'absolute', top: width * 0.4, left: width * 0.23 }} />
                 <View style={AddingClothesStyleScreen.iconUploadPicture}>
-                  <AddImageButtonComponent width={9} height={16} isAddNewImage={true} iconColor={primaryColor}></AddImageButtonComponent>
+                  <AddImageButtonComponent width={12} height={16} isAddNewImage={true} iconColor={primaryColor}></AddImageButtonComponent>
                 </View>
               </View>
 
@@ -691,7 +687,7 @@ const AddingClothesScreen = () => {
 
             </View>
 
-            <View style={[AddingClothesStyleScreen.multilineTextContainer, Platform.OS === 'android' && { marginTop: 20 }]}>
+            <View style={[AddingClothesStyleScreen.multilineTextContainer, Platform.OS === 'android' && { marginTop: 50 }]}>
               <Text style={AddingClothesStyleScreen.lableDropDown}>Hashtag</Text>
               <TextInput
                 value={hashtagTxt}

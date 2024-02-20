@@ -44,7 +44,7 @@ export interface ClothesInterface {
     clothesColors?: string[];
     clothesSizes?: string[];
     clothesImages: string[];
-    react?:number,
+    react?: number,
     clothesStyle?: string[];
 }
 
@@ -72,7 +72,34 @@ export interface NotificationInterface {
     dateTime?: string;
 }
 
+export interface PostingInterface {
+    postID?: number;
+    userResponse?: UserInterFace;
+    typeOfPosts?: string;
+    content?: string;
+    hashtag?: string[];
+    image?: string[];
+    date?: string;
+    status?: string;
+    comment?: CommentsInterface[];
+    react?: ReactInterface[];
+    reacted?: boolean;
+}
 
+
+export interface CommentsInterface {
+    commentID: any,
+    user: UserInterFace,
+    postID?: any,
+    content: string,
+    date?: string
+}
+
+export interface ReactInterface {
+    userID: any,
+    postID: any,
+    react: any,
+}
 
 
 

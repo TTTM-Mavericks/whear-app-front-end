@@ -104,7 +104,7 @@ export default function App() {
                 component={SocialScreen}
                 options={{ headerShown: false }}
               />
-
+              
               <Stack.Screen
                 name='PostingDetail'
                 component={PostingDetailScreen}

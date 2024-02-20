@@ -188,7 +188,7 @@ const AddingClothesStyleScreen = StyleSheet.create({
     backgroundColor: backgroundColor,
   },
   multilineTextContainer:{
-    marginTop: 10,
+    marginTop: 30,
     marginLeft: width*0.05
   },
   buttonGroup_button: {
