@@ -56,7 +56,6 @@ const CarouselCards: React.FC<CarouselCardsProps> = ({ child, dataObj }) => {
 
 const styles = StyleSheet.create({
     containerStyle: {
-        marginTop: width * 0.1,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -68,7 +67,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0, 0, 0, 0.92)',
     },
     dotContainerStyle: {
-        marginHorizontal: 5,
     }
 })
 

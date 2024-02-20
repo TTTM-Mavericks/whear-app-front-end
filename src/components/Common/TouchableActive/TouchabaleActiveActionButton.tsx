@@ -51,13 +51,11 @@ export default function TouchabaleActiveActionButton() {
 
 
   useEffect(() => {
-    console.log('---------------------');
     const retrievePosition = async () => {
       try {
         const storedPosition = await AsyncStorage.getItem('touchablePosition');
         if (storedPosition !== null) {
           const parsedPosition = JSON.parse(storedPosition);
-          console.log('Retrieved position: ', parsedPosition);
           setInitX(parsedPosition.x);
           setInitY(parsedPosition.y);
         }
@@ -78,7 +76,6 @@ export default function TouchabaleActiveActionButton() {
         y: initY,
       };
 
-      console.log('position: ', position);
 
       try {
         AsyncStorage.setItem('touchablePosition', JSON.stringify(position));

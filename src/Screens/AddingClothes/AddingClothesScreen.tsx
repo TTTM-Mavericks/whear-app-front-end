@@ -156,6 +156,37 @@ const dropdownData = {
     { value: 'IVORY', label: '#FFFFF0' },
   ],
 
+  fashionStyles: [
+    { label: 'CYBERPUNK', value: 'CYBERPUNK', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'CLASSIC', value: 'CLASSIC', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'ROCK', value: 'ROCK', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'PREPPY', value: 'PREPPY', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'NORMCORE', value: 'NORMCORE', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'MINIMALISM', value: 'MINIMALISM', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'BASIC', value: 'BASIC', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'SPORTY', value: 'SPORTY', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'PARISIAN', value: 'PARISIAN', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'GOTHIC', value: 'GOTHIC', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'BOHEMIAN', value: 'BOHEMIAN', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'Y2K', value: 'Y2K', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'OLD_MONEY', value: 'OLD_MONEY', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'HIPPIE', value: 'HIPPIE', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'VINTAGE', value: 'VINTAGE', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'INDIE', value: 'INDIE', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+    { label: 'E-GIRL', value: 'E_GIRL', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+  ],
+
+  bodyShap: [
+    { label: 'HOURGLASS SHAPE', value: 'HOURGLASS_SHAPE', imgUrl: 'URL_HERE' },
+    { label: 'PEAR SHAPE', value: 'PEAR_SHAPE', imgUrl: 'URL_HERE' },
+    { label: 'APPLE SHAPE', value: 'APPLE_SHAPE', imgUrl: 'URL_HERE' },
+    { label: 'RECTANGLE SHAPE', value: 'RECTANGLE_SHAPE', imgUrl: 'URL_HERE' },
+    { label: 'INVERTED TRIANGLE SHAPE', value: 'INVERTED_TRIANGLE_SHAPE', imgUrl: 'URL_HERE' },
+    { label: 'ROUND SHAPE', value: 'ROUND_SHAPE', imgUrl: 'URL_HERE' },
+    { label: 'LEAN OR SLIM SHAPE', value: 'LEAN_OR_SLIM_SHAPE', imgUrl: 'URL_HERE' },
+  ]
+  
+
 
 };
 
@@ -176,6 +207,7 @@ const AddingClothesScreen = () => {
   const [selectedTypeOfClothes, setSelectedTypeOfClothes] = useState('');
   const [selectedShape, setSelectedShape] = useState('');
   const [selectedSeason, setSelectedSeason] = useState<string[]>([]);
+  const [selectedStyle, setSelectedStyle] = useState<string[]>([]);
   const [selectedMaterial, setSelectedMaterial] = useState('');
   const [selectedClothesSize, setSelectedClothesSize] = useState<string[]>([]);
   const [selectedColor, setSelectedColor] = useState<string[]>([]);
@@ -193,6 +225,8 @@ const AddingClothesScreen = () => {
   const [openTypeOfCloth, setOpenTypeOfCloth] = useState(false);
   const [openShape, setOpenShape] = useState(false);
   const [openSeason, setOpenSeason] = useState(false);
+  const [openStyle, setOpenStyle] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
   const [accessToken, setAccessToken] = useState('');
   const [canAdd, setCanAdd] = useState(false);
@@ -212,7 +246,6 @@ const AddingClothesScreen = () => {
 
   const handleSubmit = () => {
     // Handle the submission logic here
-    console.log('Multiline Text:', clothDetail);
   };
 
   const [state, setState] = React.useState({ open: false });
@@ -238,7 +271,6 @@ const AddingClothesScreen = () => {
       const tokenStorage = await AsyncStorage.getItem('access_token');
       if (tokenStorage) {
         const tokenString = JSON.parse(tokenStorage);
-        console.log('userParse: ', tokenString);
         setAccessToken(tokenString);
       }
     }
@@ -296,7 +328,6 @@ const AddingClothesScreen = () => {
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', e => {
       setHeightOfKeyBoard(e.endCoordinates.height)
-      console.log(e.endCoordinates.height);
       setIskeyboardOpen(true);
     }
     );
@@ -348,6 +379,10 @@ const AddingClothesScreen = () => {
     setOpenSeason(!openShape)
   }
 
+  const handleOpenStyle = () => {
+    setOpenStyle(!openStyle)
+  }
+
   const handlePickColor = () => {
 
   }
@@ -376,6 +411,13 @@ const AddingClothesScreen = () => {
     }
   };
 
+  const handleStyleonChange = (style: any) => {
+    if (selectedStyle.includes(style)) {
+      setSelectedStyle(selectedStyle.filter((c) => c !== style));
+    } else {
+      setSelectedStyle([...selectedStyle, style]);
+    }
+  };
   /**
      * SignUp handler
      */
@@ -397,10 +439,10 @@ const AddingClothesScreen = () => {
         description: clothDetail,
         link: shopLink,
         hashtag: hashtagArray,
+        clothesStyle: selectedStyle,
 
       }
 
-      console.log('clothReq', clothRequest);
 
       setIsLoading(true);
       const response = await api.post('/api/v1/clothes/create-clothes', clothRequest, accessToken);
@@ -439,7 +481,7 @@ const AddingClothesScreen = () => {
 
 
   return (
-    <View style={[AddingClothesStyleScreen.container, ]}>
+    <View style={[AddingClothesStyleScreen.container,]}>
       <Toast
         position='top'
         topOffset={30}
@@ -470,7 +512,7 @@ const AddingClothesScreen = () => {
 
       <ScrollView
         persistentScrollbar={false}
-        style={[AddingClothesStyleScreen.scrollView, Platform.OS === 'ios' && isKeyBoardOpen && { position: 'absolute', bottom: heightOfKeyBoard , backgroundColor: backgroundColor }]}
+        style={[AddingClothesStyleScreen.scrollView, Platform.OS === 'ios' && isKeyBoardOpen && { position: 'absolute', bottom: heightOfKeyBoard, backgroundColor: backgroundColor }]}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
@@ -499,13 +541,31 @@ const AddingClothesScreen = () => {
                 <Image source={{ uri: imageUrlState }} style={AddingClothesStyleScreen.picture}></Image>
                 <ActivityIndicator animating={isLoadingImage && isUploadedImage} color={primaryColor} style={{ position: 'absolute', top: width * 0.4, left: width * 0.23 }} />
                 <View style={AddingClothesStyleScreen.iconUploadPicture}>
-                  <AddImageButtonComponent width={9} height={16} isAddNewImage={true} iconColor={primaryColor}></AddImageButtonComponent>
+                  <AddImageButtonComponent width={12} height={16} isAddNewImage={true} iconColor={primaryColor}></AddImageButtonComponent>
                 </View>
               </View>
 
               {/* --------clothes props---------- */}
               <View style={AddingClothesStyleScreen.clothesPropsArea}>
                 <View style={{ alignItems: 'flex-end' }}>
+                  {/* Style Of Cloth */}
+                  <View style={AddingClothesStyleScreen.dropdownContainer}>
+                    <Text style={AddingClothesStyleScreen.lableDropDown}>Style</Text>
+                    <TouchableOpacity onPress={handleOpenStyle}>
+                      <View
+                        style={[
+                          AddingClothesStyleScreen.buttondropDownStyle,
+                          {
+                            alignItems: 'center',
+                            alignContent: 'center',
+                            padding: '5%',
+                          },
+                        ]}
+                      >
+                        <Text style={[AddingClothesStyleScreen.buttonTextStyle, { paddingTop: 0 }]}>{selectedStyle.length > 0 ? selectedStyle + ', ' : 'Select options.'}</Text>
+                      </View>
+                    </TouchableOpacity>
+                  </View>
 
                   {/* Type Of Cloth */}
                   <View style={AddingClothesStyleScreen.dropdownContainer}>
@@ -627,7 +687,7 @@ const AddingClothesScreen = () => {
 
             </View>
 
-            <View style={[AddingClothesStyleScreen.multilineTextContainer, Platform.OS === 'android' && { marginTop: 20 }]}>
+            <View style={[AddingClothesStyleScreen.multilineTextContainer, Platform.OS === 'android' && { marginTop: 50 }]}>
               <Text style={AddingClothesStyleScreen.lableDropDown}>Hashtag</Text>
               <TextInput
                 value={hashtagTxt}
@@ -808,6 +868,51 @@ const AddingClothesScreen = () => {
         </ScrollView>
         <Dialog.Actions>
           <TouchableOpacity onPress={() => setOpenSeason(false)}>
+            <Text>Done</Text>
+          </TouchableOpacity>
+        </Dialog.Actions>
+      </Dialog>
+
+      {/* Style */}
+      <Dialog visible={openStyle} onDismiss={() => setOpenStyle(false)} style={{ backgroundColor: backgroundColor, width: width * 0.85 }}>
+        <Dialog.Title style={{ fontSize: 15 }}>Style</Dialog.Title>
+        <ScrollView style={{ height: 400 }}>
+          <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignContent: 'center', alignItems: 'center', marginLeft: 10, marginBottom: 20 }}>
+            {dropdownData.fashionStyles.map((style, key1) => (
+              <View key={style.value} style={{ flexDirection: 'row', marginBottom: 50, alignItems: 'center' }}>
+                <View key={style.value} style={{ width: width * 0.40, height: 150, alignItems: 'center' }}>
+                  <View style={{ width: width * 0.3, height: 150, borderRadius: 20 }} >
+                    <Image source={{ uri: style.imgUrl }} style={{ width: width * 0.3, height: 150, borderRadius: 20 }} />
+                  </View>
+                  <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20, alignContent: 'flex-start' }}>
+                    {Platform.OS === 'ios' ? (
+                      <RadioButton.IOS
+                        key={style.value}
+                        value={style.label}
+                        color={primaryColor}
+                        status={selectedStyle.includes(style.value) ? 'checked' : 'unchecked'}
+                        onPress={() => handleStyleonChange(style.value)}
+                      />
+                    ) : (
+                      <RadioButton.Android
+                        key={style.value}
+                        value={style.label}
+                        color={primaryColor}
+                        status={selectedStyle.includes(style.value) ? 'checked' : 'unchecked'}
+                        onPress={() => handleStyleonChange(style.value)}
+
+                      />
+                    )}
+
+                    <Text style={{ fontSize: 13 }}>{style.label}</Text>
+                  </View>
+                </View>
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+        <Dialog.Actions>
+          <TouchableOpacity onPress={() => setOpenStyle(false)}>
             <Text>Done</Text>
           </TouchableOpacity>
         </Dialog.Actions>

@@ -9,6 +9,9 @@ import AppBarHeaderComponent from "../../components/Common/AppBarHeader/AppBarHe
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
 import { primaryColor, secondaryColor } from "../../root/Colors";
+import { RootStackParamList } from "../../root/RootStackParams";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
 
 interface MessageItems {
   id: number;
@@ -17,9 +20,12 @@ interface MessageItems {
   description: string;
 }
 
+type RouteNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
+
 function MessageScreen() {
   const { width, height } = Dimensions.get("window");
-  // fake data 2 phút trước
+
+  const navigation = useNavigation<RouteNavigationProp>();
 
   let twoMinutesAgo = new Date(Date.now() - 2 * 60 * 1000);
   let timeAgo = moment(twoMinutesAgo).fromNow();
@@ -110,7 +116,7 @@ function MessageScreen() {
     <View style={MessageStyle.mainContainer}>
       <AppBarHeaderComponent
         title={
-          <View>
+          <View style={MessageStyle.titleTopBar}>
             <MaskedView
               maskElement={
                 <Text style={MessageStyle.titleTopBar}>Message</Text>
@@ -136,7 +142,9 @@ function MessageScreen() {
             />
           </View>
         }
+        backAction={() => navigation.goBack()}
       ></AppBarHeaderComponent>
+      
       <View>
         <FlatList
           data={messageItems}

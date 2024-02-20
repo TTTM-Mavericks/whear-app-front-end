@@ -17,6 +17,10 @@ export type RootStackParamList = {
   NotificationScreen: undefined;
   AddingClothesScreen: undefined;
   AddingPostingsScreen: undefined;
+  RecommendOutfitScreen: undefined;
+  MessageScreen: undefined;
+  NewsScreen: undefined;
+  HotStoreScreen: undefined;
 
 
 };

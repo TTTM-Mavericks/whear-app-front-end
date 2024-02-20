@@ -1,30 +1,23 @@
 
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, FlatList, Animated, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, ScrollView, FlatList, Animated, TouchableOpacity, Platform } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../../root/RootStackParams';
 import { StackNavigationProp } from '@react-navigation/stack';
-import CarouselComponent from '../../components/Common/Carousel/CarouselComponent';
 import ListViewComponent from '../../components/ListView/ListViewComponent';
-import { Appbar, Button, Chip, Icon, IconButton, MD3Colors, SegmentedButtons, TextInput } from 'react-native-paper';
+import { Button, Icon, IconButton, SegmentedButtons, TextInput } from 'react-native-paper';
 import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
-import AppBarHeaderStylesComponent from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
-import HorizontalCarouselComponent from '../../components/Common/Carousel/HorizontalCarouselComponent';
-import ChipGroupComponent from '../../components/Common/ChipGroup/ChipGroupComponent';
 import { height, width } from '../../root/ResponsiveSize';
-import SmallChipGroupComponent from '../../components/Common/ChipGroup/SmallChipGroupComponent';
 import { backgroundColor, grayBorderColor, primaryColor, secondaryColor } from '../../root/Colors';
 import { useDispatch } from 'react-redux';
 import { setOpenAddToCollectionsDialog, setOpenCreateClothesDialog } from '../../redux/State/Actions';
 import AddingToCollectionComponent from '../../components/Dialog/AddingToCollectionComponent';
 import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarFooterComponents';
 import CreateClothesDialogComponent from '../../components/Dialog/CreateClothesDialogComponent';
-import dataSlider from '../../components/Common/Carousel/Data';
 import SearchStyleScreen from './SearchStyleScreen';
 import { spanTextSize } from '../../root/Texts';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
-import TouchabaleActiveActionButton from '../../components/Common/TouchableActive/TouchabaleActiveActionButton';
 
 interface ListItem {
   id: string;
@@ -284,7 +277,6 @@ const SearchScreen = () => {
 
   return (
     <View style={SearchStyleScreen.container}>
-      <TouchabaleActiveActionButton ></TouchabaleActiveActionButton>
 
       <AppBarHeaderComponent
         title={
