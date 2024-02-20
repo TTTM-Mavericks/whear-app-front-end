@@ -13,15 +13,16 @@ import { backgroundColor, fourthColor, primaryColor, secondaryColor, thirthColor
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import { spanTextSize } from '../../root/Texts';
-import { UserInterFace } from '../../models/ObjectInterface';
+import { PostingInterface, UserInterFace } from '../../models/ObjectInterface';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-toast-message'
 import { height } from '../../root/ResponsiveSize';
 import AddImageButtonComponent from '../../components/ImagePicker/AddImageButtonComponent';
 import { convertDateFormat } from '../../components/Common/Functions/CommonFunctionComponents';
+import api from '../../api/AxiosApiConfig';
 
-const MAX_LENGTH = 30;
-const MAX_CHARACTERS_PER_LINE = 20;
+const MAX_LENGTH = 300;
+const MAX_CHARACTERS_PER_LINE = 300;
 type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 const AddingPostingsScreen = () => {
   const navigation = useNavigation<ScreenNavigationProp>();
@@ -43,6 +44,7 @@ const AddingPostingsScreen = () => {
   const [hashtagTxt, setHashtagTxt] = useState('');
   const [hashtagArr, setHashtagArr] = useState<string[]>([]);
   const [openHashtag, setOpenHashtag] = useState(false);
+  const [postingRequest, setPostingRequest] = useState<PostingInterface>();
 
 
 
@@ -76,7 +78,6 @@ const AddingPostingsScreen = () => {
       const tokenStorage = await AsyncStorage.getItem('access_token');
       if (tokenStorage) {
         const tokenString = JSON.parse(tokenStorage);
-        console.log('userParse: ', tokenString);
         setAccessToken(tokenString);
       }
     }
@@ -105,7 +106,6 @@ const AddingPostingsScreen = () => {
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', e => {
       setHeightOfKeyBoard(e.endCoordinates.height)
-      console.log(e.endCoordinates.height);
       setIskeyboardOpen(true);
     }
     );
@@ -121,8 +121,6 @@ const AddingPostingsScreen = () => {
   }, [heightOfKeyBoard]);
 
   React.useEffect(() => {
-    console.log('clothesImagePostinUrl: ', clothesImagePostingUrl);
-    console.log(imageUrlState);
     setIsLoadingImage(true);
     setClothesImagePostingUrl((prev) => [imageUrlState]);
 
@@ -132,7 +130,7 @@ const AddingPostingsScreen = () => {
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
-    console.log('back');
+    navigation.goBack();
   }
 
   const handleTextChange = (text: any) => {
@@ -151,19 +149,40 @@ const AddingPostingsScreen = () => {
   };
 
 
-  const hanldeCreatePost = () => {
+  const hanldeCreatePost = async () => {
+    setIsLoading(true);
     const hashtagArray = hashtagTxt.split(',');
     const bodyRequest = {
       userID: user?.userID,
       typeOfPosts: "POSTS",
       hashtag: hashtagArray,
-      date: convertDateFormat( new Date()),
+      date: convertDateFormat(new Date()),
       status: 'UNACTIVE',
       content: textInput,
       image: clothesImagePostingUrl
     }
+    
 
-    console.log('POSTING-----------, ',bodyRequest);
+    try {
+      const response = await api.post('/api/v1/post/create-post', bodyRequest);
+      if (response.success === 200) {
+        setTimeout(() => {
+          setIsLoading(false);
+          navigation.navigate('PostingDetail', { postID: response.data.postID });
+        }, 3000)
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: JSON.stringify(response.message),
+          position: 'top'
+        });
+        setIsLoading(false);
+
+      }
+    } catch (error) {
+
+    }
+
   }
 
 

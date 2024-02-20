@@ -121,7 +121,7 @@ const SignInComponent = () => {
           setIsLoading(true);
           setTimeout(() => {
             setIsLoading(false);
-            navigation.navigate('Home');
+            navigation.replace('Home');
           }, 500)
         } else {
           setIsLoading(false);

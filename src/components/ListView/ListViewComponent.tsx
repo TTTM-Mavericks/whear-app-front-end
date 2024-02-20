@@ -5,7 +5,7 @@ import ListViewStylesComponent from './ListViewStyleComponent';
 import { height, width } from '../../root/ResponsiveSize';
 
 interface ListItem {
-    id: string;
+    id: any;
     title?: string;
     imgUrl: ImageSourcePropType | string;
     description?: string;
@@ -32,7 +32,7 @@ const ListViewComponent: React.FC<ListViewProps> = ({ data, child, cardStyleCont
         ...(cardStyleContainer as object),
     };
 
-    
+
 
     const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
 
@@ -59,17 +59,22 @@ const ListViewComponent: React.FC<ListViewProps> = ({ data, child, cardStyleCont
                             />
                         </View>
                     ) : (
+                        <>
+                            {item.imgUrl !== '#' && (
+                                <View>
 
-                        <View>
-                            <Image source={typeof (item.imgUrl) === 'string' ? { uri: item.imgUrl } : item.imgUrl} style={[ListViewStylesComponent.image, cardStyleContent]} />
-                            {item.title && (
-                                <Text style={ListViewStylesComponent.header}>{item.title}</Text>
+                                    <Image source={typeof (item.imgUrl) === 'string' ? { uri: item.imgUrl } : item.imgUrl} style={[ListViewStylesComponent.image, cardStyleContent]} />
+                                    {item.title && (
+                                        <Text style={ListViewStylesComponent.header}>{item.title}</Text>
+                                    )}
+                                    {item.description && (
+                                        <Text style={ListViewStylesComponent.body}>{item.description}</Text>
+                                    )}
+                                    {child}
+                                </View>
                             )}
-                            {item.description && (
-                                <Text style={ListViewStylesComponent.body}>{item.description}</Text>
-                            )}
-                            {child}
-                        </View>
+                        </>
+
                     )}
                 </Card>
             </View>

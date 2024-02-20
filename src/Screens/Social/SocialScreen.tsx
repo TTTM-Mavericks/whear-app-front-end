@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   SafeAreaView,
@@ -10,7 +10,7 @@ import {
   View
 } from 'react-native';
 
-import { Avatar, TextInput } from 'react-native-paper';
+import { Avatar, IconButton, TextInput } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarFooterComponents';
 import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
@@ -31,6 +31,10 @@ import { width } from '../../root/ResponsiveSize';
 import { RootStackParamList } from '../../root/RootStackParams';
 import { spanTextSize } from '../../root/Texts';
 import SocailStyleScreen from './SocailStyleScreen';
+import { PostingInterface, UserInterFace } from '../../models/ObjectInterface';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from '../../api/AxiosApiConfig';
+import LoadingComponent from '../../components/Common/Loading/LoadingComponent';
 
 interface ListItem {
   id: string;
@@ -304,6 +308,10 @@ const SocialScreen = () => {
   const [selectedItem, setSelectedItem] = useState({});
   const [scrollUp, setScrollUp] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [currentPosting, setCurrentPosting] = useState<PostingInterface[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [postingObj, setPostingObj] = useState<PostingInterface>();
+  const [user, setUser] = useState<UserInterFace>();
 
   /*-----------------Usable variable-----------------*/
   const dispatch = useDispatch();
@@ -312,10 +320,44 @@ const SocialScreen = () => {
   );
 
   /*-----------------UseEffect-----------------*/
-  // useEffect(() => {
-  //   dispatch(setOpenCommentsDialog(true));
-  //   console.log(selectedItem);
-  // }, [selectedItem])
+  useEffect(() => {
+    setIsLoading(true);
+    const fetchData = async () => {
+      const tokenStorage = await AsyncStorage.getItem('access_token');
+      const userStorage = await AsyncStorage.getItem('userData');
+      if (userStorage) {
+        const userParse: UserInterFace = JSON.parse(userStorage);
+        console.log("userrrrr=r=r==r=: ", userParse.userID);
+        setUser(userParse);
+        if (tokenStorage) {
+          const tokenString = JSON.parse(tokenStorage);
+          const params = {}
+          try {
+            const getData = await api.get(`/api/v1/post/get-all-post-for-user?user_id=${userParse.userID}`, params, tokenString);
+            console.log('===================================: ', getData);
+            if (getData.success === 200) {
+              const arrData: PostingInterface[] = getData.data
+              // const result = arrData.filter((item: PostingInterface) => item.typeOfPosts === 'POSTS');
+              // if (result) {
+              setCurrentPosting(arrData);
+              // }
+              setTimeout(() => {
+                setIsLoading(false);
+              }, 1000)
+            }
+            else {
+              setTimeout(() => {
+                setIsLoading(false);
+              }, 1000)
+            }
+          } catch (error) {
+            console.error("An error occurred during data fetching:", error);
+          }
+        }
+      }
+    }
+    fetchData();
+  }, []);
 
   /*-----------------Function handler-----------------*/
   const hanldeGoBack = () => {
@@ -336,9 +378,9 @@ const SocialScreen = () => {
     navigation.navigate('AddingPostingsScreen')
   };
 
-  const handleOpenCommentsDialog = (postID: string) => {
-    const selectedItem = data.find((item) => item.postID === postID);
-    if (selectedItem) {
+  const handleOpenCommentsDialog = (postID: any) => {
+    const selectedItem = currentPosting.find((item) => item.postID === postID);
+    if (selectedItem && selectedItem.postID) {
       setSelectedItem(selectedItem.postID);
     }
     setIsOpenCommentsDialog(true);
@@ -350,7 +392,6 @@ const SocialScreen = () => {
   };
 
   const handleSetComment = (text: string, postID: string) => {
-    console.log('textSocial', text);
     setComments((prevComments) => ({
       ...prevComments,
       [postID]: text,
@@ -358,10 +399,9 @@ const SocialScreen = () => {
   };
 
   const handleSendComment = (id: string) => {
-    console.log('post: ', id, ' - ', comments);
   };
 
-  const handleMoveToPostingDetail = (postID: string) => {
+  const handleMoveToPostingDetail = (postID: any) => {
     navigation.navigate('PostingDetail', { postID });
   };
 
@@ -436,25 +476,27 @@ const SocialScreen = () => {
           {/* Regular FlatList */}
           <FlatList
             style={SocailStyleScreen.flatlist}
-            data={data.slice(0, 10)}
-            keyExtractor={(item) => item.postID}
+            data={currentPosting}
+            keyExtractor={(item: any) => item.postID}
             renderItem={({ item }) => (
               <ListViewComponent
                 key={item.postID}
-                data={[{ id: item.postID, imgUrl: '' }]}
-                extendImgUrl={item.content.imgUrl}
+                data={[{ id: item.postID, imgUrl: '#' }]}
+                extendImgUrl={item.image && item.image[0]}
                 cardStyleContainer={SocailStyleScreen.container_cardContainer}
                 cardStyleContent={SocailStyleScreen.container_cardContent}
                 onPress={() => handleMoveToPostingDetail(item.postID)}
                 extendHeaderChild={
                   <View
+                  key={item.postID}
                     style={[
                       SocailStyleScreen.container_postingBar,
                       { marginTop: 20 },
                     ]}
                   >
                     <TouchableOpacity
-                      onPress={() => handleMoveToUserProfile(item.user.userID)}
+                      key={item.postID}
+                      onPress={() => handleMoveToUserProfile(item?.userResponse?.userID)}
                     >
                       <View
                         style={{
@@ -465,7 +507,7 @@ const SocialScreen = () => {
                       >
                         <Avatar.Image
                           size={iconAvatarPostingSize}
-                          source={{ uri: item.user.imgUrl }}
+                          source={{ uri: item?.userResponse?.imgUrl }}
                           style={{ marginLeft: 10 }}
                         />
                         <View
@@ -480,53 +522,64 @@ const SocialScreen = () => {
                               paddingTop: iconAvatarPostingSize * 0.05,
                             }}
                           >
-                            Nguyen Minh Tu
+                            {item.userResponse?.username}
                           </Text>
                           <Text style={{ fontSize: spanTextSize * 0.8 }}>
-                            {item.date.toLocaleString()}
+                            {item.date}
                           </Text>
                         </View>
                       </View>
                     </TouchableOpacity>
+                    <View style={{ position: 'absolute', right: 0 }}>
+                      <IconButton icon={require('../../assets/icon/3dotmenu.png')} size={20}></IconButton>
+                    </View>
                   </View>
                 }
                 extendChild={
-                  <View style={SocailStyleScreen.post__content}>
+                  <View key={item.postID} style={SocailStyleScreen.post__content}>
 
-                    <PostContentComponent key={item.postID} props={item} />
+                    <PostContentComponent key={item.postID} props={item} user={user} isReact={item.reacted} />
 
                     <View style={SocailStyleScreen.post__content_child}>
-                      <Text style={{ color: 'black', fontSize: 15 }}>
-                        {showFullContent
-                          ? item.content.content
-                          : item.content.content.substring(0, 150) + '...'}
-                        {"  "}
-                        {item.content.content.length > 150 && (
-                          <Text
-                            onPress={handleToggleContent}
-                            style={{ color: 'black', fontSize: 15, textDecorationLine: 'underline' }}
-                          >
-                            {showFullContent ? 'See less' : 'See more'}
-                          </Text>
-                        )}
-                      </Text>
-                      <View style={{ paddingVertical: 5 }}>
-                        <Text
-                          style={{ color: 'gray', fontSize: 15 }}
-                          onPress={() => handleOpenCommentsDialog(item.postID)}
-                        >
-                          See all {item.comment.length} comments
+                      {item.content && (
+                        <Text style={{ color: 'black', fontSize: 15 }}>
+                          {showFullContent
+                            ? item.content
+                            : item?.content.substring(0, 150) + '...'}
+                          {"  "}
+                          {item.content.length > 150 && (
+                            <Text
+                              onPress={handleToggleContent}
+                              style={{ color: 'black', fontSize: 15, textDecorationLine: 'underline' }}
+                            >
+                              {showFullContent ? 'See less' : 'See more'}
+                            </Text>
+                          )}
                         </Text>
-                      </View>
+                      )}
 
-                      {item.postID === selectedItem && (
+
+
+                      {user && item.postID === selectedItem && (
                         <SafeAreaView >
-                          <CommentsDetailDialogComponent
-                            postId={item.postID}
-                            comments={item.comment as Comment[]}
-                          ></CommentsDetailDialogComponent>
+                          {item.comment && (
+                            <CommentsDetailDialogComponent
+                              postId={item.postID}
+                              comments={item.comment}
+                              user={user}
+                            ></CommentsDetailDialogComponent>
+                          )}
                         </SafeAreaView>
                       )}
+                    </View>
+                    <View style={{ paddingVertical: 5 }}>
+                      <TouchableOpacity onPress={() => handleOpenCommentsDialog(item.postID)}>
+                        <Text
+                          style={{ color: 'gray', fontSize: 15 }}
+                        >
+                          See all {item.comment ? item.comment.length : '0'} comments
+                        </Text>
+                      </TouchableOpacity>
                     </View>
                   </View>
                 }
@@ -536,14 +589,15 @@ const SocialScreen = () => {
             showsVerticalScrollIndicator={false}
             scrollEnabled={false}
           />
-
-          <PostingDialogComponent></PostingDialogComponent>
+          {/* <PostingDialogComponent></PostingDialogComponent> */}
         </View>
       </ScrollView>
       <AppBarFooterComponents
         isHide={scrollUp}
         centerIcon={'plus'}
       ></AppBarFooterComponents>
+      <LoadingComponent spinner={isLoading}></LoadingComponent>
+
     </View>
   );
 };

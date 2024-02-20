@@ -144,7 +144,7 @@ const DialogStylesComponent = StyleSheet.create({
     commentDialogContent: {
         marginLeft: -20,
         width: width,
-        // marginBottom: 20
+        height: height
     },
     container_cardContainer: {
         width: width,

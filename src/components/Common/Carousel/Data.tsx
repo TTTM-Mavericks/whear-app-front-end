@@ -17,8 +17,8 @@ export const dataSlider = [
 
   },
   {
-    title: "Lorem Ipsum",
-    body: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
+    title: "",
+    body: "",
     imgUrl: "https://i.imgur.com/gQNItX5.jpeg",
 
   },

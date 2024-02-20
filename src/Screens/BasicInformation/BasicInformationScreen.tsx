@@ -60,7 +60,6 @@ export default function BasicInformationScreen() {
             bodyShapeName: selectedBodyShape,
             listStyles: []
           }
-          console.log('bodyShape: ', bodyShape);
           await AsyncStorage.setItem('styleDefault', JSON.stringify(bodyShape));
         } catch (error) {
           console.log("AsyncStorage error: ", error);

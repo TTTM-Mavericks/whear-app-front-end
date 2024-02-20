@@ -314,7 +314,7 @@ const ClothesDetailScreen = () => {
                 {clothData?.clothesImages?.map((image, index) => (
                   <View key={index}>
                     <Image
-                      style={{ height: height * 0.7, borderRadius: 5 }}
+                      style={{ height: height * 0.65, borderRadius: 5 }}
                       resizeMode="stretch"
                       source={{ uri: image }}
                     />
