@@ -29,6 +29,7 @@ import MessageScreen from "./src/Screens/Message/MessageScreen";
 import AddingClothesScreen from "./src/Screens/AddingClothes/AddingClothesScreen";
 import ClothesDetailScreen from "./src/Screens/ClothesDetail/ClothesDetailScreen";
 import AddingPostingsScreen from "./src/Screens/AddingPostings/AddingPostingsScreen";
+import EventScreen from "./src/Screens/Event/EventScreen";
 import RecommendOutfitScreen from "./src/Screens/RecommendOutfit/RecommendOutfitScreen";
 import FirstLoadingPage from "./src/Screens/Introduce/FirstLoadingPage";
 
@@ -54,7 +55,7 @@ export default function App() {
                 options={{ headerShown: false }}
               />
 
-              <Stack.Screen
+               <Stack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{
@@ -144,6 +145,11 @@ export default function App() {
               <Stack.Screen
                 name='NotificationScreen'
                 component={NotificationScreen}
+                options={{ headerShown: false }}
+              /> 
+               <Stack.Screen
+                name='Event'
+                component={EventScreen}
                 options={{ headerShown: false }}
               />
 
