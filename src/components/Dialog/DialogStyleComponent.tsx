@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
 import { buttonTextSize, titleTextDialogSize } from '../../root/Texts';
 import { backgroundColor, grayBackgroundColor, primaryColor } from '../../root/Colors';
 
@@ -268,8 +268,48 @@ const DialogStylesComponent = StyleSheet.create({
     contentText: {
         fontSize: 13,
         marginBottom: 5,
-        marginTop: 5
-    }
+        marginTop: 5,
+        fontWeight: '400'
+    },
+
+    // --------------Create Collection Dialog---------------------
+    lableDropDown: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        paddingBottom: 5,
+
+    },
+    rowTextStyle: {
+        fontSize: 13,
+        fontWeight: '400',
+        textAlign: 'left'
+    },
+    rowStyle: {
+        height: 30,
+    },
+    buttondropDownStyle: {
+        backgroundColor: backgroundColor,
+        borderRadius: 8,
+        height: 30,
+        width: Platform.OS === 'ios' ? 145 : 135,
+        borderWidth: 0.8,
+        fontSize: 10
+    },
+    pictureAreaCollection: {
+        position: 'relative',
+        width: width * 0.5,
+        height: height * 0.3,
+        borderStyle: 'dashed',
+        borderWidth: 1,
+        borderColor: primaryColor,
+        margin: 10
+    },
+    picture: {
+        position: 'relative',
+        width: width * 0.495,
+        height: height * 0.398,
+
+    },
 
 });
 

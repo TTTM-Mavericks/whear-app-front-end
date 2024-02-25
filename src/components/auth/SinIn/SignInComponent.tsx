@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform, ImageBackground } from 'react-native';
 import SigInStylesComponent from './SignInStyleComponent';
 import { useNavigation } from '@react-navigation/native';
 
@@ -23,7 +23,7 @@ import { UserInterFace } from '../../../models/ObjectInterface';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingComponent from '../../Common/Loading/LoadingComponent';
 import Toast from 'react-native-toast-message'
-import { height } from '../../../root/ResponsiveSize';
+import { height, width } from '../../../root/ResponsiveSize';
 
 /**
  * Image Url
@@ -175,45 +175,53 @@ const SignInComponent = () => {
 
   return (
     <View style={SigInStylesComponent.container}>
-      <View style={{ marginTop: 100 }}>
-        <Text style={SigInStylesComponent.title}>Sign In</Text>
-        <TextInput
-          label="Email"
-          activeOutlineColor={primaryColor}
-          value={email}
-          style={SigInStylesComponent.input}
-          onChangeText={text => setEmail(text)}
-          mode='outlined'
-          right={
-            <TextInput.Icon icon="close" onPress={handleClearInput} />
-          }
-        />
-        {!isEmailValidate && (
-          <Text style={SigInStylesComponent.errorValidate}>{errorEmailValidate}</Text>
-        )}
+      <ImageBackground style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: width,
+        height: height,
+        padding: 16
+      }} source={require('../../../assets/img/logo/background.png')}>
+        <Image source={require('../../../assets/img/logo/logo.png')} style={{width: 150, height: 150, marginTop: 20}}></Image>
+        <View style={{marginTop: 50}}>
+          <Text style={SigInStylesComponent.title}>Sign In</Text>
+          <TextInput
+            label="Email"
+            activeOutlineColor={primaryColor}
+            value={email}
+            style={SigInStylesComponent.input}
+            onChangeText={text => setEmail(text)}
+            mode='outlined'
+            right={
+              <TextInput.Icon icon="close" onPress={handleClearInput} />
+            }
+          />
+          {!isEmailValidate && (
+            <Text style={SigInStylesComponent.errorValidate}>{errorEmailValidate}</Text>
+          )}
 
-        <TextInput
-          label="Password"
-          activeOutlineColor={primaryColor}
-          value={password}
-          style={SigInStylesComponent.input}
-          secureTextEntry={isHidePassword}
-          mode='outlined'
-          onChangeText={(text) => setPassword(text)}
-          right={
-            <TextInput.Icon icon="eye"
-              onPress={handleHidePassword}
-            />
-          }
-        />
-        {!isPasswordValidate && (
-          <Text style={SigInStylesComponent.errorValidate}>{errorPasswordValidate}</Text>
-        )}
-        <TouchableOpacity onPress={() => handleMoveToForgotPassword(email)}>
-          <Text style={SigInStylesComponent.content}>Forgot password?</Text>
-        </TouchableOpacity>
-        <View style={SigInStylesComponent.button}>
-          {/* <ButtonComponent
+          <TextInput
+            label="Password"
+            activeOutlineColor={primaryColor}
+            value={password}
+            style={SigInStylesComponent.input}
+            secureTextEntry={isHidePassword}
+            mode='outlined'
+            onChangeText={(text) => setPassword(text)}
+            right={
+              <TextInput.Icon icon="eye"
+                onPress={handleHidePassword}
+              />
+            }
+          />
+          {!isPasswordValidate && (
+            <Text style={SigInStylesComponent.errorValidate}>{errorPasswordValidate}</Text>
+          )}
+          <TouchableOpacity onPress={() => handleMoveToForgotPassword(email)}>
+            <Text style={SigInStylesComponent.content}>Forgot password?</Text>
+          </TouchableOpacity>
+          <View style={SigInStylesComponent.button}>
+            {/* <ButtonComponent
             title="Sign In"
             onPress={() => {
               handleSignIn();
@@ -230,49 +238,50 @@ const SignInComponent = () => {
             }]}
           /> */}
 
-          <Button
-            mode='outlined'
-            contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
-            style={[SigInStylesComponent.buttonGroup_button, { backgroundColor: primaryColor }]}
-            labelStyle={[SigInStylesComponent.buttonGroup_button_lable,]}
-            onPress={() => handleSignIn()}
-          >
-            <Text style={{ fontWeight: '500', fontSize: 15 }}>Sign In</Text>
-          </Button>
+            <Button
+              mode='outlined'
+              contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
+              style={[SigInStylesComponent.buttonGroup_button, { backgroundColor: primaryColor }]}
+              labelStyle={[SigInStylesComponent.buttonGroup_button_lable,]}
+              onPress={() => handleSignIn()}
+            >
+              <Text style={{ fontWeight: '500', fontSize: 15 }}>Sign In</Text>
+            </Button>
+          </View>
+          <View style={SigInStylesComponent.optionSignIn}>
+            <Text style={SigInStylesComponent.optionSignIn}>Sign in with</Text>
+          </View>
+          <View style={{ backgroundColor: backgroundColor, alignItems: 'center', justifyContent: 'center' }}>
+            <ButtonGroup
+              containerStyle={SigInStylesComponent.buttonGroupOption}
+              innerBorderStyle={{ color: 'none', width: 0 }}
+              buttons={[
+                <Image
+                  source={FACBOOK_LOGO}
+                  style={[SigInStylesComponent.buttonOption, { marginLeft: 0, marginRight: 0 }]}
+                  PlaceholderContent={<ActivityIndicator />}
+                />,
+                <Image
+                  source={GOOGLE_LOGO}
+                  style={[SigInStylesComponent.buttonOption, { marginLeft: 6, marginRight: 6.5 }]}
+                  PlaceholderContent={<ActivityIndicator />}
+                />,
+                <Image
+                  source={TWITTER_LOGO}
+                  style={[SigInStylesComponent.buttonOption, { marginLeft: 6, marginRight: 6.5 }]}
+                  PlaceholderContent={<ActivityIndicator />}
+                />
+              ]}
+            />
+          </View>
+          <View style={SigInStylesComponent.inlineContainer}>
+            <Text style={SigInStylesComponent.optionSignIn}>You don't have an account?</Text>
+            <TouchableOpacity style={{ width: 70 }}>
+              <Text onPress={() => navigation.navigate('SignUp')} style={{ textDecorationLine: 'underline', fontSize: 15, marginLeft: 10 }}>Sign up</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={SigInStylesComponent.optionSignIn}>
-          <Text style={SigInStylesComponent.optionSignIn}>Sign in with</Text>
-        </View>
-        <View style={{ backgroundColor: backgroundColor, alignItems: 'center', justifyContent: 'center' }}>
-          <ButtonGroup
-            containerStyle={SigInStylesComponent.buttonGroupOption}
-            innerBorderStyle={{ color: 'none', width: 0 }}
-            buttons={[
-              <Image
-                source={FACBOOK_LOGO}
-                style={[SigInStylesComponent.buttonOption, { marginLeft: 0, marginRight: 0 }]}
-                PlaceholderContent={<ActivityIndicator />}
-              />,
-              <Image
-                source={GOOGLE_LOGO}
-                style={[SigInStylesComponent.buttonOption, { marginLeft: 6, marginRight: 6.5 }]}
-                PlaceholderContent={<ActivityIndicator />}
-              />,
-              <Image
-                source={TWITTER_LOGO}
-                style={[SigInStylesComponent.buttonOption, { marginLeft: 6, marginRight: 6.5 }]}
-                PlaceholderContent={<ActivityIndicator />}
-              />
-            ]}
-          />
-        </View>
-        <View style={SigInStylesComponent.inlineContainer}>
-          <Text style={SigInStylesComponent.optionSignIn}>You don't have an account?</Text>
-          <TouchableOpacity style={{ width: 70 }}>
-            <Text onPress={() => navigation.navigate('SignUp')} style={{ textDecorationLine: 'underline', fontSize: 15, marginLeft: 10 }}>Sign up</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </ImageBackground>
       <LoadingComponent spinner={isLoading}></LoadingComponent>
       <Toast
         position='top'

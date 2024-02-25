@@ -9,8 +9,7 @@ const SignInStylesComponent = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: containerPadding,
-    backgroundColor: backgroundColor
+    backgroundColor: backgroundColor,
   },
   title: {
     fontSize: width * titleTextSize,
@@ -22,7 +21,7 @@ const SignInStylesComponent = StyleSheet.create({
     width: 200,
   },
   input: {
-    backgroundColor: 'transparent'
+    backgroundColor: 'transparent',
   },
   button: {
     textAlign: 'center',
@@ -47,7 +46,7 @@ const SignInStylesComponent = StyleSheet.create({
   buttonGroupOption: {
     flexDirection: 'row',
     width: 40 * 3 + 6 * 8,
-    height: 42,
+    height: 50,
     textAlign: 'center',
     justifyContent: 'center',
     alignItems: 'center',

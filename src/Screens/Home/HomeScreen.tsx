@@ -7,7 +7,7 @@ import { RootStackParamList } from '../../root/RootStackParams';
 import { StackNavigationProp } from '@react-navigation/stack';
 import CarouselComponent from '../../components/Common/Carousel/CarouselComponent';
 import ListViewComponent from '../../components/ListView/ListViewComponent';
-import { Appbar, Button, Chip, Icon, IconButton, MD3Colors } from 'react-native-paper';
+import { ActivityIndicator, Appbar, Button, Chip, Icon, IconButton, MD3Colors } from 'react-native-paper';
 import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
 import AppBarHeaderStylesComponent from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
 import HorizontalCarouselComponent from '../../components/Common/Carousel/HorizontalCarouselComponent';
@@ -31,96 +31,6 @@ import { clothesLogoUrlDefault } from '../../root/Texts';
 import UpgradeRoleDialogComponent from '../../components/Dialog/UpgradeRoleDialogComponent';
 import { dataSlider } from '../../components/Common/Carousel/Data';
 
-interface ListItem {
-  id: string;
-  title?: string;
-  imgUrl?: any;
-  description?: string;
-}
-const data = [
-  {
-    id: '1',
-    title: "Aenean leo",
-    description: "Ut tincidunt tincidunt erat. Sed cursus turpis vitae tortor. Quisque malesuada placerat nisl. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_1.png'),
-  },
-  {
-    id: '4',
-    title: "In turpis",
-    description: "Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_2.png'),
-
-  },
-  {
-    id: '2',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_3.png'),
-
-  },
-  {
-    id: '3',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
-
-  },
-  {
-    id: '5',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
-
-  },
-  {
-    id: '6',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
-
-  },
-  {
-    id: '7',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
-
-  },
-  {
-    id: '10',
-    title: "Aenean leo",
-    description: "Ut tincidunt tincidunt erat. Sed cursus turpis vitae tortor. Quisque malesuada placerat nisl. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_1.png'),
-  },
-  {
-    id: '11',
-    title: "In turpis",
-    description: "Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_2.png'),
-
-  },
-  {
-    id: '12',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_3.png'),
-
-  },
-  {
-    id: '13',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
-
-  },
-  {
-    id: '14',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
-
-  },
-];
 
 const data1 = [
   {
@@ -166,7 +76,9 @@ const HomeScreen = () => {
   const [addedItems, setAddedItems] = useState<string[]>([]);
   const [scrollUp, setScrollUp] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [clothesData, setClothesData] = useState<ClothesInterface[]>([])
+  const [clothesData, setClothesData] = useState<ClothesInterface[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [addedClothId, setAddedClothId] = useState()
 
 
   /*-----------------Usable variable-----------------*/
@@ -176,20 +88,24 @@ const HomeScreen = () => {
   useEffect(() => {
     const fetchData = async () => {
       const tokenStorage = await AsyncStorage.getItem('access_token');
-      if (tokenStorage) {
+      const userString = await AsyncStorage.getItem('userData');
+      if (tokenStorage && userString) {
         const tokenString = JSON.parse(tokenStorage);
+        const user = JSON.parse(userString);
+        const userID = user.userID;
         console.log('userParse: ', tokenString);
         const params = {}
         try {
-          const getData = await api.get('/api/v1/clothes/get-all-clothes', params, tokenString);
+          const getData = await api.get(`/api/v1/recommedation/get-list-recommendation-by-user-history-items?userID=${userID}`, params, tokenString);
 
           if (getData.success === 200) {
-            console.log(getData.data);
             setClothesData(getData.data);
+            setIsLoading(false);
           }
           else {
             console.log(getData.data);
           }
+
         } catch (error) {
           console.error("An error occurred during data fetching:", error);
         }
@@ -197,6 +113,7 @@ const HomeScreen = () => {
     }
     fetchData();
   }, []);
+  
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
@@ -211,13 +128,14 @@ const HomeScreen = () => {
     alert('handleMore')
   }
 
-  const handleAddToCollection = (id: string) => {
+  const handleAddToCollection = (id: any) => {
     if (addItemToCollection) {
       dispatch(setOpenAddToCollectionsDialog(true));
+      setAddedClothId(id);
     }
   }
 
-  const handleChangeIconAdded = (id: string) => {
+  const handleChangeIconAdded = (id: any) => {
     setAddItemToCollection(!addItemToCollection);
     handleAddToCollection(id);
 
@@ -244,7 +162,7 @@ const HomeScreen = () => {
   }
 
   const hanldeMoveToDetail = (clothID: string) => {
-    navigation.navigate('ClothesDetailScreen', {clothID});
+    navigation.navigate('ClothesDetailScreen', { clothID });
   }
 
   const handleOpenUpgradeDialog = () => {
@@ -332,32 +250,37 @@ const HomeScreen = () => {
 
 
           {/* Regular FlatList */}
-          <FlatList
-            style={HomeStylesComponent.flatlist}
-            data={clothesData}
-            keyExtractor={(item) => item.clothesID}
-            numColumns={2}
-            renderItem={({ item }) => (
-              <ListViewComponent data={[{ id: item.clothesID, imgUrl: item.clothesImages ? item.clothesImages[0] : clothesLogoUrlDefault , }]} 
-              onPress={()=>hanldeMoveToDetail(item.clothesID)}
-              child={
-                <IconButton
-                  mode='outlined'
-                  icon={'heart'}
-                  style={[HomeStylesComponent.iconCard, {}]}
-                  size={15}
-                  iconColor={addedItems.includes(item.clothesID) ? '#C90801' : '#C3C3C3'}
-                  onPress={() => {
-                    handleChangeIconAdded(item.clothesID);
-                  }}
+          {!isLoading ? (
+            <FlatList
+              style={HomeStylesComponent.flatlist}
+              data={clothesData}
+              keyExtractor={(item) => item.clothesID}
+              numColumns={2}
+              renderItem={({ item }) => (
+                <ListViewComponent data={[{ id: item.clothesID, imgUrl: item.clothesImages ? item.clothesImages[0] : clothesLogoUrlDefault, }]}
+                  onPress={() => hanldeMoveToDetail(item.clothesID)}
+                  child={
+                    <IconButton
+                      mode='outlined'
+                      icon={'heart'}
+                      style={[HomeStylesComponent.iconCard, {}]}
+                      size={15}
+                      iconColor={addedItems.includes(item.clothesID) ? '#C90801' : '#C3C3C3'}
+                      onPress={() => {
+                        handleChangeIconAdded(item.clothesID);
+                      }}
 
-                />
-              } />
-            )}
-            contentContainerStyle={{ paddingRight: 0 }}
-            showsVerticalScrollIndicator={false}
-            scrollEnabled={false}
-          />
+                    />
+                  } />
+              )}
+              contentContainerStyle={{ paddingRight: 0 }}
+              showsVerticalScrollIndicator={false}
+              scrollEnabled={false}
+            />
+          )
+        : (
+          <ActivityIndicator animating={true} color={primaryColor} style={{marginTop: 50, marginBottom: 50}} />
+        )}
 
           <Button mode='outlined' style={{ width: width * 0.8, margin: 20, borderRadius: 8 }} textColor='black' onPress={handleOpenUpgradeDialog} >
             <Text style={{ fontSize: 12.5, fontWeight: '500' }}>
@@ -372,7 +295,7 @@ const HomeScreen = () => {
           </View>
 
 
-          <AddingToCollectionComponent></AddingToCollectionComponent>
+          <AddingToCollectionComponent clothID={addedClothId}></AddingToCollectionComponent>
           <CreateClothesDialogComponent></CreateClothesDialogComponent>
         </View>
       </ScrollView >

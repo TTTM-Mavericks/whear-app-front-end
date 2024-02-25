@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, FlatList, Image, Platform } from 'react-native';
+import { View, Text, ScrollView, FlatList, Image, Platform, TouchableOpacity } from 'react-native';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../../root/RootStackParams';
@@ -16,9 +16,9 @@ import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarF
 import AddImageButtonComponent from '../../components/ImagePicker/AddImageButtonComponent';
 import api from '../../api/AxiosApiConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { UserInterFace } from '../../models/ObjectInterface';
+import { ClothesInterface, CollectionInterface, UserInterFace } from '../../models/ObjectInterface';
 import { setUploadToFireBase } from '../../redux/State/Actions';
-import { spanTextSize } from '../../root/Texts';
+import { clothesLogoUrlDefault, spanTextSize } from '../../root/Texts';
 import Toast from 'react-native-toast-message';
 
 interface ListItem {
@@ -29,90 +29,90 @@ interface ListItem {
 }
 
 
-const data = [
-  {
-    id: '1',
-    title: "Aenean leo",
-    description: "Ut tincidunt tincidunt erat. Sed cursus turpis vitae tortor. Quisque malesuada placerat nisl. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_1.png'),
-  },
-  {
-    id: '4',
-    title: "In turpis",
-    description: "Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_2.png'),
+// const data = [
+//   {
+//     id: '1',
+//     title: "Aenean leo",
+//     description: "Ut tincidunt tincidunt erat. Sed cursus turpis vitae tortor. Quisque malesuada placerat nisl. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.",
+//     imgUrl: require('../../assets/img/introduce_background/introduce_background_1.png'),
+//   },
+//   {
+//     id: '4',
+//     title: "In turpis",
+//     description: "Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ",
+//     imgUrl: require('../../assets/img/introduce_background/introduce_background_2.png'),
 
-  },
-  {
-    id: '2',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_3.png'),
+//   },
+//   {
+//     id: '2',
+//     title: "Lorem Ipsum",
+//     description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
+//     imgUrl: require('../../assets/img/introduce_background/introduce_background_3.png'),
 
-  },
-  {
-    id: '3',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+//   },
+//   {
+//     id: '3',
+//     title: "Lorem Ipsum",
+//     description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
+//     imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
 
-  },
-  {
-    id: '5',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+//   },
+//   {
+//     id: '5',
+//     title: "Lorem Ipsum",
+//     description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
+//     imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
 
-  },
-  {
-    id: '6',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+//   },
+//   {
+//     id: '6',
+//     title: "Lorem Ipsum",
+//     description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
+//     imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
 
-  },
-  {
-    id: '7',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+//   },
+//   {
+//     id: '7',
+//     title: "Lorem Ipsum",
+//     description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
+//     imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
 
-  },
-  {
-    id: '10',
-    title: "Aenean leo",
-    description: "Ut tincidunt tincidunt erat. Sed cursus turpis vitae tortor. Quisque malesuada placerat nisl. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_1.png'),
-  },
-  {
-    id: '11',
-    title: "In turpis",
-    description: "Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_2.png'),
+//   },
+//   {
+//     id: '10',
+//     title: "Aenean leo",
+//     description: "Ut tincidunt tincidunt erat. Sed cursus turpis vitae tortor. Quisque malesuada placerat nisl. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.",
+//     imgUrl: require('../../assets/img/introduce_background/introduce_background_1.png'),
+//   },
+//   {
+//     id: '11',
+//     title: "In turpis",
+//     description: "Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ",
+//     imgUrl: require('../../assets/img/introduce_background/introduce_background_2.png'),
 
-  },
-  {
-    id: '12',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_3.png'),
+//   },
+//   {
+//     id: '12',
+//     title: "Lorem Ipsum",
+//     description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
+//     imgUrl: require('../../assets/img/introduce_background/introduce_background_3.png'),
 
-  },
-  {
-    id: '13',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+//   },
+//   {
+//     id: '13',
+//     title: "Lorem Ipsum",
+//     description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
+//     imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
 
-  },
-  {
-    id: '14',
-    title: "Lorem Ipsum",
-    description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+//   },
+//   {
+//     id: '14',
+//     title: "Lorem Ipsum",
+//     description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
+//     imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
 
-  },
-];
+//   },
+// ];
 
 
 interface UserProps {
@@ -144,6 +144,14 @@ const UserProfileScreen = () => {
   const [visibleFollowerDialog, setVisibleFollowerDialog] = useState(false);
   const [isFollowedInFollowingUser, setIsFollowedInFollowingUser] = useState(true);
   const [selectedItems, setSelectedItems] = useState([] as string[]);
+  const [selectedTag, setSelectedTag] = useState('clothes');
+  const [isLoading, setIsLoading] = useState(true);
+  const [token, setToken] = useState('');
+  const [userClothes, setUserColthes] = useState<ClothesInterface[]>([]);
+  const [userCollection, setUserCollection] = useState<CollectionInterface[]>([]);
+  const [data, setData] = useState<CollectionInterface[] | ClothesInterface[]>([]);
+
+
 
 
 
@@ -161,9 +169,14 @@ const UserProfileScreen = () => {
    * Fetch data to get user by ID
    */
   useEffect(() => {
-    
+
     const fetchData = async () => {
       const userStorage = await AsyncStorage.getItem("userData");
+      const tokenStorage = await AsyncStorage.getItem('access_token');
+      if (tokenStorage) {
+        const tokenString = JSON.parse(tokenStorage);
+        setToken(tokenString);
+      }
       if (userStorage) {
         const userParse: UserInterFace = JSON.parse(userStorage);
         setUserStorage(userParse);
@@ -292,7 +305,7 @@ const UserProfileScreen = () => {
 
         } catch (error) {
           console.error("An error occurred during data fetching:", error);
-          
+
         }
       }
     };
@@ -300,6 +313,57 @@ const UserProfileScreen = () => {
     fetchData();
   }, []);
 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      const params = {}
+      try {
+        // selectedTag === 'clothes'
+        // if (selectedTag === 'clothes') {
+        //   const getData = await api.get(`/api/v1/collection/get-all-by-userid?user_id=${userStorage?.userID}`, params, token);
+
+        //   if (getData.success === 200) {
+        //     setUserColthes(getData.data);
+        //     setTimeout(() => {
+        //       setIsLoading(false);
+        //     }, 1000)
+        //   }
+        //   else {
+        //     console.log(getData.data);
+        //     setTimeout(() => {
+        //       setIsLoading(false);
+        //     }, 1000)
+        //   }
+        // }
+
+        // selectedTag === 'collection'
+        if (selectedTag === 'collection') {
+          const getData = await api.get(`/api/v1/collection/get-all-by-userid?user_id=${userStorage?.userID}`, params, token);
+
+          if (getData.success === 200) {
+            setUserCollection(getData.data);
+            setData(getData.data);
+            console.log(getData.data);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 1000)
+          }
+          else {
+            console.log(getData.data);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 1000)
+          }
+        }
+
+
+      } catch (error) {
+        console.error("An error occurred during data fetching:", error);
+      }
+    }
+    fetchData();
+  }, [selectedTag])
 
 
   /*-----------------Function handler-----------------*/
@@ -518,11 +582,11 @@ const UserProfileScreen = () => {
       <SegmentedButtons
         style={[UserProfileStyleScreen.segmentedButtonsNavbar]}
         theme={{ roundness: 2 }}
-        value={value}
-        onValueChange={setValue}
+        value={selectedTag}
+        onValueChange={setSelectedTag}
         buttons={[
           {
-            value: 'all',
+            value: 'clothes',
             icon: 'image',
             style: {
               marginTop: 0,
@@ -538,7 +602,7 @@ const UserProfileScreen = () => {
             uncheckedColor: '#808991',
           },
           {
-            value: 'hotStore',
+            value: 'collection',
             icon: 'heart',
             style: {
               borderRadius: 0,
@@ -586,6 +650,7 @@ const UserProfileScreen = () => {
       />
 
 
+
       <ScrollView
         persistentScrollbar={false}
         style={UserProfileStyleScreen.scrollView}
@@ -595,18 +660,45 @@ const UserProfileScreen = () => {
         scrollEventThrottle={16}
       >
         <View style={UserProfileStyleScreen.scrollViewContent}>
-          <FlatList
-            style={UserProfileStyleScreen.flatlist}
-            data={data.slice(0, 10)}
-            keyExtractor={(item) => item.id}
-            numColumns={2}
-            renderItem={({ item }) => (
-              <ListViewComponent data={[{ id: item.id, imgUrl: item.imgUrl, }]} />
+          {selectedTag === 'collection' &&
+            (
+              <FlatList
+                style={UserProfileStyleScreen.flatlist}
+                data={userCollection}
+                keyExtractor={(item) => item.collectionID}
+                numColumns={2}
+                renderItem={({ item }) => (
+                  <TouchableOpacity>
+                    <ListViewComponent data={[{ id: item.collectionID, imgUrl: item.imgUrl ? item.imgUrl : clothesLogoUrlDefault, }]} />
+                    <View style={{ position: 'absolute', backgroundColor: 'rgba(216,216,216, 0.3)', width: width * 0.9, height: 300, justifyContent: 'center', alignItems: 'center', borderRadius: 8, top: 10, left: 10 }}>
+                      <Text style={{ color: backgroundColor, fontSize: 40, fontWeight: 'bold' }}>{item.nameOfCollection}</Text>
+                    </View>
+                  </TouchableOpacity>
+                )}
+                contentContainerStyle={{ paddingRight: 0 }}
+                showsVerticalScrollIndicator={false}
+                scrollEnabled={false}
+              />
             )}
-            contentContainerStyle={{ paddingRight: 0 }}
-            showsVerticalScrollIndicator={false}
-            scrollEnabled={false}
-          />
+
+          {selectedTag === 'clothes' &&
+            (
+              <FlatList
+                style={UserProfileStyleScreen.flatlist}
+                data={userClothes}
+                keyExtractor={(item) => item.clothesID}
+                numColumns={2}
+                renderItem={({ item }) => (
+                  <TouchableOpacity>
+                    <ListViewComponent data={[{ id: item.clothesID, imgUrl: item.clothesImages ? item.clothesImages[0] : clothesLogoUrlDefault, }]} />
+                  </TouchableOpacity>
+                )}
+                contentContainerStyle={{ paddingRight: 0 }}
+                showsVerticalScrollIndicator={false}
+                scrollEnabled={false}
+              />
+            )}
+
           <PostingDialogComponent></PostingDialogComponent>
         </View>
       </ScrollView >

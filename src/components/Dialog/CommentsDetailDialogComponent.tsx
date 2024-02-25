@@ -181,6 +181,7 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
       if (response.success === 200) {
         console.log('123123132comeents: ', response);
         setCommmentGetting((prev) => [...prev, response.data]);
+        setComment('');
       } else {
 
 

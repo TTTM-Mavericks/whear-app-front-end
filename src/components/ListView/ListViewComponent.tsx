@@ -89,13 +89,23 @@ const ListViewComponent: React.FC<ListViewProps> = ({ data, child, cardStyleCont
 
     return (
         <View>
-            <FlatList
-                data={data}
-                keyExtractor={(item) => item.id}
-                renderItem={renderRow}
-                numColumns={isHorizontal ? 1 : 2}
-                horizontal={isHorizontal}
-            />
+            {isHorizontal ? (
+
+                <FlatList
+                    data={data}
+                    keyExtractor={(item) => item.id}
+                    renderItem={renderRow}
+                    horizontal={isHorizontal}
+                />
+            ) : (
+                <FlatList
+                    data={data}
+                    keyExtractor={(item) => item.id}
+                    renderItem={renderRow}
+                    numColumns={isHorizontal ? 1 : 2}
+                    horizontal={isHorizontal}
+                />
+            )}
         </View>
     );
 };

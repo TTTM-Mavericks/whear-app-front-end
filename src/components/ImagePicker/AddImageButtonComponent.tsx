@@ -8,7 +8,7 @@ import { addDoc, collection, onSnapshot } from "firebase/firestore";
 import { Video } from "expo-av";
 import { db, storage } from "../../../FireBaseConfig";
 import { useDispatch } from "react-redux";
-import { saveImageCreatingUrl, saveImagePostingUrl, saveImageUrl, setUploadToFireBase } from "../../redux/State/Actions";
+import { saveImageCollectionngUrl, saveImageCreatingUrl, saveImagePostingUrl, saveImageUrl, setUploadToFireBase } from "../../redux/State/Actions";
 import { IconButton } from "react-native-paper";
 import UploadingAndroid from "./UploadingAndroid";
 import * as ImageManipulator from 'expo-image-manipulator';
@@ -33,6 +33,7 @@ interface ImageButtonProps {
   isAddNewImagePosting?: boolean,
   iconSize?: number,
   iconStyle?: StyleProp<ViewStyle>,
+  isCollectionImage?: boolean
 }
 
 const AddImageButtonComponent: React.FC<ImageButtonProps> = (
@@ -47,7 +48,8 @@ const AddImageButtonComponent: React.FC<ImageButtonProps> = (
     height,
     isAddNewImagePosting,
     iconSize,
-    iconStyle
+    iconStyle,
+    isCollectionImage
   }) => {
   const [image, setImage] = useState<string>("");
   const [video, setVideo] = useState<string>("");
@@ -171,6 +173,9 @@ const AddImageButtonComponent: React.FC<ImageButtonProps> = (
           }
           if (isAddNewImagePosting) {
             dispatch(saveImagePostingUrl(downloadURL));
+          }
+          if (isCollectionImage) {
+            dispatch(saveImageCollectionngUrl(downloadURL));
           }
           await saveRecord(fileType, downloadURL, new Date().toISOString());
           setImage("");
