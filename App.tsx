@@ -43,7 +43,7 @@ export default function App() {
           <View style={styles.container}>
             <Stack.Navigator>
 
-              <Stack.Screen
+              {/* <Stack.Screen
                 name='FirstLoadingPage'
                 component={FirstLoadingPage}
                 options={{ headerShown: false }}
@@ -53,9 +53,9 @@ export default function App() {
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
-              />
+              />  */}
 
-               <Stack.Screen
+              <Stack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{
@@ -105,7 +105,7 @@ export default function App() {
                 component={SocialScreen}
                 options={{ headerShown: false }}
               />
-              
+
               <Stack.Screen
                 name='PostingDetail'
                 component={PostingDetailScreen}
@@ -146,8 +146,9 @@ export default function App() {
                 name='NotificationScreen'
                 component={NotificationScreen}
                 options={{ headerShown: false }}
-              /> 
-               <Stack.Screen
+              />
+              
+              <Stack.Screen
                 name='Event'
                 component={EventScreen}
                 options={{ headerShown: false }}

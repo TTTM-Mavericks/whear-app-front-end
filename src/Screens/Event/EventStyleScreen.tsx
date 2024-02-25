@@ -51,6 +51,7 @@ const EventStyleScreen = StyleSheet.create({
   chip: {
     marginHorizontal: 5,
     marginVertical: 5,
+    backgroundColor: backgroundColor
   },
 });
 export default EventStyleScreen;

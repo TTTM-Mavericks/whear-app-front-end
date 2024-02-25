@@ -3,12 +3,17 @@ import { SafeAreaView, StyleProp, StyleSheet, ViewStyle } from 'react-native';
 import { SegmentedButtons } from 'react-native-paper';
 import { width } from '../../../root/ResponsiveSize';
 import { backgroundColor, primaryColor } from '../../../root/Colors';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../../root/RootStackParams';
+import { useNavigation } from '@react-navigation/native';
 
 interface chipGroupInterface {
     buttonsData?: {}[];
     style?: StyleProp<ViewStyle>;
 }
+type RouteNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 const ChipGroupComponent: React.FC<chipGroupInterface> = ({style}) => {
+    const navigation = useNavigation<RouteNavigationProp>();
     const [value, setValue] = React.useState('');
 
     return (
@@ -48,6 +53,7 @@ const ChipGroupComponent: React.FC<chipGroupInterface> = ({style}) => {
                     {
                         value: 'events',
                         label: 'Events',
+                        onPress: () => {navigation.navigate('Event')},
                         style: {
                             borderRadius: 0,
                             borderColor: 'transparent',
@@ -59,6 +65,7 @@ const ChipGroupComponent: React.FC<chipGroupInterface> = ({style}) => {
                         uncheckedColor: '#808991',
                     }, {
                         value: 'news',
+                        onPress: () => {navigation.navigate('NewsScreen')},
                         label: 'News', style: {
                             borderRadius: 0,
                             borderColor: 'transparent',
