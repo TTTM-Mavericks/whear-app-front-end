@@ -32,6 +32,7 @@ import AddingPostingsScreen from "./src/Screens/AddingPostings/AddingPostingsScr
 import EventScreen from "./src/Screens/Event/EventScreen";
 import RecommendOutfitScreen from "./src/Screens/RecommendOutfit/RecommendOutfitScreen";
 import FirstLoadingPage from "./src/Screens/Introduce/FirstLoadingPage";
+import ChatScreen from "./src/Screens/Chat/chatScreen";
 
 const Stack = createStackNavigator();
 
@@ -42,7 +43,6 @@ export default function App() {
         <NavigationContainer>
           <View style={styles.container}>
             <Stack.Navigator>
-
               {/* <Stack.Screen
                 name='FirstLoadingPage'
                 component={FirstLoadingPage}
@@ -54,7 +54,7 @@ export default function App() {
                 component={SignInComponent}
                 options={{ headerShown: false }}
               />  */}
-
+{/* 
               <Stack.Screen
                 name="Home"
                 component={HomeScreen}
@@ -64,29 +64,28 @@ export default function App() {
               />
 
               <Stack.Screen
-                name='Collections'
+                name="Collections"
                 component={CollectionsScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name='UserProfile'
+                name="UserProfile"
                 component={UserProfileScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name='UserProfileSetting'
+                name="UserProfileSetting"
                 component={UserProfileSettingScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name='SignUp'
+                name="SignUp"
                 component={SignUpComponent}
                 options={{ headerShown: false }}
               />
-
 
               <Stack.Screen
                 name="Introduce"
@@ -95,19 +94,19 @@ export default function App() {
               />
 
               <Stack.Screen
-                name='ForgotPassword'
+                name="ForgotPassword"
                 component={ForgotPasswordComponent}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name='Social'
+                name="Social"
                 component={SocialScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name='PostingDetail'
+                name="PostingDetail"
                 component={PostingDetailScreen}
                 options={{ headerShown: false }}
               />
@@ -131,68 +130,70 @@ export default function App() {
               />
 
               <Stack.Screen
-                name='HotStore'
+                name="HotStore"
                 component={HotStoreScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name='SearchScreen'
+                name="SearchScreen"
                 component={SearchScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name='NotificationScreen'
+                name="NotificationScreen"
                 component={NotificationScreen}
                 options={{ headerShown: false }}
               />
-              
+
               <Stack.Screen
-                name='Event'
+                name="Event"
                 component={EventScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name='AddingClothesScreen'
+                name="AddingClothesScreen"
                 component={AddingClothesScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name='ClothesDetailScreen'
+                name="ClothesDetailScreen"
                 component={ClothesDetailScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name='AddingPostingsScreen'
+                name="AddingPostingsScreen"
                 component={AddingPostingsScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name='RecommendOutfitScreen'
+                name="RecommendOutfitScreen"
                 component={RecommendOutfitScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name='MessageScreen'
+                name="MessageScreen"
                 component={MessageScreen}
                 options={{ headerShown: false }}
               />
 
               <Stack.Screen
-                name='HotStoreScreen'
+                name="HotStoreScreen"
                 component={HotStoreScreen}
                 options={{ headerShown: false }}
+              /> */}
+
+              <Stack.Screen
+                name="ChatScreen"
+                component={ChatScreen}
+                options={{ headerShown: false }}
               />
-
-
-
-
             </Stack.Navigator>
           </View>
         </NavigationContainer>
