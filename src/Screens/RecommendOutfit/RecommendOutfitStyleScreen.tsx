@@ -1,5 +1,5 @@
-import { StyleSheet, Dimensions } from 'react-native';
-import { backgroundColor } from '../../root/Colors';
+import { StyleSheet, Dimensions, Platform } from 'react-native';
+import { backgroundColor, primaryColor } from '../../root/Colors';
 import { ITEM_HEIGHT } from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
 import { ITEM_WIDTH } from '../../components/ListView/ListViewStyleComponent';
 
@@ -21,9 +21,9 @@ const RecommendOutfitStyleScreen = StyleSheet.create({
 
   },
   scrollViewContent: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    // flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center'
   },
   title: {
     fontSize: width * 0.1,
@@ -92,7 +92,7 @@ const RecommendOutfitStyleScreen = StyleSheet.create({
   buttonGroup_button_lable: {
     height: height * 0.04,
     marginTop: height * 0.04 * 0.75,
-    fontSize: 13, 
+    fontSize: 13,
     fontWeight: '400',
     color: 'black',
     flexDirection: 'row-reverse',
@@ -112,6 +112,62 @@ const RecommendOutfitStyleScreen = StyleSheet.create({
     height: ITEM_HEIGHT,
     width: ITEM_WIDTH,
   },
+
+  card: {
+    marginRight: 8,
+
+  },
+  cardContainer: {
+    backgroundColor: backgroundColor,
+    marginRight: 10,
+    marginLeft: 10,
+    marginBottom: 10,
+    marginTop: 10,
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    alignContent: 'center',
+    alignItems: 'center',
+    width: (width + 55) * 0.4,
+    height: 300
+  },
+  chipContainer: {
+    marginTop: -10,
+    marginRight: 30,
+    width: '100%'
+
+  },
+  segmentedButtons: {
+    borderColor: 'transparent',
+    borderWidth: 0,
+    fontWeight: 'bold',
+    marginRight: 50
+  },
+  outfitTag: {
+    backgroundColor: primaryColor,
+    width: 100,
+    alignContent: 'center',
+    alignItems: 'center',
+
+  },
+  hiddenElement: {
+    width: (width + 55) * 0.4,
+    marginLeft: 10,
+    height: 300, top: 0,
+    marginTop: 0,
+    backgroundColor: 'rgba(216,216,216, 0.93)',
+    position: 'absolute',
+    zIndex: 999,
+    borderRadius: 8,
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 
 });
 

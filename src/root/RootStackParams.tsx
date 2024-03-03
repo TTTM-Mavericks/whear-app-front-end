@@ -23,6 +23,9 @@ export type RootStackParamList = {
   HotStoreScreen: undefined;
   UpgradeScreen: undefined;
   UpgardeDetailScreen: undefined
+  Event: undefined;
+
+
 };
 
 export interface RootState {

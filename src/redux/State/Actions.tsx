@@ -11,6 +11,10 @@ export const SAVE_IMAGE_CREATING_URL = 'SAVE_IMAGE_CREATING_URL';
 export const SAVE_IMAGE_POSTING_URL = 'SAVE_IMAGE_POSTING_URL';
 export const OPEN_UPGRADE_ROLES_DIALOG = 'OPEN_UPGRADE_ROLES_DIALOG';
 export const IS_UPLOADED_IMAGE_TO_FIREBASE = 'IS_UPLOADED_IMAGE_TO_FIREBASE';
+export const OPEN_CREATE_COLLECTION_DIALOG = 'OPEN_CREATE_COLLECTION_DIALOG';
+export const SAVE_IMAGE_COLLECTION_URL = 'SAVE_IMAGE_COLLECTION_URL';
+
+
 
 
 export const signIn = (email: string, password: string) => ({
@@ -78,5 +82,14 @@ export const setOpenUpgradeRolesDialog = (isOpenUpgradeRolesDialog: boolean) => 
   payload: isOpenUpgradeRolesDialog,
 });
 
+export const setCreateCollectionDialog = (isOpenCreateCollectionDialog: boolean) => ({
+  type: OPEN_CREATE_COLLECTION_DIALOG,
+  payload: isOpenCreateCollectionDialog,
+});
+
+export const saveImageCollectionngUrl = (imageCollectionUrl: string) => ({
+  type: SAVE_IMAGE_COLLECTION_URL,
+  payload: imageCollectionUrl,
+});
 
 

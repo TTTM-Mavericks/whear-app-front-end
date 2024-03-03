@@ -116,10 +116,10 @@ function MessageScreen() {
     <View style={MessageStyle.mainContainer}>
       <AppBarHeaderComponent
         title={
-          <View style={MessageStyle.titleTopBar}>
+          <View>
             <MaskedView
               maskElement={
-                <Text style={MessageStyle.titleTopBar}>Message</Text>
+                <Text style={MessageStyle.titleTopBar}></Text>
               }
             >
               <LinearGradient
@@ -128,7 +128,7 @@ function MessageScreen() {
                 end={{ x: 0, y: 1 }}
                 style={MessageStyle.linearBackground}
               >
-                <Text style={{ opacity: 0 }}>Message</Text>
+                <Text style={{ opacity: 0 }}></Text>
               </LinearGradient>
             </MaskedView>
           </View>
@@ -144,7 +144,7 @@ function MessageScreen() {
         }
         backAction={() => navigation.goBack()}
       ></AppBarHeaderComponent>
-      
+
       <View>
         <FlatList
           data={messageItems}

@@ -14,6 +14,8 @@ interface State {
   isUploadedImageToFireBase: boolean;
   imagePostingUrl: string;
   isOpenUpgradeRolesDialog: boolean;
+  isOpenCreateCollectionDialog: boolean;
+  imageCollectionUrl: string;
 }
 
 const initialState: State = {
@@ -28,7 +30,9 @@ const initialState: State = {
   imageCreatingUrl: clothesLogoUrlDefault,
   isUploadedImageToFireBase: false,
   imagePostingUrl: '#',
-  isOpenUpgradeRolesDialog: false
+  isOpenUpgradeRolesDialog: false,
+  isOpenCreateCollectionDialog: false,
+  imageCollectionUrl: '#'
 };
 
 const authSlice = createSlice({
@@ -75,6 +79,12 @@ const authSlice = createSlice({
     setOpenUpgradeRolesDialog: (state, action: PayloadAction<{ isOpenUpgradeRolesDialog: boolean }>) => {
       state.isOpenUpgradeRolesDialog = action.payload.isOpenUpgradeRolesDialog;
     },
+    setCreateCollectionDialog: (state, action: PayloadAction<{ isOpenCreateCollectionDialog: boolean }>) => {
+      state.isOpenCreateCollectionDialog = action.payload.isOpenCreateCollectionDialog;
+    },
+    saveImageCollectionUrl: (state, action: PayloadAction<{ imageCollectionUrl: string }>) => {
+      state.imageCollectionUrl = action.payload.imageCollectionUrl;
+    },
   },
 });
 
@@ -91,7 +101,8 @@ export const {
   setOpenUpPostingDialog,
   setUploadToFireBase,
   saveImagePostingUrl,
-  setOpenUpgradeRolesDialog
+  setOpenUpgradeRolesDialog,
+  saveImageCollectionUrl
 
 } = authSlice.actions;
 export default authSlice.reducer;

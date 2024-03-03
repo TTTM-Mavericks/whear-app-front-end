@@ -9,11 +9,11 @@ const BasicInformationStyle = StyleSheet.create({
     flex: 1,
     fontWeight: "bold",
     padding: containerPadding,
-    backgroundColor: backgroundColor
+    backgroundColor: backgroundColor,
   },
   headerText: { marginTop: 20 },
   textDescription: {
-    marginTop: 20,
+    marginTop: 10,
     color: "#D4D4D4",
     width: 306,
     height: 100,
@@ -88,6 +88,7 @@ const BasicInformationStyle = StyleSheet.create({
     width: width - containerPadding * 2,
     paddingRight: 50,
     paddingBottom: 20,
+    marginTop: 25
   },
   title: {
     fontSize: 35,

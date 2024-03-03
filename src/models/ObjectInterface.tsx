@@ -49,12 +49,14 @@ export interface ClothesInterface {
 }
 
 export interface CollectionInterface {
-    userID?: string;
+    collectionID?: any;
+    userID?: any;
     nameOfCollection?: string;
     typeOfCollection?: string;
     numberOfClothes?: number;
     collectionStatus?: string;
     imgUrl?: string;
+    clothesList?: ClothesInterface[];
 }
 
 

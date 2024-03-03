@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, Platform, Image, ImageBackground } from 'react-native';
 import { Input, CheckBox } from '@rneui/base';
 import DatePicker from 'react-native-date-picker';
 import { useNavigation } from '@react-navigation/native';
@@ -10,13 +10,9 @@ import { convertDateFormat, validateEmail, validatePassword, validateString } fr
 import SignUpStylesComponent from './SignUpStyleComponent';
 import { Button, HelperText, IconButton, List, Modal, Portal, TextInput } from 'react-native-paper';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import { Icon } from 'react-native-vector-icons/Icon';
 import PolicyComponent from '../Policy/PolicyComponent';
-import { RootState } from '../../../root/RootStackParams'
 import { setOpenPolicy } from '../AuthState/AuthAction';
 import { backgroundColor, primaryColor } from '../../../root/Colors';
-import ButtonComponent from '../../Button/ButtonDefaultComponent';
-import { buttonHeight, buttonWidth } from '../../Button/ButtonDefaultData';
 import api from '../../../api/AxiosApiConfig';
 import { UserInterFace } from '../../../models/ObjectInterface';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -245,160 +241,140 @@ const SignUpComponent = () => {
     return (
         <View style={{ backgroundColor: backgroundColor, height: 'auto', flex: 1 }}>
             <ScrollView contentContainerStyle={{ backgroundColor: backgroundColor, height: 'auto' }}>
+                <ImageBackground style={{
+                    width: width,
+                    height: height,
+                }} source={require('../../../assets/img/logo/background.png')}>
 
-                <View style={SignUpStylesComponent.container}>
-                    <Text style={SignUpStylesComponent.title}>Sign Up</Text>
-                    <TextInput
-                        label="Email"
-                        activeOutlineColor={primaryColor}
-                        value={email}
-                        onChangeText={text => setEmail(text)}
-                        style={SignUpStylesComponent.input}
-                        mode='outlined'
-                        right={
-                            <TextInput.Icon
-                                icon="email"
-                            />
-                        }
-                    />
-                    {!isEmailValidate && (
-                        <Text style={SignUpStylesComponent.errorValidate}>{errorEmailValidate}</Text>
-                    )}
-
-                    <TextInput
-                        label="Username"
-                        activeOutlineColor={primaryColor}
-                        value={username}
-                        onChangeText={text => setUsername(text)}
-                        style={SignUpStylesComponent.input}
-                        mode='outlined'
-                        right={
-                            <TextInput.Icon
-                                icon="account"
-                            />
-                        }
-                    />
-                    {!isUsernameValidate && (
-                        <Text style={SignUpStylesComponent.errorValidate}>{errorUsernameValidate}</Text>
-                    )}
-
-                    <TextInput
-                        focusable={false}
-                        label="Password"
-                        activeOutlineColor={primaryColor}
-                        value={password}
-                        style={SignUpStylesComponent.input}
-                        secureTextEntry={isHidePassword}
-                        mode='outlined'
-                        onChangeText={(text) => setPassword(text)}
-                        right={
-                            <TextInput.Icon icon="eye"
-                                onPress={handleHidePassword}
-                            />
-                        }
-                    />
-                    {!isPasswordValidate && (
-                        <Text style={SignUpStylesComponent.errorValidate}>{errorPasswordValidate}</Text>
-                    )}
-
-                    <TextInput
-                        label="Confirm Password"
-                        value={confirmPassword}
-                        activeOutlineColor={primaryColor}
-                        style={SignUpStylesComponent.input}
-                        secureTextEntry={isHideConfirmPassword}
-                        mode='outlined'
-                        onChangeText={(text) => setConfirmPassword(text)}
-                        right={
-                            <TextInput.Icon icon="eye"
-                                onPress={handleHideConfirmPassword}
-                            />
-                        }
-                    />
-                    {!isConfirmPasswordValidate && (
-                        <Text style={SignUpStylesComponent.errorValidate}>{errorConfirmPasswordValidate}</Text>
-                    )}
-
-                    <TextInput
-                        label="Phone"
-                        value={phone}
-                        activeOutlineColor={primaryColor}
-                        onChangeText={text => setPhone(text)}
-                        style={SignUpStylesComponent.input}
-                        mode='outlined'
-                        aria-valuemin={12}
-                        keyboardType='numeric'
-                        right={
-                            <TextInput.Icon
-                                icon="phone"
-                            />
-                        }
-                    />
-
-                    {/* Gender */}
-                    <View style={SignUpStylesComponent.groupCheckbox} >
-                        <CheckBox
-                            checked={gender === true}
-                            onPress={() => setGender(true)}
-                            checkedIcon="dot-circle-o"
-                            uncheckedIcon="circle-o"
-                            title={
-                                <Text style={SignUpStylesComponent.checkBoxText}>
-                                    {'Male'}
-                                </Text>
-                            }
-
-                        />
-                        <CheckBox
-                            checked={gender === false}
-                            onPress={() => setGender(false)}
-                            checkedIcon="dot-circle-o"
-                            uncheckedIcon="circle-o"
-                            title={
-                                <Text style={SignUpStylesComponent.checkBoxText}>
-                                    {'Female'}
-                                </Text>
-                            }
-                        />
-                    </View>
-
-                    {/* Birthday */}
-                    <TextInput
-                        label="Birthday"
-                        activeOutlineColor={primaryColor}
-                        value={birthday.toLocaleDateString()}
-                        style={SignUpStylesComponent.input}
-                        mode='outlined'
-                        onFocus={showDatePicker}
-                        right={
-                            <TextInput.Icon icon="calendar"
-                                onPress={showDatePicker}
-                            />
-                        }
-                    />
-                    <DateTimePickerModal
-                        isVisible={isDatePickerVisible}
-                        mode="date"
-                        onConfirm={(date) => handleConfirm(date)}
-                        onCancel={hideDatePicker}
-                        onChange={(text: any) => setBirthday(text)}
-
-                    />
-
-                    {/* Country */}
-                    <View>
+                    <View style={SignUpStylesComponent.container}>
+                        <Text style={SignUpStylesComponent.title}>Sign Up</Text>
                         <TextInput
-                            label="Country"
+                            label="Email"
                             activeOutlineColor={primaryColor}
-                            value={language}
+                            value={email}
+                            onChangeText={text => setEmail(text)}
                             style={SignUpStylesComponent.input}
                             mode='outlined'
                             right={
                                 <TextInput.Icon
-                                    icon="chevron-down"
-                                    onPress={showCountryPicker} />
+                                    icon="email"
+                                />
                             }
-                            editable={false}
+                        />
+                        {!isEmailValidate && (
+                            <Text style={SignUpStylesComponent.errorValidate}>{errorEmailValidate}</Text>
+                        )}
+
+                        <TextInput
+                            label="Username"
+                            activeOutlineColor={primaryColor}
+                            value={username}
+                            onChangeText={text => setUsername(text)}
+                            style={SignUpStylesComponent.input}
+                            mode='outlined'
+                            right={
+                                <TextInput.Icon
+                                    icon="account"
+                                />
+                            }
+                        />
+                        {!isUsernameValidate && (
+                            <Text style={SignUpStylesComponent.errorValidate}>{errorUsernameValidate}</Text>
+                        )}
+
+                        <TextInput
+                            focusable={false}
+                            label="Password"
+                            activeOutlineColor={primaryColor}
+                            value={password}
+                            style={SignUpStylesComponent.input}
+                            secureTextEntry={isHidePassword}
+                            mode='outlined'
+                            onChangeText={(text) => setPassword(text)}
+                            right={
+                                <TextInput.Icon icon="eye"
+                                    onPress={handleHidePassword}
+                                />
+                            }
+                        />
+                        {!isPasswordValidate && (
+                            <Text style={SignUpStylesComponent.errorValidate}>{errorPasswordValidate}</Text>
+                        )}
+
+                        <TextInput
+                            label="Confirm Password"
+                            value={confirmPassword}
+                            activeOutlineColor={primaryColor}
+                            style={SignUpStylesComponent.input}
+                            secureTextEntry={isHideConfirmPassword}
+                            mode='outlined'
+                            onChangeText={(text) => setConfirmPassword(text)}
+                            right={
+                                <TextInput.Icon icon="eye"
+                                    onPress={handleHideConfirmPassword}
+                                />
+                            }
+                        />
+                        {!isConfirmPasswordValidate && (
+                            <Text style={SignUpStylesComponent.errorValidate}>{errorConfirmPasswordValidate}</Text>
+                        )}
+
+                        <TextInput
+                            label="Phone"
+                            value={phone}
+                            activeOutlineColor={primaryColor}
+                            onChangeText={text => setPhone(text)}
+                            style={SignUpStylesComponent.input}
+                            mode='outlined'
+                            aria-valuemin={12}
+                            keyboardType='numeric'
+                            right={
+                                <TextInput.Icon
+                                    icon="phone"
+                                />
+                            }
+                        />
+
+                        {/* Gender */}
+                        <View style={SignUpStylesComponent.groupCheckbox} >
+                            <CheckBox
+                                checked={gender === true}
+                                onPress={() => setGender(true)}
+                                checkedIcon="dot-circle-o"
+                                uncheckedIcon="circle-o"
+                                title={
+                                    <Text style={SignUpStylesComponent.checkBoxText}>
+                                        {'Male'}
+                                    </Text>
+                                }
+
+                            />
+                            <CheckBox
+                                checked={gender === false}
+                                onPress={() => setGender(false)}
+                                checkedIcon="dot-circle-o"
+                                uncheckedIcon="circle-o"
+                                title={
+                                    <Text style={SignUpStylesComponent.checkBoxText}>
+                                        {'Female'}
+                                    </Text>
+                                }
+                            />
+                        </View>
+
+                        {/* Birthday */}
+                        <TextInput
+                            label="Birthday"
+                            activeOutlineColor={primaryColor}
+                            value={birthday.toLocaleDateString()}
+                            style={SignUpStylesComponent.input}
+                            mode='outlined'
+                            onFocus={showDatePicker}
+                            right={
+                                <TextInput.Icon icon="calendar"
+                                    onPress={showDatePicker}
+                                />
+                            }
                         />
                         <Portal>
                             <Modal visible={isModalVisible} onDismiss={hideCountryPicker} >
@@ -435,8 +411,67 @@ const SignUpComponent = () => {
                         />
                         <PolicyComponent></PolicyComponent>
                     </View>
+                        <DateTimePickerModal
+                            isVisible={isDatePickerVisible}
+                            mode="date"
+                            onConfirm={(date) => handleConfirm(date)}
+                            onCancel={hideDatePicker}
+                            onChange={(text: any) => setBirthday(text)}
 
-                    {/* <ButtonComponent
+                        />
+
+                        {/* Country */}
+                        <View>
+                            <TextInput
+                                label="Country"
+                                activeOutlineColor={primaryColor}
+                                value={language}
+                                style={SignUpStylesComponent.input}
+                                mode='outlined'
+                                right={
+                                    <TextInput.Icon
+                                        icon="chevron-down"
+                                        onPress={showCountryPicker} />
+                                }
+                                editable={false}
+                            />
+                            <Portal>
+                                <Modal visible={isModalVisible} onDismiss={hideCountryPicker} >
+                                    <List.Section style={{ backgroundColor: 'white', borderRadius: 8, width: '80%', marginLeft: '10%' }}>
+                                        <List.Subheader>Select a language</List.Subheader>
+                                        {languages.map((language) => (
+                                            <List.Item
+                                                style={{ backgroundColor: '#fffff' }}
+                                                key={language}
+                                                title={language}
+                                                onPress={() => handleChangeLaguage(language)}
+                                            />
+                                        ))}
+                                    </List.Section>
+                                </Modal>
+                            </Portal>
+                        </View>
+
+                        {/* Accept Policy */}
+                        <View style={SignUpStylesComponent.groupCheckbox} >
+                            <CheckBox
+                                checked={acceptPolicy}
+                                onPress={() => setAcceptPolicy(!acceptPolicy)}
+                                textStyle={SignUpStylesComponent.checkBoxText}
+                                title={
+                                    <>
+                                        <Text style={{ fontSize: 15 }}> I accept the policy.
+                                        </Text>
+                                        <TouchableOpacity onPress={handleOpenPolicy}>
+                                            <Text style={SignUpStylesComponent.content}>Read more?</Text>
+                                        </TouchableOpacity>
+                                    </>
+                                }
+                            />
+                            <PolicyComponent></PolicyComponent>
+                        </View>
+
+                        {/* <ButtonComponent
                         title="Press me"
                         onPress={() => {
                             handleSignUp();
@@ -448,18 +483,19 @@ const SignUpComponent = () => {
                         mode="contained"
                         style={{ marginBottom: 0, color: 'black' }}
                     /> */}
-                    <Button
-                        mode='outlined'
-                        contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
-                        style={[SignUpStylesComponent.buttonGroup_button, { backgroundColor: primaryColor }]}
-                        labelStyle={[SignUpStylesComponent.buttonGroup_button_lable,]}
-                        onPress={() => handleSignUp()}
-                    >
-                        <Text style={{ fontWeight: '500', fontSize: 15 }}>Sign Up</Text>
-                    </Button>
+                        <Button
+                            mode='outlined'
+                            contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
+                            style={[SignUpStylesComponent.buttonGroup_button, { backgroundColor: primaryColor, marginBottom: 100 }]}
+                            labelStyle={[SignUpStylesComponent.buttonGroup_button_lable,]}
+                            onPress={() => handleSignUp()}
+                        >
+                            <Text style={{ fontWeight: '500', fontSize: 15 }}>Sign Up</Text>
+                        </Button>
 
 
-                </View>
+                    </View>
+                </ImageBackground>
             </ScrollView>
             <LoadingComponent spinner={isLoading}></LoadingComponent>
             <Toast

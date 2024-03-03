@@ -107,7 +107,7 @@ const EventScreen = () => {
   const FiltersBar = () => {
     return (
       <View
-        style={[EventStyleScreen.chip__filter, ]}
+        style={[EventStyleScreen.chip__filter,]}
       >
         {filters.map((filter) => (
           <Chip
@@ -142,7 +142,7 @@ const EventScreen = () => {
         title={
           <View>
             <MaskedView
-              maskElement={<Text style={EventStyleScreen.title}>EVENT</Text>}
+              maskElement={<Text style={EventStyleScreen.title}>Events</Text>}
             >
               <LinearGradient
                 colors={[secondaryColor, primaryColor]}
@@ -150,23 +150,19 @@ const EventScreen = () => {
                 end={{ x: 0, y: 1 }}
                 style={EventStyleScreen.linearBackground}
               >
-                <Text style={{ opacity: 0 }}>EVENT </Text>
+                <Text style={{ opacity: 0 }}>Events </Text>
               </LinearGradient>
             </MaskedView>
           </View>
         }
-        iconChild={
-          <>
-            <Appbar.Action icon={'magnify'} onPress={handleSearch} />
-            {/* <Appbar.Action icon='dots-vertical' onPress={handleMore} /> */}
-          </>
-        }
+
       ></AppBarHeaderComponent>
 
       <View style={EventStyleScreen.scroll__view}>
         <FlatList
           onScroll={(event) => handleScroll(event)}
-
+          showsVerticalScrollIndicator={false}
+          showsHorizontalScrollIndicator={false}
           data={filterEvents}
           ListHeaderComponent={FiltersBar}
           keyExtractor={(item) => item.id}

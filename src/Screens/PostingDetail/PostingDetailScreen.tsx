@@ -266,6 +266,7 @@ const PostingDetailScreen = () => {
           ...prev,
           comment: [...(prev?.comment || []), response.data],
         }));
+        setComment('');
 
       } else {
 

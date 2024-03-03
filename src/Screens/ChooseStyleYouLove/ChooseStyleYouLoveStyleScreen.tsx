@@ -20,6 +20,7 @@ const ChooseStyleYouLoveStyleScreen = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+
   },
 
   titleView: {
@@ -51,8 +52,8 @@ const ChooseStyleYouLoveStyleScreen = StyleSheet.create({
     borderWidth: 1,
   },
   buttonView: {
-    paddingTop: 20,
-    paddingBottom: 20,
+    marginTop: 30,
+    marginBottom: -10,
   },
   cardStyleContainer: {
     position: 'relative',

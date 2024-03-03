@@ -35,7 +35,7 @@ const UpgradeRoleDialogComponent = () => {
             showAnimation()
             setIsOpen(openDialog);
         } else {
-            hideAnimation()
+            hideAnimation();
         }
     }, [openDialog]);
 
@@ -124,17 +124,33 @@ const UpgradeRoleDialogComponent = () => {
                             showsVerticalScrollIndicator={false}
                             showsHorizontalScrollIndicator={false}>
                             <View style={DialogStylesComponent.groupCard}>
+                                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
+                                    <Text style={[DialogStylesComponent.contentText, { fontSize: 15, fontWeight: 'bold' }]}>
+                                        For only
+                                    </Text>
+                                    <View style={{ backgroundColor: primaryColor, marginLeft: 5, marginRight: 5, borderRadius: 10 }}>
+                                        <Text style={[DialogStylesComponent.contentText, { fontSize: 15, fontWeight: 'bold', padding: 5, }]}>
+                                            79,000 VND/month
+                                        </Text>
+                                    </View>
+                                    <Text style={[DialogStylesComponent.contentText, { fontSize: 15, fontWeight: 'bold' }]}>
+                                        you can:
+                                    </Text>
+                                </View>
                                 <Text style={DialogStylesComponent.contentText}>
-                                    - Ad-free experience: Enjoy the app without interruptions.
+                                    - Have the Premium icon.
                                 </Text>
                                 <Text style={DialogStylesComponent.contentText}>
-                                    - Early access: Get access to new features before anyone else.
+                                    - Unlimit the number of days per week for outfit recommendations.
                                 </Text>
                                 <Text style={DialogStylesComponent.contentText}>
-                                    - Premium content: Access exclusive content and features.
+                                    - Extend number of collection from 3 to 5
                                 </Text>
                                 <Text style={DialogStylesComponent.contentText}>
-                                    - Priority support: Receive faster and priority customer support.
+                                    - Extend the number of clothes in each collection from 10 to 20.
+                                </Text>
+                                <Text style={DialogStylesComponent.contentText}>
+                                    - Unlimited rating.
                                 </Text>
                                 <Text style={DialogStylesComponent.contentText}>
                                     - Customization options: Personalize your app experience.
