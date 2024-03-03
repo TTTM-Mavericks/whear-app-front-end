@@ -6,7 +6,7 @@ const containerPadding = 16;
 
 const IntroduceStylesComponent = StyleSheet.create({
   container: {
-    height: height,
+    height: height + 40,
     justifyContent: 'center',
     alignItems: 'center',
     padding: containerPadding,

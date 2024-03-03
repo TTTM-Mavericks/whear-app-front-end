@@ -41,7 +41,6 @@ const CommentStyle = StyleSheet.create({
     paddingVertical: 4,
   },
   commentReact: {
-    alignSelf: 'flex-start',
     alignItems: 'center',
     borderRadius: 50,
     borderColor: grayBorderColor,
@@ -49,6 +48,7 @@ const CommentStyle = StyleSheet.create({
     borderWidth: 1,
     paddingVertical: 4,
     paddingHorizontal: 5,
+    marginRight: 40
   },
   commentActionContainer: {
     flex: 1,

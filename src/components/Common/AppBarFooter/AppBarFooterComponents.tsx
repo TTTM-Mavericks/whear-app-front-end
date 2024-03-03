@@ -75,7 +75,7 @@ const AppBarFooterComponents: React.FC<footerProperties> = ({ isHide, centerIcon
                 visible={false}
                 actions={[
                     { icon: require('../../../assets/icon/brand.png'), style: { backgroundColor: primaryColor }, label: 'Hot stores', onPress: () => navigation.replace('HotStoreScreen') },
-                    { icon: require('../../../assets/icon/events.png'), style: { backgroundColor: primaryColor }, label: 'Events', onPress: () => navigation.replace('Collections') },
+                    { icon: require('../../../assets/icon/events.png'), style: { backgroundColor: primaryColor }, label: 'Events', onPress: () => navigation.replace('Event') },
                     { icon: require('../../../assets/icon/news.png'), style: { backgroundColor: primaryColor }, label: 'News', onPress: () => navigation.replace('NewsScreen') },
                     { icon: require('../../../assets/icon/talking.png'), style: { backgroundColor: primaryColor }, label: 'Message', onPress: () => navigation.replace('MessageScreen') },
                     { icon: require('../../../assets/icon/heart.png'), style: { backgroundColor: primaryColor }, label: 'Collection', onPress: () => navigation.replace('Collections') },
@@ -112,7 +112,7 @@ const AppBarFooterComponents: React.FC<footerProperties> = ({ isHide, centerIcon
                 <View style={AppBarFooterStyleComponents.rhombusContainer}>
                     <IconButton icon={centerIcon ? centerIcon : { uri: urlCenterIcon }} onPress={centerOnPress ? centerOnPress : handleCreateNewCloth} style={[AppBarFooterStyleComponents.button, { transform: [{ rotate: '-45deg' }] }]} />
                 </View>
-                <IconButton icon={require('../../../assets/icon/tshirt.png')} size={22} style={AppBarFooterStyleComponents.button} onPress={() => navigation.replace('Collections')} />
+                <IconButton icon={require('../../../assets/icon/tshirt.png')} size={22} style={AppBarFooterStyleComponents.button} onPress={() => navigation.replace('RecommendOutfitScreen')} />
                 {/* <IconButton icon={require('../../../assets/icon/heart.png')} size={22} style={AppBarFooterStyleComponents.button} onPress={() => navigation.replace('Collections')} /> */}
                 {/* <IconButton icon={require('../../../assets/icon/user.png')} iconColor='#49454F' size={22} style={AppBarFooterStyleComponents.button} onPress={() => handleMoveToUserProfile()} /> */}
                 <IconButton icon={require('../../../assets/icon/menu.png')} size={22} style={AppBarFooterStyleComponents.button} onPress={() => setFabGroupVisible(!isFabGroupVisible)} />

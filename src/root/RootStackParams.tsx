@@ -21,6 +21,7 @@ export type RootStackParamList = {
   MessageScreen: undefined;
   NewsScreen: undefined;
   HotStoreScreen: undefined;
+  Event: undefined;
 
 
 };

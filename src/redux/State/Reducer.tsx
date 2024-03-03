@@ -7,8 +7,10 @@ import {
   OPEN_ADD_TO_COLLECTIONS_DIALOG,
   OPEN_COMMENTS_DIALOG, 
   OPEN_CREATE_CLOTHES_DIALOG,
+  OPEN_CREATE_COLLECTION_DIALOG,
   OPEN_UPGRADE_ROLES_DIALOG,
   OPEN_UP_POSTING_DIALOG,
+  SAVE_IMAGE_COLLECTION_URL,
   SAVE_IMAGE_CREATING_URL,
   SAVE_IMAGE_POSTING_URL,
   SAVE_IMAGE_URL,
@@ -28,6 +30,8 @@ interface State {
   isUploadedImageToFireBase: boolean;
   imagePostingUrl: string;
   isOpenUpgradeRolesDialog: boolean;
+  isOpenCreateCollectionDialog: boolean;
+  imageCollectionUrl: string;
 }
 
 const initialState: State = {
@@ -42,7 +46,9 @@ const initialState: State = {
   imageCreatingUrl: clothesLogoUrlDefault,
   isUploadedImageToFireBase: false,
   imagePostingUrl: '#',
-  isOpenUpgradeRolesDialog: false
+  isOpenUpgradeRolesDialog: false,
+  isOpenCreateCollectionDialog: false,
+  imageCollectionUrl: '#',
 
 
 };
@@ -114,6 +120,16 @@ const Reducer = (state = initialState, action: any): State => {
       return {
         ...state,
         isOpenUpgradeRolesDialog: action.payload,
+      };
+      case OPEN_CREATE_COLLECTION_DIALOG:
+      return {
+        ...state,
+        isOpenCreateCollectionDialog: action.payload,
+      };
+      case SAVE_IMAGE_COLLECTION_URL:
+      return {
+        ...state,
+        imageCollectionUrl: action.payload,
       };
     default:
       return state;

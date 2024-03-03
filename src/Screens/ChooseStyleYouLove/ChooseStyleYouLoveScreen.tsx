@@ -87,23 +87,23 @@ const styleData = [
 ];
 
 const fashionStyles = [
-  { title: 'CYBERPUNK', id: 'CYBERPUNK', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'CLASSIC', id: 'CLASSIC', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'ROCK', id: 'ROCK', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'PREPPY', id: 'PREPPY', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'NORMCORE', id: 'NORMCORE', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'MINIMALISM', id: 'MINIMALISM', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'BASIC', id: 'BASIC', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'SPORTY', id: 'SPORTY', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'PARISIAN', id: 'PARISIAN', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'GOTHIC', id: 'GOTHIC', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'BOHEMIAN', id: 'BOHEMIAN', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'Y2K', id: 'Y2K', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'OLD_MONEY', id: 'OLD_MONEY', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'HIPPIE', id: 'HIPPIE', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'VINTAGE', id: 'VINTAGE', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'INDIE', id: 'INDIE', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
-  { title: 'E-GIRL', id: 'E_GIRL', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSPRING.jpg?alt=media&token=3e486b7d-0fd8-4188-861c-f18aa4a3d81c' },
+  { title: 'CYBERPUNK', id: 'CYBERPUNK', imgUrl: 'https://i.pinimg.com/564x/be/6e/92/be6e928031d63b318a3e40838d1a521e.jpg' },
+  { title: 'CLASSIC', id: 'CLASSIC', imgUrl: 'https://i.pinimg.com/564x/d6/69/b0/d669b095aa8b030c97593d40c8994b34.jpg' },
+  { title: 'VINTAGE', id: 'VINTAGE', imgUrl: 'https://i.pinimg.com/564x/c3/8f/47/c38f47fc4cf06e4d17c819514774fa73.jpg' },
+  { title: 'INDIE', id: 'INDIE', imgUrl: 'https://i.pinimg.com/564x/80/5b/ae/805baeac4224f42620c2bc9e9f52e5a6.jpg' },
+  { title: 'E-GIRL', id: 'E_GIRL', imgUrl: 'https://i.pinimg.com/564x/17/0f/0d/170f0d0758e164f07057e9c834c791f0.jpg' },
+  { title: 'BASIC', id: 'BASIC', imgUrl: 'https://i.pinimg.com/564x/2d/58/2a/2d582a49179cdb48d1d211dd491cbd2b.jpg' },
+  { title: 'SPORTY', id: 'SPORTY', imgUrl: 'https://i.pinimg.com/564x/77/8d/ba/778dba980001dc562591a0becd05fe72.jpg' },
+  { title: 'PREPPY', id: 'PREPPY', imgUrl: 'https://i.pinimg.com/564x/a9/07/77/a907778666f533fa2a9455b3456fcded.jpg' },
+  { title: 'NORMCORE', id: 'NORMCORE', imgUrl: 'https://i.pinimg.com/564x/11/d7/0b/11d70b5f83ab1bd452dc13309191c770.jpg' },
+  { title: 'MINIMALISM', id: 'MINIMALISM', imgUrl: 'https://i.pinimg.com/564x/36/98/8c/36988c3ceee413259404a8483a49d062.jpg' },
+  { title: 'ROCK', id: 'ROCK', imgUrl: 'https://i.pinimg.com/564x/c7/55/d1/c755d189d35933d71de13d8f9f08d6d0.jpg' },
+  { title: 'PARISIAN', id: 'PARISIAN', imgUrl: 'https://i.pinimg.com/564x/16/72/44/167244265a52d1593d0eb4ba3565c9e7.jpg' },
+  { title: 'GOTHIC', id: 'GOTHIC', imgUrl: 'https://i.pinimg.com/564x/e5/2b/c7/e52bc7563942dda4f1ebfc4a693c884f.jpg' },
+  { title: 'BOHEMIAN', id: 'BOHEMIAN', imgUrl: 'https://i.pinimg.com/564x/77/48/72/7748721dc1e1bde0cb4bf455ab08a18d.jpg' },
+  { title: 'Y2K', id: 'Y2K', imgUrl: 'https://i.pinimg.com/564x/39/9e/ab/399eabdaa3a2623c3c510b54b246992a.jpg' },
+  { title: 'OLD_MONEY', id: 'OLD_MONEY', imgUrl: 'https://i.pinimg.com/564x/5a/07/f1/5a07f1cd4d31432eeadbdb52c1920927.jpg' },
+  { title: 'HIPPIE', id: 'HIPPIE', imgUrl: 'https://i.pinimg.com/564x/af/d9/4f/afd94f56dbe3bfe3913000483f1eba5e.jpg' },
 ]
 
 type bodyShape = {
@@ -157,7 +157,7 @@ const ChooseStyleYouLoveScreen = () => {
   const handleMoveToHomeScreen = async () => {
     console.log('styleDefault: ', styleDefault);
     if (selectedItems.length >= 2) {
-          navigation.navigate('Home');
+      navigation.navigate('Home');
       // const response = await api.post('/api/v1/user-style/create-style-and-body-shape', styleDefault);
       // if (response.success === 200) {
       //   setIsLoading(true);

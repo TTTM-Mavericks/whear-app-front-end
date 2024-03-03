@@ -1,8 +1,8 @@
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Image, Keyboard, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { Avatar, TextInput } from 'react-native-paper';
+import { Avatar, IconButton, TextInput } from 'react-native-paper';
 import CommentComponent from '../../components/Common/Comment/CommentComponent';
 import PostContentComponent from '../../components/Common/PostContent/PostContentComponent';
 import { RootStackParamList } from '../../root/RootStackParams';
@@ -18,6 +18,10 @@ import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
 import { iconAvatarPostingSize } from '../../root/Icon';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { CommentsInterface, PostingInterface, UserInterFace } from '../../models/ObjectInterface';
+import api from '../../api/AxiosApiConfig';
+import LoadingComponent from '../../components/Common/Loading/LoadingComponent';
 
 export interface Comment {
   commentID: string;
@@ -139,6 +143,11 @@ type SignInScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
   'Route'
 >;
+
+type PostingResponse = {
+  post: PostingInterface,
+  react: any;
+}
 const PostingDetailScreen = () => {
   const navigation = useNavigation<SignInScreenNavigationProp>();
 
@@ -147,6 +156,14 @@ const PostingDetailScreen = () => {
   const [comment, setComment] = useState('');
   const [isKeyBoardOpen, setIskeyboardOpen] = useState(false);
   const [heightOfKeyBoard, setHeightOfKeyBoard] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [postingObj, setPostingObj] = useState<PostingInterface>();
+  const [postingResponse, setPostingResponse] = useState<PostingResponse>();
+  const [user, setUser] = useState<UserInterFace>();
+  const [commentGetting, setCommmentGetting] = useState<CommentsInterface[]>([]);
+
+
+
 
   /*-----------------Usable variable-----------------*/
   const dispatch = useDispatch();
@@ -155,12 +172,48 @@ const PostingDetailScreen = () => {
   const postID = (route.params as { postID?: string })?.postID || '';
 
   /*-----------------UseEffect-----------------*/
-  React.useEffect(() => {}, []);
+  const clothID = (route.params as { clothID?: string })?.clothID || '';
+
+  /*-----------------UseEffect-----------------*/
+  useEffect(() => {
+    const fetchData = async () => {
+      const tokenStorage = await AsyncStorage.getItem('access_token');
+      const userStorage = await AsyncStorage.getItem('userData');
+      setIsLoading(true);
+      if (userStorage) {
+        const userParse: UserInterFace = JSON.parse(userStorage);
+        setUser(userParse);
+        if (tokenStorage) {
+          const tokenString = JSON.parse(tokenStorage);
+          const params = {}
+          try {
+            const getData = await api.get(`/api/v1/post/get-post-by-postid?post_id=${postID}&based_userid=${userParse.userID}`, params, tokenString);
+            // const getData = await api.get(`/api/v1/post/get-post-by-postid?post_id=4&based_userid=${userParse.userID}`, params, tokenString);
+
+            if (getData.success === 200) {
+              setPostingObj(getData.data);
+              setPostingResponse(getData.data)
+              setTimeout(() => {
+                setIsLoading(false);
+              }, 1000)
+            }
+            else {
+              setTimeout(() => {
+                setIsLoading(false);
+              }, 1000)
+            }
+          } catch (error) {
+            console.error("An error occurred during data fetching:", error);
+          }
+        }
+      }
+    }
+    fetchData();
+  }, [clothID]);
 
   React.useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', e => {
       setHeightOfKeyBoard(e.endCoordinates.height)
-      console.log(e.endCoordinates.height);
       setIskeyboardOpen(true);
     }
     );
@@ -196,9 +249,33 @@ const PostingDetailScreen = () => {
     setComment(text);
   };
 
-  // const handleSendComment = (id: string) => {
-  //   console.log('post: ', id, ' - ', comments);
-  // };
+  /**
+   * Send comment
+   * @param postID
+   */
+  const handleSendComment = async (postID: any) => {
+    const bodyRequest = {
+      userID: user?.userID,
+      postID: postID,
+      content: comment
+    }
+    try {
+      const response = await api.post('/api/v1/comment/create-comment', bodyRequest);
+      if (response.success === 200) {
+        setPostingObj((prev) => ({
+          ...prev,
+          comment: [...(prev?.comment || []), response.data],
+        }));
+        setComment('');
+
+      } else {
+
+
+      }
+    } catch (error) {
+
+    }
+  };
 
   /**
    * Comments group element
@@ -207,6 +284,7 @@ const PostingDetailScreen = () => {
 
   return (
     <View style={PostingDetailStyleScreen.container}>
+      <LoadingComponent spinner={isLoading}></LoadingComponent>
       <AppBarHeaderComponent
         title={
           <View>
@@ -232,13 +310,13 @@ const PostingDetailScreen = () => {
 
       <ScrollView
         persistentScrollbar={false}
-        style={[PostingDetailStyleScreen.scrollView, ]}
+        style={[PostingDetailStyleScreen.scrollView,]}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       >
-        <View style={[{ marginTop: 20, marginBottom: 10, flex: 1,  }, ]}>
+        <View style={[{ marginTop: 20, marginBottom: 10, flex: 1, },]}>
           <TouchableOpacity
-            onPress={() => handleMoveToUserProfile(data.user.userID)}
+            onPress={() => handleMoveToUserProfile(postingObj?.userResponse?.userID)}
           >
             <View
               style={{
@@ -248,7 +326,7 @@ const PostingDetailScreen = () => {
             >
               <Avatar.Image
                 size={iconAvatarPostingSize}
-                source={{ uri: data.user.imgUrl }}
+                source={{ uri: postingObj?.userResponse?.imgUrl }}
                 style={{ marginLeft: 10 }}
               />
               <View
@@ -263,36 +341,59 @@ const PostingDetailScreen = () => {
                     paddingTop: iconAvatarPostingSize * 0.05,
                   }}
                 >
-                  {data.user.userName}
+                  {postingObj?.userResponse?.username}
                 </Text>
-                <Text style={{ fontSize: spanTextSize * 0.8 }}>
-                  {data.date.toLocaleString()}
-                </Text>
+                <View style={{ flexDirection: 'row' }}>
+                  <View>
+                    <Text style={{ fontSize: spanTextSize * 0.8 }}>
+                      {postingObj?.date}
+                    </Text>
+                  </View>
+
+                </View>
+
               </View>
+
             </View>
           </TouchableOpacity>
+          <View style={{ position: 'absolute', right: 0, flexDirection: 'row' }}>
+            <IconButton icon={require('../../assets/icon/3dotmenu.png')} size={20}></IconButton>
+          </View>
         </View>
-
-        <View style={PostingDetailStyleScreen.post_imageContainter}>
-          <Image
-            style={PostingDetailStyleScreen.post_image}
-            source={{ uri: data.content.imgUrl }}
-          />
-        </View>
+        {
+          postingObj?.image && (
+            <View style={PostingDetailStyleScreen.post_imageContainter}>
+              <Image
+                style={PostingDetailStyleScreen.post_image}
+                source={{ uri: postingObj?.image[0] }}
+              />
+            </View>
+          )
+        }
 
         <View style={PostingDetailStyleScreen.post__content}>
-          <PostContentComponent props={data}/>
+
+          {/* ----------React---------- */}
+          {postingObj && (
+            <PostContentComponent props={postingObj}  isReact={postingObj.reacted} />
+          )}
+
+          {/* ----------Contents---------- */}
           <View style={PostingDetailStyleScreen.post__content_child}>
             <Text style={{ color: 'black', fontSize: 15 }}>
-              {data.content.content}
+              {postingObj?.content}
             </Text>
           </View>
-          <View style={[PostingDetailStyleScreen.post__content_child, { flexDirection: 'column', marginTop: 20 }]}>          
-             <View>
-              <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold'}}
-              >{data.comment.length} comments</Text>
+
+          {/* ----------Comments---------- */}
+          {postingObj?.comment && (
+            <View style={[PostingDetailStyleScreen.post__content_child, { flexDirection: 'column', marginTop: 20 }]}>
+              <View>
+
+                <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold' }}
+                >{postingObj?.comment.length} comments</Text>
               </View>
-              {data.comment.map((comment: Comment, key: any) => (
+              {postingObj.comment.map((comment: CommentsInterface, key: any) => (
                 <CommentComponent
                   key={comment.commentID}
                   commentID={comment.commentID}
@@ -302,8 +403,9 @@ const PostingDetailScreen = () => {
                 />
               ))}
             </View>
+          )}
         </View>
-      </ScrollView>
+      </ScrollView >
 
       <View
         style={[{
@@ -320,7 +422,7 @@ const PostingDetailScreen = () => {
         >
           <Avatar.Image
             size={iconAvatarPostingSize}
-            source={{ uri: data.user.imgUrl }}
+            source={{ uri: user?.imgUrl }}
             style={{ marginRight: 10 }}
           />
           <View>
@@ -341,14 +443,14 @@ const PostingDetailScreen = () => {
                   style={{ paddingTop: 25 * 0 }}
                   icon={'send'}
                   color={primaryColor}
-                  // onPress={() => handleSendComment(postID)}
+                  onPress={() => handleSendComment(postID)}
                 ></TextInput.Icon>
               }
             />
           </View>
         </View>
       </View>
-    </View>
+    </View >
   );
 };
 

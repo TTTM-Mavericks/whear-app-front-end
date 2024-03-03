@@ -34,6 +34,8 @@ import { height, width } from '../../root/ResponsiveSize';
 import { RootStackParamList } from '../../root/RootStackParams';
 import CommentComponent from '../Common/Comment/CommentComponent';
 import DialogStylesComponent from './DialogStyleComponent';
+import { CommentsInterface, UserInterFace } from '../../models/ObjectInterface';
+import api from '../../api/AxiosApiConfig';
 
 type SignInScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -41,9 +43,10 @@ type SignInScreenNavigationProp = StackNavigationProp<
 >;
 
 export interface CommentsDataProperties {
-  comments: Comment[];
-  postId: string;
+  comments: CommentsInterface[];
+  postId: any;
   commentsChild?: ReactNode;
+  user: UserInterFace;
 }
 
 const MAX_LENGTH = 30;
@@ -53,6 +56,7 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
   comments,
   postId,
   commentsChild,
+  user
 }) => {
   // console.log("comment", comments)
   /*-----------------UseState variable-----------------*/
@@ -70,6 +74,7 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
   const [comment, setComment] = useState('');
   const [isKeyBoardOpen, setIskeyboardOpen] = useState(false);
   const [heightOfKeyBoard, setHeightOfKeyBoard] = useState(0);
+  const [commentGetting, setCommmentGetting] = useState<CommentsInterface[]>([]);
   /*-----------------Usable variable-----------------*/
 
   const dispatch = useDispatch();
@@ -85,14 +90,13 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
     }
   }, [openDialog]);
 
-  // React.useEffect(() => {
-  //     setImgUrl(comments.user.imgUrl)
-  // }, [])
+  React.useEffect(() => {
+    setCommmentGetting(comments);
+  }, []);
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', e => {
       setHeightOfKeyBoard(e.endCoordinates.height)
-      console.log(e.endCoordinates.height);
       setIskeyboardOpen(true);
     }
     );
@@ -166,9 +170,26 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
    * Send comment
    * @param postID
    */
-  //   const handleSendComment = (postID: any) => {
-  //     //TODO
-  //   };
+  const handleSendComment = async (postID: any) => {
+    const bodyRequest = {
+      userID: user.userID,
+      postID: postID,
+      content: comment
+    }
+    try {
+      const response = await api.post('/api/v1/comment/create-comment', bodyRequest);
+      if (response.success === 200) {
+        console.log('123123132comeents: ', response);
+        setCommmentGetting((prev) => [...prev, response.data]);
+        setComment('');
+      } else {
+
+
+      }
+    } catch (error) {
+
+    }
+  };
 
   //   const handleToggleComment = () => {
   //     setShowFullComment(!showFullComment);
@@ -177,7 +198,7 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
     setComment(text);
   };
 
-  
+
 
   return (
     <TouchableWithoutFeedback onPress={handleTouchablePress}>
@@ -213,7 +234,7 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
                 keyboardShouldPersistTaps="handled" // Add keyboardShouldPersistTaps
               >
                 {commentsChild}
-                {comments.map((comment: Comment, key: any) => (
+                {commentGetting && commentGetting.map((comment: CommentsInterface, key: any) => (
                   <CommentComponent
                     key={comment.commentID}
                     commentID={comment.commentID}
@@ -258,37 +279,40 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
                 </View>
               </Dialog.Actions>
             ) : ( */}
-            <Dialog.Actions style={{ height: 60, paddingHorizontal: 10, }}>
-              <View style={DialogStylesComponent.commentActionContainer}>
-                <Avatar.Image
-                  size={iconAvatarPostingSize}
-                  source={{ uri: comments[0].user.imgUrl }}
-                  style={{ marginRight: 10 }}
-                />
-                <View>
-                  <TextInput
-                    value={comment}
-                    mode='outlined'
-                    style={DialogStylesComponent.commentInput}
-                    onChangeText={(text: string) => handleSetComment(text)}
-                    outlineStyle={{
-                      borderRadius: 30,
-                      borderColor: grayBorderColor,
-                      borderWidth: 1,
-                    }}
-                    placeholder='Comment at here...'
-                    right={
-                      <TextInput.Icon
-                        size={25}
-                        icon={'send'}
-                        color={primaryColor}
-                      // onPress={() => handleSendComment(postID)}
-                      ></TextInput.Icon>
-                    }
+            {commentGetting.length >= 0 && (
+
+              <Dialog.Actions style={{ height: 60, paddingHorizontal: 10, }}>
+                <View style={DialogStylesComponent.commentActionContainer}>
+                  <Avatar.Image
+                    size={iconAvatarPostingSize}
+                    source={{ uri: user.imgUrl }}
+                    style={{ marginRight: 10 }}
                   />
+                  <View>
+                    <TextInput
+                      value={comment}
+                      mode='outlined'
+                      style={DialogStylesComponent.commentInput}
+                      onChangeText={(text: string) => handleSetComment(text)}
+                      outlineStyle={{
+                        borderRadius: 30,
+                        borderColor: grayBorderColor,
+                        borderWidth: 1,
+                      }}
+                      placeholder='Comment at here...'
+                      right={
+                        <TextInput.Icon
+                          size={25}
+                          icon={'send'}
+                          color={primaryColor}
+                          onPress={() => handleSendComment(postId)}
+                        ></TextInput.Icon>
+                      }
+                    />
+                  </View>
                 </View>
-              </View>
-            </Dialog.Actions>
+              </Dialog.Actions>
+            )}
             {/* )} */}
 
           </Dialog>

@@ -64,7 +64,7 @@ const baseURL = 'https://tunm.mavericks-tttm.studio';
 
 const axiosInstance = axios.create({
   baseURL,
-  timeout: 10000,
+  timeout: 50000,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -121,7 +121,6 @@ const getRequestConfig = (accessToken?: string, params?: any): AxiosRequestConfi
 
   if (accessToken) {
     headers['Authorization'] =  "Bearer " + `${accessToken}`;
-    console.log('headers: ', headers);
   }
 
   return {

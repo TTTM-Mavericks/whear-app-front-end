@@ -1,7 +1,6 @@
 import { StyleSheet, Dimensions } from "react-native";
 import { backgroundColor } from "../../root/Colors";
-import { ITEM_HEIGHT } from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
-import { ITEM_WIDTH } from '../../components/ListView/ListViewStyleComponent';
+import { ITEM_HEIGHT, ITEM_WIDTH } from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
 
 const { width, height } = Dimensions.get("window");
 const containerPadding = 16;
@@ -20,12 +19,15 @@ const MessageStyle = StyleSheet.create({
     fontSize: 20,
     fontWeight: "700",
     alignSelf: "center",
+    alignItems: 'center',
     height: ITEM_HEIGHT,
-    paddingTop: 10
+    paddingTop: 10,
+    marginLeft: 20
   },
   linearBackground: {
     height: ITEM_HEIGHT,
     width: ITEM_WIDTH,
+    marginLeft: 20
   },
 
   itemContainer: {
