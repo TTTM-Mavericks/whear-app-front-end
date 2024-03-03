@@ -52,6 +52,12 @@ const UpgradeRoleDialogComponent = () => {
         hideDialog();
     }
 
+    /*-----------------Move To Upgrade Screen-----------------*/
+    const handleUpgradePress = () => {
+        // Navigate to the Upgrade screen
+        navigation.navigate('UpgradeScreen');
+        hideDialog();
+    };
 
 
     const showAnimation = () => {
@@ -97,7 +103,7 @@ const UpgradeRoleDialogComponent = () => {
                     {/* <Image source={}></Image> */}
 
                     <View style={{ backgroundColor: purpleColor, width: '100%', height: 100, alignContent: 'center', alignItems: 'center', borderTopStartRadius: 10, borderTopEndRadius: 10 }}>
-                        <Image source={require('../../assets/img/user_upgrade.png')} style={{ width: 200, height: 200, position: 'absolute', bottom: width*0.0008 }}></Image>
+                        <Image source={require('../../assets/img/user_upgrade.png')} style={{ width: 200, height: 200, position: 'absolute', bottom: width * 0.0008 }}></Image>
 
                         <IconButton
                             icon="close"
@@ -144,6 +150,7 @@ const UpgradeRoleDialogComponent = () => {
                             contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
                             style={[DialogStylesComponent.buttonGroup_button, { backgroundColor: primaryColor, marginBottom: 20 }]}
                             labelStyle={[DialogStylesComponent.buttonGroup_button_lable,]}
+                            onPress={handleUpgradePress}
                         >
                             <Text style={{ fontWeight: 'bold', fontSize: 13, color: 'black' }}>Upgrade Premium</Text>
                         </Button>

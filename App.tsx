@@ -32,6 +32,8 @@ import AddingPostingsScreen from "./src/Screens/AddingPostings/AddingPostingsScr
 import EventScreen from "./src/Screens/Event/EventScreen";
 import RecommendOutfitScreen from "./src/Screens/RecommendOutfit/RecommendOutfitScreen";
 import FirstLoadingPage from "./src/Screens/Introduce/FirstLoadingPage";
+import UpgradeScreen from "./src/Screens/Upgrade/UpgradeScreen";
+import UpgardeDetailScreen from "./src/Screens/Upgrade/UpgardeDetailScreen";
 
 const Stack = createStackNavigator();
 
@@ -55,7 +57,7 @@ export default function App() {
                 options={{ headerShown: false }}
               />
 
-               <Stack.Screen
+              <Stack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{
@@ -105,7 +107,7 @@ export default function App() {
                 component={SocialScreen}
                 options={{ headerShown: false }}
               />
-              
+
               <Stack.Screen
                 name='PostingDetail'
                 component={PostingDetailScreen}
@@ -146,8 +148,8 @@ export default function App() {
                 name='NotificationScreen'
                 component={NotificationScreen}
                 options={{ headerShown: false }}
-              /> 
-               <Stack.Screen
+              />
+              <Stack.Screen
                 name='Event'
                 component={EventScreen}
                 options={{ headerShown: false }}
@@ -189,6 +191,17 @@ export default function App() {
                 options={{ headerShown: false }}
               />
 
+              <Stack.Screen
+                name="UpgradeScreen"
+                component={UpgradeScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="UpgardeDetailScreen"
+                component={UpgardeDetailScreen}
+                options={{ headerShown: false }}
+              />
 
 
 
