@@ -32,6 +32,9 @@ import AddingPostingsScreen from "./src/Screens/AddingPostings/AddingPostingsScr
 import EventScreen from "./src/Screens/Event/EventScreen";
 import RecommendOutfitScreen from "./src/Screens/RecommendOutfit/RecommendOutfitScreen";
 import FirstLoadingPage from "./src/Screens/Introduce/FirstLoadingPage";
+
+import UpgradeScreen from "./src/Screens/Upgrade/UpgradeScreen";
+import UpgardeDetailScreen from "./src/Screens/Upgrade/UpgardeDetailScreen";
 import ChatScreen from "./src/Screens/Chat/chatScreen";
 
 const Stack = createStackNavigator();
@@ -53,8 +56,8 @@ export default function App() {
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
-              />  */}
-{/* 
+              />
+
               <Stack.Screen
                 name="Home"
                 component={HomeScreen}
@@ -148,7 +151,7 @@ export default function App() {
               />
 
               <Stack.Screen
-                name="Event"
+                name="Event
                 component={EventScreen}
                 options={{ headerShown: false }}
               />
@@ -187,7 +190,19 @@ export default function App() {
                 name="HotStoreScreen"
                 component={HotStoreScreen}
                 options={{ headerShown: false }}
-              /> */}
+              />
+
+              <Stack.Screen
+                name="UpgradeScreen"
+                component={UpgradeScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="UpgardeDetailScreen"
+                component={UpgardeDetailScreen}
+                options={{ headerShown: false }}
+              />
 
               <Stack.Screen
                 name="ChatScreen"

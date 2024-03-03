@@ -58,8 +58,8 @@
 
 import axios, { AxiosRequestConfig } from 'axios';
 
-// const baseURL = 'https://whear-app.azurewebsites.net';
 const baseURL = 'https://tunm.mavericks-tttm.studio';
+// const baseURL = 'https://tam.mavericks-tttm.studio';
 
 
 const axiosInstance = axios.create({
@@ -71,7 +71,7 @@ const axiosInstance = axios.create({
 });
 
 const api = {
-   get: async (url: string, params?: any, accessToken?: string) => {
+  get: async (url: string, params?: any, accessToken?: string) => {
     try {
       const response = await axiosInstance.get(url, getRequestConfig(accessToken, params));
       return response.data;
@@ -120,7 +120,7 @@ const getRequestConfig = (accessToken?: string, params?: any): AxiosRequestConfi
   };
 
   if (accessToken) {
-    headers['Authorization'] =  "Bearer " + `${accessToken}`;
+    headers['Authorization'] = "Bearer " + `${accessToken}`;
   }
 
   return {

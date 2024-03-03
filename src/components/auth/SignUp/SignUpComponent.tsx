@@ -376,6 +376,41 @@ const SignUpComponent = () => {
                                 />
                             }
                         />
+                        <Portal>
+                            <Modal visible={isModalVisible} onDismiss={hideCountryPicker} >
+                                <List.Section style={{ backgroundColor: 'white', borderRadius: 8, width: '80%', marginLeft: '10%' }}>
+                                    <List.Subheader>Select a language</List.Subheader>
+                                    {languages.map((language) => (
+                                        <List.Item
+                                            style={{ backgroundColor: '#fffff' }}
+                                            key={language}
+                                            title={language}
+                                            onPress={() => handleChangeLaguage(language)}
+                                        />
+                                    ))}
+                                </List.Section>
+                            </Modal>
+                        </Portal>
+                    </View>
+
+                    {/* Accept Policy */}
+                    <View style={SignUpStylesComponent.groupCheckbox} >
+                        <CheckBox
+                            checked={acceptPolicy}
+                            onPress={() => setAcceptPolicy(!acceptPolicy)}
+                            textStyle={SignUpStylesComponent.checkBoxText}
+                            title={
+                                <>
+                                    <Text style={{ fontSize: 15 }}> I accept the policy.
+                                    </Text>
+                                    <TouchableOpacity onPress={handleOpenPolicy}>
+                                        <Text style={SignUpStylesComponent.content}>Read more?</Text>
+                                    </TouchableOpacity>
+                                </>
+                            }
+                        />
+                        <PolicyComponent></PolicyComponent>
+                    </View>
                         <DateTimePickerModal
                             isVisible={isDatePickerVisible}
                             mode="date"
