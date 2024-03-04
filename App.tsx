@@ -33,7 +33,7 @@ import EventScreen from "./src/Screens/Event/EventScreen";
 import RecommendOutfitScreen from "./src/Screens/RecommendOutfit/RecommendOutfitScreen";
 import FirstLoadingPage from "./src/Screens/Introduce/FirstLoadingPage";
 import ChatScreen from "./src/Screens/Chat/chatScreen";
-
+import OnboardingScreen from "./src/Screens/Onboarding/OnboardingPage";
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -54,8 +54,8 @@ export default function App() {
                 component={SignInComponent}
                 options={{ headerShown: false }}
               />  */}
-{/* 
-              <Stack.Screen
+
+              {/* <Stack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{
@@ -187,11 +187,16 @@ export default function App() {
                 name="HotStoreScreen"
                 component={HotStoreScreen}
                 options={{ headerShown: false }}
-              /> */}
+              /> 
 
               <Stack.Screen
                 name="ChatScreen"
                 component={ChatScreen}
+                options={{ headerShown: false }}
+              /> */}
+               <Stack.Screen
+                name="Onboarding"
+                component={OnboardingScreen}
                 options={{ headerShown: false }}
               />
             </Stack.Navigator>

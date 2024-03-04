@@ -70,7 +70,7 @@
     "@babel/core": "^7.20.0",
     "@types/react": "~18.2.14",
     "@types/react-native": "^0.73.0",
-    "@types/react-native-snap-carousel": "^3.8.10",
+    "@types/react-native-snap-carousel": "^3.8.11",
     "@types/sockjs-client": "^1.5.4",
     "miragejs": "^0.1.48",
     "typescript": "^5.3.3"
