@@ -307,7 +307,7 @@ const DialogStylesComponent = StyleSheet.create({
     picture: {
         position: 'relative',
         width: width * 0.495,
-        height: height * 0.398,
+        height: height * 0.3,
 
     },
 

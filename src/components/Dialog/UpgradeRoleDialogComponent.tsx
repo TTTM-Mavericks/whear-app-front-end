@@ -71,10 +71,7 @@ const UpgradeRoleDialogComponent = () => {
         });
     };
 
-    const handleAddNewCollection = () => {
-        hideDialog();
-        navigation.navigate('Social')
-    }
+
     return (
         <View
             style={{ justifyContent: 'center', alignItems: 'center' }}

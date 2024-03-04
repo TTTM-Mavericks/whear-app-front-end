@@ -37,27 +37,27 @@ const data1 = [
     id: '1a',
     title: "Aenean leo",
     description: "Ut tincidunt tincidunt erat. Sed cursus turpis vitae tortor. Quisque malesuada placerat nisl. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_1.png'),
+    imgUrl: require('../../assets/img/introduce_background/introducebackground1.png'),
   },
   {
     id: '4a',
     title: "In turpis",
     description: "Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_2.png'),
+    imgUrl: require('../../assets/img/introduce_background/introducebackground2.png'),
 
   },
   {
     id: '2a',
     title: "Lorem Ipsum",
     description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_3.png'),
+    imgUrl: require('../../assets/img/introduce_background/introducebackground3.png'),
 
   },
   {
     id: '3a',
     title: "Lorem Ipsum",
     description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+    imgUrl: require('../../assets/img/introduce_background/introducebackground4.png'),
 
   },
 ];

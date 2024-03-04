@@ -347,7 +347,7 @@ const AddingClothesScreen = () => {
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
-    console.log('back');
+    navigation.goBack();
   }
 
   const openMenu = () => setVisible(true);

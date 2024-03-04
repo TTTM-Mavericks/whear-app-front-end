@@ -275,7 +275,7 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
                             showsHorizontalScrollIndicator={false}>
                             <View style={DialogStylesComponent.groupCard}>
 
-                                {userCollection.map((item) => (
+                                {userCollection ? userCollection.map((item) => (
                                     <Card style={DialogStylesComponent.cardContent} key={item.collectionID} onPress={() => handleAddClothToCollection(item.collectionID)}>
                                         <View style={DialogStylesComponent.cardCover}>
                                             <ImageBackground
@@ -293,7 +293,12 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
                                             </ImageBackground>
                                         </View>
                                     </Card>
-                                ))}
+                                ))
+                            : (
+                                <View>
+                                    <Text>Do not have any Collection</Text>
+                                </View>
+                            )}
                             </View>
                             <View style={{
                                 justifyContent: 'center',

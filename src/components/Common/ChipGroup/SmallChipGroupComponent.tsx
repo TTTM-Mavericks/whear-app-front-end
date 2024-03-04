@@ -3,12 +3,16 @@ import { Platform, Text, View } from 'react-native';
 import { Chip } from 'react-native-paper';
 import { backgroundColor } from '../../../root/Colors';
 import { height, width } from '../../../root/ResponsiveSize';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../../root/RootStackParams';
+import { useNavigation } from '@react-navigation/native';
 
 interface GroupChipComponentProps {
     chipData: string[];
 }
-
+type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 const SmallChipGroupComponent: React.FC<GroupChipComponentProps> = ({ chipData }) => {
+    const navigation = useNavigation<ScreenNavigationProp>();
     return (
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', width: width * 0.7 }}>
             {chipData.map((chip, index) => (
@@ -41,6 +45,10 @@ const SmallChipGroupComponent: React.FC<GroupChipComponentProps> = ({ chipData }
                         backgroundColor: backgroundColor,
                         justifyContent: 'center',
                         alignItems: 'center',
+                    }}
+                    onPress={() => {
+                        const data = chip.replace('#', '')
+                        navigation.navigate('SearchScreen', { keyWord:  data})
                     }}
                 >
                     <Text style={{ fontSize: 10, marginTop: 0 }}>
