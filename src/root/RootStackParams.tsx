@@ -13,7 +13,7 @@ export type RootStackParamList = {
   ClothesDetailScreen: { clothID: any };
   BasicInformationScreen: undefined;
   ChooseStyleYouLove: undefined;
-  SearchScreen: {keyWord: any};
+  SearchScreen: {keyWord: string};
   NotificationScreen: undefined;
   AddingClothesScreen: undefined;
   AddingPostingsScreen: undefined;

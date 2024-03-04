@@ -31,6 +31,7 @@
     "cloudinary-react-native": "^0.2.0",
     "deprecated-react-native-prop-types": "^5.0.0",
     "expo": "~49.0.15",
+    "expo-constants": "~14.4.2",
     "expo-google-sign-in": "^11.0.0",
     "expo-image-manipulator": "~11.3.0",
     "expo-image-picker": "~14.3.2",

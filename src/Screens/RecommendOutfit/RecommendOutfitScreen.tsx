@@ -43,27 +43,27 @@ const data1 = [
     id: '1a',
     title: "Aenean leo",
     description: "Ut tincidunt tincidunt erat. Sed cursus turpis vitae tortor. Quisque malesuada placerat nisl. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_1.png'),
+    imgUrl: require('../../assets/img/introduce_background/introducebackground1.png'),
   },
   {
     id: '4a',
     title: "In turpis",
     description: "Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_2.png'),
+    imgUrl: require('../../assets/img/introduce_background/introducebackground2.png'),
 
   },
   {
     id: '2a',
     title: "Lorem Ipsum",
     description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_3.png'),
+    imgUrl: require('../../assets/img/introduce_background/introducebackground3.png'),
 
   },
   {
     id: '3a',
     title: "Lorem Ipsum",
     description: "Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.",
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+    imgUrl: require('../../assets/img/introduce_background/introducebackground4.png'),
 
   },
 ];
@@ -94,731 +94,731 @@ interface ClothesResInterface {
 }
 
 
-const data: AIStylistResponse[] = [
-  {
-    styleName: "CYBERPUNK",
-    bodyShapeName: "PEAR_SHAPE",
-    outfits: [
-      [
-        {
-          clothesID: 69,
-          nameOfProduct: "CouleurStudio Gray T-Shirt",
-          typeOfClothes: "T_SHIRT",
-          shape: "CIRCLE",
-          description: "Bảng size áo thun Couleur: M: Dài 70 Rộng 53 | 1m45 – 1m60, Dưới 55kg, L: Dài 72 Rộng 55 | 1m55 – 1m70, Dưới 65kg, XL: Dài 74 Rộng 57 | 1m65 – 1m80, Dưới 75kg",
-          link: "https://shopee.vn/CouleurStudio-Gray-T-Shirt-%C3%81o-Thun-X%C3%A1m-Local-Brand-Couleur-TS06-i.806308123.19563599859?sp_atk=15c022e9-7679-4d52-aa80-297405199d79&xptdk=15c022e9-7679-4d52-aa80-297405199d79",
-          rating: 0,
-          materials: "COTTON",
-          reactPerClothes: null,
-          hashtag: [
-            "COULEUR"
-          ],
-          clothesSeasons: [
-            "SPRING",
-            "AUTUMN",
-            "WINTER"
-          ],
-          clothesImages: [
-            "https://down-vn.img.susercontent.com/file/sg-11134201-23010-n9dfd7i9hwmved",
-            "https://down-vn.img.susercontent.com/file/sg-11134201-23010-5bz65ok7ktmv54_tn"
-          ],
-          clothesSizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL",
-            "XXXL"
-          ],
-          clothesColors: [
-            "GRAY"
-          ],
-          clothesStyles: [
-            "CYBERPUNK"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        },
-        {
-          clothesID: 75,
-          "nameOfProduct": "Áo hoodie dáng rộng",
-          typeOfClothes: "HOODIE",
-          shape: "PENTAGON",
-          "description": "Chất lượng là hàng đầu với dịch vụ tốt nhất . Khách hàng đều là bạn của chúng tôi. Thiết kế thời trang,100",
-          link: "https://shopee.vn/%C3%81o-hoodie-d%C3%A1ng-r%E1%BB%99ng-th%E1%BB%9Di-trang-cho-nam-size-M-8XL-%C3%81o-Hoodie-Tay-D%C3%A0i-In-Ch%E1%BB%AF-%C4%90%C6%A1n-Gi%E1%BA%A3n-Th%E1%BB%9Di-Trang-D%C3%A0nh-Cho-Nam-N%E1%BB%AF-i.82095709.17997985106?sp_atk=a343dd84-ecff-4b61-ae13-a5369342452b&xptdk=a343dd84-ecff-4b61-ae13-a5369342452b",
-          rating: 0,
-          materials: "FLEECE",
-          reactPerClothes: null,
-          hashtag: [
-            "Shineess"
-          ],
-          clothesSeasons: [
-            "SPRING",
-            "AUTUMN",
-            "WINTER"
-          ],
-          clothesImages: [
-            "https://down-vn.img.susercontent.com/file/sg-11134201-7qver-lio8j55tolc038"
-          ],
-          clothesSizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL",
-            "XXXL"
-          ],
-          clothesColors: [
-            "BLACK"
-          ],
-          clothesStyles: [
-            "CYBERPUNK"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        },
-        {
-          clothesID: 77,
-          "nameOfProduct": "Jogger GymSharks LoGo Thêu",
-          typeOfClothes: "JOGGER",
-          shape: "TRIANGLE",
-          "description": "Jogger Gymshark Logo Thêu. Mặc Tập gym, chơi các môn thể thao đều ok. Chất liệu thun poly CỰC MÁT, co giãn 4 chiều, co giãn thoải mái.",
-          link: "https://shopee.vn/Jogger-GymSharks-LoGo-Th%C3%AAu-ch%E1%BA%A5t-Thun-Poly-2-Da-T%C3%BAi-Kh%C3%B3a-i.1003032.20807396973?sp_atk=ee76d7ef-66d2-4d9a-a508-bd72b390c277&xptdk=ee76d7ef-66d2-4d9a-a508-bd72b390c277",
-          rating: 0,
-          materials: "POLYESTER",
-          reactPerClothes: null,
-          hashtag: [
-            "#quần_tập #quần_đùi #quần_gym #thể_thao #quần_short"
-          ],
-          clothesSeasons: [
-            "SPRING",
-            "AUTUMN",
-            "WINTER"
-          ],
-          clothesImages: [
-            "https://down-vn.img.susercontent.com/file/ea57db9c3ed4eea198e3c4b90bfeb707",
-            "https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lhbhhr094s8jb5"
-          ],
-          clothesSizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL",
-            "XXXL"
-          ],
-          clothesColors: [
-            "BLACK"
-          ],
-          clothesStyles: [
-            "CYBERPUNK"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        },
-        {
-          clothesID: 104,
-          "nameOfProduct": "Đèn led neon hình giày Neonchill",
-          typeOfClothes: "SNEAKER",
-          shape: "PENTAGON",
-          "description": "Đèn led neon hình giày. Sử dụng để trang trí, decor phòng siêu đẹp. Với ánh sáng sang trọng ấm áp, quý khách có thể lựa chọn màu sắc theo yêu cầu. Ngoài ra, quý khách có thể yêu cầu size khác nhau để phù hợp với căn phòng của mình",
-          link: "https://shopee.vn/%C4%90%C3%A8n-led-neon-h%C3%ACnh-gi%C3%A0y-Neonchill97-35-x-20-cm-sneaker-neon-sign-trang-tr%C3%AD-c%E1%BB%ADa-h%C3%A0ng-i.291415124.18745429854?sp_atk=9c991f4b-7961-4d40-925a-19b3a0c95900&xptdk=9c991f4b-7961-4d40-925a-19b3a0c95900",
-          rating: 0,
-          materials: "CHIFFON",
-          reactPerClothes: null,
-          hashtag: [
-            "NEONCHILL97"
-          ],
-          clothesSeasons: [
-            "SPRING",
-            "AUTUMN",
-            "WINTER"
-          ],
-          clothesImages: [
-            "https://down-vn.img.susercontent.com/file/12a198dddf146dc53e081b95e197db26"
-          ],
-          clothesSizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL",
-            "XXXL"
-          ],
-          clothesColors: [
-            "XANH_NEON"
-          ],
-          clothesStyles: [
-            "CLASSIC"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        },
-        {
-          clothesID: 89,
-          "nameOfProduct": "Mũ lưỡi trai LOULI SAIGON ",
-          typeOfClothes: "CAP",
-          shape: "RECTANGLE",
-          "description": "THÔNG TIN CHI TIẾT SẢN PHẨM MŨ LƯỠI TRAI VINTAGE: Chất liệu vải: Mũ được dệt từ vải kaki cao cấp. Kích thước nón: từ 53-60 cm. Màu sắc: Đen, kem, nâu coffee, xanh đen, xám, xanh lá, hồng. Khóa chỉnh size: Được làm bằng inox chống gỉ. Form mềm Nam Nữ đều được, phong cách Unisex.",
-          link: "https://shopee.vn/M%C5%A9-l%C6%B0%E1%BB%A1i-trai-LOULI-SAIGON-VINTAGE-v%E1%BA%A3i-kaki-cao-c%E1%BA%A5p-form-m%E1%BB%81m-i.906790672.22642852825?sp_atk=b197c335-43c6-4182-89c1-f751c491ea22&xptdk=b197c335-43c6-4182-89c1-f751c491ea22",
-          rating: 0,
-          materials: "FABRIC",
-          reactPerClothes: null,
-          hashtag: [
-            "Louli Saigon Official Store"
-          ],
-          clothesSeasons: [
-            "SPRING",
-            "AUTUMN",
-            "WINTER"
-          ],
-          clothesImages: [
-            "https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lgymjtu17uur25"
-          ],
-          clothesSizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL",
-            "XXXL"
-          ],
-          clothesColors: [
-            "BLACK",
-            "WHITE"
-          ],
-          clothesStyles: [
-            "CYBERPUNK"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        }
-      ],
-      [
-        {
-          clothesID: 69,
-          "nameOfProduct": "CouleurStudio Gray T-Shirt",
-          typeOfClothes: "T_SHIRT",
-          shape: "CIRCLE",
-          "description": "Bảng size áo thun Couleur: M: Dài 70 Rộng 53 | 1m45 – 1m60, Dưới 55kg, L: Dài 72 Rộng 55 | 1m55 – 1m70, Dưới 65kg, XL: Dài 74 Rộng 57 | 1m65 – 1m80, Dưới 75kg",
-          link: "https://shopee.vn/CouleurStudio-Gray-T-Shirt-%C3%81o-Thun-X%C3%A1m-Local-Brand-Couleur-TS06-i.806308123.19563599859?sp_atk=15c022e9-7679-4d52-aa80-297405199d79&xptdk=15c022e9-7679-4d52-aa80-297405199d79",
-          rating: 0,
-          materials: "COTTON",
-          reactPerClothes: null,
-          hashtag: [
-            "COULEUR"
-          ],
-          clothesSeasons: [
-            "SPRING",
-            "AUTUMN",
-            "WINTER"
-          ],
-          clothesImages: [
-            "https://down-vn.img.susercontent.com/file/sg-11134201-23010-n9dfd7i9hwmved",
-            "https://down-vn.img.susercontent.com/file/sg-11134201-23010-5bz65ok7ktmv54_tn"
-          ],
-          clothesSizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL",
-            "XXXL"
-          ],
-          clothesColors: [
-            "GRAY"
-          ],
-          clothesStyles: [
-            "CYBERPUNK"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        },
-        {
-          clothesID: 75,
-          "nameOfProduct": "Áo hoodie dáng rộng",
-          typeOfClothes: "HOODIE",
-          shape: "PENTAGON",
-          "description": "Chất lượng là hàng đầu với dịch vụ tốt nhất . Khách hàng đều là bạn của chúng tôi. Thiết kế thời trang,100",
-          link: "https://shopee.vn/%C3%81o-hoodie-d%C3%A1ng-r%E1%BB%99ng-th%E1%BB%9Di-trang-cho-nam-size-M-8XL-%C3%81o-Hoodie-Tay-D%C3%A0i-In-Ch%E1%BB%AF-%C4%90%C6%A1n-Gi%E1%BA%A3n-Th%E1%BB%9Di-Trang-D%C3%A0nh-Cho-Nam-N%E1%BB%AF-i.82095709.17997985106?sp_atk=a343dd84-ecff-4b61-ae13-a5369342452b&xptdk=a343dd84-ecff-4b61-ae13-a5369342452b",
-          rating: 0,
-          materials: "FLEECE",
-          reactPerClothes: null,
-          hashtag: [
-            "Shineess"
-          ],
-          clothesSeasons: [
-            "SPRING",
-            "AUTUMN",
-            "WINTER"
-          ],
-          clothesImages: [
-            "https://down-vn.img.susercontent.com/file/sg-11134201-7qver-lio8j55tolc038"
-          ],
-          clothesSizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL",
-            "XXXL"
-          ],
-          clothesColors: [
-            "BLACK"
-          ],
-          clothesStyles: [
-            "CYBERPUNK"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        },
-        {
-          clothesID: 77,
-          "nameOfProduct": "Jogger GymSharks LoGo Thêu",
-          typeOfClothes: "JOGGER",
-          shape: "TRIANGLE",
-          "description": "Jogger Gymshark Logo Thêu. Mặc Tập gym, chơi các môn thể thao đều ok. Chất liệu thun poly CỰC MÁT, co giãn 4 chiều, co giãn thoải mái.",
-          link: "https://shopee.vn/Jogger-GymSharks-LoGo-Th%C3%AAu-ch%E1%BA%A5t-Thun-Poly-2-Da-T%C3%BAi-Kh%C3%B3a-i.1003032.20807396973?sp_atk=ee76d7ef-66d2-4d9a-a508-bd72b390c277&xptdk=ee76d7ef-66d2-4d9a-a508-bd72b390c277",
-          rating: 0,
-          materials: "POLYESTER",
-          reactPerClothes: null,
-          hashtag: [
-            "#quần_tập #quần_đùi #quần_gym #thể_thao #quần_short"
-          ],
-          clothesSeasons: [
-            "SPRING",
-            "AUTUMN",
-            "WINTER"
-          ],
-          clothesImages: [
-            "https://down-vn.img.susercontent.com/file/ea57db9c3ed4eea198e3c4b90bfeb707",
-            "https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lhbhhr094s8jb5"
-          ],
-          clothesSizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL",
-            "XXXL"
-          ],
-          clothesColors: [
-            "BLACK"
-          ],
-          clothesStyles: [
-            "CYBERPUNK"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        },
-        {
-          clothesID: 83,
-          "nameOfProduct": "Đèn led neon hình giày",
-          typeOfClothes: "SNEAKER",
-          shape: "TRIANGLE",
-          "description": "Đèn led neon hình giày. Sử dụng để trang trí, decor phòng siêu đẹp. Với ánh sáng sang trọng ấm áp, quý khách có thể lựa chọn màu sắc theo yêu cầu. Ngoài ra, quý khách có thể yêu cầu size khác nhau để phù hợp với căn phòng của mình",
-          link: "https://shopee.vn/%C4%90%C3%A8n-led-neon-h%C3%ACnh-gi%C3%A0y-Neonchill97-35-x-20-cm-sneaker-neon-sign-trang-tr%C3%AD-c%E1%BB%ADa-h%C3%A0ng-i.291415124.18745429854?sp_atk=fb45e9cd-f899-4015-9268-77809bf72257&xptdk=fb45e9cd-f899-4015-9268-77809bf72257",
-          rating: 0,
-          materials: "POLYESTER",
-          reactPerClothes: null,
-          hashtag: [
-            "NEONCHILL97"
-          ],
-          clothesSeasons: [
-            "SPRING",
-            "AUTUMN",
-            "WINTER"
-          ],
-          clothesImages: [
-            "https://down-vn.img.susercontent.com/file/12a198dddf146dc53e081b95e197db26",
-            "https://down-vn.img.susercontent.com/file/8a40c0e9a8818ebce6d052edf361c4f4"
-          ],
-          clothesSizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL",
-            "XXXL"
-          ],
-          clothesColors: [
-            "XANH_NEON"
-          ],
-          clothesStyles: [
-            "CYBERPUNK"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        },
-        {
-          clothesID: 89,
-          "nameOfProduct": "Mũ lưỡi trai LOULI SAIGON ",
-          typeOfClothes: "CAP",
-          shape: "RECTANGLE",
-          "description": "THÔNG TIN CHI TIẾT SẢN PHẨM MŨ LƯỠI TRAI VINTAGE: Chất liệu vải: Mũ được dệt từ vải kaki cao cấp. Kích thước nón: từ 53-60 cm. Màu sắc: Đen, kem, nâu coffee, xanh đen, xám, xanh lá, hồng. Khóa chỉnh size: Được làm bằng inox chống gỉ. Form mềm Nam Nữ đều được, phong cách Unisex.",
-          link: "https://shopee.vn/M%C5%A9-l%C6%B0%E1%BB%A1i-trai-LOULI-SAIGON-VINTAGE-v%E1%BA%A3i-kaki-cao-c%E1%BA%A5p-form-m%E1%BB%81m-i.906790672.22642852825?sp_atk=b197c335-43c6-4182-89c1-f751c491ea22&xptdk=b197c335-43c6-4182-89c1-f751c491ea22",
-          rating: 0,
-          materials: "FABRIC",
-          reactPerClothes: null,
-          hashtag: [
-            "Louli Saigon Official Store"
-          ],
-          clothesSeasons: [
-            "SPRING",
-            "AUTUMN",
-            "WINTER"
-          ],
-          clothesImages: [
-            "https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lgymjtu17uur25"
-          ],
-          clothesSizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL",
-            "XXXL"
-          ],
-          clothesColors: [
-            "BLACK",
-            "WHITE"
-          ],
-          clothesStyles: [
-            "CYBERPUNK"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        }
-      ]
-    ],
-    message: "Suggest full clothes for free user"
-  },
-  {
-    styleName: "MINIMALISM",
-    bodyShapeName: "PEAR_SHAPE",
-    outfits: [
-      [
-        {
-          clothesID: 68,
-          nameOfProduct: "Machine Age T-shirt",
-          typeOfClothes: "T_SHIRT",
-          shape: "CIRCLE",
-          description: "Machine Age T-shirt MA-29, Black n Neon/ White n Red, Unisex nam nữ đều mặc được",
-          link: "https://shopee.vn/Machine-Age-T-shirt-%C3%A1o-ph%C3%B4ng-unisex-phong-c%C3%A1ch-streetwear-trendy-i.68926569.19728660724?sp_atk=b89d73b4-2486-449c-be81-a4607b078ce6&xptdk=b89d73b4-2486-449c-be81-a4607b078ce6",
-          rating: 0,
-          materials: "POLYESTER",
-          reactPerClothes: null,
-          hashtag: [
-            "Carpediem.2k"
-          ],
-          clothesSeasons: [
-            "SPRING",
-            "AUTUMN",
-            "WINTER"
-          ],
-          clothesImages: [
-            "https://down-vn.img.susercontent.com/file/e0f1ea7e73468ae951486cadb462b8c9",
-            "https://down-vn.img.susercontent.com/file/c857497b21a79c883a9a4c9f5018aa36"
-          ],
-          clothesSizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL",
-            "XXXL"
-          ],
-          clothesColors: [
-            "BLACK",
-            "WHITE"
-          ],
-          clothesStyles: [
-            "CYBERPUNK"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        },
-        {
-          "clothesID": 106,
-          nameOfProduct: "Giày Oxford Tăng Chiều Cao",
-          "typeOfClothes": "OXFORD",
-          shape: "RECTANGLE",
-          description: "Giày Oxford Tăng Chiều Cao 6cm Đế Phíp Cao Cấp SIGOURNEY Da Bò Nhập Khẩu Màu Đen Trơn SCC08 Bảo Hành 18 Tháng. Giày nam tăng chiều cao 6cm Sigourney có thiết kế dáng Oxford cổ điển với màu đen bóng sang trọng, dễ mang, dễ phối đồ, mang đến vẻ sang trọng và chỉn chu cho người mang. Với thiết kế TĂNG CHIỀU CAO, không khó để SCC08 “giấu” một miếng độn đế dày 3cm, cộng với phần đế giày cao 3cm, tổng thể tăng thêm 6cm cho người mang, hoàn toàn bí mật, cực kì dễ mang và không hề chông chênh.",
-          "link": "https://shopee.vn/Gi%C3%A0y-Oxford-T%C4%83ng-Chi%E1%BB%81u-Cao-6cm-%C4%90%E1%BA%BF-Ph%C3%ADp-Cao-C%E1%BA%A5p-SIGOURNEY-Da-B%C3%B2-Nh%E1%BA%ADp-Kh%E1%BA%A9u-M%C3%A0u-%C4%90en-Tr%C6%A1n-SCC08-B%E1%BA%A3o-H%C3%A0nh-18-Th%C3%A1ng-i.119959072.25857963895?sp_atk=c4e5b1f8-9e19-42f7-9a37-477ed51f3249&xptdk=c4e5b1f8-9e19-42f7-9a37-477ed51f3249",
-          rating: 0,
-          materials: "COTTON",
-          reactPerClothes: null,
-          hashtag: [
-            "SIGOURNEY OFFICIAL STORE"
-          ],
-          clothesSeasons: [
-            "SPRING",
-            "AUTUMN",
-            "WINTER"
-          ],
-          clothesImages: [
-            "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lqe62jcypmwnfd"
-          ],
-          clothesSizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL",
-            "XXXL"
-          ],
-          clothesColors: [
-            "BLACK"
-          ],
-          clothesStyles: [
-            "CLASSIC"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        },
-        {
-          "clothesID": 87,
-          nameOfProduct: "GUDETU Giày Sneaker Thời Trang Cho Nam Vớ Và Giày Kéo Dài. Giày Lười Đen",
-          "typeOfClothes": "SNEAKER",
-          shape: "HEXAGON",
-          description: "Một vài lý do để chọn chúng tôiChúng tôi đã chuẩn bị một phiếu giảm giá bất ngờ cho bạn, bạn có thể tự nhận hoặc trò chuyện riêng với bộ phận chăm sóc khách hàng của chúng tôi để nhận hàng. Đó là một trải nghiệm thú vị từ khi nhìn thấy sản phẩm đến khi nhận sản phẩm, bạn sẽ thích shop của tôi",
-          "link": "https://shopee.vn/GUDETU-Gi%C3%A0y-Sneaker-Th%E1%BB%9Di-Trang-Cho-Nam-V%E1%BB%9B-V%C3%A0-Gi%C3%A0y-K%C3%A9o-D%C3%A0i.-Gi%C3%A0y-L%C6%B0%E1%BB%9Di-%C4%90en.-Gi%C3%A0y-Th%E1%BB%83-Thao-%C4%90%E1%BA%BF-D%C3%A0y-Th%E1%BB%9Di-Trang-N%C4%83ng-%C4%90%E1%BB%99ng-Cho-Nam-Gi%C3%A0y-%C4%90%C6%A1n-Tr%C3%AAn-B%C3%A0n-V%E1%BB%ABa.-Gi%C3%A0y-Th%E1%BB%83-Thao-Nam-Th%E1%BB%9Di-Trang-N%C4%83ng-%C4%90%E1%BB%99ng-i.946067865.22155314921?sp_atk=36a0146d-57eb-478f-99f8-5b0b28efdbc0&xptdk=36a0146d-57eb-478f-99f8-5b0b28efdbc0",
-          rating: 0,
-          materials: "DENIM",
-          reactPerClothes: null,
-          hashtag: [
-            "GUDETU"
-          ],
-          clothesSeasons: [
-            "SPRING",
-            "AUTUMN",
-            "WINTER"
-          ],
-          clothesImages: [
-            "https://down-vn.img.susercontent.com/file/cn-11134207-7r98o-lpj557gadqpr05"
-          ],
-          clothesSizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL",
-            "XXXL"
-          ],
-          clothesColors: [
-            "BLACK"
-          ],
-          clothesStyles: [
-            "CYBERPUNK"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        }
-      ],
-      [
-        {
-          "clothesID": 125,
-          nameOfProduct: "Basic Crew Neck Cotton T-shirts",
-          "typeOfClothes": "T_SHIRT",
-          shape: "RECTANGLE",
-          description: "Stay comfortable and stylish with our Basic Crew Neck Cotton T-shirts. Made with soft, breathable cotton, these lightweight tees are perfect for lounging, running errands, or a night on the town. You'll always look your best.",
-          "link": "https://watereverysunday.com/products/basic-crew-neck-cotton-t-shirts?variant=44231846527195",
-          rating: 0,
-          materials: "COTTON",
-          reactPerClothes: null,
-          hashtag: [
-            "#casualstyle",
-            "#CottonTShirt"
-          ],
-          clothesSeasons: [
-            "SUMMER"
-          ],
-          clothesImages: [
-            "https://watereverysunday.com/cdn/shop/files/Basic-Crew-Neck-Cotton-T-shirts-watereverysunday-6060_large.jpg?v=1698322745",
-            "https://watereverysunday.com/cdn/shop/files/Basic-Crew-Neck-Cotton-T-shirts-watereverysunday-6121_1024x1024.jpg?v=1698322574",
-            "https://watereverysunday.com/cdn/shop/files/Basic-Crew-Neck-Cotton-T-shirts-watereverysunday-4732_1024x1024.jpg?v=1698322750",
-            "https://watereverysunday.com/cdn/shop/files/Basic-Crew-Neck-Cotton-T-shirts-watereverysunday-534_1024x1024.jpg?v=1698322865"
-          ],
-          clothesSizes: [
-            "XS",
-            "S",
-            "M",
-            "L",
-            "XL"
-          ],
-          clothesColors: [
-            "PURPLE",
-            "PINK",
-            "BLACK",
-            "WHITE"
-          ],
-          clothesStyles: [
-            "NORMCORE"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        },
-        {
-          "clothesID": 106,
-          nameOfProduct: "Giày Oxford Tăng Chiều Cao",
-          "typeOfClothes": "OXFORD",
-          shape: "RECTANGLE",
-          description: "Giày Oxford Tăng Chiều Cao 6cm Đế Phíp Cao Cấp SIGOURNEY Da Bò Nhập Khẩu Màu Đen Trơn SCC08 Bảo Hành 18 Tháng. Giày nam tăng chiều cao 6cm Sigourney có thiết kế dáng Oxford cổ điển với màu đen bóng sang trọng, dễ mang, dễ phối đồ, mang đến vẻ sang trọng và chỉn chu cho người mang. Với thiết kế TĂNG CHIỀU CAO, không khó để SCC08 “giấu” một miếng độn đế dày 3cm, cộng với phần đế giày cao 3cm, tổng thể tăng thêm 6cm cho người mang, hoàn toàn bí mật, cực kì dễ mang và không hề chông chênh.",
-          "link": "https://shopee.vn/Gi%C3%A0y-Oxford-T%C4%83ng-Chi%E1%BB%81u-Cao-6cm-%C4%90%E1%BA%BF-Ph%C3%ADp-Cao-C%E1%BA%A5p-SIGOURNEY-Da-B%C3%B2-Nh%E1%BA%ADp-Kh%E1%BA%A9u-M%C3%A0u-%C4%90en-Tr%C6%A1n-SCC08-B%E1%BA%A3o-H%C3%A0nh-18-Th%C3%A1ng-i.119959072.25857963895?sp_atk=c4e5b1f8-9e19-42f7-9a37-477ed51f3249&xptdk=c4e5b1f8-9e19-42f7-9a37-477ed51f3249",
-          rating: 0,
-          materials: "COTTON",
-          reactPerClothes: null,
-          hashtag: [
-            "SIGOURNEY OFFICIAL STORE"
-          ],
-          clothesSeasons: [
-            "SPRING",
-            "AUTUMN",
-            "WINTER"
-          ],
-          clothesImages: [
-            "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lqe62jcypmwnfd"
-          ],
-          clothesSizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL",
-            "XXXL"
-          ],
-          clothesColors: [
-            "BLACK"
-          ],
-          clothesStyles: [
-            "CLASSIC"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        },
-        {
-          "clothesID": 84,
-          nameOfProduct: "Giày Sneaker Vải Canvas",
-          "typeOfClothes": "SNEAKER",
-          shape: "OCTAGON",
-          description: "Giày Sneaker Vải Canvas Nữ E18 Black Chính Hãng Dincox trẻ trung, thời thượng với thiết kế đẹp, chất da bền bỉ và đặt biệt độ bền cực cao phù hợp với mọi hoạt động thường ngày như đi chơi, đi làm và cả dự tiệc. Lót giày sử dụng công nghệ Memory Foam mang rất êm và nhẹ chân, phù hợp sử dụng để đi chơi, đi làm hoặc dự tiệc. Chất liệu Vải canvas với đặc tính là độ bền, kháng nấm mốc ngoài ra còn có khả năng chống tia UV",
-          "link": "https://shopee.vn/Gi%C3%A0y-Sneaker-V%E1%BA%A3i-Canvas-Nam-N%E1%BB%AF-E18-Black-DIncox-i.151338284.18393116525?sp_atk=5bfc19fe-97d8-4f8f-8891-4bfb8031520d&xptdk=5bfc19fe-97d8-4f8f-8891-4bfb8031520d",
-          rating: 0,
-          materials: "COTTON",
-          reactPerClothes: null,
-          hashtag: [
-            "DINCOX SHOES OFFICIAL STORE"
-          ],
-          clothesSeasons: [
-            "SPRING",
-            "AUTUMN",
-            "WINTER"
-          ],
-          clothesImages: [
-            "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llnrfkwbj3cs5d"
-          ],
-          clothesSizes: [
-            "S",
-            "M",
-            "L",
-            "XL",
-            "XXL",
-            "XXXL"
-          ],
-          clothesColors: [
-            "BLACK"
-          ],
-          clothesStyles: [
-            "CYBERPUNK"
-          ],
-          react: [],
-          comment: [],
-          userResponseStylish: {
-            userID: "8",
-            username: "hoangha1@gmail.com",
-            imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
-          }
-        }
-      ]
-    ],
-    message: "Suggest full clothes for free user"
-  }
-]
+// const data: AIStylistResponse[] = [
+//   {
+//     styleName: "CYBERPUNK",
+//     bodyShapeName: "PEAR_SHAPE",
+//     outfits: [
+//       [
+//         {
+//           clothesID: 69,
+//           nameOfProduct: "CouleurStudio Gray T-Shirt",
+//           typeOfClothes: "T_SHIRT",
+//           shape: "CIRCLE",
+//           description: "Bảng size áo thun Couleur: M: Dài 70 Rộng 53 | 1m45 – 1m60, Dưới 55kg, L: Dài 72 Rộng 55 | 1m55 – 1m70, Dưới 65kg, XL: Dài 74 Rộng 57 | 1m65 – 1m80, Dưới 75kg",
+//           link: "https://shopee.vn/CouleurStudio-Gray-T-Shirt-%C3%81o-Thun-X%C3%A1m-Local-Brand-Couleur-TS06-i.806308123.19563599859?sp_atk=15c022e9-7679-4d52-aa80-297405199d79&xptdk=15c022e9-7679-4d52-aa80-297405199d79",
+//           rating: 0,
+//           materials: "COTTON",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "COULEUR"
+//           ],
+//           clothesSeasons: [
+//             "SPRING",
+//             "AUTUMN",
+//             "WINTER"
+//           ],
+//           clothesImages: [
+//             "https://down-vn.img.susercontent.com/file/sg-11134201-23010-n9dfd7i9hwmved",
+//             "https://down-vn.img.susercontent.com/file/sg-11134201-23010-5bz65ok7ktmv54_tn"
+//           ],
+//           clothesSizes: [
+//             "S",
+//             "M",
+//             "L",
+//             "XL",
+//             "XXL",
+//             "XXXL"
+//           ],
+//           clothesColors: [
+//             "GRAY"
+//           ],
+//           clothesStyles: [
+//             "CYBERPUNK"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         },
+//         {
+//           clothesID: 75,
+//           "nameOfProduct": "Áo hoodie dáng rộng",
+//           typeOfClothes: "HOODIE",
+//           shape: "PENTAGON",
+//           "description": "Chất lượng là hàng đầu với dịch vụ tốt nhất . Khách hàng đều là bạn của chúng tôi. Thiết kế thời trang,100",
+//           link: "https://shopee.vn/%C3%81o-hoodie-d%C3%A1ng-r%E1%BB%99ng-th%E1%BB%9Di-trang-cho-nam-size-M-8XL-%C3%81o-Hoodie-Tay-D%C3%A0i-In-Ch%E1%BB%AF-%C4%90%C6%A1n-Gi%E1%BA%A3n-Th%E1%BB%9Di-Trang-D%C3%A0nh-Cho-Nam-N%E1%BB%AF-i.82095709.17997985106?sp_atk=a343dd84-ecff-4b61-ae13-a5369342452b&xptdk=a343dd84-ecff-4b61-ae13-a5369342452b",
+//           rating: 0,
+//           materials: "FLEECE",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "Shineess"
+//           ],
+//           clothesSeasons: [
+//             "SPRING",
+//             "AUTUMN",
+//             "WINTER"
+//           ],
+//           clothesImages: [
+//             "https://down-vn.img.susercontent.com/file/sg-11134201-7qver-lio8j55tolc038"
+//           ],
+//           clothesSizes: [
+//             "S",
+//             "M",
+//             "L",
+//             "XL",
+//             "XXL",
+//             "XXXL"
+//           ],
+//           clothesColors: [
+//             "BLACK"
+//           ],
+//           clothesStyles: [
+//             "CYBERPUNK"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         },
+//         {
+//           clothesID: 77,
+//           "nameOfProduct": "Jogger GymSharks LoGo Thêu",
+//           typeOfClothes: "JOGGER",
+//           shape: "TRIANGLE",
+//           "description": "Jogger Gymshark Logo Thêu. Mặc Tập gym, chơi các môn thể thao đều ok. Chất liệu thun poly CỰC MÁT, co giãn 4 chiều, co giãn thoải mái.",
+//           link: "https://shopee.vn/Jogger-GymSharks-LoGo-Th%C3%AAu-ch%E1%BA%A5t-Thun-Poly-2-Da-T%C3%BAi-Kh%C3%B3a-i.1003032.20807396973?sp_atk=ee76d7ef-66d2-4d9a-a508-bd72b390c277&xptdk=ee76d7ef-66d2-4d9a-a508-bd72b390c277",
+//           rating: 0,
+//           materials: "POLYESTER",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "#quần_tập #quần_đùi #quần_gym #thể_thao #quần_short"
+//           ],
+//           clothesSeasons: [
+//             "SPRING",
+//             "AUTUMN",
+//             "WINTER"
+//           ],
+//           clothesImages: [
+//             "https://down-vn.img.susercontent.com/file/ea57db9c3ed4eea198e3c4b90bfeb707",
+//             "https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lhbhhr094s8jb5"
+//           ],
+//           clothesSizes: [
+//             "S",
+//             "M",
+//             "L",
+//             "XL",
+//             "XXL",
+//             "XXXL"
+//           ],
+//           clothesColors: [
+//             "BLACK"
+//           ],
+//           clothesStyles: [
+//             "CYBERPUNK"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         },
+//         {
+//           clothesID: 104,
+//           "nameOfProduct": "Đèn led neon hình giày Neonchill",
+//           typeOfClothes: "SNEAKER",
+//           shape: "PENTAGON",
+//           "description": "Đèn led neon hình giày. Sử dụng để trang trí, decor phòng siêu đẹp. Với ánh sáng sang trọng ấm áp, quý khách có thể lựa chọn màu sắc theo yêu cầu. Ngoài ra, quý khách có thể yêu cầu size khác nhau để phù hợp với căn phòng của mình",
+//           link: "https://shopee.vn/%C4%90%C3%A8n-led-neon-h%C3%ACnh-gi%C3%A0y-Neonchill97-35-x-20-cm-sneaker-neon-sign-trang-tr%C3%AD-c%E1%BB%ADa-h%C3%A0ng-i.291415124.18745429854?sp_atk=9c991f4b-7961-4d40-925a-19b3a0c95900&xptdk=9c991f4b-7961-4d40-925a-19b3a0c95900",
+//           rating: 0,
+//           materials: "CHIFFON",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "NEONCHILL97"
+//           ],
+//           clothesSeasons: [
+//             "SPRING",
+//             "AUTUMN",
+//             "WINTER"
+//           ],
+//           clothesImages: [
+//             "https://down-vn.img.susercontent.com/file/12a198dddf146dc53e081b95e197db26"
+//           ],
+//           clothesSizes: [
+//             "S",
+//             "M",
+//             "L",
+//             "XL",
+//             "XXL",
+//             "XXXL"
+//           ],
+//           clothesColors: [
+//             "XANH_NEON"
+//           ],
+//           clothesStyles: [
+//             "CLASSIC"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         },
+//         {
+//           clothesID: 89,
+//           "nameOfProduct": "Mũ lưỡi trai LOULI SAIGON ",
+//           typeOfClothes: "CAP",
+//           shape: "RECTANGLE",
+//           "description": "THÔNG TIN CHI TIẾT SẢN PHẨM MŨ LƯỠI TRAI VINTAGE: Chất liệu vải: Mũ được dệt từ vải kaki cao cấp. Kích thước nón: từ 53-60 cm. Màu sắc: Đen, kem, nâu coffee, xanh đen, xám, xanh lá, hồng. Khóa chỉnh size: Được làm bằng inox chống gỉ. Form mềm Nam Nữ đều được, phong cách Unisex.",
+//           link: "https://shopee.vn/M%C5%A9-l%C6%B0%E1%BB%A1i-trai-LOULI-SAIGON-VINTAGE-v%E1%BA%A3i-kaki-cao-c%E1%BA%A5p-form-m%E1%BB%81m-i.906790672.22642852825?sp_atk=b197c335-43c6-4182-89c1-f751c491ea22&xptdk=b197c335-43c6-4182-89c1-f751c491ea22",
+//           rating: 0,
+//           materials: "FABRIC",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "Louli Saigon Official Store"
+//           ],
+//           clothesSeasons: [
+//             "SPRING",
+//             "AUTUMN",
+//             "WINTER"
+//           ],
+//           clothesImages: [
+//             "https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lgymjtu17uur25"
+//           ],
+//           clothesSizes: [
+//             "S",
+//             "M",
+//             "L",
+//             "XL",
+//             "XXL",
+//             "XXXL"
+//           ],
+//           clothesColors: [
+//             "BLACK",
+//             "WHITE"
+//           ],
+//           clothesStyles: [
+//             "CYBERPUNK"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         }
+//       ],
+//       [
+//         {
+//           clothesID: 69,
+//           "nameOfProduct": "CouleurStudio Gray T-Shirt",
+//           typeOfClothes: "T_SHIRT",
+//           shape: "CIRCLE",
+//           "description": "Bảng size áo thun Couleur: M: Dài 70 Rộng 53 | 1m45 – 1m60, Dưới 55kg, L: Dài 72 Rộng 55 | 1m55 – 1m70, Dưới 65kg, XL: Dài 74 Rộng 57 | 1m65 – 1m80, Dưới 75kg",
+//           link: "https://shopee.vn/CouleurStudio-Gray-T-Shirt-%C3%81o-Thun-X%C3%A1m-Local-Brand-Couleur-TS06-i.806308123.19563599859?sp_atk=15c022e9-7679-4d52-aa80-297405199d79&xptdk=15c022e9-7679-4d52-aa80-297405199d79",
+//           rating: 0,
+//           materials: "COTTON",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "COULEUR"
+//           ],
+//           clothesSeasons: [
+//             "SPRING",
+//             "AUTUMN",
+//             "WINTER"
+//           ],
+//           clothesImages: [
+//             "https://down-vn.img.susercontent.com/file/sg-11134201-23010-n9dfd7i9hwmved",
+//             "https://down-vn.img.susercontent.com/file/sg-11134201-23010-5bz65ok7ktmv54_tn"
+//           ],
+//           clothesSizes: [
+//             "S",
+//             "M",
+//             "L",
+//             "XL",
+//             "XXL",
+//             "XXXL"
+//           ],
+//           clothesColors: [
+//             "GRAY"
+//           ],
+//           clothesStyles: [
+//             "CYBERPUNK"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         },
+//         {
+//           clothesID: 75,
+//           "nameOfProduct": "Áo hoodie dáng rộng",
+//           typeOfClothes: "HOODIE",
+//           shape: "PENTAGON",
+//           "description": "Chất lượng là hàng đầu với dịch vụ tốt nhất . Khách hàng đều là bạn của chúng tôi. Thiết kế thời trang,100",
+//           link: "https://shopee.vn/%C3%81o-hoodie-d%C3%A1ng-r%E1%BB%99ng-th%E1%BB%9Di-trang-cho-nam-size-M-8XL-%C3%81o-Hoodie-Tay-D%C3%A0i-In-Ch%E1%BB%AF-%C4%90%C6%A1n-Gi%E1%BA%A3n-Th%E1%BB%9Di-Trang-D%C3%A0nh-Cho-Nam-N%E1%BB%AF-i.82095709.17997985106?sp_atk=a343dd84-ecff-4b61-ae13-a5369342452b&xptdk=a343dd84-ecff-4b61-ae13-a5369342452b",
+//           rating: 0,
+//           materials: "FLEECE",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "Shineess"
+//           ],
+//           clothesSeasons: [
+//             "SPRING",
+//             "AUTUMN",
+//             "WINTER"
+//           ],
+//           clothesImages: [
+//             "https://down-vn.img.susercontent.com/file/sg-11134201-7qver-lio8j55tolc038"
+//           ],
+//           clothesSizes: [
+//             "S",
+//             "M",
+//             "L",
+//             "XL",
+//             "XXL",
+//             "XXXL"
+//           ],
+//           clothesColors: [
+//             "BLACK"
+//           ],
+//           clothesStyles: [
+//             "CYBERPUNK"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         },
+//         {
+//           clothesID: 77,
+//           "nameOfProduct": "Jogger GymSharks LoGo Thêu",
+//           typeOfClothes: "JOGGER",
+//           shape: "TRIANGLE",
+//           "description": "Jogger Gymshark Logo Thêu. Mặc Tập gym, chơi các môn thể thao đều ok. Chất liệu thun poly CỰC MÁT, co giãn 4 chiều, co giãn thoải mái.",
+//           link: "https://shopee.vn/Jogger-GymSharks-LoGo-Th%C3%AAu-ch%E1%BA%A5t-Thun-Poly-2-Da-T%C3%BAi-Kh%C3%B3a-i.1003032.20807396973?sp_atk=ee76d7ef-66d2-4d9a-a508-bd72b390c277&xptdk=ee76d7ef-66d2-4d9a-a508-bd72b390c277",
+//           rating: 0,
+//           materials: "POLYESTER",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "#quần_tập #quần_đùi #quần_gym #thể_thao #quần_short"
+//           ],
+//           clothesSeasons: [
+//             "SPRING",
+//             "AUTUMN",
+//             "WINTER"
+//           ],
+//           clothesImages: [
+//             "https://down-vn.img.susercontent.com/file/ea57db9c3ed4eea198e3c4b90bfeb707",
+//             "https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lhbhhr094s8jb5"
+//           ],
+//           clothesSizes: [
+//             "S",
+//             "M",
+//             "L",
+//             "XL",
+//             "XXL",
+//             "XXXL"
+//           ],
+//           clothesColors: [
+//             "BLACK"
+//           ],
+//           clothesStyles: [
+//             "CYBERPUNK"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         },
+//         {
+//           clothesID: 83,
+//           "nameOfProduct": "Đèn led neon hình giày",
+//           typeOfClothes: "SNEAKER",
+//           shape: "TRIANGLE",
+//           "description": "Đèn led neon hình giày. Sử dụng để trang trí, decor phòng siêu đẹp. Với ánh sáng sang trọng ấm áp, quý khách có thể lựa chọn màu sắc theo yêu cầu. Ngoài ra, quý khách có thể yêu cầu size khác nhau để phù hợp với căn phòng của mình",
+//           link: "https://shopee.vn/%C4%90%C3%A8n-led-neon-h%C3%ACnh-gi%C3%A0y-Neonchill97-35-x-20-cm-sneaker-neon-sign-trang-tr%C3%AD-c%E1%BB%ADa-h%C3%A0ng-i.291415124.18745429854?sp_atk=fb45e9cd-f899-4015-9268-77809bf72257&xptdk=fb45e9cd-f899-4015-9268-77809bf72257",
+//           rating: 0,
+//           materials: "POLYESTER",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "NEONCHILL97"
+//           ],
+//           clothesSeasons: [
+//             "SPRING",
+//             "AUTUMN",
+//             "WINTER"
+//           ],
+//           clothesImages: [
+//             "https://down-vn.img.susercontent.com/file/12a198dddf146dc53e081b95e197db26",
+//             "https://down-vn.img.susercontent.com/file/8a40c0e9a8818ebce6d052edf361c4f4"
+//           ],
+//           clothesSizes: [
+//             "S",
+//             "M",
+//             "L",
+//             "XL",
+//             "XXL",
+//             "XXXL"
+//           ],
+//           clothesColors: [
+//             "XANH_NEON"
+//           ],
+//           clothesStyles: [
+//             "CYBERPUNK"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         },
+//         {
+//           clothesID: 89,
+//           "nameOfProduct": "Mũ lưỡi trai LOULI SAIGON ",
+//           typeOfClothes: "CAP",
+//           shape: "RECTANGLE",
+//           "description": "THÔNG TIN CHI TIẾT SẢN PHẨM MŨ LƯỠI TRAI VINTAGE: Chất liệu vải: Mũ được dệt từ vải kaki cao cấp. Kích thước nón: từ 53-60 cm. Màu sắc: Đen, kem, nâu coffee, xanh đen, xám, xanh lá, hồng. Khóa chỉnh size: Được làm bằng inox chống gỉ. Form mềm Nam Nữ đều được, phong cách Unisex.",
+//           link: "https://shopee.vn/M%C5%A9-l%C6%B0%E1%BB%A1i-trai-LOULI-SAIGON-VINTAGE-v%E1%BA%A3i-kaki-cao-c%E1%BA%A5p-form-m%E1%BB%81m-i.906790672.22642852825?sp_atk=b197c335-43c6-4182-89c1-f751c491ea22&xptdk=b197c335-43c6-4182-89c1-f751c491ea22",
+//           rating: 0,
+//           materials: "FABRIC",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "Louli Saigon Official Store"
+//           ],
+//           clothesSeasons: [
+//             "SPRING",
+//             "AUTUMN",
+//             "WINTER"
+//           ],
+//           clothesImages: [
+//             "https://down-vn.img.susercontent.com/file/vn-11134207-7qukw-lgymjtu17uur25"
+//           ],
+//           clothesSizes: [
+//             "S",
+//             "M",
+//             "L",
+//             "XL",
+//             "XXL",
+//             "XXXL"
+//           ],
+//           clothesColors: [
+//             "BLACK",
+//             "WHITE"
+//           ],
+//           clothesStyles: [
+//             "CYBERPUNK"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         }
+//       ]
+//     ],
+//     message: "Suggest full clothes for free user"
+//   },
+//   {
+//     styleName: "MINIMALISM",
+//     bodyShapeName: "PEAR_SHAPE",
+//     outfits: [
+//       [
+//         {
+//           clothesID: 68,
+//           nameOfProduct: "Machine Age T-shirt",
+//           typeOfClothes: "T_SHIRT",
+//           shape: "CIRCLE",
+//           description: "Machine Age T-shirt MA-29, Black n Neon/ White n Red, Unisex nam nữ đều mặc được",
+//           link: "https://shopee.vn/Machine-Age-T-shirt-%C3%A1o-ph%C3%B4ng-unisex-phong-c%C3%A1ch-streetwear-trendy-i.68926569.19728660724?sp_atk=b89d73b4-2486-449c-be81-a4607b078ce6&xptdk=b89d73b4-2486-449c-be81-a4607b078ce6",
+//           rating: 0,
+//           materials: "POLYESTER",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "Carpediem.2k"
+//           ],
+//           clothesSeasons: [
+//             "SPRING",
+//             "AUTUMN",
+//             "WINTER"
+//           ],
+//           clothesImages: [
+//             "https://down-vn.img.susercontent.com/file/e0f1ea7e73468ae951486cadb462b8c9",
+//             "https://down-vn.img.susercontent.com/file/c857497b21a79c883a9a4c9f5018aa36"
+//           ],
+//           clothesSizes: [
+//             "S",
+//             "M",
+//             "L",
+//             "XL",
+//             "XXL",
+//             "XXXL"
+//           ],
+//           clothesColors: [
+//             "BLACK",
+//             "WHITE"
+//           ],
+//           clothesStyles: [
+//             "CYBERPUNK"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         },
+//         {
+//           "clothesID": 106,
+//           nameOfProduct: "Giày Oxford Tăng Chiều Cao",
+//           "typeOfClothes": "OXFORD",
+//           shape: "RECTANGLE",
+//           description: "Giày Oxford Tăng Chiều Cao 6cm Đế Phíp Cao Cấp SIGOURNEY Da Bò Nhập Khẩu Màu Đen Trơn SCC08 Bảo Hành 18 Tháng. Giày nam tăng chiều cao 6cm Sigourney có thiết kế dáng Oxford cổ điển với màu đen bóng sang trọng, dễ mang, dễ phối đồ, mang đến vẻ sang trọng và chỉn chu cho người mang. Với thiết kế TĂNG CHIỀU CAO, không khó để SCC08 “giấu” một miếng độn đế dày 3cm, cộng với phần đế giày cao 3cm, tổng thể tăng thêm 6cm cho người mang, hoàn toàn bí mật, cực kì dễ mang và không hề chông chênh.",
+//           "link": "https://shopee.vn/Gi%C3%A0y-Oxford-T%C4%83ng-Chi%E1%BB%81u-Cao-6cm-%C4%90%E1%BA%BF-Ph%C3%ADp-Cao-C%E1%BA%A5p-SIGOURNEY-Da-B%C3%B2-Nh%E1%BA%ADp-Kh%E1%BA%A9u-M%C3%A0u-%C4%90en-Tr%C6%A1n-SCC08-B%E1%BA%A3o-H%C3%A0nh-18-Th%C3%A1ng-i.119959072.25857963895?sp_atk=c4e5b1f8-9e19-42f7-9a37-477ed51f3249&xptdk=c4e5b1f8-9e19-42f7-9a37-477ed51f3249",
+//           rating: 0,
+//           materials: "COTTON",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "SIGOURNEY OFFICIAL STORE"
+//           ],
+//           clothesSeasons: [
+//             "SPRING",
+//             "AUTUMN",
+//             "WINTER"
+//           ],
+//           clothesImages: [
+//             "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lqe62jcypmwnfd"
+//           ],
+//           clothesSizes: [
+//             "S",
+//             "M",
+//             "L",
+//             "XL",
+//             "XXL",
+//             "XXXL"
+//           ],
+//           clothesColors: [
+//             "BLACK"
+//           ],
+//           clothesStyles: [
+//             "CLASSIC"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         },
+//         {
+//           "clothesID": 87,
+//           nameOfProduct: "GUDETU Giày Sneaker Thời Trang Cho Nam Vớ Và Giày Kéo Dài. Giày Lười Đen",
+//           "typeOfClothes": "SNEAKER",
+//           shape: "HEXAGON",
+//           description: "Một vài lý do để chọn chúng tôiChúng tôi đã chuẩn bị một phiếu giảm giá bất ngờ cho bạn, bạn có thể tự nhận hoặc trò chuyện riêng với bộ phận chăm sóc khách hàng của chúng tôi để nhận hàng. Đó là một trải nghiệm thú vị từ khi nhìn thấy sản phẩm đến khi nhận sản phẩm, bạn sẽ thích shop của tôi",
+//           "link": "https://shopee.vn/GUDETU-Gi%C3%A0y-Sneaker-Th%E1%BB%9Di-Trang-Cho-Nam-V%E1%BB%9B-V%C3%A0-Gi%C3%A0y-K%C3%A9o-D%C3%A0i.-Gi%C3%A0y-L%C6%B0%E1%BB%9Di-%C4%90en.-Gi%C3%A0y-Th%E1%BB%83-Thao-%C4%90%E1%BA%BF-D%C3%A0y-Th%E1%BB%9Di-Trang-N%C4%83ng-%C4%90%E1%BB%99ng-Cho-Nam-Gi%C3%A0y-%C4%90%C6%A1n-Tr%C3%AAn-B%C3%A0n-V%E1%BB%ABa.-Gi%C3%A0y-Th%E1%BB%83-Thao-Nam-Th%E1%BB%9Di-Trang-N%C4%83ng-%C4%90%E1%BB%99ng-i.946067865.22155314921?sp_atk=36a0146d-57eb-478f-99f8-5b0b28efdbc0&xptdk=36a0146d-57eb-478f-99f8-5b0b28efdbc0",
+//           rating: 0,
+//           materials: "DENIM",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "GUDETU"
+//           ],
+//           clothesSeasons: [
+//             "SPRING",
+//             "AUTUMN",
+//             "WINTER"
+//           ],
+//           clothesImages: [
+//             "https://down-vn.img.susercontent.com/file/cn-11134207-7r98o-lpj557gadqpr05"
+//           ],
+//           clothesSizes: [
+//             "S",
+//             "M",
+//             "L",
+//             "XL",
+//             "XXL",
+//             "XXXL"
+//           ],
+//           clothesColors: [
+//             "BLACK"
+//           ],
+//           clothesStyles: [
+//             "CYBERPUNK"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         }
+//       ],
+//       [
+//         {
+//           "clothesID": 125,
+//           nameOfProduct: "Basic Crew Neck Cotton T-shirts",
+//           "typeOfClothes": "T_SHIRT",
+//           shape: "RECTANGLE",
+//           description: "Stay comfortable and stylish with our Basic Crew Neck Cotton T-shirts. Made with soft, breathable cotton, these lightweight tees are perfect for lounging, running errands, or a night on the town. You'll always look your best.",
+//           "link": "https://watereverysunday.com/products/basic-crew-neck-cotton-t-shirts?variant=44231846527195",
+//           rating: 0,
+//           materials: "COTTON",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "#casualstyle",
+//             "#CottonTShirt"
+//           ],
+//           clothesSeasons: [
+//             "SUMMER"
+//           ],
+//           clothesImages: [
+//             "https://watereverysunday.com/cdn/shop/files/Basic-Crew-Neck-Cotton-T-shirts-watereverysunday-6060_large.jpg?v=1698322745",
+//             "https://watereverysunday.com/cdn/shop/files/Basic-Crew-Neck-Cotton-T-shirts-watereverysunday-6121_1024x1024.jpg?v=1698322574",
+//             "https://watereverysunday.com/cdn/shop/files/Basic-Crew-Neck-Cotton-T-shirts-watereverysunday-4732_1024x1024.jpg?v=1698322750",
+//             "https://watereverysunday.com/cdn/shop/files/Basic-Crew-Neck-Cotton-T-shirts-watereverysunday-534_1024x1024.jpg?v=1698322865"
+//           ],
+//           clothesSizes: [
+//             "XS",
+//             "S",
+//             "M",
+//             "L",
+//             "XL"
+//           ],
+//           clothesColors: [
+//             "PURPLE",
+//             "PINK",
+//             "BLACK",
+//             "WHITE"
+//           ],
+//           clothesStyles: [
+//             "NORMCORE"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         },
+//         {
+//           "clothesID": 106,
+//           nameOfProduct: "Giày Oxford Tăng Chiều Cao",
+//           "typeOfClothes": "OXFORD",
+//           shape: "RECTANGLE",
+//           description: "Giày Oxford Tăng Chiều Cao 6cm Đế Phíp Cao Cấp SIGOURNEY Da Bò Nhập Khẩu Màu Đen Trơn SCC08 Bảo Hành 18 Tháng. Giày nam tăng chiều cao 6cm Sigourney có thiết kế dáng Oxford cổ điển với màu đen bóng sang trọng, dễ mang, dễ phối đồ, mang đến vẻ sang trọng và chỉn chu cho người mang. Với thiết kế TĂNG CHIỀU CAO, không khó để SCC08 “giấu” một miếng độn đế dày 3cm, cộng với phần đế giày cao 3cm, tổng thể tăng thêm 6cm cho người mang, hoàn toàn bí mật, cực kì dễ mang và không hề chông chênh.",
+//           "link": "https://shopee.vn/Gi%C3%A0y-Oxford-T%C4%83ng-Chi%E1%BB%81u-Cao-6cm-%C4%90%E1%BA%BF-Ph%C3%ADp-Cao-C%E1%BA%A5p-SIGOURNEY-Da-B%C3%B2-Nh%E1%BA%ADp-Kh%E1%BA%A9u-M%C3%A0u-%C4%90en-Tr%C6%A1n-SCC08-B%E1%BA%A3o-H%C3%A0nh-18-Th%C3%A1ng-i.119959072.25857963895?sp_atk=c4e5b1f8-9e19-42f7-9a37-477ed51f3249&xptdk=c4e5b1f8-9e19-42f7-9a37-477ed51f3249",
+//           rating: 0,
+//           materials: "COTTON",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "SIGOURNEY OFFICIAL STORE"
+//           ],
+//           clothesSeasons: [
+//             "SPRING",
+//             "AUTUMN",
+//             "WINTER"
+//           ],
+//           clothesImages: [
+//             "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lqe62jcypmwnfd"
+//           ],
+//           clothesSizes: [
+//             "S",
+//             "M",
+//             "L",
+//             "XL",
+//             "XXL",
+//             "XXXL"
+//           ],
+//           clothesColors: [
+//             "BLACK"
+//           ],
+//           clothesStyles: [
+//             "CLASSIC"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         },
+//         {
+//           "clothesID": 84,
+//           nameOfProduct: "Giày Sneaker Vải Canvas",
+//           "typeOfClothes": "SNEAKER",
+//           shape: "OCTAGON",
+//           description: "Giày Sneaker Vải Canvas Nữ E18 Black Chính Hãng Dincox trẻ trung, thời thượng với thiết kế đẹp, chất da bền bỉ và đặt biệt độ bền cực cao phù hợp với mọi hoạt động thường ngày như đi chơi, đi làm và cả dự tiệc. Lót giày sử dụng công nghệ Memory Foam mang rất êm và nhẹ chân, phù hợp sử dụng để đi chơi, đi làm hoặc dự tiệc. Chất liệu Vải canvas với đặc tính là độ bền, kháng nấm mốc ngoài ra còn có khả năng chống tia UV",
+//           "link": "https://shopee.vn/Gi%C3%A0y-Sneaker-V%E1%BA%A3i-Canvas-Nam-N%E1%BB%AF-E18-Black-DIncox-i.151338284.18393116525?sp_atk=5bfc19fe-97d8-4f8f-8891-4bfb8031520d&xptdk=5bfc19fe-97d8-4f8f-8891-4bfb8031520d",
+//           rating: 0,
+//           materials: "COTTON",
+//           reactPerClothes: null,
+//           hashtag: [
+//             "DINCOX SHOES OFFICIAL STORE"
+//           ],
+//           clothesSeasons: [
+//             "SPRING",
+//             "AUTUMN",
+//             "WINTER"
+//           ],
+//           clothesImages: [
+//             "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-llnrfkwbj3cs5d"
+//           ],
+//           clothesSizes: [
+//             "S",
+//             "M",
+//             "L",
+//             "XL",
+//             "XXL",
+//             "XXXL"
+//           ],
+//           clothesColors: [
+//             "BLACK"
+//           ],
+//           clothesStyles: [
+//             "CYBERPUNK"
+//           ],
+//           react: [],
+//           comment: [],
+//           userResponseStylish: {
+//             userID: "8",
+//             username: "hoangha1@gmail.com",
+//             imgUrl: "https://i.pinimg.com/736x/9a/df/06/9adf06f9e30223c13f1a5685bd38ac89.jpg"
+//           }
+//         }
+//       ]
+//     ],
+//     message: "Suggest full clothes for free user"
+//   }
+// ]
 
 type AIStylistResponse = {
   styleName: string,
@@ -849,6 +849,7 @@ const RecommendOutfitScreen = () => {
   const [user, setUser] = useState<UserInterFace>();
   const [subrole, setSubrole] = useState('');
   const [premiumRole, setPremiumRole] = useState(false);
+  const [data, setData] = useState<AIStylistResponse[]>();
 
 
 
@@ -875,29 +876,31 @@ const RecommendOutfitScreen = () => {
         const userID = user.userID;
         console.log('userParse: ', userID);
         const params = {}
-        // try {
-        //   const getData = await api.get(`/api/v1/ai-stylish/get-suggest-clothes-for-user?userID=${userID}`, params, tokenString);
+        try {
+          const getData = await api.get(`/api/v1/ai-stylish/get-suggest-clothes-for-user?userID=${userID}`, params, tokenString);
 
-        //   if (getData.success === 200) {
-        //     setAiStylistResponse(getData.data);
-        //     console.log('asdasd', getData.data);
-        //     setIsLoading(false);
-        //   }
-        //   else {
-        //     console.log(getData.data);
-        //   }
+          if (getData.success === 200) {
+            setData(getData.data)
+            console.log('1111111111111111111111111111111', getData.data);
+            setIsLoading(false);
+          }
+          else {
+            console.log(getData.message);
+          }
 
-        // } catch (error) {
-        //   console.error("An error occurred during data fetching:", error);
-        // }
+        } catch (error) {
+          console.error("An error occurred during data fetching:", error);
+        }
       }
     }
     fetchData();
   }, []);
 
   useEffect(() => {
-    console.log(data[0].outfits[0]);
-    setAiStylistResponse(data);
+    if(data) {
+      console.log(data[0].outfits[0]);
+      setAiStylistResponse(data);
+    }
 
 
   }, [aiStylistResponse]);

@@ -55,7 +55,7 @@ export default function App() {
                 options={{ headerShown: false }}
               />  */}
 
-              {/* <Stack.Screen
+              <Stack.Screen
                 name="Home"
                 component={HomeScreen}
                 options={{
@@ -193,7 +193,7 @@ export default function App() {
                 name="ChatScreen"
                 component={ChatScreen}
                 options={{ headerShown: false }}
-              /> */}
+              />
                <Stack.Screen
                 name="Onboarding"
                 component={OnboardingScreen}

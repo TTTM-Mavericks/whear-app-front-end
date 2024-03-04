@@ -364,14 +364,6 @@ const SocialScreen = () => {
     navigation.goBack();
   }
 
-  const handleSearch = () => {
-    alert('search');
-  };
-
-  const handleMore = () => {
-    alert('handleMore');
-  };
-
   const handleOpenPostingForm = () => {
     // dispatch(setOpenUpPostingDialog(true));
     // setIsOpenCommentsDialog(true);
@@ -443,7 +435,7 @@ const SocialScreen = () => {
             </MaskedView>
           </View>
         }
-        backAction={hanldeGoBack}
+        backAction={() => hanldeGoBack()}
       ></AppBarHeaderComponent>
 
       <ScrollView
@@ -488,7 +480,7 @@ const SocialScreen = () => {
                 onPress={() => handleMoveToPostingDetail(item.postID)}
                 extendHeaderChild={
                   <View
-                  key={item.postID}
+                    key={item.postID}
                     style={[
                       SocailStyleScreen.container_postingBar,
                       { marginTop: 20 },
