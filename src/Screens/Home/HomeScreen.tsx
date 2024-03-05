@@ -14,7 +14,7 @@ import HorizontalCarouselComponent from '../../components/Common/Carousel/Horizo
 import ChipGroupComponent from '../../components/Common/ChipGroup/ChipGroupComponent';
 import { width } from '../../root/ResponsiveSize';
 import SmallChipGroupComponent from '../../components/Common/ChipGroup/SmallChipGroupComponent';
-import { backgroundColor, primaryColor, secondaryColor } from '../../root/Colors';
+import { backgroundColor, fourthColor, primaryColor, secondaryColor } from '../../root/Colors';
 import { useDispatch } from 'react-redux';
 import { setOpenAddToCollectionsDialog, setOpenCreateClothesDialog, setOpenUpgradeRolesDialog } from '../../redux/State/Actions';
 import AddingToCollectionComponent from '../../components/Dialog/AddingToCollectionComponent';
@@ -64,6 +64,7 @@ const data1 = [
 
 const chipData = ['#Minimalism', '#Girly', '#Sporty', '#Vintage', '#Manly'];
 
+const PAGE_SIZE = 20;
 
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
@@ -78,7 +79,10 @@ const HomeScreen = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [clothesData, setClothesData] = useState<ClothesInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [addedClothId, setAddedClothId] = useState()
+  const [addedClothId, setAddedClothId] = useState();
+  const [pageNumber, setPageNumber] = useState(1);
+  const [isFetchingMore, setIsFetchingMore] = useState(true);
+  const [dataPaging, setDataPaging] = useState<ClothesInterface[]>([]);
 
 
   /*-----------------Usable variable-----------------*/
@@ -99,7 +103,8 @@ const HomeScreen = () => {
           const getData = await api.get(`/api/v1/recommedation/get-list-recommendation-by-user-history-items?userID=${userID}`, params, tokenString);
 
           if (getData.success === 200) {
-            setClothesData(getData.data);
+            console.log('recommend');
+            setDataPaging(getData.data);
             setIsLoading(false);
           }
           else {
@@ -113,9 +118,73 @@ const HomeScreen = () => {
     }
     fetchData();
   }, []);
-  
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+
+  //     handleFetchDataPaging(pageNumber);
+  //   }, 0);
+  // }, [pageNumber]);
+
+  useEffect(() => {
+
+      handleFetchDataPaging(0);
+  }, [dataPaging]);
+
+
+
+
+
+
 
   /*-----------------Function handler-----------------*/
+
+  const handleFetchDataPaging = async (page: any) => {
+    try {
+      const tokenStorage = await AsyncStorage.getItem('access_token');
+      const userString = await AsyncStorage.getItem('userData');
+
+      if (tokenStorage && userString) {
+        const tokenString = JSON.parse(tokenStorage);
+        const user = JSON.parse(userString);
+        const userID = user.userID;
+
+        const params = {
+        };
+
+        const body = dataPaging
+
+        const getData = await api.post(`/api/v1/paging/get-page?page=${page}&pageSize=${PAGE_SIZE}`, body, tokenString);
+
+        if (getData.success === 200) {
+          console.log('handleFetchDataPaging');
+          setClothesData((prev)=>[...prev,...getData.data]);
+          // setClothesData(getData.data);
+          // console.log(getData.data);
+
+
+        } else {
+          console.log(getData.data);
+        }
+      }
+    } catch (error) {
+      console.error("An error occurred during data fetching:", error);
+    } finally {
+      setIsFetchingMore(false);
+    }
+  };
+
+  const handleLoadMore = () => {
+    console.log('paging');
+    if (!isFetchingMore) {
+      setIsFetchingMore(true);
+      setPageNumber((prevPage) => prevPage + 1);
+      handleFetchDataPaging(pageNumber + 1);
+      setIsLoading(true);
+    }
+  };
+
+
   function hanldeGoBack(): void {
     navigation.goBack();
   }
@@ -250,37 +319,44 @@ const HomeScreen = () => {
 
 
           {/* Regular FlatList */}
-          {!isLoading ? (
-            <FlatList
-              style={HomeStylesComponent.flatlist}
-              data={clothesData}
-              keyExtractor={(item) => item.clothesID}
-              numColumns={2}
-              renderItem={({ item }) => (
-                <ListViewComponent data={[{ id: item.clothesID, imgUrl: item.clothesImages ? item.clothesImages[0] : clothesLogoUrlDefault, }]}
-                  onPress={() => hanldeMoveToDetail(item.clothesID)}
-                  child={
-                    <IconButton
-                      mode='outlined'
-                      icon={'heart'}
-                      style={[HomeStylesComponent.iconCard, {}]}
-                      size={15}
-                      iconColor={addedItems.includes(item.clothesID) ? '#C90801' : '#C3C3C3'}
-                      onPress={() => {
-                        handleChangeIconAdded(item.clothesID);
-                      }}
 
-                    />
-                  } />
-              )}
-              contentContainerStyle={{ paddingRight: 0 }}
-              showsVerticalScrollIndicator={false}
-              scrollEnabled={false}
-            />
-          )
-        : (
-          <ActivityIndicator animating={true} color={primaryColor} style={{marginTop: 50, marginBottom: 50}} />
-        )}
+          <FlatList
+            style={HomeStylesComponent.flatlist}
+            data={clothesData}
+            keyExtractor={(item) => item.clothesID}
+            numColumns={2}
+            renderItem={({ item }) => (
+              <ListViewComponent key={item.clothesID} data={[{ id: item.clothesID, imgUrl: item.clothesImages ? item.clothesImages[0] : clothesLogoUrlDefault, }]}
+                onPress={() => hanldeMoveToDetail(item.clothesID)}
+                child={
+                  <IconButton
+                    key={item.clothesID}
+                    mode='outlined'
+                    icon={'heart'}
+                    style={[HomeStylesComponent.iconCard, {}]}
+                    size={15}
+                    iconColor={addedItems.includes(item.clothesID) ? '#C90801' : '#C3C3C3'}
+                    // iconColor={item.reacted ? fourthColor : '#C3C3C3'}
+                    // iconColor={fourthColor}
+
+                    onPress={() => {
+                      handleChangeIconAdded(item.clothesID);
+                    }}
+
+                  />
+                } />
+            )}
+            contentContainerStyle={{ paddingRight: 0 }}
+            showsVerticalScrollIndicator={false}
+            scrollEnabled={false}
+            onEndReached={handleLoadMore}
+            onEndReachedThreshold={0.01}
+          // ListFooterComponent={isFetchingMore && <ActivityIndicator size="large" color="#0000ff" />}
+          />
+          {isLoading
+            && (
+              <ActivityIndicator animating={true} color={primaryColor} style={{ marginTop: 50, marginBottom: 50 }} />
+            )}
 
           <Button mode='outlined' style={{ width: width * 0.8, margin: 20, borderRadius: 8 }} textColor='black' onPress={handleOpenUpgradeDialog} >
             <Text style={{ fontSize: 12.5, fontWeight: '500' }}>

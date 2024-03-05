@@ -44,8 +44,9 @@ export interface ClothesInterface {
     clothesColors?: string[];
     clothesSizes?: string[];
     clothesImages: string[];
-    react?: number,
+    reactPerClothes?: number,
     clothesStyle?: string[];
+    reacted?: boolean;
 }
 
 export interface CollectionInterface {

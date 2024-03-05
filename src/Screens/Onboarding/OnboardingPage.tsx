@@ -4,12 +4,17 @@ import { Button, Text } from 'react-native-paper';
 import { dataSliderOnboarding } from './Data';
 import { OnboardingStyle } from './OnboadingStyle';
 import VerticalMotion from './VerticalMotion';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../root/RootStackParams';
+import { useNavigation } from '@react-navigation/native';
+type NavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 
 const OnboardingPage = () => {
   const fadeAnim = new Animated.Value(0);
+  const navigation = useNavigation<NavigationProp>();
 
   const handleGetStarted = () => {
-    console.log('Get Started');
+    navigation.navigate('Introduce');
   };
 
   useEffect(() => {

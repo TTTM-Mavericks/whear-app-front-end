@@ -58,6 +58,7 @@ const SearchScreen = () => {
   const [user, setUser] = React.useState<UserInterFace>();
   const [subrole, setSubRole] = React.useState('');
   const [token, setToken] = React.useState('');
+  const [mockSuggestions, setmockSuggestions] = useState<string[]>([]);
 
 
 
@@ -90,6 +91,25 @@ const SearchScreen = () => {
         setUser(user);
         setToken(tokenString);
         console.log('userParse: ', user);
+        const params = {}
+
+        try {
+          const getData = await api.get(`/api/v1/histories/get-all-history-items-by-customer-id?customerID=${userID}`, params, tokenString);
+          // const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=1&based_userid=1`, params, tokenString);
+          if (getData.success === 200) {
+            setmockSuggestions(getData.data.historyItems);
+            console.log('getData.data: ', getData.data.historyItems);
+
+          }
+          else {
+            console.log(getData.message);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 1000)
+          }
+        } catch (error) {
+          console.error("An error occurred during data fetching:", error);
+        }
       }
     }
     fetchData();
@@ -197,7 +217,6 @@ const SearchScreen = () => {
 
 
   // Mock data for suggestions
-  const mockSuggestions: string[] = ['Keyword 1', 'Keyword 2', 'Keyword 3'];
 
   const handleSearch = async (text: string) => {
     setIsLoading(true);
@@ -303,7 +322,7 @@ const SearchScreen = () => {
                   data={suggestions}
                   keyExtractor={(item) => item}
                   renderItem={({ item }) => (
-                    <TouchableOpacity onPress={() => handleSelectSuggestion(item)}>
+                    <TouchableOpacity key={item} onPress={() => handleSelectSuggestion(item)}>
                       <Text style={{ padding: 10 }}>{item}</Text>
                     </TouchableOpacity>
                   )}
@@ -446,7 +465,7 @@ const SearchScreen = () => {
                     />
                   } />
                 )}
-                
+
                 contentContainerStyle={{ paddingRight: 0 }}
                 showsVerticalScrollIndicator={false}
                 scrollEnabled={false}
