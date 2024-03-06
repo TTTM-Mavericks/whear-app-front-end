@@ -52,6 +52,12 @@ const UpgradeRoleDialogComponent = () => {
         hideDialog();
     }
 
+    /*-----------------Move To Upgrade Screen-----------------*/
+    const handleUpgradePress = () => {
+        // Navigate to the Upgrade screen
+        navigation.navigate('UpgradeScreen');
+        hideDialog();
+    };
 
 
     const showAnimation = () => {
@@ -157,6 +163,7 @@ const UpgradeRoleDialogComponent = () => {
                             contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
                             style={[DialogStylesComponent.buttonGroup_button, { backgroundColor: primaryColor, marginBottom: 20 }]}
                             labelStyle={[DialogStylesComponent.buttonGroup_button_lable,]}
+                            onPress={handleUpgradePress}
                         >
                             <Text style={{ fontWeight: 'bold', fontSize: 13, color: 'black' }}>Upgrade Premium</Text>
                         </Button>
