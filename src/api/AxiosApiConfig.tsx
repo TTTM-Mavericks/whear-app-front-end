@@ -72,7 +72,7 @@ const axiosInstance = axios.create({
 });
 
 const api = {
-   get: async (url: string, params?: any, accessToken?: string) => {
+  get: async (url: string, params?: any, accessToken?: string) => {
     try {
       const response = await axiosInstance.get(url, getRequestConfig(accessToken, params));
       return response.data;
@@ -121,7 +121,7 @@ const getRequestConfig = (accessToken?: string, params?: any): AxiosRequestConfi
   };
 
   if (accessToken) {
-    headers['Authorization'] =  "Bearer " + `${accessToken}`;
+    headers['Authorization'] = "Bearer " + `${accessToken}`;
   }
 
   return {
