@@ -334,9 +334,6 @@ const CreateCollectionDialogComponents = () => {
                     </Dialog.Actions>
                 </Dialog>
             </Portal>
-            <UpgradeRoleDialogComponent></UpgradeRoleDialogComponent>
-
-
 
         </View>
 

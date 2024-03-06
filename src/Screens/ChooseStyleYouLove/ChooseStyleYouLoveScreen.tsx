@@ -101,23 +101,23 @@ const ChooseStyleYouLoveScreen = () => {
     console.log('styleDefault: ', styleDefault);
     if (selectedItems.length >= 2) {
       navigation.navigate('Home');
-      // const response = await api.post('/api/v1/user-style/create-style-and-body-shape', styleDefault);
-      // if (response.success === 200) {
-      //   setIsLoading(true);
-      //   setTimeout(() => {
-      //     setIsLoading(false);
-      //     navigation.navigate('Home');
+      const response = await api.post('/api/v1/user-style/create-style-and-body-shape', styleDefault);
+      if (response.success === 200) {
+        setIsLoading(true);
+        setTimeout(() => {
+          setIsLoading(false);
+          navigation.navigate('Home');
 
-      //   }, 3000)
-      // } else {
-      //   Toast.show({
-      //     type: 'error',
-      //     text1: JSON.stringify(response.message),
-      //     position: 'top'
-      //   });
-      //   setIsLoading(false);
+        }, 3000)
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: JSON.stringify(response.message),
+          position: 'top'
+        });
+        setIsLoading(false);
 
-      // }
+      }
     }
   }
   const handleSetSelectedItems = (id: string) => {

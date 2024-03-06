@@ -50,7 +50,9 @@ const DialogStylesComponent = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
-        width: '100%'
+        width: '100%',
+        alignItems: 'center', 
+        alignContent: 'center',
     },
     cardContent: {
         width: '47%',

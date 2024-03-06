@@ -3,7 +3,7 @@ import { ScrollView, View, Image, TouchableOpacity, ImageBackground, Animated } 
 import { Button, Card, Chip, Dialog, Icon, IconButton, MD3Colors, Portal, Text } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import DialogStylesComponent from './DialogStyleComponent';
-import { backgroundColor, primaryColor } from '../../root/Colors';
+import { backgroundColor, fourthColor, primaryColor } from '../../root/Colors';
 import { setCreateCollectionDialog, setOpenAddToCollectionsDialog } from '../../redux/State/Actions';
 import { LinearGradient } from 'expo-linear-gradient';
 import { height, width } from '../../root/ResponsiveSize';
@@ -14,60 +14,10 @@ import CreateCollectionDialogComponents from './CreateCollectionDialogComponents
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CollectionInterface, UserInterFace } from '../../models/ObjectInterface';
 import api from '../../api/AxiosApiConfig';
+import { ALERT_TYPE,  AlertNotificationRoot } from 'react-native-alert-notification';
+import { Dialog as DialogNoti } from 'react-native-alert-notification';
 
-const collections = [
-    {
-        id: '1',
-        name: 'Spring collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '2',
-        name: 'Summer collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '3',
-        name: 'Fall collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '4',
-        name: 'Winter collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '5',
-        name: 'Winter collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '6',
-        name: 'Winter collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '7',
-        name: 'Winter collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '8',
-        name: 'Winter collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '9',
-        name: 'Winter collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '10',
-        name: 'Winter collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
 
-]
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 
@@ -81,6 +31,7 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
     const [token, setToken] = React.useState('');
     const [message, setMessage] = React.useState('');
     const [messageAdded, setMessageAdded] = React.useState('');
+    const [reload, setReload] = React.useState(false);
 
 
 
@@ -104,44 +55,48 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
     }, [openDialog]);
 
     React.useEffect(() => {
-        const fetchData = async () => {
-            const tokenStorage = await AsyncStorage.getItem('access_token');
-            const userStorage = await AsyncStorage.getItem('userData');
-            setIsLoading(true);
-            if (userStorage) {
-                const userParse: UserInterFace = JSON.parse(userStorage);
-                if (tokenStorage) {
-                    const tokenString = JSON.parse(tokenStorage);
-                    setToken(tokenString);
-                    console.log('userParse: ', tokenString);
-                    const params = {}
-                    try {
-                        const getData = await api.get(`/api/v1/collection/get-all-by-userid?user_id=${userParse.userID}`, params, tokenString);
-                        // const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=1&based_userid=1`, params, tokenString);
-
-                        if (getData.success === 200) {
-                            setUserCollection(getData.data)
-                            console.log('getData.data: ', getData.data);
-                            setTimeout(() => {
-                                setIsLoading(false);
-                            }, 1000)
-                        }
-                        else {
-                            console.log(getData.data);
-                            setTimeout(() => {
-                                setIsLoading(false);
-                            }, 1000)
-                        }
-                    } catch (error) {
-                        console.error("An error occurred during data fetching:", error);
-                    }
-                }
-            }
-        }
         fetchData();
     }, []);
 
+    React.useEffect(() => {
+        fetchData();
+    }, [reload]);
+
     /*-----------------Function handler-----------------*/
+    const fetchData = async () => {
+        const tokenStorage = await AsyncStorage.getItem('access_token');
+        const userStorage = await AsyncStorage.getItem('userData');
+        setIsLoading(true);
+        if (userStorage) {
+            const userParse: UserInterFace = JSON.parse(userStorage);
+            if (tokenStorage) {
+                const tokenString = JSON.parse(tokenStorage);
+                setToken(tokenString);
+                console.log('userParse: ', tokenString);
+                const params = {}
+                try {
+                    const getData = await api.get(`/api/v1/collection/get-all-by-userid?user_id=${userParse.userID}`, params, tokenString);
+                    // const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=1&based_userid=1`, params, tokenString);
+
+                    if (getData.success === 200) {
+                        setUserCollection(getData.data)
+                        console.log('getData.data: ', getData.data);
+                        setTimeout(() => {
+                            setIsLoading(false);
+                        }, 1000)
+                    }
+                    else {
+                        console.log(getData.data);
+                        setTimeout(() => {
+                            setIsLoading(false);
+                        }, 1000)
+                    }
+                } catch (error) {
+                    console.error("An error occurred during data fetching:", error);
+                }
+            }
+        }
+    }
     const hideDialog = () => {
         dispatch(setOpenAddToCollectionsDialog(false));
         setIsOpen((prevIsOpen: any) => !prevIsOpen);
@@ -152,6 +107,32 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
         setIsAccepted((prevIsAccepted: any) => !prevIsAccepted);
         hideDialog();
     }
+
+    const showDialogSuccess = (message: any, status: any, buttonTitle: any) => {
+        if (status === 'Success') {
+            DialogNoti.show({
+                type: ALERT_TYPE.SUCCESS,
+                title: 'Success',
+                textBody: message,
+                onPressButton() {
+                    // navigation.navigate('UpgardeDetailScreen');
+                    // DialogNoti.hide();
+                },
+                button: 'Payment',
+            });
+        } else {
+            DialogNoti.show({
+                type: ALERT_TYPE.DANGER,
+                title: 'Error',
+                textBody: message,
+                onPressButton() {
+                    // navigation.navigate('UpgardeDetailScreen');
+                    // DialogNoti.hide();
+                },
+                button: 'Payment',
+            });
+        }
+    };
 
 
 
@@ -195,16 +176,19 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
                 console.log(response.data);
                 setIsLoading(false);
                 setTimeout(() => {
+                    setReload(true);
+                    showDialogSuccess('Added cloth to collection', 'Success', 'Go Collections');
                 }, 1000)
             } else {
                 setIsOpen(false);
                 setIsLoading(false);
                 console.log(response.message);
+                showDialogSuccess(response.message, 'DANGER', 'Close');
 
             }
         } catch (error: any) {
             console.error('Error posting data:', error);
-
+            showDialogSuccess(error, 'DANGER', 'Close');
             setIsLoading(false);
         }
 
@@ -275,7 +259,7 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
                             showsHorizontalScrollIndicator={false}>
                             <View style={DialogStylesComponent.groupCard}>
 
-                                {userCollection ? userCollection.map((item) => (
+                                {userCollection.length > 0 ? userCollection.map((item) => (
                                     <Card style={DialogStylesComponent.cardContent} key={item.collectionID} onPress={() => handleAddClothToCollection(item.collectionID)}>
                                         <View style={DialogStylesComponent.cardCover}>
                                             <ImageBackground
@@ -294,11 +278,11 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
                                         </View>
                                     </Card>
                                 ))
-                            : (
-                                <View>
-                                    <Text>Do not have any Collection</Text>
-                                </View>
-                            )}
+                                    : (
+                                        <View style={{ justifyContent: 'center', alignItems: 'center', alignContent: 'center', marginTop: 10, marginBottom: 10 }}>
+                                            <Text style={{ fontSize: 17, fontWeight: 'bold', color: fourthColor, justifyContent: 'center', alignItems: 'center', alignContent: 'center', }}>Do not have any collection!</Text>
+                                        </View>
+                                    )}
                             </View>
                             <View style={{
                                 justifyContent: 'center',

@@ -61,8 +61,6 @@ import axios, { AxiosRequestConfig } from 'axios';
 // const baseURL = 'https://whear-app.azurewebsites.net';
 // const baseURL = 'https://tunm.mavericks-tttm.studio';
 const baseURL = 'https://host.whearapp.tech';
-// const baseURL = 'https://tunm.mavericks-tttm.studio';
-// const baseURL = 'https://tam.mavericks-tttm.studio';
 
 
 const axiosInstance = axios.create({

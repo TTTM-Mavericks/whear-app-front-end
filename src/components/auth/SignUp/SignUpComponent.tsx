@@ -193,7 +193,7 @@ const SignUpComponent = () => {
                 setIsLoading(true);
                 setTimeout(() => {
                     setIsLoading(false);
-                    navigation.navigate('Introduce');
+                    navigation.navigate('OnboardingScreen');
 
                 }, 1000)
             } else {

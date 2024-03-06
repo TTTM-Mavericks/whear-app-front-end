@@ -23,14 +23,10 @@ import { ClothesInterface, UserInterFace } from '../../models/ObjectInterface';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingComponent from '../../components/Common/Loading/LoadingComponent';
 
-interface ListItem {
-  id: string;
-  title?: string;
-  imgUrl?: any;
-  description?: string;
-}
 
 const topKeyWord = ['Minimalism', 'Girly', 'Sporty', 'Vintage', 'Manly'];
+
+const PAGE_SIZE = 20;
 
 
 
@@ -58,6 +54,10 @@ const SearchScreen = () => {
   const [user, setUser] = React.useState<UserInterFace>();
   const [subrole, setSubRole] = React.useState('');
   const [token, setToken] = React.useState('');
+  const [mockSuggestions, setmockSuggestions] = useState<string[]>([]);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [isFetchingMore, setIsFetchingMore] = useState(true);
+  const [dataPaging, setDataPaging] = useState<ClothesInterface[]>([]);
 
 
 
@@ -90,6 +90,25 @@ const SearchScreen = () => {
         setUser(user);
         setToken(tokenString);
         console.log('userParse: ', user);
+        const params = {}
+
+        try {
+          const getData = await api.get(`/api/v1/histories/get-all-history-items-by-customer-id?customerID=${userID}`, params, tokenString);
+          // const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=1&based_userid=1`, params, tokenString);
+          if (getData.success === 200) {
+            setmockSuggestions(getData.data.historyItems);
+            console.log('getData.data: ', getData.data.historyItems);
+
+          }
+          else {
+            console.log(getData.message);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 1000)
+          }
+        } catch (error) {
+          console.error("An error occurred during data fetching:", error);
+        }
       }
     }
     fetchData();
@@ -137,8 +156,69 @@ const SearchScreen = () => {
     setSuggestions(filteredSuggestions);
   }, [keyWordSearch]);
 
+  useEffect(() => {
+    handleFetchDataPaging(pageNumber);
+  }, [dataPaging]);
+
+
+
+
+
+
+
 
   /*-----------------Function handler-----------------*/
+
+
+
+  /*-----------------Function handler-----------------*/
+
+
+  const handleFetchDataPaging = async (page: any) => {
+    try {
+      const tokenStorage = await AsyncStorage.getItem('access_token');
+      const userString = await AsyncStorage.getItem('userData');
+
+      if (tokenStorage && userString) {
+        const tokenString = JSON.parse(tokenStorage);
+        const user = JSON.parse(userString);
+        const userID = user.userID;
+
+        const params = {
+        };
+
+        const body = dataPaging
+
+        const getData = await api.post(`/api/v1/paging/get-page?page=${page}&pageSize=${PAGE_SIZE}`, body, tokenString);
+
+        if (getData.success === 200) {
+          console.log('handleFetchDataPaging');
+          const data: ClothesInterface[] = getData.data;
+          setSearchResult((prev) => [...prev, ...data]);
+          // setClothesData(getData.data);
+          setIsLoading(false);
+
+
+        } else {
+          console.log(getData.data);
+        }
+      }
+    } catch (error) {
+      console.error("An error occurred during data fetching:", error);
+    } finally {
+      setIsFetchingMore(false);
+    }
+  };
+
+  const handleLoadMore = () => {
+    console.log('paging');
+    if (!isFetchingMore) {
+      setIsFetchingMore(true);
+      setPageNumber((prevPage) => prevPage + 1);
+      handleFetchDataPaging(pageNumber + 1);
+      setIsLoading(true);
+    }
+  };
   const hideElement = () => {
     Animated.timing(translateY, {
       toValue: 0,
@@ -197,7 +277,6 @@ const SearchScreen = () => {
 
 
   // Mock data for suggestions
-  const mockSuggestions: string[] = ['Keyword 1', 'Keyword 2', 'Keyword 3'];
 
   const handleSearch = async (text: string) => {
     setIsLoading(true);
@@ -206,7 +285,8 @@ const SearchScreen = () => {
       const getData = await api.get(`/api/v1/recommedation/get-list-recommendation-by-keyword?userID=${user?.userID}&keyword=${text}`, params, token);
       // const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=1&based_userid=1`, params, tokenString);
       if (getData.success === 200) {
-        setSearchResult(getData.data);
+        // setSearchResult(getData.data);
+        setDataPaging(getData.data)
         console.log('getData.data: ', getData.data);
         setTimeout(() => {
           setIsLoading(false);
@@ -303,7 +383,7 @@ const SearchScreen = () => {
                   data={suggestions}
                   keyExtractor={(item) => item}
                   renderItem={({ item }) => (
-                    <TouchableOpacity onPress={() => handleSelectSuggestion(item)}>
+                    <TouchableOpacity key={item} onPress={() => handleSelectSuggestion(item)}>
                       <Text style={{ padding: 10 }}>{item}</Text>
                     </TouchableOpacity>
                   )}
@@ -446,7 +526,7 @@ const SearchScreen = () => {
                     />
                   } />
                 )}
-                
+
                 contentContainerStyle={{ paddingRight: 0 }}
                 showsVerticalScrollIndicator={false}
                 scrollEnabled={false}
@@ -460,7 +540,7 @@ const SearchScreen = () => {
           }
 
 
-          <Button mode='outlined' style={{ width: width * 0.8, margin: 20, borderRadius: 8 }} textColor='black' >
+          <Button mode='outlined' style={{ width: width * 0.8, margin: 20, borderRadius: 8 }} textColor='black' onPress={handleLoadMore} >
             <Text style={{ fontSize: 12.5, fontWeight: '500' }}>
               Do you want to see more?
             </Text>

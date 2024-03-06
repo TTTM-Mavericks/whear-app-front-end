@@ -46,7 +46,7 @@ export default function App() {
         <NavigationContainer>
           <View style={styles.container}>
             <Stack.Navigator>
-              <Stack.Screen
+              {/* <Stack.Screen
                 name='FirstLoadingPage'
                 component={FirstLoadingPage}
                 options={{ headerShown: false }}
@@ -56,7 +56,7 @@ export default function App() {
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
-              />
+              />  */}
 
               <Stack.Screen
                 name="Home"
@@ -87,6 +87,11 @@ export default function App() {
               <Stack.Screen
                 name="SignUp"
                 component={SignUpComponent}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="OnboardingScreen"
+                component={OnboardingScreen}
                 options={{ headerShown: false }}
               />
 
