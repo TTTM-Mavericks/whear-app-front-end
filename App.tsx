@@ -34,6 +34,9 @@ import RecommendOutfitScreen from "./src/Screens/RecommendOutfit/RecommendOutfit
 import FirstLoadingPage from "./src/Screens/Introduce/FirstLoadingPage";
 import ChatScreen from "./src/Screens/Chat/chatScreen";
 import OnboardingScreen from "./src/Screens/Onboarding/OnboardingPage";
+import UpgradeScreen from "./src/Screens/Upgrade/UpgradeScreen";
+import UpgardeDetailScreen from "./src/Screens/Upgrade/UpgardeDetailScreen";
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -43,7 +46,7 @@ export default function App() {
         <NavigationContainer>
           <View style={styles.container}>
             <Stack.Navigator>
-              {/* <Stack.Screen
+              <Stack.Screen
                 name='FirstLoadingPage'
                 component={FirstLoadingPage}
                 options={{ headerShown: false }}
@@ -53,7 +56,7 @@ export default function App() {
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
-              />  */}
+              />
 
               <Stack.Screen
                 name="Home"
@@ -187,18 +190,31 @@ export default function App() {
                 name="HotStoreScreen"
                 component={HotStoreScreen}
                 options={{ headerShown: false }}
-              /> 
+              />
 
               <Stack.Screen
                 name="ChatScreen"
                 component={ChatScreen}
                 options={{ headerShown: false }}
               />
-               <Stack.Screen
+              <Stack.Screen
                 name="Onboarding"
                 component={OnboardingScreen}
                 options={{ headerShown: false }}
               />
+
+              <Stack.Screen
+                name="UpgradeScreen"
+                component={UpgradeScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="UpgardeDetailScreen"
+                component={UpgardeDetailScreen}
+                options={{ headerShown: false }}
+              />
+
             </Stack.Navigator>
           </View>
         </NavigationContainer>
