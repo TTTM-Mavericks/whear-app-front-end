@@ -487,7 +487,6 @@ const SocialScreen = () => {
                     ]}
                   >
                     <TouchableOpacity
-                      key={item.postID}
                       onPress={() => handleMoveToUserProfile(item?.userResponse?.userID)}
                     >
                       <View

@@ -177,8 +177,7 @@ const ClothesDetailScreen = () => {
 
             if (getData.success === 200) {
               setUserCreate(getData.data.user)
-              setClothData(getData.data.clothes);
-              console.log('image: ', getData.data.clothes.clothesImages);
+              setClothData(getData.data);
               setTimeout(() => {
                 setIsLoading(false);
               }, 1000)

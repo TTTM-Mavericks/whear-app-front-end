@@ -14,60 +14,10 @@ import CreateCollectionDialogComponents from './CreateCollectionDialogComponents
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CollectionInterface, UserInterFace } from '../../models/ObjectInterface';
 import api from '../../api/AxiosApiConfig';
+import { ALERT_TYPE,  AlertNotificationRoot } from 'react-native-alert-notification';
+import { Dialog as DialogNoti } from 'react-native-alert-notification';
 
-const collections = [
-    {
-        id: '1',
-        name: 'Spring collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '2',
-        name: 'Summer collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '3',
-        name: 'Fall collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '4',
-        name: 'Winter collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '5',
-        name: 'Winter collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '6',
-        name: 'Winter collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '7',
-        name: 'Winter collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '8',
-        name: 'Winter collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '9',
-        name: 'Winter collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
-    {
-        id: '10',
-        name: 'Winter collection',
-        imgUrl: 'https://picsum.photos/700'
-    },
 
-]
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 
@@ -158,6 +108,32 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
         hideDialog();
     }
 
+    const showDialogSuccess = (message: any, status: any, buttonTitle: any) => {
+        if (status === 'Success') {
+            DialogNoti.show({
+                type: ALERT_TYPE.SUCCESS,
+                title: 'Success',
+                textBody: message,
+                onPressButton() {
+                    // navigation.navigate('UpgardeDetailScreen');
+                    // DialogNoti.hide();
+                },
+                button: 'Payment',
+            });
+        } else {
+            DialogNoti.show({
+                type: ALERT_TYPE.DANGER,
+                title: 'Error',
+                textBody: message,
+                onPressButton() {
+                    // navigation.navigate('UpgardeDetailScreen');
+                    // DialogNoti.hide();
+                },
+                button: 'Payment',
+            });
+        }
+    };
+
 
 
     const showAnimation = () => {
@@ -201,16 +177,18 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
                 setIsLoading(false);
                 setTimeout(() => {
                     setReload(true);
+                    showDialogSuccess('Added cloth to collection', 'Success', 'Go Collections');
                 }, 1000)
             } else {
                 setIsOpen(false);
                 setIsLoading(false);
                 console.log(response.message);
+                showDialogSuccess(response.message, 'DANGER', 'Close');
 
             }
         } catch (error: any) {
             console.error('Error posting data:', error);
-
+            showDialogSuccess(error, 'DANGER', 'Close');
             setIsLoading(false);
         }
 

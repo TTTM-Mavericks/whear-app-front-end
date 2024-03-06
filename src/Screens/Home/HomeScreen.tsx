@@ -64,7 +64,7 @@ const data1 = [
 
 const chipData = ['#Minimalism', '#Girly', '#Sporty', '#Vintage', '#Manly'];
 
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 30;
 
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
@@ -80,7 +80,7 @@ const HomeScreen = () => {
   const [clothesData, setClothesData] = useState<ClothesInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [addedClothId, setAddedClothId] = useState();
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(0);
   const [isFetchingMore, setIsFetchingMore] = useState(true);
   const [dataPaging, setDataPaging] = useState<ClothesInterface[]>([]);
 
@@ -106,6 +106,7 @@ const HomeScreen = () => {
             console.log('recommend');
             setDataPaging(getData.data);
             setIsLoading(false);
+            // setClothesData(getData.data.slice(0.20));
           }
           else {
             console.log(getData.data);
@@ -118,18 +119,15 @@ const HomeScreen = () => {
     }
     fetchData();
   }, []);
-
   // useEffect(() => {
-  //   setTimeout(() => {
 
-  //     handleFetchDataPaging(pageNumber);
-  //   }, 0);
-  // }, [pageNumber]);
+  //   handleFetchDataPaging(0);
+  // }, [dataPaging]);
 
   useEffect(() => {
-
-      handleFetchDataPaging(0);
+      handleFetchDataPaging(pageNumber);
   }, [dataPaging]);
+
 
 
 
@@ -158,9 +156,10 @@ const HomeScreen = () => {
 
         if (getData.success === 200) {
           console.log('handleFetchDataPaging');
-          setClothesData((prev)=>[...prev,...getData.data]);
+          const data: ClothesInterface[] = getData.data;
+          setClothesData((prev)=>[...prev,...data]);
           // setClothesData(getData.data);
-          // console.log(getData.data);
+          setIsLoading(false);
 
 
         } else {
@@ -204,9 +203,11 @@ const HomeScreen = () => {
     }
   }
 
-  const handleChangeIconAdded = (id: any) => {
+  const handleChangeIconAdded = (id: any, reacted: boolean | undefined) => {
     setAddItemToCollection(!addItemToCollection);
-    handleAddToCollection(id);
+    if (!reacted) {
+      handleAddToCollection(id);
+    }
 
   }
 
@@ -331,16 +332,18 @@ const HomeScreen = () => {
                 child={
                   <IconButton
                     key={item.clothesID}
-                    mode='outlined'
+                    mode='contained'
                     icon={'heart'}
+                    underlayColor='transparent'
+                    containerColor='transparent'
                     style={[HomeStylesComponent.iconCard, {}]}
-                    size={15}
-                    iconColor={addedItems.includes(item.clothesID) ? '#C90801' : '#C3C3C3'}
+                    size={20}
+                    iconColor={addedItems.includes(item.clothesID) && item.reacted ? '#C90801' : 'black'}
                     // iconColor={item.reacted ? fourthColor : '#C3C3C3'}
                     // iconColor={fourthColor}
 
                     onPress={() => {
-                      handleChangeIconAdded(item.clothesID);
+                      handleChangeIconAdded(item.clothesID, item.reacted);
                     }}
 
                   />
@@ -349,8 +352,8 @@ const HomeScreen = () => {
             contentContainerStyle={{ paddingRight: 0 }}
             showsVerticalScrollIndicator={false}
             scrollEnabled={false}
-            onEndReached={handleLoadMore}
-            onEndReachedThreshold={0.01}
+            // onEndReached={handleLoadMore}
+            // onEndReachedThreshold={0.9}
           // ListFooterComponent={isFetchingMore && <ActivityIndicator size="large" color="#0000ff" />}
           />
           {isLoading
@@ -358,7 +361,7 @@ const HomeScreen = () => {
               <ActivityIndicator animating={true} color={primaryColor} style={{ marginTop: 50, marginBottom: 50 }} />
             )}
 
-          <Button mode='outlined' style={{ width: width * 0.8, margin: 20, borderRadius: 8 }} textColor='black' onPress={handleOpenUpgradeDialog} >
+          <Button mode='outlined' style={{ width: width * 0.8, margin: 20, borderRadius: 8 }} textColor='black' onPress={handleLoadMore} >
             <Text style={{ fontSize: 12.5, fontWeight: '500' }}>
               Do you want to see more?
             </Text>

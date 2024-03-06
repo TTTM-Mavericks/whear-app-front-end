@@ -52,7 +52,7 @@ const PostContentComponent = ({ props, react, user, isReact }: PostContentProps)
     }
   }
   return (
-    <View>
+    <View key={props.postID}>
       <View style={PostContentStyle.post__content_child}>
         <View style={PostContentStyle.post__content_interaction}>
           <TouchableOpacity onPress={handleSetLike}>
@@ -94,7 +94,7 @@ const PostContentComponent = ({ props, react, user, isReact }: PostContentProps)
 
       <View style={PostContentStyle.post__content_child}>
         {props?.hashtag && props?.hashtag.map((hashtag, key) => (
-          <Text style={PostContentStyle.post__content_hashtag}>
+          <Text key={key} style={PostContentStyle.post__content_hashtag}>
             {hashtag}
           </Text>
         ))}

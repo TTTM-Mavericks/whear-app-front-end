@@ -21,7 +21,7 @@ const RecommendOutfitStyleScreen = StyleSheet.create({
 
   },
   scrollViewContent: {
-    // flex: 1,
+    // flex: 2,
     // justifyContent: 'center',
     // alignItems: 'center'
   },
@@ -43,7 +43,8 @@ const RecommendOutfitStyleScreen = StyleSheet.create({
     right: 0,
   },
   flatlist: {
-    backgroundColor: backgroundColor,
+    // backgroundColor: backgroundColor,
+    backgroundColor: 'transparent' ,
     flex: 1,
     flexDirection: 'row',
 
@@ -55,7 +56,7 @@ const RecommendOutfitStyleScreen = StyleSheet.create({
   homeSliderHorizotalContent: {
     flexDirection: 'row',
     backgroundColor: backgroundColor,
-    flex: 1,
+    // flex: 1,
     borderRadius: 8,
     marginBottom: 20,
   },
@@ -118,7 +119,7 @@ const RecommendOutfitStyleScreen = StyleSheet.create({
 
   },
   cardContainer: {
-    backgroundColor: backgroundColor,
+    backgroundColor: 'transparent' ,
     marginRight: 10,
     marginLeft: 10,
     marginBottom: 10,
@@ -153,6 +154,7 @@ const RecommendOutfitStyleScreen = StyleSheet.create({
     width: 100,
     alignContent: 'center',
     alignItems: 'center',
+    // flexDirection: 'row',
 
   },
   hiddenElement: {
