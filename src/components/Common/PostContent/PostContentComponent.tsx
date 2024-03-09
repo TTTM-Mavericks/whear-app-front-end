@@ -1,56 +1,54 @@
-import React, { useEffect, useState } from 'react'
-import PostContentStyle from "./PostContentStyle"
-import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons'
-import IconFeather from 'react-native-vector-icons/Feather'
-import { Text, TouchableOpacity, View } from "react-native"
-import { Post } from '../../../Screens/PostingDetail/PostingDetailScreen'
-import { PostingInterface, ReactInterface, UserInterFace } from '../../../models/ObjectInterface'
-import { fourthColor } from '../../../root/Colors'
-import api from '../../../api/AxiosApiConfig'
+import React, { useEffect, useState } from 'react';
+import PostContentStyle from "./PostContentStyle";
+import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconFeather from 'react-native-vector-icons/Feather';
+import { Text, TouchableOpacity, View } from "react-native";
+import { PostingInterface, ReactInterface, UserInterFace } from '../../../models/ObjectInterface';
+import { fourthColor } from '../../../root/Colors';
+import api from '../../../api/AxiosApiConfig';
 
 interface PostContentProps {
-  props: PostingInterface,
-  react?: ReactInterface,
-  user?: UserInterFace,
-  isReact?: boolean,
+  props: PostingInterface;
+  react?: ReactInterface[] | boolean | undefined; 
+  hasReact?: boolean;
+  user?: UserInterFace;
+  isReact?: boolean;
+  updateCommentCount: (count: number) => void; 
 }
-const PostContentComponent = ({ props, react, user, isReact }: PostContentProps) => {
-  const [isLiked, setIsliked] = useState(false);
-  const [numOfReact, setNumOfReact] = useState(0);
 
+const PostContentComponent = ({ props, react, user, isReact, updateCommentCount }: PostContentProps) => {
+  const [isLiked, setIsLiked] = useState(false);
+  const [numOfReact, setNumOfReact] = useState(0);
 
   useEffect(() => {
     if (props.react) {
-      setNumOfReact(props.react.length)
+      setNumOfReact(props.react.length);
     }
-  }, [props])
+  }, [props]);
 
   const handleSetLike = async () => {
     const bodyRequest: ReactInterface = {
       userID: user?.userID,
       postID: props.postID,
-      react: "LiKE"
-    }
+      react: "LIKE"
+    };
     try {
       const response = await api.post('/api/v1/react/un-send-react', bodyRequest);
       if (response.success === 200) {
         if (response.data) {
           setNumOfReact(numOfReact + 1);
-          setIsliked(true);
-        } else
-          if (response.data === null) {
-            setIsliked(false);
-            setNumOfReact(numOfReact - 1);
-
-          }
+          setIsLiked(true);
+        } else {
+          setIsLiked(false);
+          setNumOfReact(numOfReact - 1);
+        }
       } else {
-
-
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+
   return (
     <View key={props.postID}>
       <View style={PostContentStyle.post__content_child}>
@@ -61,7 +59,6 @@ const PostContentComponent = ({ props, react, user, isReact }: PostContentProps)
               size={25}
               color={isReact || isLiked ? fourthColor : 'black'}
               style={PostContentStyle.interaction_icon}
-
             />
           </TouchableOpacity>
           <Text style={PostContentStyle.interaction_number}>
@@ -99,9 +96,8 @@ const PostContentComponent = ({ props, react, user, isReact }: PostContentProps)
           </Text>
         ))}
       </View>
-
-
     </View>
-  )
-}
-export default PostContentComponent
+  );
+};
+
+export default PostContentComponent;

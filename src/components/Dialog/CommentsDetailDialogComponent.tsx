@@ -1,40 +1,17 @@
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { ReactNode, useEffect, useState } from 'react';
-import {
-  Animated,
-  Keyboard,
-  KeyboardAvoidingView,
-  KeyboardEventName,
-  Platform,
-  ScrollView,
-  TouchableWithoutFeedback,
-  View
-} from 'react-native';
-import {
-  Avatar,
-  Button,
-  Dialog,
-  Portal,
-  Text,
-  TextInput
-} from 'react-native-paper';
+import React, { useEffect, useState } from 'react';
+import { Animated, Keyboard, Platform, ScrollView, TouchableWithoutFeedback, View } from 'react-native';
+import { Avatar, Dialog, Portal, Text, TextInput } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { Comment } from '../../Screens/PostingDetail/PostingDetailScreen';
-import {
-  setOpenCommentsDialog
-} from '../../redux/State/Actions';
-import {
-  backgroundColor,
-  grayBorderColor,
-  primaryColor
-} from '../../root/Colors';
+import { setOpenCommentsDialog } from '../../redux/State/Actions';
+import { backgroundColor, grayBorderColor, primaryColor } from '../../root/Colors';
 import { iconAvatarPostingSize } from '../../root/Icon';
 import { height, width } from '../../root/ResponsiveSize';
 import { RootStackParamList } from '../../root/RootStackParams';
 import CommentComponent from '../Common/Comment/CommentComponent';
 import DialogStylesComponent from './DialogStyleComponent';
-import { CommentsInterface, UserInterFace } from '../../models/ObjectInterface';
+import { CommentsInterface, PostingInterface, UserInterFace } from '../../models/ObjectInterface';
 import api from '../../api/AxiosApiConfig';
 
 type SignInScreenNavigationProp = StackNavigationProp<
@@ -45,120 +22,72 @@ type SignInScreenNavigationProp = StackNavigationProp<
 export interface CommentsDataProperties {
   comments: CommentsInterface[];
   postId: any;
-  commentsChild?: ReactNode;
+  commentsChild?: React.ReactNode;
   user: UserInterFace;
 }
-
-const MAX_LENGTH = 30;
-const MAX_CHARACTERS_PER_LINE = 20;
 
 const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
   comments,
   postId,
   commentsChild,
-  user
+  user,
 }) => {
-  // console.log("comment", comments)
-  /*-----------------UseState variable-----------------*/
+  const dispatch = useDispatch();
   const openDialog = useSelector(
     (state: any) => state.store.isOpenCommentsDialog
   );
-  const [isOpen, setIsOpen] = React.useState(openDialog);
-  const [isAccepted, setIsAccepted] = React.useState(false);
   const navigation = useNavigation<SignInScreenNavigationProp>();
-  const [textInput, setTextInput] = React.useState('');
-  const [lengthText, setLengthText] = React.useState(0);
-  const [countOpening, setCountOpening] = useState(0);
-  const [showFullComment, setShowFullComment] = useState(false);
-  // const [imgUrl, setImgUrl] = useState('#');
   const [comment, setComment] = useState('');
   const [isKeyBoardOpen, setIskeyboardOpen] = useState(false);
   const [heightOfKeyBoard, setHeightOfKeyBoard] = useState(0);
   const [commentGetting, setCommmentGetting] = useState<CommentsInterface[]>([]);
-  /*-----------------Usable variable-----------------*/
+  const [commentCount, setCommentCount] = useState(comments.length);
+  const translateY = React.useRef(new Animated.Value(600)).current;
+  const MAX_LENGTH = 30;
+  const MAX_CHARACTERS_PER_LINE = 20;
 
-  const dispatch = useDispatch();
-  const translateY = React.useRef(new Animated.Value(600)).current; // Adjust the initial position
-
-  /*-----------------UseEffect-----------------*/
-  React.useEffect(() => {
+  useEffect(() => {
     if (openDialog) {
       showAnimation();
-      setIsOpen(true);
     } else {
       hideAnimation();
     }
   }, [openDialog]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setCommmentGetting(comments);
-  }, []);
+  }, [comments]);
 
   useEffect(() => {
     const showSubscription = Keyboard.addListener('keyboardDidShow', e => {
       setHeightOfKeyBoard(e.endCoordinates.height)
       setIskeyboardOpen(true);
-    }
-    );
+    });
     const hideSubscription = Keyboard.addListener('keyboardWillHide', () => {
       setIskeyboardOpen(false);
       setHeightOfKeyBoard(0);
-    }
-    );
+    });
     return () => {
       showSubscription.remove();
       hideSubscription.remove();
-    }
-  }, [heightOfKeyBoard]);
+    };
+  }, []);
 
-
-  /*-----------------Function handler-----------------*/
   const hideDialog = () => {
     dispatch(setOpenCommentsDialog(false));
-    setIsOpen(false);
-    setCountOpening(0);
   };
 
-  const handleAcceptedPolicy = () => {
-    setIsAccepted((prevIsAccepted: any) => !prevIsAccepted);
-    hideDialog();
-  };
-
-  /**
-   * Show animation
-   */
-  const showAnimation = () => {
-    Animated.spring(translateY, {
-      toValue: 0,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  /**
-   * Hide animation
-   */
-  const hideAnimation = () => {
-    Animated.timing(translateY, {
-      toValue: 200,
-      duration: 300,
-      useNativeDriver: true,
-    }).start(() => { });
-  };
-
-  /**
-   * onChangeText
-   */
-  const handleTextChange = (text: any) => {
+  const handleTextChange = (text: string) => {
     const lines = text.split('\n');
-    const truncatedLines = lines.map((line: any) =>
+    const truncatedLines = lines.map(line =>
       line.slice(0, MAX_CHARACTERS_PER_LINE)
     );
     const truncatedText = truncatedLines.join('\n');
 
-    if (lengthText + truncatedLines.length > MAX_LENGTH) {
+    if (truncatedLines.length > MAX_LENGTH) {
+      // Do something if exceeded max length
     } else {
-      setTextInput(truncatedText);
-      setLengthText(lengthText + truncatedLines.length);
+      setComment(truncatedText);
     }
   };
 
@@ -166,63 +95,58 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
     Keyboard.dismiss();
   };
 
-  /**
-   * Send comment
-   * @param postID
-   */
-  const handleSendComment = async (postID: any) => {
+  const handleSendComment = async () => {
     const bodyRequest = {
-      userID: user.userID,
-      postID: postID,
-      content: comment
+      userID: user?.userID,
+      postID: postId,
+      content: comment,
+
     }
     try {
       const response = await api.post('/api/v1/comment/create-comment', bodyRequest);
       if (response.success === 200) {
-        console.log('123123132comeents: ', response);
-        setCommmentGetting((prev) => [...prev, response.data]);
+        setCommmentGetting(prevComments => [...prevComments, response.data]);
+        setCommentCount(prevCount => prevCount + 1); 
         setComment('');
       } else {
-
-
+        // Handle error response
       }
     } catch (error) {
-
+      // Handle network or other errors
     }
+    
   };
 
-  //   const handleToggleComment = () => {
-  //     setShowFullComment(!showFullComment);
-  //   };
-  const handleSetComment = (text: string) => {
-    setComment(text);
+  const showAnimation = () => {
+    Animated.spring(translateY, {
+      toValue: 0,
+      useNativeDriver: true,
+    }).start();
   };
 
-
+  const hideAnimation = () => {
+    Animated.timing(translateY, {
+      toValue: 200,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
 
   return (
     <TouchableWithoutFeedback onPress={handleTouchablePress}>
-
       <View style={{ backgroundColor: 'white' }}>
         <Portal>
           <Dialog
-            visible={isOpen}
-            style={[DialogStylesComponent.postingDialogContainer, Platform.OS === 'ios' && isKeyBoardOpen && { position: 'absolute', bottom: heightOfKeyBoard - 30, backgroundColor: backgroundColor }]}
+            visible={openDialog}
+            style={[
+              DialogStylesComponent.postingDialogContainer,
+              Platform.OS === 'ios' && isKeyBoardOpen && { position: 'absolute', bottom: heightOfKeyBoard - 30, backgroundColor: backgroundColor }
+            ]}
             onDismiss={hideDialog}
           >
             <Dialog.Title style={{ marginTop: 10 }}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  width: width * 0.8,
-                  paddingLeft: 10,
-                }}
-              >
-                <Text
-                  style={{ color: 'black', fontSize: 15, fontWeight: 'bold' }}
-                >
-                  Comments
-                </Text>
+              <View style={{ flexDirection: 'row', width: width * 0.8, paddingLeft: 10 }}>
+                <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold' }}>Comments</Text>
               </View>
             </Dialog.Title>
 
@@ -231,10 +155,10 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
                 style={DialogStylesComponent.commentDialogContent}
-                keyboardShouldPersistTaps="handled" // Add keyboardShouldPersistTaps
+                keyboardShouldPersistTaps="handled"
               >
                 {commentsChild}
-                {commentGetting && commentGetting.map((comment: CommentsInterface, key: any) => (
+                {commentGetting && commentGetting.map((comment: CommentsInterface) => (
                   <CommentComponent
                     key={comment.commentID}
                     commentID={comment.commentID}
@@ -246,42 +170,8 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
               </ScrollView>
             </Dialog.ScrollArea>
 
-            {/* {Platform.OS === 'ios' && isKeyBoardOpen ? (
-              <Dialog.Actions style={{ height: 60, paddingHorizontal: 10, position: 'absolute', bottom: heightOfKeyBoard - 30, backgroundColor: backgroundColor }}>
-                <View style={[DialogStylesComponent.commentActionContainer, {backgroundColor: backgroundColor}]}>
-                  <Avatar.Image
-                    size={iconAvatarPostingSize}
-                    source={{ uri: comments[0].user.imgUrl }}
-                    style={{ marginRight: 10 }}
-                  />
-                  <View>
-                    <TextInput
-                      value={comment}
-                      mode='outlined'
-                      style={DialogStylesComponent.commentInput}
-                      onChangeText={(text: string) => handleSetComment(text)}
-                      outlineStyle={{
-                        borderRadius: 30,
-                        borderColor: grayBorderColor,
-                        borderWidth: 1,
-                      }}
-                      placeholder='Comment at here...'
-                      right={
-                        <TextInput.Icon
-                          size={25}
-                          icon={'send'}
-                          color={primaryColor}
-                        // onPress={() => handleSendComment(postID)}
-                        ></TextInput.Icon>
-                      }
-                    />
-                  </View>
-                </View>
-              </Dialog.Actions>
-            ) : ( */}
             {commentGetting.length >= 0 && (
-
-              <Dialog.Actions style={{ height: 60, paddingHorizontal: 10, }}>
+              <Dialog.Actions style={{ height: 60, paddingHorizontal: 10 }}>
                 <View style={DialogStylesComponent.commentActionContainer}>
                   <Avatar.Image
                     size={iconAvatarPostingSize}
@@ -293,7 +183,7 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
                       value={comment}
                       mode='outlined'
                       style={DialogStylesComponent.commentInput}
-                      onChangeText={(text: string) => handleSetComment(text)}
+                      onChangeText={(text: string) => handleTextChange(text)}
                       outlineStyle={{
                         borderRadius: 30,
                         borderColor: grayBorderColor,
@@ -303,24 +193,21 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
                       right={
                         <TextInput.Icon
                           size={25}
-                          icon={'send'}
+                          icon='send'
                           color={primaryColor}
-                          onPress={() => handleSendComment(postId)}
-                        ></TextInput.Icon>
+                          onPress={handleSendComment}
+                        />
                       }
                     />
                   </View>
                 </View>
               </Dialog.Actions>
             )}
-            {/* )} */}
-
           </Dialog>
         </Portal>
       </View>
     </TouchableWithoutFeedback>
   );
 };
-
 
 export default CommentsDetailDialogComponent;
