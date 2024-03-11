@@ -6,9 +6,9 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../../root/RootStackParams';
 import { StackNavigationProp } from '@react-navigation/stack';
 import ListViewComponent from '../../components/ListView/ListViewComponent';
-import { Button, Dialog, Icon, IconButton, Portal, SegmentedButtons } from 'react-native-paper';
+import { Button, Card, Dialog, Icon, IconButton, Portal, SegmentedButtons } from 'react-native-paper';
 import { height, width } from '../../root/ResponsiveSize';
-import { backgroundColor, grayBackgroundColor, grayBorderColor, primaryColor } from '../../root/Colors';
+import { backgroundColor, fourthColor, grayBackgroundColor, grayBorderColor, primaryColor, thirthColor } from '../../root/Colors';
 import { useDispatch, useSelector } from 'react-redux';
 import PostingDialogComponent from '../../components/Dialog/PostingDialogComponent';
 import UserProfileStyleScreen from './UserProfileStyleScreen';
@@ -16,7 +16,7 @@ import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarF
 import AddImageButtonComponent from '../../components/ImagePicker/AddImageButtonComponent';
 import api from '../../api/AxiosApiConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ClothesInterface, CollectionInterface, UserInterFace } from '../../models/ObjectInterface';
+import { ClothesInterface, CollectionInterface, TransactionInterface, UserInterFace } from '../../models/ObjectInterface';
 import { setUploadToFireBase } from '../../redux/State/Actions';
 import { clothesLogoUrlDefault, spanTextSize } from '../../root/Texts';
 import Toast from 'react-native-toast-message';
@@ -61,6 +61,7 @@ const UserProfileScreen = () => {
   const [userClothes, setUserColthes] = useState<ClothesInterface[]>([]);
   const [userCollection, setUserCollection] = useState<CollectionInterface[]>([]);
   const [data, setData] = useState<CollectionInterface[] | ClothesInterface[]>([]);
+  const [history, setHistory] = useState<TransactionInterface[]>([]);
 
 
 
@@ -268,6 +269,44 @@ const UserProfileScreen = () => {
           }
         }
 
+        if (selectedTag === 'clothes') {
+          const getData = await api.get(`/api/v1/clothes/get-clothes-by-user-id?userId=${userStorage?.userID}`, params, token);
+          console.log(userStorage?.userID);
+          if (getData.success === 200) {
+            setUserColthes(getData.data);
+            setData(getData.data);
+            console.log(getData.data);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 1000)
+          }
+          else {
+            console.log(getData.data);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 1000)
+          }
+        }
+
+        if (selectedTag === 'history' && currentUser?.userID === userStorage?.userID) {
+          console.log('history');
+          const getData = await api.get(`/api/v1/payment/get-all-payment?userId=${userStorage?.userID}`, params, token);
+          console.log(userStorage?.userID);
+          if (getData.success === 200) {
+            setHistory(getData.data);
+            console.log(getData.data);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 1000)
+          }
+          else {
+            console.log(getData.data);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 1000)
+          }
+        }
+
 
       } catch (error) {
         console.error("An error occurred during data fetching:", error);
@@ -389,6 +428,11 @@ const UserProfileScreen = () => {
   };
 
 
+  const handleMoveToDetail = (id: any) => {
+    console.log('id: ', id);
+    navigation.navigate('TransactionDetailScreen', {transactionId: id})
+  }
+
   return (
     <View style={UserProfileStyleScreen.container}>
       <Toast
@@ -397,7 +441,7 @@ const UserProfileScreen = () => {
 
       />
       <View style={UserProfileStyleScreen.header}>
-        <IconButton icon={require('../../assets/icon/backarrow.png')} onPress={() => navigation.goBack()}></IconButton>
+        <IconButton icon={require('../../assets/icon/backarrow.png')} onPress={() => navigation.navigate('Home')}></IconButton>
         <View style={UserProfileStyleScreen.upgradeBanner} >
           <Icon source={require('../../assets/img/logo/logo.png')} size={40}></Icon>
           <Text style={{ fontSize: 12, fontWeight: 'bold', marginRight: 10 }}>Upgrade to Store</Text>
@@ -528,7 +572,7 @@ const UserProfileScreen = () => {
             uncheckedColor: '#808991',
           },
           {
-            value: 'events',
+            value: 'history',
             icon: 'history',
             style: {
               borderRadius: 0,
@@ -571,7 +615,7 @@ const UserProfileScreen = () => {
         scrollEventThrottle={16}
       >
         <View style={UserProfileStyleScreen.scrollViewContent}>
-          {selectedTag === 'collection' &&
+          {selectedTag === 'collection' ? userCollection.length > 0 ?
             (
               <FlatList
                 style={UserProfileStyleScreen.flatlist}
@@ -590,9 +634,18 @@ const UserProfileScreen = () => {
                 showsVerticalScrollIndicator={false}
                 scrollEnabled={false}
               />
-            )}
+            ) : (
+              <View style={{ justifyContent: 'center', alignItems: 'center', alignContent: 'center', marginTop: 10, marginBottom: 10 }}>
+                <Text style={{ fontSize: 17, fontWeight: 'bold', color: primaryColor }}>Do not have any collection.</Text>
+              </View>
+            )
+            : (
+              <View></View>
+            )
+          }
 
-          {selectedTag === 'clothes' &&
+
+          {selectedTag === 'clothes' ? userClothes.length > 0 ?
             (
               <FlatList
                 style={UserProfileStyleScreen.flatlist}
@@ -608,7 +661,54 @@ const UserProfileScreen = () => {
                 showsVerticalScrollIndicator={false}
                 scrollEnabled={false}
               />
+            )
+            : (
+              <View style={{ justifyContent: 'center', alignItems: 'center', alignContent: 'center', marginTop: 10, marginBottom: 10 }}>
+                <Text style={{ fontSize: 17, fontWeight: 'bold', color: primaryColor }}>Do not have any Cloth.</Text>
+              </View>
+            )
+            : (
+              <View></View>
             )}
+
+          {selectedTag === 'history' ? history.length > 0 ?
+            (
+              <FlatList
+                style={UserProfileStyleScreen.flatlist}
+                data={history}
+                keyExtractor={(item) => item.data.id}
+                numColumns={1}
+                renderItem={({ item }) => (
+                  <TouchableOpacity key={item.data.id} style={UserProfileStyleScreen.cardContentHistory} onPress={()=> handleMoveToDetail(item.data.orderCode)}>
+                    <View style={{ padding: 10, flexDirection: 'row' }} >
+                      <View style={[UserProfileStyleScreen.cardContentStatus, { backgroundColor: item.data.status === 'PAID' ? primaryColor : item.data.status === 'CANCELLED' ? fourthColor : thirthColor }]}>
+                        <Text style={{ color: backgroundColor, fontWeight: 'bold' }}>
+                          {item.data.status}
+                        </Text>
+                      </View>
+                      <View style={UserProfileStyleScreen.cardContentDetail}>
+                        <Text>ID: {item.data.orderCode}</Text>
+                        <Text>Amount: {item.data.amount} VND</Text>
+                        <Text>AmountPaid: {item.data.amountPaid} VND</Text>
+                        <Text>CreatedAt: {item.data.createdAt}</Text>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                )}
+                contentContainerStyle={{ paddingRight: 0 }}
+                showsVerticalScrollIndicator={false}
+                scrollEnabled={false}
+              />
+            )
+            : (
+              <View style={{ justifyContent: 'center', alignItems: 'center', alignContent: 'center', marginTop: 10, marginBottom: 10 }}>
+                <Text style={{ fontSize: 17, fontWeight: 'bold', color: primaryColor }}>Do not have any transaction.</Text>
+              </View>
+            )
+            : (
+              <View></View>
+            )
+          }
 
           <PostingDialogComponent></PostingDialogComponent>
         </View>

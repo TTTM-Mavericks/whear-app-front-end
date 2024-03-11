@@ -36,6 +36,8 @@ import ChatScreen from "./src/Screens/Chat/chatScreen";
 import OnboardingScreen from "./src/Screens/Onboarding/OnboardingPage";
 import UpgradeScreen from "./src/Screens/Upgrade/UpgradeScreen";
 import UpgardeDetailScreen from "./src/Screens/Upgrade/UpgardeDetailScreen";
+import TypeOfClothesScreen from "./src/Screens/TypeOfClothes/TypeOfClothesScreen";
+import TransactionDetailScreen from "./src/Screens/TransactionDetail/TransactionDetailScreen";
 
 const Stack = createStackNavigator();
 
@@ -56,7 +58,7 @@ export default function App() {
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
-              />  */}
+              /> */}
 
               <Stack.Screen
                 name="Home"
@@ -217,6 +219,18 @@ export default function App() {
               <Stack.Screen
                 name="UpgardeDetailScreen"
                 component={UpgardeDetailScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="TypeOfClothesScreen"
+                component={TypeOfClothesScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="TransactionDetailScreen"
+                component={TransactionDetailScreen}
                 options={{ headerShown: false }}
               />
 
