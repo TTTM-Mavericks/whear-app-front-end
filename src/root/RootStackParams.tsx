@@ -24,9 +24,13 @@ export type RootStackParamList = {
   Event: undefined;
   ChatScreen: undefined;
   OnboardingScreen: undefined;
-
   UpgradeScreen: undefined;
-  UpgardeDetailScreen: undefined
+  UpgardeDetailScreen: undefined;
+  TypeOfClothesScreen: {typeOfClothes: string},
+  StylesOfClothesScreen: {stylesOfClothes: string},
+  TransactionDetailScreen: {transactionId: any}
+
+
 
 };
 

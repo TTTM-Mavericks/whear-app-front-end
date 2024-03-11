@@ -28,6 +28,67 @@ const topKeyWord = ['Minimalism', 'Girly', 'Sporty', 'Vintage', 'Manly'];
 
 const PAGE_SIZE = 20;
 
+const dropdownData = {
+  typeOfClothes: [
+    { label: 'SHIRT', value: 'SHIRT', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSHIRT.jpg?alt=media&token=9e21cef8-a609-4496-a164-870c4ba03262' },
+    { label: 'PANTS', value: 'PANTS', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FQuan-Baggy-Jean-nam-nu-2b-1-Quan-ong-rong-xanh-classic-ZiZoou-Store.png?alt=media&token=662336d2-4fe9-4df1-b8af-a9977dae31cb' },
+    { label: 'DRESS', value: 'DRESS', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2Fvn-11134207-7r98o-lnjhbc5ry64a70.jpg?alt=media&token=edb7dfd4-0fc0-41e2-bc24-6ae63226b834' },
+    { label: 'SKIRT', value: 'SKIRT', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2Fshopping.png?alt=media&token=278b7984-5157-4339-99a6-a5aa9ee315ae' },
+    { label: 'JACKET', value: 'JACKET', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2Fshopping1.png?alt=media&token=cc55658f-ba42-41a5-9efb-1bf4b6592fa9' },
+    { label: 'COAT', value: 'COAT', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2Fshopping2.png?alt=media&token=3ca69263-3cad-488d-93c8-9957ff639518' },
+    { label: 'SHORTS', value: 'SHORTS', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSHORTS.png?alt=media&token=68ffc84e-5b1c-4b41-a8cc-e7b43b140976' },
+    { label: 'SWEATER', value: 'SWEATER', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSWEATER.png?alt=media&token=d42e6a62-0287-4428-b674-e88090f1e770' },
+    { label: 'HOODIE', value: 'HOODIE', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FHOODIE.png?alt=media&token=889e9fa8-3976-4661-8a9b-51f5e3d87646' },
+    { label: 'T-SHIRT', value: 'T_SHIRT', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FT_SHIRT.jpg?alt=media&token=8920f6fd-318d-4bfb-b2de-df8cbeda90ef' },
+    { label: 'BLAZER', value: 'BLAZER', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FBLAZER.jpg?alt=media&token=0da8e2a9-a955-4540-83d3-e2b61c79d198' },
+    { label: 'JEANS', value: 'JEANS', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FJEANS.jpg?alt=media&token=56326f50-7c60-4203-9ffd-951a4512521f' },
+    { label: 'TANK TOP', value: 'TANK_TOP', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FTANK%20TOP.jpg?alt=media&token=b9a94d8f-0e2a-4c4e-9046-1dbd83034eaa' },
+    { label: 'SUIT', value: 'SUIT', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FSUIT.jpg?alt=media&token=8afa2ef2-1ec8-46c7-a0c0-e11cb0e5ad96' },
+    { label: 'POLO', value: 'POLO_SHIRT', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FPOLO_SHIRT.jpg?alt=media&token=8d9f6f4e-7ab6-474d-b37c-fc86c11dd4b5' },
+    { label: 'FORMAL', value: 'FORMAL_WEAR', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FFORMAL_WEAR.jpg?alt=media&token=0ce12378-d7bc-4328-8049-eb7eef2952d8' },
+    { label: 'ATHLETIC', value: 'ATHLETIC_WEAR', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FATHLETIC_WEAR.jpg?alt=media&token=08cc7f99-acce-42bf-ae4d-099bf892a8f8' },
+  ],
+  fashionStyles: [
+    { label: 'CYBERPUNK', value: 'CYBERPUNK', imgUrl: 'https://i.pinimg.com/564x/be/6e/92/be6e928031d63b318a3e40838d1a521e.jpg' },
+    { label: 'CLASSIC', value: 'CLASSIC', imgUrl: 'https://i.pinimg.com/564x/6b/53/4b/6b534b415ac978d559b388dfc775227a.jpg' },
+    { label: 'VINTAGE', value: 'VINTAGE', imgUrl: 'https://i.pinimg.com/564x/c3/8f/47/c38f47fc4cf06e4d17c819514774fa73.jpg' },
+    { label: 'INDIE', value: 'INDIE', imgUrl: 'https://i.pinimg.com/564x/80/5b/ae/805baeac4224f42620c2bc9e9f52e5a6.jpg' },
+    { label: 'E-GIRL', value: 'E_GIRL', imgUrl: 'https://i.pinimg.com/564x/17/0f/0d/170f0d0758e164f07057e9c834c791f0.jpg' },
+    { label: 'BASIC', value: 'BASIC', imgUrl: 'https://i.pinimg.com/564x/72/77/37/727737a7495fd4a32b2dec882b1b166f.jpg' },
+    { label: 'SPORTY', value: 'SPORTY', imgUrl: 'https://i.pinimg.com/564x/2c/e8/42/2ce8421ce88a1ebdc551b3ea6fca4087.jpg' },
+    { label: 'NORMCORE', value: 'NORMCORE', imgUrl: 'https://i.pinimg.com/564x/66/e3/dc/66e3dc2b5f6fefe2f16051108a436786.jpg' },
+    { label: 'MINIMALISM', value: 'MINIMALISM', imgUrl: 'https://i.pinimg.com/564x/0e/12/ff/0e12ff14baf962358b43485383b54e5c.jpg' },
+    { label: 'ROCK', value: 'ROCK', imgUrl: 'https://i.pinimg.com/564x/c7/55/d1/c755d189d35933d71de13d8f9f08d6d0.jpg' },
+    { label: 'PARISIAN', value: 'PARISIAN', imgUrl: 'https://i.pinimg.com/564x/f8/b9/e8/f8b9e80d1c1a5265d1c1baa02a22176b.jpg' },
+    { label: 'GOTHIC', value: 'GOTHIC', imgUrl: 'https://i.pinimg.com/564x/e5/2b/c7/e52bc7563942dda4f1ebfc4a693c884f.jpg' },
+    { label: 'BOHEMIAN', value: 'BOHEMIAN', imgUrl: 'https://i.pinimg.com/564x/77/48/72/7748721dc1e1bde0cb4bf455ab08a18d.jpg' },
+    { label: 'Y2K', value: 'Y2K', imgUrl: 'https://i.pinimg.com/564x/ea/59/7d/ea597d014e36d29dc6c10a40d3d4c6b0.jpg' },
+    { label: 'OLD_MONEY', value: 'OLD_MONEY', imgUrl: 'https://i.pinimg.com/564x/5a/07/f1/5a07f1cd4d31432eeadbdb52c1920927.jpg' },
+    { label: 'HIPPIE', value: 'HIPPIE', imgUrl: 'https://i.pinimg.com/564x/f2/77/b1/f277b128b6371d0d12f3c08211012417.jpg' },
+
+  ],
+  fashionStylesFemale: [
+    { label: 'CYBERPUNK', value: 'CYBERPUNK', imgUrl: 'https://i.pinimg.com/736x/6e/2a/39/6e2a39ebe676df56b93ae2321342bc6c.jpg' },
+    { label: 'CLASSIC', value: 'CLASSIC', imgUrl: 'https://i.pinimg.com/564x/d6/69/b0/d669b095aa8b030c97593d40c8994b34.jpg' },
+    { label: 'VINTAGE', value: 'VINTAGE', imgUrl: 'https://i.pinimg.com/236x/12/db/55/12db550be8169c8bef37c65d0628a269.jpg' },
+    { label: 'INDIE', value: 'INDIE', imgUrl: 'https://i.pinimg.com/736x/45/79/16/457916cdb8a86dabd73c6051075a7276.jpg' },
+    { label: 'E-GIRL', value: 'E_GIRL', imgUrl: 'https://i.pinimg.com/564x/17/0f/0d/170f0d0758e164f07057e9c834c791f0.jpg' },
+    { label: 'BASIC', value: 'BASIC', imgUrl: 'https://i.pinimg.com/564x/2d/58/2a/2d582a49179cdb48d1d211dd491cbd2b.jpg' },
+    { label: 'SPORTY', value: 'SPORTY', imgUrl: 'https://i.pinimg.com/564x/77/8d/ba/778dba980001dc562591a0becd05fe72.jpg' },
+    { label: 'PREPPY', value: 'PREPPY', imgUrl: 'https://i.pinimg.com/564x/a9/07/77/a907778666f533fa2a9455b3456fcded.jpg' },
+    { label: 'NORMCORE', value: 'NORMCORE', imgUrl: 'https://i.pinimg.com/564x/11/d7/0b/11d70b5f83ab1bd452dc13309191c770.jpg' },
+    { label: 'MINIMALISM', value: 'MINIMALISM', imgUrl: 'https://i.pinimg.com/564x/36/98/8c/36988c3ceee413259404a8483a49d062.jpg' },
+    { label: 'ROCK', value: 'ROCK', imgUrl: 'https://i.pinimg.com/236x/c8/1b/05/c81b053cf70f2de9f7963ced7a7d04d8.jpg' },
+    { label: 'PARISIAN', value: 'PARISIAN', imgUrl: 'https://i.pinimg.com/564x/16/72/44/167244265a52d1593d0eb4ba3565c9e7.jpg' },
+    { label: 'GOTHIC', value: 'GOTHIC', imgUrl: 'https://i.pinimg.com/236x/44/5b/b9/445bb9e5ba33afff59ddc5423f7237ca.jpg' },
+    { label: 'BOHEMIAN', value: 'BOHEMIAN', imgUrl: 'https://i.pinimg.com/474x/83/85/94/838594321fadcac3d829c51c555cce34.jpg' },
+    { label: 'Y2K', value: 'Y2K', imgUrl: 'https://i.pinimg.com/564x/39/9e/ab/399eabdaa3a2623c3c510b54b246992a.jpg' },
+    { label: 'OLD_MONEY', value: 'OLD_MONEY', imgUrl: 'https://i.pinimg.com/236x/aa/cb/8b/aacb8b92faa15ee8d3a716cbefb91759.jpg' },
+    { label: 'HIPPIE', value: 'HIPPIE', imgUrl: 'https://i.pinimg.com/564x/af/d9/4f/afd94f56dbe3bfe3913000483f1eba5e.jpg' },
+
+  ],
+}
+
 
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
@@ -58,6 +119,21 @@ const SearchScreen = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const [isFetchingMore, setIsFetchingMore] = useState(true);
   const [dataPaging, setDataPaging] = useState<ClothesInterface[]>([]);
+  const [countSearch, setCountSearch] = useState(0);
+  const [chipTag, setChipTag] = useState('cLothes');
+  const [typesShow, setTypesShows] = useState<{
+    label: string,
+    value: string,
+    imgUrl: string
+
+  }[]>([]);
+
+  const [stylesShow, setStyleShows] = useState<{
+    label: string,
+    value: string,
+    imgUrl: string
+
+  }[]>([]);
 
 
 
@@ -92,23 +168,23 @@ const SearchScreen = () => {
         console.log('userParse: ', user);
         const params = {}
 
-        try {
-          const getData = await api.get(`/api/v1/histories/get-all-history-items-by-customer-id?customerID=${userID}`, params, tokenString);
-          // const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=1&based_userid=1`, params, tokenString);
-          if (getData.success === 200) {
-            setmockSuggestions(getData.data.historyItems);
-            console.log('getData.data: ', getData.data.historyItems);
+        // try {
+        //   const getData = await api.get(`/api/v1/histories/get-all-history-items-by-customer-id?customerID=${userID}`, params, tokenString);
+        //   // const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=1&based_userid=1`, params, tokenString);
+        //   if (getData.success === 200) {
+        //     setmockSuggestions(getData.data.historyItems);
+        //     console.log('getData.data: ', getData.data.historyItems);
 
-          }
-          else {
-            console.log(getData.message);
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 1000)
-          }
-        } catch (error) {
-          console.error("An error occurred during data fetching:", error);
-        }
+        //   }
+        //   else {
+        //     console.log(getData.message);
+        //     setTimeout(() => {
+        //       setIsLoading(false);
+        //     }, 1000)
+        //   }
+        // } catch (error) {
+        //   console.error("An error occurred during data fetching:", error);
+        // }
       }
     }
     fetchData();
@@ -158,7 +234,7 @@ const SearchScreen = () => {
 
   useEffect(() => {
     handleFetchDataPaging(pageNumber);
-  }, [dataPaging]);
+  }, [countSearch]);
 
 
 
@@ -286,7 +362,9 @@ const SearchScreen = () => {
       // const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=1&based_userid=1`, params, tokenString);
       if (getData.success === 200) {
         // setSearchResult(getData.data);
-        setDataPaging(getData.data)
+        setSearchResult([]);
+        setDataPaging(getData.data);
+        setCountSearch(countSearch + 1);
         console.log('getData.data: ', getData.data);
         setTimeout(() => {
           setIsLoading(false);
@@ -303,8 +381,8 @@ const SearchScreen = () => {
     }
   }
 
-  const hanldeMoveToDetail = (clothID: string) => {
-    navigation.navigate('ClothesDetailScreen', { clothID });
+  const hanldeMoveToDetail = (typesValue: string) => {
+    navigation.navigate('TypeOfClothesScreen', { typeOfClothes: typesValue });
   }
 
   const handleSelectSuggestion = (selectedKeyword: string) => {
@@ -313,6 +391,30 @@ const SearchScreen = () => {
     // Clear the suggestions
     setSuggestions([]);
   };
+
+  const handleChangeChipTag = (tagName: string) => {
+    setChipTag(tagName);
+    if (tagName === 'clothes') {
+
+    }
+
+    if (tagName === 'types') {
+      handleShowTypes();
+    }
+
+    if (tagName === 'styles') {
+      if(user?.gender) {
+        setStyleShows(dropdownData.fashionStyles);
+      } else {
+        setStyleShows(dropdownData.fashionStylesFemale);
+      }
+    }
+  }
+
+  const handleShowTypes = () => {
+    setTypesShows(dropdownData.typeOfClothes);
+
+  }
 
 
 
@@ -434,7 +536,7 @@ const SearchScreen = () => {
             onValueChange={setValue}
             buttons={[
               {
-                value: 'all',
+                value: 'clothes',
                 label: 'Clothes',
                 icon: 'image',
                 style: {
@@ -449,10 +551,28 @@ const SearchScreen = () => {
                 },
                 checkedColor: primaryColor,
                 uncheckedColor: 'black',
+                onPress: () => handleChangeChipTag('clothes'),
               },
               {
-                value: 'hotStore',
-                label: 'Collections',
+                value: 'types',
+                label: 'Types',
+                icon: require('../../assets/icon/photo-camera.png'),
+                style: {
+                  borderRadius: 0,
+                  borderColor: grayBorderColor,
+                  borderTopWidth: 0,
+                  borderBottomWidth: 0,
+                  borderRightWidth: 0,
+                  borderLeftWidth: 0,
+                  backgroundColor: backgroundColor,
+                },
+                checkedColor: primaryColor,
+                uncheckedColor: 'black',
+                onPress: () => handleChangeChipTag('types'),
+              },
+              {
+                value: 'styles',
+                label: 'Styles',
                 icon: 'heart',
                 style: {
                   borderRadius: 0,
@@ -465,22 +585,7 @@ const SearchScreen = () => {
                 },
                 checkedColor: primaryColor,
                 uncheckedColor: 'black',
-              },
-              {
-                value: 'events',
-                label: 'History',
-                icon: 'history',
-                style: {
-                  borderRadius: 0,
-                  borderColor: grayBorderColor,
-                  borderTopWidth: 0,
-                  borderBottomWidth: 0,
-                  borderRightWidth: 0,
-                  borderLeftWidth: 0,
-                  backgroundColor: backgroundColor,
-                },
-                checkedColor: primaryColor,
-                uncheckedColor: 'black',
+                onPress: () => handleChangeChipTag('styles'),
               },
 
             ]}
@@ -504,8 +609,8 @@ const SearchScreen = () => {
 
 
           {/* Regular FlatList */}
-          {searchResult.length > 0
-            ? (
+          {chipTag === 'clothes'
+            ? searchResult.length > 0 ? (
               <FlatList
                 style={SearchStyleScreen.flatlist}
                 data={searchResult}
@@ -532,12 +637,68 @@ const SearchScreen = () => {
                 scrollEnabled={false}
               />
             )
-            : (
-              <View style={{ justifyContent: 'center', alignItems: 'center', alignContent: 'center', marginTop: 10, marginBottom: 10 }}>
-                <Text style={{ fontSize: 17, fontWeight: 'bold', color: primaryColor }}>Do not have any Cloth.</Text>
-              </View>
+              : (
+                <View style={{ justifyContent: 'center', alignItems: 'center', alignContent: 'center', marginTop: 10, marginBottom: 10 }}>
+                  <Text style={{ fontSize: 17, fontWeight: 'bold', color: primaryColor }}>Do not have any Cloth.</Text>
+                </View>
+              )
+            : chipTag === 'types' ? (
+              <FlatList
+                style={SearchStyleScreen.flatlist}
+                data={typesShow}
+                keyExtractor={(item) => item.value}
+                numColumns={2}
+                renderItem={({ item }) => (
+                  <ListViewComponent
+                    cardStyleContainer={{ height: 200, marginBottom: 20 }}
+                    cardStyleContent={{ height: 200, position: 'relative' }}
+                    onPress={() => hanldeMoveToDetail(item.value)}
+                    data={[{ id: item.value, imgUrl: item.imgUrl ? item.imgUrl : clothesLogoUrlDefault, }]}
+                    child={
+                      <View style={SearchStyleScreen.cardTextView}>
+                        <Text style={SearchStyleScreen.cardText}>
+                          {item.label}
+                        </Text>
+                      </View>
+                    }
+                  
+                  />
+                )}
+
+                contentContainerStyle={{ paddingRight: 0 }}
+                showsVerticalScrollIndicator={false}
+                scrollEnabled={false}
+              />
             )
+              : chipTag === 'styles' && (
+                <FlatList
+                  style={SearchStyleScreen.flatlist}
+                  data={stylesShow}
+                  keyExtractor={(item) => item.value}
+                  numColumns={2}
+                  renderItem={({ item }) => (
+                    <ListViewComponent
+                      cardStyleContainer={{ height: 200, marginBottom: 20 }}
+                      cardStyleContent={{ height: 200, position: 'relative' }}
+                      onPress={() => hanldeMoveToDetail(item.value)}
+                      data={[{ id: item.value, imgUrl: item.imgUrl ? item.imgUrl : clothesLogoUrlDefault, }]}
+                      child={
+                        <View style={SearchStyleScreen.cardTextView}>
+                          <Text style={SearchStyleScreen.cardText}>
+                            {item.label}
+                          </Text>
+                        </View>
+                      }
+                    />
+                  )}
+
+                  contentContainerStyle={{ paddingRight: 0 }}
+                  showsVerticalScrollIndicator={false}
+                  scrollEnabled={false}
+                />
+              )
           }
+
 
 
           <Button mode='outlined' style={{ width: width * 0.8, margin: 20, borderRadius: 8 }} textColor='black' onPress={handleLoadMore} >

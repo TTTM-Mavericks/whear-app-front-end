@@ -47,6 +47,7 @@ export interface ClothesInterface {
     reactPerClothes?: number,
     clothesStyle?: string[];
     reacted?: boolean;
+    gender?: boolean;
 }
 
 export interface CollectionInterface {
@@ -117,4 +118,26 @@ export interface PaymentInterface {
     checkoutUrl?: string,
     qrCode?: string
 }
+
+export interface OrderDataInterface {
+    id: string;
+    orderCode: number;
+    amount: number;
+    amountPaid: number;
+    amountRemaining: number;
+    status: string;
+    createdAt: string;
+    transactions: [];
+    canceledAt: string | null;
+    cancellationReason: string | null;
+  }
+  
+  export interface TransactionInterface {
+    code: string;
+    desc: string;
+    data: OrderDataInterface;
+    signature: string;
+    checkoutUrl: string;
+    qrCode: string;
+  }
 

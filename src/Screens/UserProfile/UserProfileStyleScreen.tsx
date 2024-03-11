@@ -1,5 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { backgroundColor, primaryColor } from '../../root/Colors';
+import { backgroundColor, grayBackgroundColor, primaryColor } from '../../root/Colors';
 
 const { width, height } = Dimensions.get('window');
 const containerPadding = 16;
@@ -174,6 +174,31 @@ const UserProfileStyleScreen = StyleSheet.create({
     textAlign: 'center',
     alignContent: 'center',
     alignItems: 'center',
+  },
+  cardContentHistory: {
+    width: width*0.9,
+    height: 100,
+    borderRadius: 8,
+    backgroundColor: grayBackgroundColor,
+    marginBottom: 10,
+    marginTop: 20
+
+  },
+  cardContentStatus: {
+    width: width*0.8*0.3,
+    height: '100%',
+    borderRadius: 8,
+    textAlign: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  cardContentDetail: {
+    justifyContent: 'center',
+    alignContent: 'flex-start',
+    alignItems: 'flex-start',
+    borderRadius: 8,
+    paddingLeft: 10
   }
 
 

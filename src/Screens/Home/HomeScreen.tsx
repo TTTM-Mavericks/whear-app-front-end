@@ -64,7 +64,7 @@ const data1 = [
 
 const chipData = ['#Minimalism', '#Girly', '#Sporty', '#Vintage', '#Manly'];
 
-const PAGE_SIZE = 30;
+const PAGE_SIZE = 16;
 
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
