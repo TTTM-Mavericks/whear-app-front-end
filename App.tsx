@@ -33,6 +33,11 @@ import EventScreen from "./src/Screens/Event/EventScreen";
 import RecommendOutfitScreen from "./src/Screens/RecommendOutfit/RecommendOutfitScreen";
 import FirstLoadingPage from "./src/Screens/Introduce/FirstLoadingPage";
 import ChatScreen from "./src/Screens/Chat/chatScreen";
+import OnboardingScreen from "./src/Screens/Onboarding/OnboardingPage";
+import UpgradeScreen from "./src/Screens/Upgrade/UpgradeScreen";
+import UpgardeDetailScreen from "./src/Screens/Upgrade/UpgardeDetailScreen";
+import TypeOfClothesScreen from "./src/Screens/TypeOfClothes/TypeOfClothesScreen";
+import TransactionDetailScreen from "./src/Screens/TransactionDetail/TransactionDetailScreen";
 
 const Stack = createStackNavigator();
 
@@ -53,8 +58,8 @@ export default function App() {
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
-              />  */}
-{/* 
+              /> */}
+
               <Stack.Screen
                 name="Home"
                 component={HomeScreen}
@@ -84,6 +89,11 @@ export default function App() {
               <Stack.Screen
                 name="SignUp"
                 component={SignUpComponent}
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="OnboardingScreen"
+                component={OnboardingScreen}
                 options={{ headerShown: false }}
               />
 
@@ -187,13 +197,43 @@ export default function App() {
                 name="HotStoreScreen"
                 component={HotStoreScreen}
                 options={{ headerShown: false }}
-              /> */}
+              />
 
               <Stack.Screen
                 name="ChatScreen"
                 component={ChatScreen}
                 options={{ headerShown: false }}
               />
+              <Stack.Screen
+                name="Onboarding"
+                component={OnboardingScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="UpgradeScreen"
+                component={UpgradeScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="UpgardeDetailScreen"
+                component={UpgardeDetailScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="TypeOfClothesScreen"
+                component={TypeOfClothesScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="TransactionDetailScreen"
+                component={TransactionDetailScreen}
+                options={{ headerShown: false }}
+              />
+
             </Stack.Navigator>
           </View>
         </NavigationContainer>

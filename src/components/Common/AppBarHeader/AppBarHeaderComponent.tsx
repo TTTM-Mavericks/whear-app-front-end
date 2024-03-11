@@ -41,7 +41,7 @@ const AppBarHeaderComponent: React.FC<appBarProps> = (
   };
 
   const _handleSearch = () => {
-    const keyWord: string = 'all'
+    const keyWord: string = ''
     navigation.navigate('SearchScreen', { keyWord });
   };
 

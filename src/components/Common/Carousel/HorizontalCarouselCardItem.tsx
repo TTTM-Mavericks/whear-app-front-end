@@ -23,7 +23,7 @@ const HorizontalCarouselCardItem: React.FC<HorizontalCarouselItemProps> = ({ ite
       <Image source={{ uri: item.imgUrl }} style={styles.image} />
       {item.body && (
         <View style={{ position: 'absolute', bottom: 0, width: '80%', backgroundColor: 'rgba(169, 169, 169, 0.7)', borderTopEndRadius: 10, borderBottomEndRadius: 10 }}>
-          <Text style={styles.title}>{item.title}</Text>
+          <Text style={styles.title}>{item.title && item.title.substring(0, 60)}</Text>
           <Text style={styles.body}>{item.body.substring(0, 80)}...</Text>
         </View>
 
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   body: {
     color: '#222',
-    fontSize: 15,
+    fontSize: 12,
     paddingLeft: 20,
     paddingRight: 20,
     fontWeight: '500',
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: backgroundColor,
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
     paddingLeft: 20,
     paddingRight: 20,

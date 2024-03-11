@@ -1,0 +1,88 @@
+import React, { useEffect } from 'react';
+import { Animated, View } from 'react-native';
+import { Button, Text } from 'react-native-paper';
+import { dataSliderOnboarding } from './Data';
+import { OnboardingStyle } from './OnboadingStyle';
+import VerticalMotion from './VerticalMotion';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../root/RootStackParams';
+import { useNavigation } from '@react-navigation/native';
+type NavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
+
+const OnboardingPage = () => {
+  const fadeAnim = new Animated.Value(0);
+  const navigation = useNavigation<NavigationProp>();
+
+  const handleGetStarted = () => {
+    navigation.navigate('Introduce');
+  };
+
+  useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 4000,
+      useNativeDriver: true,
+    }).start();
+  }, [fadeAnim]);
+
+  return (
+    <View style={OnboardingStyle.container}>
+      <View style={OnboardingStyle.verticalMotion}>
+
+        {/* firstColumn */}
+        <View style={OnboardingStyle.motionColumn}>
+          <VerticalMotion
+            value={0}
+            toValue={-1500}
+            duration={12000}
+            imagesProps={dataSliderOnboarding[0]}
+          />
+        </View>
+
+        {/* secondColumn */}
+        <View style={[OnboardingStyle.motionColumn, { position: 'relative' }]}>
+          <View style={OnboardingStyle.logoContainer}>
+            <Animated.Image
+              style={[OnboardingStyle.logo, { opacity: fadeAnim }]}
+              source={require('../../assets/img/logo/logo.png')}
+            />
+          </View>
+          <View>
+            <VerticalMotion
+              value={-1500}
+              toValue={0}
+              duration={12000}
+              imagesProps={dataSliderOnboarding[1]}
+            />
+          </View>
+        </View>
+
+        {/* thirdColumn */}
+        <View style={OnboardingStyle.motionColumn}>
+          <VerticalMotion
+            value={0}
+            toValue={-1500}
+            duration={12000}
+            imagesProps={dataSliderOnboarding[2]}
+          />
+        </View>
+      </View>
+
+      <View style={OnboardingStyle.textContainer}>
+        <Text variant='headlineLarge'>
+          Start discorvering your unique fashion style
+        </Text>
+        <Button
+          labelStyle={{ color: 'black', fontSize: 18 }}
+          style={OnboardingStyle.getStartedBtn}
+          onPress={handleGetStarted}
+        >
+          Get Started
+        </Button>
+      </View>
+
+    </View>
+  );
+};
+
+export default OnboardingPage;

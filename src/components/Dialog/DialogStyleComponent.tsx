@@ -50,7 +50,9 @@ const DialogStylesComponent = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
-        width: '100%'
+        width: '100%',
+        alignItems: 'center', 
+        alignContent: 'center',
     },
     cardContent: {
         width: '47%',
@@ -307,7 +309,7 @@ const DialogStylesComponent = StyleSheet.create({
     picture: {
         position: 'relative',
         width: width * 0.495,
-        height: height * 0.398,
+        height: height * 0.3,
 
     },
 

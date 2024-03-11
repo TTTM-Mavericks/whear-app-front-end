@@ -73,220 +73,6 @@ interface Post {
   comment: Comment[];
 }
 
-const data: Post[] = [
-  {
-    postID: '1',
-    user: {
-      userID: '1',
-      imgUrl:
-        'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-      userName: 'Nguyễn Minh Tú',
-    },
-    typeOfPost: 'Posting',
-    hashtag: ['#spring2024', '#hottrend', '#sports'],
-    date: new Date(),
-    comment: [
-      {
-        commentID: '1',
-        user: {
-          userID: '2',
-          userName: 'Nguyễn Minh Tú',
-          imgUrl:
-            'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-        },
-        content:
-          'wowww, this is so crazy, I want to see more of your collection. see more of your collectionsee more of your collectionsee more of your collection',
-        date: new Date(),
-      },
-      {
-        commentID: '2',
-        user: {
-          userID: '3',
-          userName: 'Nguyễn Minh Tú',
-          imgUrl:
-            'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-        },
-        content:
-          'wowww, this is so crazy, I want to see more of your collection',
-        date: new Date(),
-      },
-      {
-        commentID: '3',
-        user: {
-          userID: '4',
-          userName: 'Nguyễn Minh Tú',
-          imgUrl:
-            'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-        },
-        content:
-          'wowww, this is so crazy, I want to see more of your collection',
-        date: new Date(),
-      },
-      {
-        commentID: '4',
-        user: {
-          userID: '2',
-          userName: 'Nguyễn Minh Tú',
-          imgUrl:
-            'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-        },
-        content:
-          'wowww, this is so crazy, I want to see more of your collection',
-        date: new Date(),
-      },
-      {
-        commentID: '5',
-        user: {
-          userID: '2',
-          userName: 'Nguyễn Minh Tú',
-          imgUrl:
-            'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-        },
-        content:
-          'wowww, this is so crazy, I want to see more of your collection',
-        date: new Date(),
-      },
-      {
-        commentID: '6',
-        user: {
-          userID: '2',
-          userName: 'Nguyễn Minh Tú',
-          imgUrl:
-            'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-        },
-        content:
-          'wowww, this is so crazy, I want to see more of your collection',
-        date: new Date(),
-      },
-      {
-        commentID: '7',
-        user: {
-          userID: '2',
-          userName: 'Nguyễn Minh Tú',
-          imgUrl:
-            'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-        },
-        content:
-          'wowww, this is so crazy, I want to see more of your collection',
-        date: new Date(),
-      },
-      {
-        commentID: '8',
-        user: {
-          userID: '2',
-          userName: 'Nguyễn Minh Tú',
-          imgUrl:
-            'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-        },
-        content:
-          'wowww, this is so crazy, I want to see more of your collection',
-        date: new Date(),
-      },
-    ],
-    react: 1203,
-    status: true,
-    content: {
-      imgUrl:
-        'https://i.imgur.com/uvNCUfX.jpeg',
-      content:
-        'Ngày 3/1, cư dân mạng bất ngờ phát hiện Khả Như đã bỏ theo dõi Puka trên Instagram cá nhân. Hành động này của nữ diễn viên khiến netizen nhận định rằng tình bạn của cả hai đã chính thức "toang" và không còn hàn gắn được.',
-    },
-  },
-  {
-    postID: '2',
-    user: {
-      userID: '2',
-      imgUrl:
-        'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-      userName: 'Nguyễn Minh Tú',
-    },
-    typeOfPost: 'Posting',
-    hashtag: ['#spring2024', '#hottrend', '#sports'],
-    date: new Date(),
-    comment: [
-      {
-        commentID: '1',
-        user: {
-          userID: '2',
-          userName: 'Nguyễn Minh Tú',
-          imgUrl:
-            'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-        },
-        content:
-          'wowww, this is so crazy, I want to see more of your collection. see more of your collectionsee more of your collectionsee more of your collection',
-        date: new Date(),
-      },
-      {
-        commentID: '2',
-        user: {
-          userID: '3',
-          userName: 'Nguyễn Minh Tú',
-          imgUrl:
-            'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-        },
-        content:
-          'wowww, this is so crazy, I want to see more of your collection',
-        date: new Date(),
-      },
-      {
-        commentID: '3',
-        user: {
-          userID: '4',
-          userName: 'Nguyễn Minh Tú',
-          imgUrl:
-            'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-        },
-        content:
-          'wowww, this is so crazy, I want to see more of your collection',
-        date: new Date(),
-      },
-      {
-        commentID: '4',
-        user: {
-          userID: '2',
-          userName: 'Nguyễn Minh Tú',
-          imgUrl:
-            'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-        },
-        content:
-          'wowww, this is so crazy, I want to see more of your collection',
-        date: new Date(),
-      },
-      {
-        commentID: '5',
-        user: {
-          userID: '2',
-          userName: 'Nguyễn Minh Tú',
-          imgUrl:
-            'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-        },
-        content:
-          'wowww, this is so crazy, I want to see more of your collection',
-        date: new Date(),
-      },
-      {
-        commentID: '6',
-        user: {
-          userID: '2',
-          userName: 'Nguyễn Minh Tú',
-          imgUrl:
-            'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-        },
-        content:
-          'wowww, this is so crazy, I want to see more of your collection',
-        date: new Date(),
-      },
-    ],
-    react: 1203,
-    status: true,
-    content: {
-      imgUrl:
-        'https://i.imgur.com/E9C2u4c.jpeg',
-      content:
-        'Ngày 3/1, cư dân mạng bất ngờ phát hiện Khả Như đã bỏ theo dõi Puka trên Instagram cá nhân. Hành động này của nữ diễn viên khiến netizen nhận định rằng tình bạn của cả hai đã chính thức "toang" và không còn hàn gắn được.',
-    },
-  },
-];
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 const SocialScreen = () => {
@@ -364,14 +150,6 @@ const SocialScreen = () => {
     navigation.goBack();
   }
 
-  const handleSearch = () => {
-    alert('search');
-  };
-
-  const handleMore = () => {
-    alert('handleMore');
-  };
-
   const handleOpenPostingForm = () => {
     // dispatch(setOpenUpPostingDialog(true));
     // setIsOpenCommentsDialog(true);
@@ -443,7 +221,7 @@ const SocialScreen = () => {
             </MaskedView>
           </View>
         }
-        backAction={hanldeGoBack}
+        backAction={() => hanldeGoBack()}
       ></AppBarHeaderComponent>
 
       <ScrollView
@@ -488,14 +266,13 @@ const SocialScreen = () => {
                 onPress={() => handleMoveToPostingDetail(item.postID)}
                 extendHeaderChild={
                   <View
-                  key={item.postID}
+                    key={item.postID}
                     style={[
                       SocailStyleScreen.container_postingBar,
                       { marginTop: 20 },
                     ]}
                   >
                     <TouchableOpacity
-                      key={item.postID}
                       onPress={() => handleMoveToUserProfile(item?.userResponse?.userID)}
                     >
                       <View

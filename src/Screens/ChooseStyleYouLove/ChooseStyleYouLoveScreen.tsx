@@ -27,64 +27,7 @@ import Toast from 'react-native-toast-message';
 import LoadingComponent from '../../components/Common/Loading/LoadingComponent';
 
 
-const styleData = [
-  {
-    id: '1',
-    title: 'Minimalism',
-    description:
-      'Ut tincidunt tincidunt erat. Sed cursus turpis vitae tortor. Quisque malesuada placerat nisl. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.',
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_1.png'),
-  },
-  {
-    id: '2',
-    title: 'Girly',
-    description:
-      'Aenean ut eros et nisl sagittis vestibulum. Donec posuere vulputate arcu. Proin faucibus arcu quis ante. Curabitur at lacus ac velit ornare lobortis. ',
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_2.png'),
-  },
-  {
-    id: '3',
-    title: 'Sporty',
-    description:
-      'Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.',
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_3.png'),
-  },
-  {
-    id: '4',
-    title: 'Vintage',
-    description:
-      'Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.',
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
-  },
-  {
-    id: '5',
-    title: 'Manly',
-    description:
-      'Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.',
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
-  },
-  {
-    id: '6',
-    title: 'Manly',
-    description:
-      'Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.',
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
-  },
-  {
-    id: '7',
-    title: 'Manly',
-    description:
-      'Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.',
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
-  },
-  {
-    id: '8',
-    title: 'Manly',
-    description:
-      'Phasellus ullamcorper ipsum rutrum nunc. Nullam quis ante. Etiam ultricies nisi vel augue. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.',
-    imgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
-  },
-];
+
 
 const fashionStyles = [
   { title: 'CYBERPUNK', id: 'CYBERPUNK', imgUrl: 'https://i.pinimg.com/564x/be/6e/92/be6e928031d63b318a3e40838d1a521e.jpg' },
@@ -158,23 +101,23 @@ const ChooseStyleYouLoveScreen = () => {
     console.log('styleDefault: ', styleDefault);
     if (selectedItems.length >= 2) {
       navigation.navigate('Home');
-      // const response = await api.post('/api/v1/user-style/create-style-and-body-shape', styleDefault);
-      // if (response.success === 200) {
-      //   setIsLoading(true);
-      //   setTimeout(() => {
-      //     setIsLoading(false);
-      //     navigation.navigate('Home');
+      const response = await api.post('/api/v1/user-style/create-style-and-body-shape', styleDefault);
+      if (response.success === 200) {
+        setIsLoading(true);
+        setTimeout(() => {
+          setIsLoading(false);
+          navigation.navigate('Home');
 
-      //   }, 3000)
-      // } else {
-      //   Toast.show({
-      //     type: 'error',
-      //     text1: JSON.stringify(response.message),
-      //     position: 'top'
-      //   });
-      //   setIsLoading(false);
+        }, 3000)
+      } else {
+        Toast.show({
+          type: 'error',
+          text1: JSON.stringify(response.message),
+          position: 'top'
+        });
+        setIsLoading(false);
 
-      // }
+      }
     }
   }
   const handleSetSelectedItems = (id: string) => {

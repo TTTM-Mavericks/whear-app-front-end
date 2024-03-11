@@ -13,7 +13,7 @@ export type RootStackParamList = {
   ClothesDetailScreen: { clothID: any };
   BasicInformationScreen: undefined;
   ChooseStyleYouLove: undefined;
-  SearchScreen: {keyWord: any};
+  SearchScreen: { keyWord: string };
   NotificationScreen: undefined;
   AddingClothesScreen: undefined;
   AddingPostingsScreen: undefined;
@@ -22,6 +22,14 @@ export type RootStackParamList = {
   NewsScreen: undefined;
   HotStoreScreen: undefined;
   Event: undefined;
+  ChatScreen: undefined;
+  OnboardingScreen: undefined;
+  UpgradeScreen: undefined;
+  UpgardeDetailScreen: undefined;
+  TypeOfClothesScreen: {typeOfClothes: string},
+  StylesOfClothesScreen: {stylesOfClothes: string},
+  TransactionDetailScreen: {transactionId: any}
+
 
 
 };

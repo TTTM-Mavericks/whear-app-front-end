@@ -44,8 +44,10 @@ export interface ClothesInterface {
     clothesColors?: string[];
     clothesSizes?: string[];
     clothesImages: string[];
-    react?: number,
+    reactPerClothes?: number,
     clothesStyle?: string[];
+    reacted?: boolean;
+    gender?: boolean;
 }
 
 export interface CollectionInterface {
@@ -103,5 +105,39 @@ export interface ReactInterface {
     react: any,
 }
 
+export interface PaymentInterface {
+    bin?: number,
+    accountNumber?: string,
+    accountName?: string,
+    currency?: string,
+    paymentLinkId?: string,
+    amount?: number,
+    description?: string,
+    orderCode?: number,
+    status?: string,
+    checkoutUrl?: string,
+    qrCode?: string
+}
 
+export interface OrderDataInterface {
+    id: string;
+    orderCode: number;
+    amount: number;
+    amountPaid: number;
+    amountRemaining: number;
+    status: string;
+    createdAt: string;
+    transactions: [];
+    canceledAt: string | null;
+    cancellationReason: string | null;
+  }
+  
+  export interface TransactionInterface {
+    code: string;
+    desc: string;
+    data: OrderDataInterface;
+    signature: string;
+    checkoutUrl: string;
+    qrCode: string;
+  }
 

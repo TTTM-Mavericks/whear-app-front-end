@@ -30,82 +30,82 @@ interface StoreData {
 const HOST_STORE_DATA: HotStore[] = [
   {
     brandId: '1',
-    brandImgUrl: require('../../assets/img/introduce_background/introduce_background_1.png'),
+    brandImgUrl: require('../../assets/img/introduce_background/introducebackground1.png'),
     brandName: 'Zara',
     clothes: [
       {
         clothesId: '1.1',
-        clothesImgUrl: require('../../assets/img/introduce_background/introduce_background_2.png'),
+        clothesImgUrl: require('../../assets/img/introduce_background/introducebackground2.png'),
       },
       {
         clothesId: '1.2',
-        clothesImgUrl: require('../../assets/img/introduce_background/introduce_background_3.png'),
+        clothesImgUrl: require('../../assets/img/introduce_background/introducebackground3.png'),
       },
       {
         clothesId: '1.3',
-        clothesImgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+        clothesImgUrl: require('../../assets/img/introduce_background/introducebackground4.png'),
       },
       {
         clothesId: '1.4',
-        clothesImgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+        clothesImgUrl: require('../../assets/img/introduce_background/introducebackground4.png'),
       },
       {
         clothesId: '1.5',
-        clothesImgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+        clothesImgUrl: require('../../assets/img/introduce_background/introducebackground4.png'),
       },
     ],
   },
   {
     brandId: '2',
-    brandImgUrl: require('../../assets/img/introduce_background/introduce_background_2.png'),
+    brandImgUrl: require('../../assets/img/introduce_background/introducebackground2.png'),
     brandName: 'Zara',
     clothes: [
       {
         clothesId: '1.1',
-        clothesImgUrl: require('../../assets/img/introduce_background/introduce_background_1.png'),
+        clothesImgUrl: require('../../assets/img/introduce_background/introducebackground1.png'),
       },
       {
         clothesId: '1.2',
-        clothesImgUrl: require('../../assets/img/introduce_background/introduce_background_1.png'),
+        clothesImgUrl: require('../../assets/img/introduce_background/introducebackground1.png'),
       },
       {
         clothesId: '1.3',
-        clothesImgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+        clothesImgUrl: require('../../assets/img/introduce_background/introducebackground4.png'),
       },
       {
         clothesId: '1.4',
-        clothesImgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+        clothesImgUrl: require('../../assets/img/introduce_background/introducebackground4.png'),
       },
       {
         clothesId: '1.5',
-        clothesImgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+        clothesImgUrl: require('../../assets/img/introduce_background/introducebackground4.png'),
       },
     ],
   },
   {
     brandId: '3',
-    brandImgUrl: require('../../assets/img/introduce_background/introduce_background_3.png'),
+    brandImgUrl: require('../../assets/img/introduce_background/introducebackground3.png'),
     brandName: 'Zara',
     clothes: [
       {
         clothesId: '1.1',
-        clothesImgUrl: require('../../assets/img/introduce_background/introduce_background_1.png'),
+        clothesImgUrl: require('../../assets/img/introduce_background/introducebackground1.png'),
       },
       {
         clothesId: '1.2',
-        clothesImgUrl: require('../../assets/img/introduce_background/introduce_background_1.png'),
+        clothesImgUrl: require('../../assets/img/introduce_background/introducebackground1.png'),
       },
       {
         clothesId: '1.3',
-        clothesImgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+        clothesImgUrl: require('../../assets/img/introduce_background/introducebackground4.png'),
       },
       {
         clothesId: '1.4',
-        clothesImgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+        clothesImgUrl: require('../../assets/img/introduce_background/introducebackground4.png'),
       },
       {
         clothesId: '1.5',
-        clothesImgUrl: require('../../assets/img/introduce_background/introduce_background_4.png'),
+        clothesImgUrl: require('../../assets/img/introduce_background/introducebackground4.png'),
       },
     ],
   },

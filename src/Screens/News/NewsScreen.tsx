@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, FlatList, Image, View, Text } from "react-native";
+import { Dimensions, FlatList, Image, View, Text, ScrollView } from "react-native";
 import { Appbar, Chip } from "react-native-paper";
 import NewsStyle from "./NewsStyleScreen";
 import AppBarHeaderComponent from "../../components/Common/AppBarHeader/AppBarHeaderComponent";
@@ -9,6 +9,9 @@ import { primaryColor, secondaryColor } from "../../root/Colors";
 import { RootStackParamList } from "../../root/RootStackParams";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
+import HorizontalCarouselComponent from "../../components/Common/Carousel/HorizontalCarouselComponent";
+import { dataSlider } from "../../components/Common/Carousel/Data";
+import AppBarFooterComponents from "../../components/Common/AppBarFooter/AppBarFooterComponents";
 
 interface NewsItems {
   id: number;
@@ -39,12 +42,13 @@ export default function NewsScreen() {
     },
     {
       id: 4,
-      title: "Beauty",
+      title: "Art",
     },
     {
       id: 5,
-      title: "Art",
+      title: "Beauty",
     },
+
     {
       id: 6,
       title: "Design",
@@ -174,14 +178,14 @@ export default function NewsScreen() {
     <View style={NewsStyle.itemContainer}>
       <Image source={{ uri: item.image }} style={NewsStyle.itemImage} />
       <Text style={NewsStyle.itemTitle} onPress={() => alert("Read more")}>
-        {item.title}
+        {item.title.length > 30 ? item.title.slice(0, 30) + ' ...' : item.title}
       </Text>
-      <Text
+      {/* <Text
         style={NewsStyle.itemDescription}
         onPress={() => alert("Read more")}
       >
         {item.description}
-      </Text>
+      </Text> */}
     </View>
   );
 
@@ -214,37 +218,46 @@ export default function NewsScreen() {
         backAction={() => hanldeGoBack()}
       >
       </AppBarHeaderComponent>
-      <View style={NewsStyle.chipButton}>
-        {chipItems.map((i) => (
-          <Chip
-            key={i.id}
-            mode="outlined"
-            onPress={() => alert("Handle filter")}
-            textStyle={{
-              opacity: 0.8,
-              fontWeight: "400",
-              fontSize: 10,
-            }}
-            style={NewsStyle.chipStyles}
-          >
-            {i.title}
-          </Chip>
-        ))}
-      </View>
+      <ScrollView
+        persistentScrollbar={false}
+        style={NewsStyle.scrollView}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+        scrollEventThrottle={16}
+      >
+        <View style={NewsStyle.scrollViewContent}>
+          <HorizontalCarouselComponent data={dataSlider}></HorizontalCarouselComponent>
+          <View style={NewsStyle.chipButton}>
+            {chipItems.map((i) => (
+              <Chip
+                key={i.id}
+                mode="outlined"
+                onPress={() => alert("Handle filter")}
+                textStyle={{
+                  opacity: 0.8,
+                  fontWeight: "400",
+                  fontSize: 10,
+                }}
+                style={NewsStyle.chipStyles}
+              >
+                {i.title}
+              </Chip>
+            ))}
+          </View>
 
-      <FlatList
-        data={newsItems}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        numColumns={2}
-        columnWrapperStyle={NewsStyle.row}
-      />
 
-      <View style={NewsStyle.loadMoreArticle}>
-        <Text style={NewsStyle.loadMore} onPress={() => alert("Loading....")}>
-          Load More Article
-        </Text>
-      </View>
+          <FlatList
+            data={newsItems}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id.toString()}
+            numColumns={2}
+            columnWrapperStyle={NewsStyle.row}
+          />
+        </View>
+      </ScrollView>
+      
+      <AppBarFooterComponents isHide={true} centerIcon="plus"></AppBarFooterComponents>
+
     </View>
   );
 }

@@ -19,9 +19,9 @@ const NewsStyle = StyleSheet.create({
     backgroundColor: backgroundColor
   },
   chipButton: {
-    marginLeft: width * 0.02,
+    // marginLeft: width * 0.02,
     marginBottom: height * 0.03,
-    marginTop: height * 0.02,
+    marginLeft: 20,
     alignItems: "center",
     flexDirection: "row",
     flexWrap: "wrap",
@@ -32,6 +32,7 @@ const NewsStyle = StyleSheet.create({
     alignItems: "center",
     borderRadius: 5,
     borderColor: "#D9D9D9",
+    backgroundColor: backgroundColor,
   },
 
   loadMoreArticle: {
@@ -40,11 +41,17 @@ const NewsStyle = StyleSheet.create({
     paddingTop: height * 0.03,
     paddingBottom: height * 0.03,
   },
-  itemContainer: { margin: 10, alignItems: "center" },
+  itemContainer: {
+    alignItems: "center",
+    marginLeft: 2,
+    marginRight: 2,
+    borderRadius: 8
+  },
   itemImage: {
     width: width / 2 - 20,
     height: height / 6 - 20,
     resizeMode: "cover",
+    borderRadius: 8
   },
   itemTitle: {
     marginTop: height * 0.01,
@@ -68,7 +75,7 @@ const NewsStyle = StyleSheet.create({
   },
   row: {
     flex: 1,
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
   },
   titlePage: {
     fontSize: 20,
@@ -80,6 +87,17 @@ const NewsStyle = StyleSheet.create({
   linearBackground: {
     height: ITEM_HEIGHT,
     width: ITEM_WIDTH,
+  },
+  scrollView: {
+    width: width,
+    flex: 1,
+    backgroundColor: backgroundColor,
+
+  },
+  scrollViewContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 });
 

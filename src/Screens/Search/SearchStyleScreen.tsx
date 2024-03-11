@@ -1,17 +1,21 @@
 import { StyleSheet, Dimensions } from 'react-native';
-import { backgroundColor } from '../../root/Colors';
-import { ITEM_HEIGHT, ITEM_WIDTH } from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
+import { backgroundColor, primaryColor } from '../../root/Colors';
+import { ITEM_HEIGHT } from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
+import { ITEM_WIDTH } from '../../components/ListView/ListViewStyleComponent';
 
 const { width, height } = Dimensions.get('window');
 const containerPadding = 16;
+const cardTextFontSize = 18;
+
 
 const SearchStyleScreen = StyleSheet.create({
   container: {
+    height: 'auto',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: containerPadding,
-    backgroundColor: backgroundColor
+    backgroundColor: backgroundColor,
   },
   scrollView: {
     width: width,
@@ -98,7 +102,37 @@ const SearchStyleScreen = StyleSheet.create({
     zIndex: 1,
 
   },
-  
+  textStyleCardType: {
+    position: 'absolute',
+    alignContent: 'center',
+    alignItems: 'center',
+    backgroundColor: primaryColor,
+    fontWeight: 'bold',
+    fontSize: 40
+  },
+  cardTextView: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    alignItems: 'center',
+    width: ITEM_WIDTH,
+    alignContent: 'center',
+    backgroundColor : 'rgba(175,170,175, 0.3)',
+    borderBottomStartRadius: 8,
+    borderBottomEndRadius: 8
+  },
+  cardText: {
+    color: primaryColor,
+    fontSize: cardTextFontSize,
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10
+
+  },
+
 });
 
 export default SearchStyleScreen;
