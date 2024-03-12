@@ -441,7 +441,7 @@ const UserProfileScreen = () => {
 
       />
       <View style={UserProfileStyleScreen.header}>
-        <IconButton icon={require('../../assets/icon/backarrow.png')} onPress={() => navigation.navigate('Home')}></IconButton>
+        <IconButton icon={require('../../assets/img/logo/logo.png')} onPress={() => navigation.navigate('Home')}></IconButton>
         <View style={UserProfileStyleScreen.upgradeBanner} >
           <Icon source={require('../../assets/img/logo/logo.png')} size={40}></Icon>
           <Text style={{ fontSize: 12, fontWeight: 'bold', marginRight: 10 }}>Upgrade to Store</Text>

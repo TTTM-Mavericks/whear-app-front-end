@@ -221,6 +221,7 @@ const SocialScreen = () => {
             </MaskedView>
           </View>
         }
+        isLogo={true}
         backAction={() => hanldeGoBack()}
       ></AppBarHeaderComponent>
 

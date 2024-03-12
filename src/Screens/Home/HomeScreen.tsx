@@ -90,6 +90,7 @@ const HomeScreen = () => {
 
   /*-----------------UseEffect-----------------*/
   useEffect(() => {
+    setIsLoading(true);
     const fetchData = async () => {
       const tokenStorage = await AsyncStorage.getItem('access_token');
       const userString = await AsyncStorage.getItem('userData');
@@ -105,8 +106,8 @@ const HomeScreen = () => {
           if (getData.success === 200) {
             console.log('recommend');
             setDataPaging(getData.data);
-            setIsLoading(false);
             // setClothesData(getData.data.slice(0.20));
+            setIsLoading(true);
           }
           else {
             console.log(getData.data);
@@ -125,10 +126,28 @@ const HomeScreen = () => {
   // }, [dataPaging]);
 
   useEffect(() => {
-      handleFetchDataPaging(pageNumber);
+    handleFetchDataPaging(pageNumber);
   }, [dataPaging]);
 
+  // useEffect(() => {
+  //   clothesData.map((items) => {
+  //     if(items.reacted) {
+  //       setAddedItems(addedItems.filter((item)=> item !== items.userID));
 
+  //     } else {
+  //       // setAddedItems([...addedItems, items.clothesID])
+  //     }
+  //   })
+
+  // }, [clothesData])
+  useEffect(() => {
+    // Filter clothesData to get only items with reacted set to true
+    const reactedItems = clothesData.filter((item) => item.reacted);
+    // Extract the clothesID from filtered items
+    const reactedItemIds = reactedItems.map((item) => item.clothesID);
+    // Update addedItems state with reacted item IDs
+    setAddedItems(reactedItemIds);
+  }, [clothesData]);
 
 
 
@@ -157,7 +176,7 @@ const HomeScreen = () => {
         if (getData.success === 200) {
           console.log('handleFetchDataPaging');
           const data: ClothesInterface[] = getData.data;
-          setClothesData((prev)=>[...prev,...data]);
+          setClothesData((prev) => [...prev, ...data]);
           // setClothesData(getData.data);
           setIsLoading(false);
 
@@ -172,6 +191,8 @@ const HomeScreen = () => {
       setIsFetchingMore(false);
     }
   };
+
+
 
   const handleLoadMore = () => {
     console.log('paging');
@@ -200,14 +221,36 @@ const HomeScreen = () => {
     if (addItemToCollection) {
       dispatch(setOpenAddToCollectionsDialog(true));
       setAddedClothId(id);
+      setAddedItems(addedItems.filter((item) => item !== id));
     }
   }
 
-  const handleChangeIconAdded = (id: any, reacted: boolean | undefined) => {
-    setAddItemToCollection(!addItemToCollection);
+  const handleChangeIconAdded = async (id: any, reacted: boolean | undefined) => {
     if (!reacted) {
-      handleAddToCollection(id);
+      const selectedItem = clothesData.find((item) => item.clothesID === id);
+      if (selectedItem) {
+        if (addedItems.includes(id)) {
+          
+          handleAddToCollection(id);
+        } else {
+          setAddedItems([...addedItems, id]);
+
+        }
+      } else {
+        setAddedItems([...addedItems, id]);
+      }
+
+
     }
+    else {
+      const selectedItem = clothesData.find((item) => item.clothesID === id);
+      if (selectedItem) {
+        setAddedItems([...addedItems, id]);
+      }
+    }
+    // if (!reacted) {
+    //   handleAddToCollection(id);
+    // }
 
   }
 
@@ -331,17 +374,12 @@ const HomeScreen = () => {
                 onPress={() => hanldeMoveToDetail(item.clothesID)}
                 child={
                   <IconButton
-                    key={item.clothesID}
-                    mode='contained'
+                    mode='outlined'
                     icon={'heart'}
-                    underlayColor='transparent'
-                    containerColor='transparent'
                     style={[HomeStylesComponent.iconCard, {}]}
-                    size={20}
-                    iconColor={addedItems.includes(item.clothesID) && item.reacted ? '#C90801' : 'black'}
-                    // iconColor={item.reacted ? fourthColor : '#C3C3C3'}
-                    // iconColor={fourthColor}
-
+                    size={15}
+                    underlayColor='black'
+                    iconColor={addedItems.includes(item.clothesID) ? '#C90801' : 'black'}
                     onPress={() => {
                       handleChangeIconAdded(item.clothesID, item.reacted);
                     }}
@@ -352,9 +390,7 @@ const HomeScreen = () => {
             contentContainerStyle={{ paddingRight: 0 }}
             showsVerticalScrollIndicator={false}
             scrollEnabled={false}
-            // onEndReached={handleLoadMore}
-            // onEndReachedThreshold={0.9}
-          // ListFooterComponent={isFetchingMore && <ActivityIndicator size="large" color="#0000ff" />}
+
           />
           {isLoading
             && (

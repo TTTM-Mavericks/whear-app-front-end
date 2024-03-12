@@ -419,7 +419,9 @@ export const getIconClothImage = (type: string): ImageSourcePropType => {
       return require('../../../assets/icon/cap.png');
     case 'BOOTS':
       return require('../../../assets/icon/sneakers.png');
-      case 'SNEAKER':
+    case 'SNEAKER':
+      return require('../../../assets/icon/sneakers.png');
+    case 'LOAFERS':
       return require('../../../assets/icon/sneakers.png');
     default:
       throw new Error(`Unsupported clothing type: ${type}`);
