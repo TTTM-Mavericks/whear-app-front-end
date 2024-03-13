@@ -6,7 +6,7 @@ import { backgroundColor } from "./src/root/Colors";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 
-import { Provider } from "react-redux"; // Import Provider
+import { Provider, useSelector } from "react-redux"; // Import Provider
 import store from "./src/redux/State/Store";
 import SignUpComponent from "./src/components/auth/SignUp/SignUpComponent";
 import { PaperProvider } from "react-native-paper";
@@ -18,7 +18,7 @@ import UserProfileScreen from "./src/Screens/UserProfile/UserProfileScreen";
 import UserProfileSettingScreen from "./src/Screens/UserProfile/UserProfileSettingScreen";
 import BasicInformationScreen from "./src/Screens/BasicInformation/BasicInformationScreen";
 import ChooseStyleYouLoveScreen from "./src/Screens/ChooseStyleYouLove/ChooseStyleYouLoveScreen";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NewsScreen from "./src/Screens/News/NewsScreen";
 import SignInComponent from "./src/components/auth/SinIn/SignInComponent";
 import HotStoreScreen from "./src/Screens/HotStore/HotStoreScreen";
@@ -39,27 +39,63 @@ import UpgardeDetailScreen from "./src/Screens/Upgrade/UpgardeDetailScreen";
 import TypeOfClothesScreen from "./src/Screens/TypeOfClothes/TypeOfClothesScreen";
 import TransactionDetailScreen from "./src/Screens/TransactionDetail/TransactionDetailScreen";
 import StyleOfClothesScreen from "./src/Screens/StyleOfClothes/StyleOfClothesScreen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createStackNavigator();
 
 export default function App() {
+
+  // const [isLogin, setIsLogin] = useState(false);
+  // const isLogined = useSelector((state: any) => state.store.isLogined);
+  // React.useEffect(() => {
+  //   if (isLogined) {
+  //     setIsLogin(isLogined);
+  //     console.log('isLogined: ', isLogined);
+  //   } else {
+
+  //   }
+  // }, [isLogined]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const tokenStorage = await AsyncStorage.getItem('access_token');
+  //       const userString = await AsyncStorage.getItem('userData');
+  //       if (tokenStorage && userString) {
+  //         setIsLogin(true);
+  //       } else {
+  //         setIsLogin(false);
+  //       }
+  //     } catch (error) {
+  //       setIsLogin(false);
+  //     }
+
+  //   }
+  //   fetchData();
+  // }, []);
+
   return (
     <Provider store={store}>
       <PaperProvider>
         <NavigationContainer>
           <View style={styles.container}>
             <Stack.Navigator>
+              <Stack.Screen
+                name="Onboarding"
+                component={OnboardingScreen}
+                options={{ headerShown: false }}
+              />
               {/* <Stack.Screen
                 name='FirstLoadingPage'
                 component={FirstLoadingPage}
                 options={{ headerShown: false }}
-              />
+              /> */}
 
               <Stack.Screen
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
-              /> */}
+              />
 
               <Stack.Screen
                 name="Home"
@@ -205,11 +241,7 @@ export default function App() {
                 component={ChatScreen}
                 options={{ headerShown: false }}
               />
-              <Stack.Screen
-                name="Onboarding"
-                component={OnboardingScreen}
-                options={{ headerShown: false }}
-              />
+
 
               <Stack.Screen
                 name="UpgradeScreen"

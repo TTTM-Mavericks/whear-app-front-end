@@ -23,7 +23,7 @@ const OnboardingStyle = StyleSheet.create({
       backgroundColor: backgroundColor,
       zIndex: 1,
       width: '100%',
-      height: ITEM_HEIGHT * 0.65,
+      height: ITEM_HEIGHT * 0.8,
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -37,6 +37,7 @@ const OnboardingStyle = StyleSheet.create({
       justifyContent: 'center',
       paddingHorizontal: 20,
       alignItems: 'center',
+      marginTop: 100
     },
     getStartedBtn: {
       backgroundColor: primaryColor,
