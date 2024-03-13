@@ -232,6 +232,7 @@ const CollectionsScreen = () => {
             </MaskedView>
           </View>
         }
+        isLogo={true}
         backAction={() => hanldeGoBack()}
       >
       </AppBarHeaderComponent>

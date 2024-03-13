@@ -38,6 +38,7 @@ import UpgradeScreen from "./src/Screens/Upgrade/UpgradeScreen";
 import UpgardeDetailScreen from "./src/Screens/Upgrade/UpgardeDetailScreen";
 import TypeOfClothesScreen from "./src/Screens/TypeOfClothes/TypeOfClothesScreen";
 import TransactionDetailScreen from "./src/Screens/TransactionDetail/TransactionDetailScreen";
+import StyleOfClothesScreen from "./src/Screens/StyleOfClothes/StyleOfClothesScreen";
 
 const Stack = createStackNavigator();
 
@@ -231,6 +232,12 @@ export default function App() {
               <Stack.Screen
                 name="TransactionDetailScreen"
                 component={TransactionDetailScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="StyleOfClothesScreen"
+                component={StyleOfClothesScreen}
                 options={{ headerShown: false }}
               />
 

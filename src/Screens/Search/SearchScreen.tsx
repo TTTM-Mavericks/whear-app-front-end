@@ -382,7 +382,15 @@ const SearchScreen = () => {
   }
 
   const hanldeMoveToDetail = (typesValue: string) => {
-    navigation.navigate('TypeOfClothesScreen', { typeOfClothes: typesValue });
+    if (chipTag === 'styles') {
+      navigation.navigate('StyleOfClothesScreen', { stylesOfClothes: typesValue });
+    }
+    if (chipTag === 'types') {
+      navigation.navigate('TypeOfClothesScreen', { typeOfClothes: typesValue });
+    }
+    if(chipTag === 'clothes') {
+      navigation.navigate('ClothesDetailScreen', { clothID: typesValue });
+    }
   }
 
   const handleSelectSuggestion = (selectedKeyword: string) => {
