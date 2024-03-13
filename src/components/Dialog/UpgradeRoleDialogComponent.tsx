@@ -123,7 +123,7 @@ const UpgradeRoleDialogComponent = () => {
                             <View style={DialogStylesComponent.groupCard}>
                                 <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
                                     <Text style={[DialogStylesComponent.contentText, { fontSize: 15, fontWeight: 'bold' }]}>
-                                        For only
+                                        Only
                                     </Text>
                                     <View style={{ backgroundColor: primaryColor, marginLeft: 5, marginRight: 5, borderRadius: 10 }}>
                                         <Text style={[DialogStylesComponent.contentText, { fontSize: 15, fontWeight: 'bold', padding: 5, }]}>

@@ -13,6 +13,8 @@ export const OPEN_UPGRADE_ROLES_DIALOG = 'OPEN_UPGRADE_ROLES_DIALOG';
 export const IS_UPLOADED_IMAGE_TO_FIREBASE = 'IS_UPLOADED_IMAGE_TO_FIREBASE';
 export const OPEN_CREATE_COLLECTION_DIALOG = 'OPEN_CREATE_COLLECTION_DIALOG';
 export const SAVE_IMAGE_COLLECTION_URL = 'SAVE_IMAGE_COLLECTION_URL';
+export const IS_LOGINED = 'IS_LOGINED';
+
 
 
 
@@ -90,6 +92,11 @@ export const setCreateCollectionDialog = (isOpenCreateCollectionDialog: boolean)
 export const saveImageCollectionngUrl = (imageCollectionUrl: string) => ({
   type: SAVE_IMAGE_COLLECTION_URL,
   payload: imageCollectionUrl,
+});
+
+export const setIsLogined = (isLogined: boolean) => ({
+  type: IS_LOGINED,
+  payload: isLogined,
 });
 
 

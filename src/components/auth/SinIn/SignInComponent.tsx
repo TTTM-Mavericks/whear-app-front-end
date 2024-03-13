@@ -24,6 +24,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingComponent from '../../Common/Loading/LoadingComponent';
 import Toast from 'react-native-toast-message'
 import { height, width } from '../../../root/ResponsiveSize';
+import { setIsLogined } from '../../../redux/State/Actions';
 
 /**
  * Image Url
@@ -119,6 +120,8 @@ const SignInComponent = () => {
 
           console.log('userData: ', JSON.stringify(response.data));
           setIsLoading(true);
+          dispatch(setIsLogined(true));
+          AsyncStorage.setItem('logined', 'true');
           setTimeout(() => {
             setIsLoading(false);
             navigation.replace('Home');
@@ -182,7 +185,7 @@ const SignInComponent = () => {
         height: height,
         padding: 16
       }} source={require('../../../assets/img/logo/background.png')}>
-        <Image source={require('../../../assets/img/logo/logo.png')} style={{width: 150, height: 150, marginTop: 20}}></Image>
+        <Image source={require('../../../assets/img/logo/logo.png')} style={{width: 150, height: 150, marginTop: 35}}></Image>
         <View style={{marginTop: 50}}>
           <Text style={SigInStylesComponent.title}>Sign In</Text>
           <TextInput

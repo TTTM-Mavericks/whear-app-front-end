@@ -204,8 +204,16 @@ const dropdownData = {
     { label: 'INVERTED TRIANGLE SHAPE', value: 'INVERTED_TRIANGLE_SHAPE', imgUrl: 'URL_HERE' },
     { label: 'ROUND SHAPE', value: 'ROUND_SHAPE', imgUrl: 'URL_HERE' },
     { label: 'LEAN OR SLIM SHAPE', value: 'LEAN_OR_SLIM_SHAPE', imgUrl: 'URL_HERE' },
+  ],
+
+  gender: [
+    {label: 'Male', value: 'MALE'},
+    {label: 'Female', value: 'FEMALE'},
+    {label: 'Other', value: 'OTHER'},
+
+
   ]
-  
+
 
 
 };
@@ -230,6 +238,7 @@ const AddingClothesScreen = () => {
   const [selectedStyle, setSelectedStyle] = useState<string[]>([]);
   const [selectedMaterial, setSelectedMaterial] = useState('');
   const [selectedClothesSize, setSelectedClothesSize] = useState<string[]>([]);
+  const [selectedGender, setSelectedGender] = useState<string[]>([]);
   const [selectedColor, setSelectedColor] = useState<string[]>([]);
   const [nameOfProduct, setNameOfProduct] = useState('');
   const [customState, setCustomState] = useState(null);
@@ -445,6 +454,12 @@ const AddingClothesScreen = () => {
     setIsLoading(true);
     try {
       const hashtagArray = hashtagTxt.split(',');
+      let gender;
+      if (selectedGender[0] === 'OTHER') {
+        gender = ['MALE', 'FEMALE']
+      } else {
+        gender = selectedGender
+      }
       const clothRequest = {
         userID: useID,
         nameOfProduct: nameOfProduct,
@@ -460,8 +475,10 @@ const AddingClothesScreen = () => {
         link: shopLink,
         hashtag: hashtagArray,
         clothesStyle: selectedStyle,
+        clothesGender: gender
 
       }
+      console.log(clothRequest);
 
 
       setIsLoading(true);
@@ -699,6 +716,25 @@ const AddingClothesScreen = () => {
                     />
                   </View>
 
+                  <View style={AddingClothesStyleScreen.dropdownContainer}>
+                    <Text style={AddingClothesStyleScreen.lableDropDown}>Clothes Sizes</Text>
+                    <SelectDropdown
+                      buttonStyle={AddingClothesStyleScreen.buttondropDownStyle}
+                      dropdownStyle={AddingClothesStyleScreen.dropDownStyle}
+                      buttonTextStyle={AddingClothesStyleScreen.buttonTextStyle}
+                      rowTextStyle={AddingClothesStyleScreen.rowTextStyle}
+                      rowStyle={AddingClothesStyleScreen.rowStyle}
+                      data={dropdownData.clothesSizes}
+                      onSelect={(selectedItem, index) => {
+                        if (!selectedClothesSize.includes(selectedItem.value)) {
+                          setSelectedClothesSize((prevSelectedClothesSize) => [...prevSelectedClothesSize, selectedItem.value]);
+                        }
+                      }}
+                      buttonTextAfterSelection={(selectedItem, index) => selectedItem.label}
+                      rowTextForSelection={(item, index) => item.label}
+                    />
+                  </View>
+
 
 
                 </View>
@@ -707,19 +743,39 @@ const AddingClothesScreen = () => {
 
             </View>
 
-            <View style={[AddingClothesStyleScreen.multilineTextContainer, Platform.OS === 'android' && { marginTop: 50 }]}>
-              <Text style={AddingClothesStyleScreen.lableDropDown}>Hashtag</Text>
-              <TextInput
-                value={hashtagTxt}
-                label='#hashtag1, #hashtag2,...'
-                mode='outlined'
-                onChangeText={setHashtagTxt}
-                outlineColor={primaryColor}
-                outlineStyle={{ borderWidth: 1 }}
-                activeOutlineColor={primaryColor}
-                style={[AddingClothesStyleScreen.multilineText, { height: 30 }]}
+            <View style={[AddingClothesStyleScreen.multilineTextContainer, Platform.OS === 'android' && { marginTop: -20 }]}>
+              <View style={AddingClothesStyleScreen.dropdownContainer}>
+                <Text style={AddingClothesStyleScreen.lableDropDown}>Gender</Text>
+                <SelectDropdown
+                  buttonStyle={AddingClothesStyleScreen.buttondropDownStyle}
+                  dropdownStyle={AddingClothesStyleScreen.dropDownStyle}
+                  buttonTextStyle={AddingClothesStyleScreen.buttonTextStyle}
+                  rowTextStyle={AddingClothesStyleScreen.rowTextStyle}
+                  rowStyle={AddingClothesStyleScreen.rowStyle}
+                  data={dropdownData.gender}
+                  onSelect={(selectedItem, index) => {
+                    if (!selectedClothesSize.includes(selectedItem.value)) {
+                      setSelectedGender((prevSelectedClothesSize) => [...prevSelectedClothesSize, selectedItem.value]);
+                    }
+                  }}
+                  buttonTextAfterSelection={(selectedItem, index) => selectedItem.label}
+                  rowTextForSelection={(item, index) => item.label}
+                />
+              </View>
+              <View style={{paddingTop: -20, marginBottom: 30}}>
+                <Text style={AddingClothesStyleScreen.lableDropDown}>Hashtag</Text>
+                <TextInput
+                  value={hashtagTxt}
+                  label='#hashtag1, #hashtag2,...'
+                  mode='outlined'
+                  onChangeText={setHashtagTxt}
+                  outlineColor={primaryColor}
+                  outlineStyle={{ borderWidth: 1 }}
+                  activeOutlineColor={primaryColor}
+                  style={[AddingClothesStyleScreen.multilineText, { height: 30, width: '50%', marginTop: -7 }]}
 
-              />
+                />
+              </View>
 
             </View>
 

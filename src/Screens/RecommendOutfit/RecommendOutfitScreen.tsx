@@ -374,6 +374,7 @@ const RecommendOutfitScreen = () => {
             </MaskedView>
           </View>
         }
+        isLogo={true}
         backAction={() => hanldeGoBack()}
       >
       </AppBarHeaderComponent>

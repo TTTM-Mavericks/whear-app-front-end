@@ -27,8 +27,9 @@ export type RootStackParamList = {
   UpgradeScreen: undefined;
   UpgardeDetailScreen: undefined;
   TypeOfClothesScreen: {typeOfClothes: string},
-  StylesOfClothesScreen: {stylesOfClothes: string},
+  StyleOfClothesScreen: {stylesOfClothes: string},
   TransactionDetailScreen: {transactionId: any}
+  
 
 
 

@@ -16,6 +16,7 @@ interface State {
   isOpenUpgradeRolesDialog: boolean;
   isOpenCreateCollectionDialog: boolean;
   imageCollectionUrl: string;
+  isLogined: boolean
 }
 
 const initialState: State = {
@@ -32,7 +33,8 @@ const initialState: State = {
   imagePostingUrl: '#',
   isOpenUpgradeRolesDialog: false,
   isOpenCreateCollectionDialog: false,
-  imageCollectionUrl: '#'
+  imageCollectionUrl: '#',
+  isLogined: false,
 };
 
 const authSlice = createSlice({
@@ -85,6 +87,9 @@ const authSlice = createSlice({
     saveImageCollectionUrl: (state, action: PayloadAction<{ imageCollectionUrl: string }>) => {
       state.imageCollectionUrl = action.payload.imageCollectionUrl;
     },
+    setIsLogined: (state, action: PayloadAction<{ isLogined: boolean }>) => {
+      state.isLogined = action.payload.isLogined;
+    },
   },
 });
 
@@ -102,7 +107,8 @@ export const {
   setUploadToFireBase,
   saveImagePostingUrl,
   setOpenUpgradeRolesDialog,
-  saveImageCollectionUrl
+  saveImageCollectionUrl,
+  setIsLogined
 
 } = authSlice.actions;
 export default authSlice.reducer;

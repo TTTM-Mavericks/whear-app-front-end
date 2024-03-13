@@ -17,9 +17,10 @@ import AddImageButtonComponent from '../../components/ImagePicker/AddImageButton
 import api from '../../api/AxiosApiConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ClothesInterface, CollectionInterface, TransactionInterface, UserInterFace } from '../../models/ObjectInterface';
-import { setUploadToFireBase } from '../../redux/State/Actions';
+import { setIsLogined, setUploadToFireBase } from '../../redux/State/Actions';
 import { clothesLogoUrlDefault, spanTextSize } from '../../root/Texts';
 import Toast from 'react-native-toast-message';
+import LoadingComponent from '../../components/Common/Loading/LoadingComponent';
 
 interface ListItem {
   id: string;
@@ -191,6 +192,7 @@ const UserProfileScreen = () => {
    * Fetch data to get following User
    */
   useEffect(() => {
+    setIsLoading(true);
     const fetchData = async () => {
       const userStorage = await AsyncStorage.getItem("userData");
       if (userStorage) {
@@ -199,10 +201,11 @@ const UserProfileScreen = () => {
 
         try {
           const userIDParam = (route.params as { userID?: string })?.userID;
-          const response = await api.get(`/api/v1/follow/get-all-following-user?userid=${userIDParam}&base_userid=${userParse?.userID}`);
+          const response = await api.get(`/api/v1/follow/get-all-following-user?userid=${userIDParam}&base_userid=${userParse.userID}`);
           if (response.success === 200) {
             setFollowing(response.data);
-            // console.log(response.data);
+            console.log('edsdfsdfsdfS:',response.data);
+            setIsLoading(false);
             Toast.show({
               type: 'success',
               text1: response.message
@@ -305,6 +308,10 @@ const UserProfileScreen = () => {
               setIsLoading(false);
             }, 1000)
           }
+        }
+
+        if(selectedTag==='menu') {
+          setIsLoading(false);
         }
 
 
@@ -430,7 +437,24 @@ const UserProfileScreen = () => {
 
   const handleMoveToDetail = (id: any) => {
     console.log('id: ', id);
-    navigation.navigate('TransactionDetailScreen', {transactionId: id})
+    navigation.navigate('TransactionDetailScreen', { transactionId: id })
+  }
+
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem('access_token');
+      await AsyncStorage.removeItem('userData');
+      // Optional: Perform any other logout-related actions
+      console.log('Items cleared successfully');
+      console.log('AsyncStorage cleared successfully');
+      dispatch(setIsLogined(false));
+      AsyncStorage.setItem('logined', 'false');
+      setTimeout(() => {
+        navigation.navigate('SignIn');
+      }, 500)
+    } catch (error) {
+      console.error('Error clearing AsyncStorage:', error);
+    }
   }
 
   return (
@@ -441,7 +465,7 @@ const UserProfileScreen = () => {
 
       />
       <View style={UserProfileStyleScreen.header}>
-        <IconButton icon={require('../../assets/icon/backarrow.png')} onPress={() => navigation.navigate('Home')}></IconButton>
+        <IconButton icon={require('../../assets/icon/backarrow.png')} onPress={() => navigation.navigate('Social')}></IconButton>
         <View style={UserProfileStyleScreen.upgradeBanner} >
           <Icon source={require('../../assets/img/logo/logo.png')} size={40}></Icon>
           <Text style={{ fontSize: 12, fontWeight: 'bold', marginRight: 10 }}>Upgrade to Store</Text>
@@ -587,7 +611,7 @@ const UserProfileScreen = () => {
             uncheckedColor: '#808991',
           },
           {
-            value: 'news',
+            value: 'menu',
             icon: 'menu',
             style: {
               borderRadius: 0,
@@ -653,7 +677,7 @@ const UserProfileScreen = () => {
                 keyExtractor={(item) => item.clothesID}
                 numColumns={2}
                 renderItem={({ item }) => (
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={()=> navigation.navigate('ClothesDetailScreen', {clothID: item.clothesID})}>
                     <ListViewComponent data={[{ id: item.clothesID, imgUrl: item.clothesImages ? item.clothesImages[0] : clothesLogoUrlDefault, }]} />
                   </TouchableOpacity>
                 )}
@@ -679,7 +703,7 @@ const UserProfileScreen = () => {
                 keyExtractor={(item) => item.data.id}
                 numColumns={1}
                 renderItem={({ item }) => (
-                  <TouchableOpacity key={item.data.id} style={UserProfileStyleScreen.cardContentHistory} onPress={()=> handleMoveToDetail(item.data.orderCode)}>
+                  <TouchableOpacity key={item.data.id} style={UserProfileStyleScreen.cardContentHistory} onPress={() => handleMoveToDetail(item.data.orderCode)}>
                     <View style={{ padding: 10, flexDirection: 'row' }} >
                       <View style={[UserProfileStyleScreen.cardContentStatus, { backgroundColor: item.data.status === 'PAID' ? primaryColor : item.data.status === 'CANCELLED' ? fourthColor : thirthColor }]}>
                         <Text style={{ color: backgroundColor, fontWeight: 'bold' }}>
@@ -710,6 +734,41 @@ const UserProfileScreen = () => {
             )
           }
 
+          {selectedTag === 'menu' && userStorage?.userID === currentUser?.userID && (
+            <View>
+              <Button
+                mode='outlined'
+                contentStyle={Platform.OS === 'ios' ? { height: height * 0.05 } : { height: height * 0.04 }}
+                style={[UserProfileStyleScreen.buttonGroup_button, { backgroundColor: primaryColor, marginTop: 20 }]}
+                labelStyle={[UserProfileStyleScreen.buttonGroup_button_lable,]}
+                onPress={()=> navigation.navigate('UserProfileSetting')}
+              >
+                <Text style={{ fontWeight: '500', fontSize: 12 }}>Change info</Text>
+              </Button>
+
+              <Button
+                mode='outlined'
+                contentStyle={Platform.OS === 'ios' ? { height: height * 0.05 } : { height: height * 0.04 }}
+                style={[UserProfileStyleScreen.buttonGroup_button, { backgroundColor: primaryColor, marginTop: 20 }]}
+                labelStyle={[UserProfileStyleScreen.buttonGroup_button_lable,]}
+                onPress={() => navigation.navigate('BasicInformationScreen')}
+              >
+                <Text style={{ fontWeight: '500', fontSize: 12 }}>Change style</Text>
+              </Button>
+
+              <Button
+                mode='outlined'
+                contentStyle={Platform.OS === 'ios' ? { height: height * 0.05 } : { height: height * 0.04 }}
+                style={[UserProfileStyleScreen.buttonGroup_button, { backgroundColor: grayBackgroundColor, marginTop: 20 }]}
+                labelStyle={[UserProfileStyleScreen.buttonGroup_button_lable,]}
+                onPress={() => handleLogout()}
+              >
+                <Text style={{ fontWeight: '500', fontSize: 12 }}>Log out</Text>
+              </Button>
+
+            </View>
+          )}
+
           <PostingDialogComponent></PostingDialogComponent>
         </View>
       </ScrollView >
@@ -722,7 +781,7 @@ const UserProfileScreen = () => {
           style={{ width: width * 0.85, height: height * 0.8, backgroundColor: backgroundColor }}
         >
           <Dialog.Content>
-            {follower.length > 0 ? (
+            {flollowing.length > 0 ? (
               <FlatList
                 style={{ backgroundColor: backgroundColor }}
                 data={flollowing}
@@ -731,7 +790,7 @@ const UserProfileScreen = () => {
                   <View>
                     <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                       <Image source={{ uri: item.userResponse.imgUrl }} style={{ width: 40, height: 40, borderRadius: 90 }}></Image>
-                      <Text style={{ marginLeft: 10, marginTop: 40 * 0.3, fontSize: 13 }}> {item.userResponse.username}</Text>
+                      <Text style={{ marginLeft: 10, marginTop: 40 * 0.3, fontSize: 13 }}> {item.userResponse.username.slice(0,10)}...</Text>
                       <Button
                         mode='outlined'
                         contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
@@ -739,7 +798,7 @@ const UserProfileScreen = () => {
                         labelStyle={[UserProfileStyleScreen.buttonGroup_button_lable,]}
                         onPress={() => handleFollowInDialog(item.userResponse.userID)}
                       >
-                        <Text style={{ fontWeight: '500', fontSize: 12, color: !item.followed || !isFollowedInFollowingUser ? "black" : "white" }}>{!item.followed || !isFollowedInFollowingUser ? "Follow" : "Following"}</Text>
+                        <Text style={{ fontWeight: '500', fontSize: 10, color: !item.followed || !isFollowedInFollowingUser ? "black" : "white" }}>{!item.followed || !isFollowedInFollowingUser ? "Follow" : "Following"}</Text>
                       </Button>
                     </View>
                   </View>
@@ -780,7 +839,7 @@ const UserProfileScreen = () => {
                           style={[UserProfileStyleScreen.buttonGroup_button, { backgroundColor: !isFolowed ? grayBackgroundColor : primaryColor, width: 100, marginLeft: 5, marginRight: 5, marginTop: 30 * 0.25, position: 'absolute', right: 0 }]}
                           labelStyle={[UserProfileStyleScreen.buttonGroup_button_lable,]}
                         >
-                          <Text style={{ fontWeight: '500', fontSize: 12 }}>{isFolowed ? ' Following' : 'Follow'}</Text>
+                          <Text style={{ fontWeight: '500', fontSize: 10 }}>{isFolowed ? ' Following' : 'Follow'}</Text>
                         </Button>
                       </View>
                     </View>
@@ -801,7 +860,9 @@ const UserProfileScreen = () => {
         </Portal>
       )}
       <AppBarFooterComponents isHide={scrollUp} centerIcon={require('../../assets/img/logo/logo.png')}></AppBarFooterComponents>
+    <LoadingComponent spinner={isLoading} ></LoadingComponent>
     </View >
+
 
   );
 };
