@@ -3,6 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
 import {
   FlatList,
+  Image,
   SafeAreaView,
   ScrollView,
   Text,
@@ -35,6 +36,7 @@ import { PostingInterface, UserInterFace } from '../../models/ObjectInterface';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../api/AxiosApiConfig';
 import LoadingComponent from '../../components/Common/Loading/LoadingComponent';
+import UserListHoriziableComponent from '../../components/Common/UserListHoriziable/UserListHoriziableComponent';
 
 interface ListItem {
   id: string;
@@ -234,7 +236,9 @@ const SocialScreen = () => {
         scrollEventThrottle={16}
       >
         <View style={SocailStyleScreen.scrollViewContent}>
+          <UserListHoriziableComponent></UserListHoriziableComponent>
           <View style={SocailStyleScreen.postingEditorContainer}>
+            
             <View style={{ marginTop: 20 }}>
               <TextInput
                 value='What are you thinking?'

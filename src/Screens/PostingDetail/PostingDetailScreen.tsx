@@ -230,7 +230,7 @@ const PostingDetailScreen = () => {
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
-    navigation.navigate('Social');
+    navigation.replace('Social');
   }
 
   const handleSearch = () => {
