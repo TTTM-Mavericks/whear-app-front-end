@@ -47,6 +47,7 @@ export interface CommentsDataProperties {
   postId: any;
   commentsChild?: ReactNode;
   user: UserInterFace;
+  handleNumberOfComment: (postID: any, comments: CommentsInterface[]) => void;
 }
 
 const MAX_LENGTH = 30;
@@ -56,7 +57,8 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
   comments,
   postId,
   commentsChild,
-  user
+  user, 
+  handleNumberOfComment
 }) => {
   // console.log("comment", comments)
   /*-----------------UseState variable-----------------*/
@@ -165,6 +167,7 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
   const handleTouchablePress = () => {
     Keyboard.dismiss();
   };
+  
 
   /**
    * Send comment
@@ -182,6 +185,7 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
         console.log('123123132comeents: ', response);
         setCommmentGetting((prev) => [...prev, response.data]);
         setComment('');
+        handleNumberOfComment(postID, [...commentGetting, response.data]);
       } else {
 
 
