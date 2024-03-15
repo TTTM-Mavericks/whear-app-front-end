@@ -37,7 +37,9 @@ const OnboardingStyle = StyleSheet.create({
       justifyContent: 'center',
       paddingHorizontal: 20,
       alignItems: 'center',
-      marginTop: 100
+      marginTop: 100,
+      textAlign: 'center',
+      alignContent: 'center'
     },
     getStartedBtn: {
       backgroundColor: primaryColor,

@@ -8,10 +8,8 @@ const { width, height } = Dimensions.get('window');
 export const SLIDER_WIDTH = Dimensions.get('window').width;
 export const ListUserStyleScreen = StyleSheet.create({
   container: {
+    alignContent: 'center',
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: containerPadding,
     backgroundColor: backgroundColor
   },
   title: {
@@ -48,5 +46,16 @@ export const ListUserStyleScreen = StyleSheet.create({
   linearBackground: {
     height: ITEM_HEIGHT,
     width: ITEM_WIDTH,
+  },
+  textDescription: {
+    marginTop: 20,
+    color: "#D4D4D4",
+    width: 306,
+    height: 100,
+    fontSize: 28,
+    fontStyle: "normal",
+    fontWeight: "400",
+    lineHeight: 33,
+    letterSpacing: -1,
   },
 });

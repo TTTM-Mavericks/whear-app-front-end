@@ -491,9 +491,7 @@ const AddingClothesScreen = () => {
         });
         setIsLoading(false);
         const clothID = response.data.clothesID
-        setTimeout(() => {
           navigation.navigate('ClothesDetailScreen', { clothID });
-        }, 1000)
       } else {
         Toast.show({
           type: 'error',

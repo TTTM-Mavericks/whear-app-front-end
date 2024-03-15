@@ -227,17 +227,23 @@ const HomeScreen = () => {
 
   const handleChangeIconAdded = async (id: any, reacted: boolean | undefined) => {
     if (!reacted) {
-      const selectedItem = clothesData.find((item) => item.clothesID === id);
+      console.log('reacted: ', reacted);
+      const selectedItem = clothesData.find((item) => item.clothesID !== id);
       if (selectedItem) {
         if (addedItems.includes(id)) {
-          
-          handleAddToCollection(id);
+          const selectedItem = clothesData.find((item) => item.clothesID === id);
+          if (selectedItem) {
+            setAddedItems([...addedItems, id]);
+          }
         } else {
-          setAddedItems([...addedItems, id]);
+          handleAddToCollection(id);
 
         }
       } else {
-        setAddedItems([...addedItems, id]);
+        const selectedItem = clothesData.find((item) => item.clothesID === id);
+        if (selectedItem) {
+          setAddedItems([...addedItems, id]);
+        }
       }
 
 

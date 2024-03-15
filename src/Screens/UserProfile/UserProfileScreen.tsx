@@ -83,6 +83,8 @@ const UserProfileScreen = () => {
    */
   useEffect(() => {
 
+    setSelectedTag('clothes');
+
     const fetchData = async () => {
       const userStorage = await AsyncStorage.getItem("userData");
       const tokenStorage = await AsyncStorage.getItem('access_token');
@@ -204,7 +206,7 @@ const UserProfileScreen = () => {
           const response = await api.get(`/api/v1/follow/get-all-following-user?userid=${userIDParam}&base_userid=${userParse.userID}`);
           if (response.success === 200) {
             setFollowing(response.data);
-            console.log('edsdfsdfsdfS:',response.data);
+            console.log('edsdfsdfsdfS:', response.data);
             setIsLoading(false);
             Toast.show({
               type: 'success',
@@ -230,97 +232,104 @@ const UserProfileScreen = () => {
 
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      const params = {}
-      try {
-        // selectedTag === 'clothes'
-        // if (selectedTag === 'clothes') {
-        //   const getData = await api.get(`/api/v1/collection/get-all-by-userid?user_id=${userStorage?.userID}`, params, token);
-
-        //   if (getData.success === 200) {
-        //     setUserColthes(getData.data);
-        //     setTimeout(() => {
-        //       setIsLoading(false);
-        //     }, 1000)
-        //   }
-        //   else {
-        //     console.log(getData.data);
-        //     setTimeout(() => {
-        //       setIsLoading(false);
-        //     }, 1000)
-        //   }
-        // }
-
-        // selectedTag === 'collection'
-        if (selectedTag === 'collection') {
-          const getData = await api.get(`/api/v1/collection/get-all-by-userid?user_id=${userStorage?.userID}`, params, token);
-
-          if (getData.success === 200) {
-            setUserCollection(getData.data);
-            setData(getData.data);
-            console.log(getData.data);
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 1000)
-          }
-          else {
-            console.log(getData.data);
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 1000)
-          }
-        }
-
-        if (selectedTag === 'clothes') {
-          const getData = await api.get(`/api/v1/clothes/get-clothes-by-user-id?userId=${userStorage?.userID}`, params, token);
-          console.log(userStorage?.userID);
-          if (getData.success === 200) {
-            setUserColthes(getData.data);
-            setData(getData.data);
-            console.log(getData.data);
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 1000)
-          }
-          else {
-            console.log(getData.data);
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 1000)
-          }
-        }
-
-        if (selectedTag === 'history' && currentUser?.userID === userStorage?.userID) {
-          console.log('history');
-          const getData = await api.get(`/api/v1/payment/get-all-payment?userId=${userStorage?.userID}`, params, token);
-          console.log(userStorage?.userID);
-          if (getData.success === 200) {
-            setHistory(getData.data);
-            console.log(getData.data);
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 1000)
-          }
-          else {
-            console.log(getData.data);
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 1000)
-          }
-        }
-
-        if(selectedTag==='menu') {
-          setIsLoading(false);
-        }
-
-
-      } catch (error) {
-        console.error("An error occurred during data fetching:", error);
-      }
-    }
+    console.log('selectedTag: ', selectedTag);
+    setSelectedTag(selectedTag);
     fetchData();
-  }, [selectedTag])
+  }, [selectedTag]);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    const params = {}
+    try {
+      // selectedTag === 'clothes'
+      // if (selectedTag === 'clothes') {
+      //   const getData = await api.get(`/api/v1/collection/get-all-by-userid?user_id=${userStorage?.userID}`, params, token);
+
+      //   if (getData.success === 200) {
+      //     setUserColthes(getData.data);
+      //     setTimeout(() => {
+      //       setIsLoading(false);
+      //     }, 1000)
+      //   }
+      //   else {
+      //     console.log(getData.data);
+      //     setTimeout(() => {
+      //       setIsLoading(false);
+      //     }, 1000)
+      //   }
+      // }
+
+      // selectedTag === 'collection'
+
+      if (selectedTag === 'clothes') {
+        console.log('selectedTag: ', 1);
+        const getData = await api.get(`/api/v1/clothes/get-clothes-by-user-id?userId=${currentUser?.userID}`, params, token);
+        console.log(userStorage?.userID);
+        if (getData.success === 200) {
+          setUserColthes(getData.data);
+          setData(getData.data);
+          console.log('hihihi: ',getData.data);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 1000)
+        }
+        else {
+          console.log(getData.data);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 1000)
+        }
+      }
+
+      if (selectedTag === 'collection') {
+        const getData = await api.get(`/api/v1/collection/get-all-by-userid?user_id=${userStorage?.userID}`, params, token);
+
+        if (getData.success === 200) {
+          setUserCollection(getData.data);
+          setData(getData.data);
+          console.log(getData.data);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 1000)
+        }
+        else {
+          console.log(getData.data);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 1000)
+        }
+      }
+
+      
+
+      if (selectedTag === 'history' && currentUser?.userID === userStorage?.userID) {
+        console.log('history');
+        const getData = await api.get(`/api/v1/payment/get-all-payment?userId=${userStorage?.userID}`, params, token);
+        console.log(userStorage?.userID);
+        if (getData.success === 200) {
+          setHistory(getData.data);
+          console.log(getData.data);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 1000)
+        }
+        else {
+          console.log(getData.data);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 1000)
+        }
+      }
+
+      if (selectedTag === 'menu') {
+        setIsLoading(false);
+      }
+
+
+    } catch (error) {
+      console.error("An error occurred during data fetching:", error);
+    }
+  }
 
 
   /*-----------------Function handler-----------------*/
@@ -677,7 +686,7 @@ const UserProfileScreen = () => {
                 keyExtractor={(item) => item.clothesID}
                 numColumns={2}
                 renderItem={({ item }) => (
-                  <TouchableOpacity onPress={()=> navigation.navigate('ClothesDetailScreen', {clothID: item.clothesID})}>
+                  <TouchableOpacity onPress={() => navigation.navigate('ClothesDetailScreen', { clothID: item.clothesID })}>
                     <ListViewComponent data={[{ id: item.clothesID, imgUrl: item.clothesImages ? item.clothesImages[0] : clothesLogoUrlDefault, }]} />
                   </TouchableOpacity>
                 )}
@@ -741,7 +750,7 @@ const UserProfileScreen = () => {
                 contentStyle={Platform.OS === 'ios' ? { height: height * 0.05 } : { height: height * 0.04 }}
                 style={[UserProfileStyleScreen.buttonGroup_button, { backgroundColor: primaryColor, marginTop: 20 }]}
                 labelStyle={[UserProfileStyleScreen.buttonGroup_button_lable,]}
-                onPress={()=> navigation.navigate('UserProfileSetting')}
+                onPress={() => navigation.navigate('UserProfileSetting')}
               >
                 <Text style={{ fontWeight: '500', fontSize: 12 }}>Change info</Text>
               </Button>
@@ -790,7 +799,7 @@ const UserProfileScreen = () => {
                   <View>
                     <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                       <Image source={{ uri: item.userResponse.imgUrl }} style={{ width: 40, height: 40, borderRadius: 90 }}></Image>
-                      <Text style={{ marginLeft: 10, marginTop: 40 * 0.3, fontSize: 13 }}> {item.userResponse.username.slice(0,10)}...</Text>
+                      <Text style={{ marginLeft: 10, marginTop: 40 * 0.3, fontSize: 13 }}> {item.userResponse.username.slice(0, 10)}...</Text>
                       <Button
                         mode='outlined'
                         contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
@@ -860,7 +869,7 @@ const UserProfileScreen = () => {
         </Portal>
       )}
       <AppBarFooterComponents isHide={scrollUp} centerIcon={require('../../assets/img/logo/logo.png')}></AppBarFooterComponents>
-    <LoadingComponent spinner={isLoading} ></LoadingComponent>
+      <LoadingComponent spinner={isLoading} ></LoadingComponent>
     </View >
 
 

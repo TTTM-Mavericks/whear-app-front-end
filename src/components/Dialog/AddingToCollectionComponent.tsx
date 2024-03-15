@@ -14,7 +14,7 @@ import CreateCollectionDialogComponents from './CreateCollectionDialogComponents
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CollectionInterface, UserInterFace } from '../../models/ObjectInterface';
 import api from '../../api/AxiosApiConfig';
-import { ALERT_TYPE,  AlertNotificationRoot } from 'react-native-alert-notification';
+import { ALERT_TYPE, AlertNotificationRoot } from 'react-native-alert-notification';
 import { Dialog as DialogNoti } from 'react-native-alert-notification';
 
 
@@ -32,6 +32,7 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
     const [message, setMessage] = React.useState('');
     const [messageAdded, setMessageAdded] = React.useState('');
     const [reload, setReload] = React.useState(false);
+    const [success, setSuccess] = React.useState(false);
 
 
 
@@ -56,7 +57,7 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
 
     React.useEffect(() => {
         fetchData();
-    }, []);
+    }, [openDialog]);
 
     React.useEffect(() => {
         fetchData();
@@ -175,6 +176,7 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
                 setMessageAdded('Added to Collection.');
                 console.log(response.data);
                 setIsLoading(false);
+                setSuccess(true);
                 setTimeout(() => {
                     setReload(true);
                     showDialogSuccess('Added cloth to collection', 'Success', 'Go Collections');
@@ -251,7 +253,7 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
                     <Dialog.Content style={{ height: 400 }}>
                         {messageAdded && (
                             <View style={{ justifyContent: 'center', alignItems: 'center', alignContent: 'center', marginTop: 10, marginBottom: 10 }}>
-                                <Text style={{ fontSize: 17, fontWeight: 'bold', color: primaryColor }}>{message}</Text>
+                                <Text style={{ fontSize: 17, fontWeight: 'bold', color: primaryColor }}>{messageAdded}</Text>
                             </View>
                         )}
                         <ScrollView
@@ -273,6 +275,9 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
                                                         start={{ x: 0, y: 0 }}
                                                         end={{ x: 1, y: 0 }}
                                                     />
+                                                    <View style={{position: 'absolute' }}>
+                                                        <Text style={{ fontSize: 17, fontWeight: 'bold', color: 'black' }}>{item.nameOfCollection}</Text>
+                                                    </View>
                                                 </View>
                                             </ImageBackground>
                                         </View>

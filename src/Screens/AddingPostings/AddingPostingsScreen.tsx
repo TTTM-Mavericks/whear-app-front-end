@@ -130,7 +130,7 @@ const AddingPostingsScreen = () => {
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
-    navigation.goBack();
+    navigation.replace('Social');
   }
 
   const handleTextChange = (text: any) => {
