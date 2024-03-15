@@ -3,6 +3,7 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useEffect, useState } from 'react';
 import {
   FlatList,
+  Image,
   SafeAreaView,
   ScrollView,
   Text,
@@ -31,48 +32,11 @@ import { width } from '../../root/ResponsiveSize';
 import { RootStackParamList } from '../../root/RootStackParams';
 import { spanTextSize } from '../../root/Texts';
 import SocailStyleScreen from './SocailStyleScreen';
-import { PostingInterface, UserInterFace } from '../../models/ObjectInterface';
+import { CommentsInterface, PostingInterface, UserInterFace } from '../../models/ObjectInterface';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../api/AxiosApiConfig';
 import LoadingComponent from '../../components/Common/Loading/LoadingComponent';
-
-interface ListItem {
-  id: string;
-  title?: string;
-  imgUrl?: any;
-  description?: string;
-}
-
-export interface Comment {
-  commentID: string;
-  user: User;
-  content: string;
-  date: Date;
-}
-interface User {
-  userID: string;
-  userName: string;
-  imgUrl: string;
-}
-interface Post {
-  postID: string;
-  react: number;
-  status: boolean;
-  content: {
-    imgUrl: string;
-    content: string;
-  };
-  user: {
-    userID: string;
-    imgUrl: string;
-    userName: string;
-  };
-  typeOfPost: string;
-  hashtag: string[];
-  date: Date;
-  comment: Comment[];
-}
-
+import UserListHoriziableComponent from '../../components/Common/UserListHoriziable/UserListHoriziableComponent';
 
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 const SocialScreen = () => {
@@ -175,6 +139,15 @@ const SocialScreen = () => {
       [postID]: text,
     }));
   };
+  const handleNumberOfComment = async (postID: number, postComment: CommentsInterface[]) => {
+    let posting = [...currentPosting]
+     posting.forEach((item) => {
+      if (item.postID === postID) {
+        item.comment = postComment;
+      }
+    });
+    setCurrentPosting(posting);
+  }
 
   const handleSendComment = (id: string) => {
   };
@@ -234,7 +207,9 @@ const SocialScreen = () => {
         scrollEventThrottle={16}
       >
         <View style={SocailStyleScreen.scrollViewContent}>
+          <UserListHoriziableComponent></UserListHoriziableComponent>
           <View style={SocailStyleScreen.postingEditorContainer}>
+            
             <View style={{ marginTop: 20 }}>
               <TextInput
                 value='What are you thinking?'
@@ -345,6 +320,7 @@ const SocialScreen = () => {
                               postId={item.postID}
                               comments={item.comment}
                               user={user}
+                              handleNumberOfComment={handleNumberOfComment}
                             ></CommentsDetailDialogComponent>
                           )}
                         </SafeAreaView>

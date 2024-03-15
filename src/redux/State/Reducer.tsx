@@ -2,6 +2,7 @@ import { clothesLogoUrlDefault } from "../../root/Texts";
 import {
   ADD_TO_COLLECTIONS,
   GET_EMAIL_SIGNINED,
+  IS_LOGINED,
   IS_UPLOADED_IMAGE_TO_FIREBASE,
   MOVE_TO_FORGOT_PASSWORD,
   OPEN_ADD_TO_COLLECTIONS_DIALOG,
@@ -32,6 +33,7 @@ interface State {
   isOpenUpgradeRolesDialog: boolean;
   isOpenCreateCollectionDialog: boolean;
   imageCollectionUrl: string;
+  isLogined: boolean
 }
 
 const initialState: State = {
@@ -49,6 +51,7 @@ const initialState: State = {
   isOpenUpgradeRolesDialog: false,
   isOpenCreateCollectionDialog: false,
   imageCollectionUrl: '#',
+  isLogined: false,
 
 
 };
@@ -130,6 +133,11 @@ const Reducer = (state = initialState, action: any): State => {
       return {
         ...state,
         imageCollectionUrl: action.payload,
+      };
+      case IS_LOGINED:
+      return {
+        ...state,
+        isLogined: action.payload,
       };
     default:
       return state;
