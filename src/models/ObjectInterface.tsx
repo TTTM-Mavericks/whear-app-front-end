@@ -63,16 +63,16 @@ export interface CollectionInterface {
 
 
 export interface NotificationInterface {
-    notiID?: string;
+    notiID?: any;
     baseUserID?: string;
     targetUserID?: string;
     messageType?: string;
     content?: string;
     sender?: string;
     action?: string;
-    actionID?: number;
+    actionID?: any;
     message?: string;
-    status?: string;
+    status?: boolean;
     dateTime?: string;
 }
 
