@@ -26,16 +26,13 @@ export type RootStackParamList = {
   OnboardingScreen: undefined;
   UpgradeScreen: undefined;
   UpgardeDetailScreen: undefined;
-  TypeOfClothesScreen: {typeOfClothes: string},
-  StyleOfClothesScreen: {stylesOfClothes: string},
-  TransactionDetailScreen: {transactionId: any},
   ListUserScreen: undefined;
-
-  
-  
-
-
-
+  TypeOfClothesScreen: { typeOfClothes: string },
+  StyleOfClothesScreen: { stylesOfClothes: string },
+  TransactionDetailScreen: { transactionId: any }
+  EditNewsScreen: { newsItem: any },
+  NewsDetailScreen: { newsItem: any },
+  AddNewsScreen: undefined,
 };
 
 export interface RootState {
