@@ -40,6 +40,7 @@ import TypeOfClothesScreen from "./src/Screens/TypeOfClothes/TypeOfClothesScreen
 import TransactionDetailScreen from "./src/Screens/TransactionDetail/TransactionDetailScreen";
 import StyleOfClothesScreen from "./src/Screens/StyleOfClothes/StyleOfClothesScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ListUserScreen from "./src/Screens/ListUser/ListUserScreen";
 
 const Stack = createStackNavigator();
 
@@ -270,6 +271,12 @@ export default function App() {
               <Stack.Screen
                 name="StyleOfClothesScreen"
                 component={StyleOfClothesScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="ListUserScreen"
+                component={ListUserScreen}
                 options={{ headerShown: false }}
               />
 

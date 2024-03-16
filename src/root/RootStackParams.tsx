@@ -28,7 +28,10 @@ export type RootStackParamList = {
   UpgardeDetailScreen: undefined;
   TypeOfClothesScreen: {typeOfClothes: string},
   StyleOfClothesScreen: {stylesOfClothes: string},
-  TransactionDetailScreen: {transactionId: any}
+  TransactionDetailScreen: {transactionId: any},
+  ListUserScreen: undefined;
+
+  
   
 
 

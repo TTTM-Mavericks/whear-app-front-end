@@ -63,6 +63,8 @@ const CreateCollectionDialogComponents = () => {
     const [token, setToken] = React.useState('');
     const [isLoading, setIsLoading] = React.useState(false);
     const [message, setMessage] = React.useState('');
+    const [messageAdded, setMessageAdded] = React.useState('');
+
 
 
 
@@ -172,7 +174,8 @@ const CreateCollectionDialogComponents = () => {
             setIsLoading(true);
             const response = await api.post('/api/v1/collection/create-collection', bodyRequest, token);
             if (response.success === 200) {
-            setMessage(response.message);
+                setMessage(response.message);
+                setMessageAdded('Collection created.');
                 Toast.show({
                     type: 'success',
                     text1: JSON.stringify(response.message),
@@ -267,7 +270,7 @@ const CreateCollectionDialogComponents = () => {
                     </View>
 
 
-                    <Dialog.Content style={{ height: 270 }}>
+                    <Dialog.Content style={{ height: 'auto' }}>
                         <View style={DialogStylesComponent.pictureAreaCollection} >
                             <Image source={{ uri: imageUrlState }} style={DialogStylesComponent.picture}></Image>
                             <View style={DialogStylesComponent.iconUploadPicture}>
@@ -276,7 +279,7 @@ const CreateCollectionDialogComponents = () => {
                         </View>
                     </Dialog.Content>
 
-                    <View style={{ backgroundColor: backgroundColor, width: '100%', height: 70, justifyContent: 'center', alignItems: 'center', borderBottomStartRadius: 10, borderBottomEndRadius: 10, marginTop: 20 }} >
+                    <View style={{ backgroundColor: backgroundColor, width: '100%', justifyContent: 'center', alignItems: 'center', borderBottomStartRadius: 10, borderBottomEndRadius: 10, marginTop: 20 }} >
                         <Button
                             mode='outlined'
                             contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
@@ -286,6 +289,11 @@ const CreateCollectionDialogComponents = () => {
                         >
                             <Text style={{ fontWeight: 'bold', fontSize: 13, color: 'black' }}>Create</Text>
                         </Button>
+                        {messageAdded && (
+                            <View style={{ justifyContent: 'center', alignItems: 'center', alignContent: 'center', paddingBottom: 10 }}>
+                                <Text style={{ fontSize: 17, fontWeight: 'bold', color: primaryColor }}>{messageAdded}</Text>
+                            </View>
+                        )}
                     </View>
 
                 </Dialog>

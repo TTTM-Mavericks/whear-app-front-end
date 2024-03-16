@@ -211,7 +211,7 @@ const CommentsDetailDialogComponent: React.FC<CommentsDataProperties> = ({
         <Portal>
           <Dialog
             visible={isOpen}
-            style={[DialogStylesComponent.postingDialogContainer, Platform.OS === 'ios' && isKeyBoardOpen && { position: 'absolute', bottom: heightOfKeyBoard - 30, backgroundColor: backgroundColor }]}
+            style={[DialogStylesComponent.postingDialogContainer, Platform.OS === 'ios' && isKeyBoardOpen ? { position: 'absolute', bottom: heightOfKeyBoard - 30, backgroundColor: backgroundColor } : isKeyBoardOpen && {height: height*0.65}]}
             onDismiss={hideDialog}
           >
             <Dialog.Title style={{ marginTop: 10 }}>
