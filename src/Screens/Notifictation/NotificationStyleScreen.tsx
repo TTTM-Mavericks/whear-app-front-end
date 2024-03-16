@@ -44,9 +44,11 @@ const NotificationStyleScreen = StyleSheet.create({
   },
   flatlist: {
     backgroundColor: backgroundColor,
+    width: width * 0.9,
+    display: 'flex',
+    marginTop: 10,
     flex: 1,
-    flexDirection: 'row',
-
+    flexDirection: 'column',
   },
   homeSliderHorizotal: {
     width: width,
@@ -59,7 +61,7 @@ const NotificationStyleScreen = StyleSheet.create({
     borderRadius: 8,
   },
   filterGroup: {
-    width: width*0.85,
+    width: width * 0.85,
     flexDirection: 'row',
     backgroundColor: backgroundColor,
     textAlign: 'left',
@@ -75,6 +77,36 @@ const NotificationStyleScreen = StyleSheet.create({
   linearBackground: {
     height: ITEM_HEIGHT,
     width: ITEM_WIDTH,
+  },
+  notificationItem: {
+    height: height * 0.15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+    flex: 1,
+    flexDirection: 'row',
+    padding:5,
+    marginBottom: 10,
+    borderWidth:0.2,
+  },
+  circleImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+  },
+  image: {
+    width: 80,
+    height: 50,
+  },
+  content: {
+    marginLeft: 10,
+  },
+  description: {
+    fontSize: 14,
+  },
+  time: {
+    fontSize: 12,
+    color: '#888',
   },
 });
 
