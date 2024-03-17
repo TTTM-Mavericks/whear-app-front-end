@@ -1,8 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, StyleSheet, ScrollView, FlatList } from 'react-native';
+import { View, Text, TextInput, StyleSheet, ScrollView, FlatList, LogBox } from 'react-native';
 import HomeStylesComponent from './HomeStyleScreen';
-import { useNavigation } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../root/RootStackParams';
 import { StackNavigationProp } from '@react-navigation/stack';
 import CarouselComponent from '../../components/Common/Carousel/CarouselComponent';
@@ -23,13 +23,13 @@ import CreateClothesDialogComponent from '../../components/Dialog/CreateClothesD
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import TouchabaleActiveActionButton from '../../components/Common/TouchableActive/TouchabaleActiveActionButton';
-import { ClothesInterface } from '../../models/ObjectInterface';
+import { ClothesInterface, NewsItem, UserInterFace } from '../../models/ObjectInterface';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../api/AxiosApiConfig';
 import axios from 'axios';
 import { clothesLogoUrlDefault } from '../../root/Texts';
 import UpgradeRoleDialogComponent from '../../components/Dialog/UpgradeRoleDialogComponent';
-import { dataSlider } from '../../components/Common/Carousel/Data';
+import { dataSlider, dataSliderIntro } from '../../components/Common/Carousel/Data';
 
 
 const data1 = [
@@ -62,6 +62,48 @@ const data1 = [
   },
 ];
 
+const dropdownData = {
+  fashionStyles: [
+    { label: 'CYBERPUNK', value: 'CYBERPUNK', imgUrl: 'https://i.pinimg.com/564x/be/6e/92/be6e928031d63b318a3e40838d1a521e.jpg' },
+    { label: 'CLASSIC', value: 'CLASSIC', imgUrl: 'https://i.pinimg.com/564x/6b/53/4b/6b534b415ac978d559b388dfc775227a.jpg' },
+    { label: 'VINTAGE', value: 'VINTAGE', imgUrl: 'https://i.pinimg.com/564x/c3/8f/47/c38f47fc4cf06e4d17c819514774fa73.jpg' },
+    { label: 'INDIE', value: 'INDIE', imgUrl: 'https://i.pinimg.com/564x/80/5b/ae/805baeac4224f42620c2bc9e9f52e5a6.jpg' },
+    { label: 'E-GIRL', value: 'E_GIRL', imgUrl: 'https://i.pinimg.com/564x/17/0f/0d/170f0d0758e164f07057e9c834c791f0.jpg' },
+    { label: 'BASIC', value: 'BASIC', imgUrl: 'https://i.pinimg.com/564x/72/77/37/727737a7495fd4a32b2dec882b1b166f.jpg' },
+    { label: 'SPORTY', value: 'SPORTY', imgUrl: 'https://i.pinimg.com/564x/2c/e8/42/2ce8421ce88a1ebdc551b3ea6fca4087.jpg' },
+    { label: 'NORMCORE', value: 'NORMCORE', imgUrl: 'https://i.pinimg.com/564x/66/e3/dc/66e3dc2b5f6fefe2f16051108a436786.jpg' },
+    { label: 'MINIMALISM', value: 'MINIMALISM', imgUrl: 'https://i.pinimg.com/564x/0e/12/ff/0e12ff14baf962358b43485383b54e5c.jpg' },
+    { label: 'ROCK', value: 'ROCK', imgUrl: 'https://i.pinimg.com/564x/c7/55/d1/c755d189d35933d71de13d8f9f08d6d0.jpg' },
+    { label: 'PARISIAN', value: 'PARISIAN', imgUrl: 'https://i.pinimg.com/564x/f8/b9/e8/f8b9e80d1c1a5265d1c1baa02a22176b.jpg' },
+    { label: 'GOTHIC', value: 'GOTHIC', imgUrl: 'https://i.pinimg.com/564x/e5/2b/c7/e52bc7563942dda4f1ebfc4a693c884f.jpg' },
+    { label: 'BOHEMIAN', value: 'BOHEMIAN', imgUrl: 'https://i.pinimg.com/564x/77/48/72/7748721dc1e1bde0cb4bf455ab08a18d.jpg' },
+    { label: 'Y2K', value: 'Y2K', imgUrl: 'https://i.pinimg.com/564x/ea/59/7d/ea597d014e36d29dc6c10a40d3d4c6b0.jpg' },
+    { label: 'OLD_MONEY', value: 'OLD_MONEY', imgUrl: 'https://i.pinimg.com/564x/5a/07/f1/5a07f1cd4d31432eeadbdb52c1920927.jpg' },
+    { label: 'HIPPIE', value: 'HIPPIE', imgUrl: 'https://i.pinimg.com/564x/f2/77/b1/f277b128b6371d0d12f3c08211012417.jpg' },
+
+  ],
+  fashionStylesFemale: [
+    { label: 'CYBERPUNK', value: 'CYBERPUNK', imgUrl: 'https://i.pinimg.com/736x/6e/2a/39/6e2a39ebe676df56b93ae2321342bc6c.jpg' },
+    { label: 'CLASSIC', value: 'CLASSIC', imgUrl: 'https://i.pinimg.com/564x/d6/69/b0/d669b095aa8b030c97593d40c8994b34.jpg' },
+    { label: 'VINTAGE', value: 'VINTAGE', imgUrl: 'https://i.pinimg.com/236x/12/db/55/12db550be8169c8bef37c65d0628a269.jpg' },
+    { label: 'INDIE', value: 'INDIE', imgUrl: 'https://i.pinimg.com/736x/45/79/16/457916cdb8a86dabd73c6051075a7276.jpg' },
+    { label: 'E-GIRL', value: 'E_GIRL', imgUrl: 'https://i.pinimg.com/564x/17/0f/0d/170f0d0758e164f07057e9c834c791f0.jpg' },
+    { label: 'BASIC', value: 'BASIC', imgUrl: 'https://i.pinimg.com/564x/2d/58/2a/2d582a49179cdb48d1d211dd491cbd2b.jpg' },
+    { label: 'SPORTY', value: 'SPORTY', imgUrl: 'https://i.pinimg.com/564x/77/8d/ba/778dba980001dc562591a0becd05fe72.jpg' },
+    { label: 'PREPPY', value: 'PREPPY', imgUrl: 'https://i.pinimg.com/564x/a9/07/77/a907778666f533fa2a9455b3456fcded.jpg' },
+    { label: 'NORMCORE', value: 'NORMCORE', imgUrl: 'https://i.pinimg.com/564x/11/d7/0b/11d70b5f83ab1bd452dc13309191c770.jpg' },
+    { label: 'MINIMALISM', value: 'MINIMALISM', imgUrl: 'https://i.pinimg.com/564x/36/98/8c/36988c3ceee413259404a8483a49d062.jpg' },
+    { label: 'ROCK', value: 'ROCK', imgUrl: 'https://i.pinimg.com/236x/c8/1b/05/c81b053cf70f2de9f7963ced7a7d04d8.jpg' },
+    { label: 'PARISIAN', value: 'PARISIAN', imgUrl: 'https://i.pinimg.com/564x/16/72/44/167244265a52d1593d0eb4ba3565c9e7.jpg' },
+    { label: 'GOTHIC', value: 'GOTHIC', imgUrl: 'https://i.pinimg.com/236x/44/5b/b9/445bb9e5ba33afff59ddc5423f7237ca.jpg' },
+    { label: 'BOHEMIAN', value: 'BOHEMIAN', imgUrl: 'https://i.pinimg.com/474x/83/85/94/838594321fadcac3d829c51c555cce34.jpg' },
+    { label: 'Y2K', value: 'Y2K', imgUrl: 'https://i.pinimg.com/564x/39/9e/ab/399eabdaa3a2623c3c510b54b246992a.jpg' },
+    { label: 'OLD_MONEY', value: 'OLD_MONEY', imgUrl: 'https://i.pinimg.com/236x/aa/cb/8b/aacb8b92faa15ee8d3a716cbefb91759.jpg' },
+    { label: 'HIPPIE', value: 'HIPPIE', imgUrl: 'https://i.pinimg.com/564x/af/d9/4f/afd94f56dbe3bfe3913000483f1eba5e.jpg' },
+
+  ],
+}
+
 const chipData = ['#Minimalism', '#Girly', '#Sporty', '#Vintage', '#Manly'];
 
 const PAGE_SIZE = 16;
@@ -83,6 +125,13 @@ const HomeScreen = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const [isFetchingMore, setIsFetchingMore] = useState(true);
   const [dataPaging, setDataPaging] = useState<ClothesInterface[]>([]);
+  const [newsItems, setNewsItems] = useState<NewsItem[]>([]);
+  const [chipItems, setChipItems] = useState<string[]>(['All']);
+  const [seperateData, setSeperateData] = useState<NewsItem[]>([])
+  const [filteredItems, setFilteredItems] = useState<NewsItem[]>([]);
+  const [user, setUser] = useState<UserInterFace>();
+
+  const [listStyle, setListStyle] = useState<{ label: string, value: string, imgUrl: string }[]>([])
 
 
   /*-----------------Usable variable-----------------*/
@@ -98,6 +147,7 @@ const HomeScreen = () => {
         const tokenString = JSON.parse(tokenStorage);
         const user = JSON.parse(userString);
         const userID = user.userID;
+        setUser(user);
         console.log('userParse: ', tokenString);
         const params = {}
         try {
@@ -120,10 +170,14 @@ const HomeScreen = () => {
     }
     fetchData();
   }, []);
-  // useEffect(() => {
+  useEffect(() => {
+    if (user?.gender) {
+      setListStyle(dropdownData.fashionStyles)
+    } else {
+      setListStyle(dropdownData.fashionStylesFemale);
+    }
 
-  //   handleFetchDataPaging(0);
-  // }, [dataPaging]);
+  }, [user]);
 
   useEffect(() => {
     handleFetchDataPaging(pageNumber);
@@ -150,7 +204,12 @@ const HomeScreen = () => {
   }, [clothesData]);
 
 
-
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchDataNew();
+      LogBox.ignoreLogs(["VirtualizedLists should never be nested", "source.uri should not be an empty string"])
+    }, [])
+  );
 
 
 
@@ -227,17 +286,23 @@ const HomeScreen = () => {
 
   const handleChangeIconAdded = async (id: any, reacted: boolean | undefined) => {
     if (!reacted) {
-      const selectedItem = clothesData.find((item) => item.clothesID === id);
+      console.log('reacted: ', reacted);
+      const selectedItem = clothesData.find((item) => item.clothesID !== id);
       if (selectedItem) {
         if (addedItems.includes(id)) {
-          
-          handleAddToCollection(id);
+          const selectedItem = clothesData.find((item) => item.clothesID === id);
+          if (selectedItem) {
+            setAddedItems([...addedItems, id]);
+          }
         } else {
-          setAddedItems([...addedItems, id]);
+          handleAddToCollection(id);
 
         }
       } else {
-        setAddedItems([...addedItems, id]);
+        const selectedItem = clothesData.find((item) => item.clothesID === id);
+        if (selectedItem) {
+          setAddedItems([...addedItems, id]);
+        }
       }
 
 
@@ -282,6 +347,37 @@ const HomeScreen = () => {
     dispatch(setOpenUpgradeRolesDialog(true));
   }
 
+  const fetchDataNew = async () => {
+    try {
+      const response = await api.get('/api/v1/news/get-all-news')
+      if (response.success === 200) {
+        // SLIDE DATA TO TAKE 5 FIRST DATA TO SHOW TO THE CAROUSEL
+        const firstFiveItems = response.data.slice(0, 5);
+
+        // TAKE THE typeOfNews to show to the chip Items
+        const uniqueTypeOfNews: string[] = Array.from(new Set(response.data.map((item: NewsItem) => item.typeOfNews)));
+        const allChipItems = ['All', ...uniqueTypeOfNews];
+
+        // Show only one image in the Screen
+        const formattedData = firstFiveItems.map((item: NewsItem) => ({
+          title: item.title,
+          body: item.content,
+          imgUrl: item.image.length > 0 ? item.image[0] : ""
+        }));
+
+        // Set the Data
+        setSeperateData(formattedData);
+        setNewsItems(response.data);
+        setChipItems(allChipItems);
+        setFilteredItems(response.data);
+      } else {
+        console.error('Error');
+      }
+    } catch (error) {
+      console.log("Error fetching news data:", error);
+    }
+  };
+
 
   return (
     <View style={HomeStylesComponent.container}>
@@ -318,17 +414,17 @@ const HomeScreen = () => {
         scrollEventThrottle={16}
       >
         <View style={HomeStylesComponent.scrollViewContent}>
-          <HorizontalCarouselComponent data={dataSlider}></HorizontalCarouselComponent>
+          <HorizontalCarouselComponent data={seperateData.length>0 ? seperateData : dataSliderIntro}></HorizontalCarouselComponent>
           <ChipGroupComponent></ChipGroupComponent>
 
           {/* Horizontal FlatList */}
           <FlatList
             horizontal={true}
             style={HomeStylesComponent.homeSliderHorizotalContent}
-            data={data1}
-            keyExtractor={(item) => item.id}
+            data={listStyle.slice(0,5)}
+            keyExtractor={(item) => item.value}
             renderItem={({ item }) => (
-              <ListViewComponent cardStyleContent={{ width: (width + 55) * 0.4, height: 300, borderRadius: 8 }} cardStyleContainer={{ margin: 5, alignContent: 'center', width: (width + 55) * 0.4, height: 300, borderRadius: 8 }} data={[{ id: item.id, imgUrl: item.imgUrl, }]} />
+              <ListViewComponent onPress={()=> navigation.navigate('StyleOfClothesScreen', {stylesOfClothes: item.value})} cardStyleContent={{ width: (width + 55) * 0.4, height: 300, borderRadius: 8 }} cardStyleContainer={{ margin: 5, alignContent: 'center', width: (width + 55) * 0.4, height: 300, borderRadius: 8 }} data={[{ id: item.value, imgUrl: item.imgUrl, }]} />
             )}
             contentContainerStyle={{ paddingRight: 0 }}
             showsVerticalScrollIndicator={false}
@@ -354,7 +450,7 @@ const HomeScreen = () => {
 
           <View style={{ width: width * 0.9, display: 'flex', flexDirection: 'row' }}>
             <View style={{ alignItems: 'flex-start' }}>
-              <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#000000' }}>New Style</Text>
+              <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#000000' }}>New Clothes</Text>
             </View>
             <View style={{ flex: 1, alignItems: 'flex-end' }}>
               <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#808991' }}>Sponsor</Text>

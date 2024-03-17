@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, ActivityIndicator, Linking, Platform, StyleSheet, Alert } from 'react-native';
+import { Text, View, ActivityIndicator, Linking, Platform, StyleSheet, Alert, ScrollView } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../root/RootStackParams';
 import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
@@ -14,6 +14,7 @@ import { height } from '../../root/ResponsiveSize';
 import { ALERT_TYPE, Dialog, AlertNotificationRoot } from 'react-native-alert-notification';
 import api from '../../api/AxiosApiConfig';
 import { TransactionInterface, UserInterFace } from '../../models/ObjectInterface';
+import LoadingComponent from '../../components/Common/Loading/LoadingComponent';
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 
@@ -70,45 +71,45 @@ const TransactionDetailScreen = () => {
         fetch();
     }, [transactionId])
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const fetchOrderCode = async () => {
-            try {
-                const storedOrderCode = await AsyncStorage.getItem('orderCode');
-                const storedCheckOutURL = await AsyncStorage.getItem('checkoutUrl');
-                const storedAmount = await AsyncStorage.getItem('amount')
-                const storedDescription = await AsyncStorage.getItem('description')
-                const storedCurrency = await AsyncStorage.getItem('currency')
-                if (storedOrderCode && storedCheckOutURL && storedAmount && storedDescription && storedCurrency) {
-                    setOrderCode(storedOrderCode);
-                    setCheckoutURL(storedCheckOutURL);
-                    setAmount(storedAmount);
-                    setCurrency(storedCurrency)
-                    setDescription(storedDescription)
-                    await fetchAdditionalInfo(storedOrderCode);
-                } else {
-                    console.warn('Order code not found in AsyncStorage.');
-                }
-            } catch (error) {
-                console.error('Error retrieving order code from AsyncStorage:', error);
-            } finally {
-                setIsLoading(false);
-            }
-        };
+    //     const fetchOrderCode = async () => {
+    //         try {
+    //             const storedOrderCode = await AsyncStorage.getItem('orderCode');
+    //             const storedCheckOutURL = await AsyncStorage.getItem('checkoutUrl');
+    //             const storedAmount = await AsyncStorage.getItem('amount')
+    //             const storedDescription = await AsyncStorage.getItem('description')
+    //             const storedCurrency = await AsyncStorage.getItem('currency')
+    //             if (storedOrderCode && storedCheckOutURL && storedAmount && storedDescription && storedCurrency) {
+    //                 setOrderCode(storedOrderCode);
+    //                 setCheckoutURL(storedCheckOutURL);
+    //                 setAmount(storedAmount);
+    //                 setCurrency(storedCurrency)
+    //                 setDescription(storedDescription)
+    //                 await fetchAdditionalInfo(storedOrderCode);
+    //             } else {
+    //                 console.warn('Order code not found in AsyncStorage.');
+    //             }
+    //         } catch (error) {
+    //             console.error('Error retrieving order code from AsyncStorage:', error);
+    //         } finally {
+    //             setIsLoading(false);
+    //         }
+    //     };
 
-        const fetchAdditionalInfo = async (orderCode: string) => {
-            try {
-                // Fetch additional info based on the order code
-                // const response = await fetch(YOUR_API_ENDPOINT/${orderCode});
-                // const responseData = await response.json();
-                // setAdditionalInfo(responseData);
-            } catch (error) {
-                console.error('Error fetching additional information:', error);
-            }
-        };
+    //     const fetchAdditionalInfo = async (orderCode: string) => {
+    //         try {
+    //             // Fetch additional info based on the order code
+    //             // const response = await fetch(YOUR_API_ENDPOINT/${orderCode});
+    //             // const responseData = await response.json();
+    //             // setAdditionalInfo(responseData);
+    //         } catch (error) {
+    //             console.error('Error fetching additional information:', error);
+    //         }
+    //     };
 
-        fetchOrderCode();
-    }, []);
+    //     fetchOrderCode();
+    // }, []);
 
     // Handle Function that go back to screen
     function handleGoBack(): void {
@@ -117,12 +118,13 @@ const TransactionDetailScreen = () => {
 
     // Show the Success Box Dialog
     const showDialogSuccess = (link: string) => {
+        console.log(link);
         Dialog.show({
             type: ALERT_TYPE.SUCCESS,
             title: 'Success',
             textBody: 'Congrats! Your payment have been successs',
             onPressButton() {
-                Linking.openURL(JSON.parse(link)).then(() => {
+                Linking.openURL(link).then(() => {
                     // Hide the dialog after navigating to the next screen
                     Dialog.hide();
                 }).catch((error) => {
@@ -145,8 +147,8 @@ const TransactionDetailScreen = () => {
     }
 
     // Open Link in Chrome
-    const handleLinkPress = async (link: any) => {
-        const supported = await Linking.canOpenURL(JSON.parse(link));
+    const handleLinkPress = async (link: string) => {
+        const supported = await Linking.canOpenURL(link);
         if (supported) {
             // Show Alert When User disagrees or agrees to pay
             Alert.alert(
@@ -162,7 +164,7 @@ const TransactionDetailScreen = () => {
                     {
                         text: 'OK',
                         onPress: () => {
-                            showDialogSuccess(link);
+                            Linking.openURL(link);
                         },
                     },
                 ],
@@ -199,9 +201,9 @@ const TransactionDetailScreen = () => {
                 backAction={handleGoBack}
             />
             {isLoading ? (
-                <ActivityIndicator size="large" color={primaryColor} />
+                <LoadingComponent spinner={isLoading}></LoadingComponent>
             ) : (
-                <View style={UpgradeStyleScreen.listItems}>
+                <ScrollView style={UpgradeStyleScreen.listItems}>
                     <View style={styles.cardContainer}>
                         <View style={styles.card}>
                             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 10 }}>
@@ -234,7 +236,7 @@ const TransactionDetailScreen = () => {
                                     <Text style={[UpgradeStyleScreen.contentText, { fontSize: 15, fontWeight: 'bold' }]}>Total Price:</Text>
                                     <View style={{ backgroundColor: primaryColor, marginLeft: 5, marginRight: 5, borderRadius: 10 }}>
                                         <Text style={[UpgradeStyleScreen.contentText, { fontSize: 15, fontWeight: 'bold', padding: 5, }]}>
-                                            {transaction?.data.amount + " " + (JSON.parse(currency))}
+                                            {transaction?.data.amount + " " + currency}
                                         </Text>
                                     </View>
                                 </View>
@@ -242,7 +244,7 @@ const TransactionDetailScreen = () => {
                                     <Text style={[UpgradeStyleScreen.contentText, { fontSize: 15, fontWeight: 'bold' }]}>Amount Paid:</Text>
                                     <View style={{ backgroundColor: primaryColor, marginLeft: 5, marginRight: 5, borderRadius: 10 }}>
                                         <Text style={[UpgradeStyleScreen.contentText, { fontSize: 15, fontWeight: 'bold', padding: 5, }]}>
-                                            {transaction?.data.amountPaid + " " + (JSON.parse(currency))}
+                                            {transaction?.data.amountPaid + " " + currency}
                                         </Text>
                                     </View>
                                 </View>
@@ -250,7 +252,7 @@ const TransactionDetailScreen = () => {
                                     <Text style={[UpgradeStyleScreen.contentText, { fontSize: 15, fontWeight: 'bold' }]}>Amount Remaining:</Text>
                                     <View style={{ backgroundColor: primaryColor, marginLeft: 5, marginRight: 5, borderRadius: 10 }}>
                                         <Text style={[UpgradeStyleScreen.contentText, { fontSize: 15, fontWeight: 'bold', padding: 5, }]}>
-                                            {transaction?.data.amountRemaining + " " + (JSON.parse(currency))}
+                                            {transaction?.data.amountRemaining + " " + currency}
                                         </Text>
                                     </View>
                                 </View>
@@ -296,7 +298,6 @@ const TransactionDetailScreen = () => {
                                 </View>
                             </View>
                         </View>
-                    </View>
                     {transaction?.data.status === 'PENDING' && (
                         <Button
                             mode='outlined'
@@ -308,8 +309,9 @@ const TransactionDetailScreen = () => {
                             <Text style={{ fontWeight: '500', fontSize: 15 }}>Pay Now</Text>
                         </Button>
                     )}
+                    </View>
 
-                </View>
+                </ScrollView>
             )}
         </View>
     );
@@ -319,13 +321,13 @@ const styles = StyleSheet.create({
     container: {
         marginVertical: 20,
         alignItems: 'center',
+        height: height
+
     },
     cardContainer: {
         alignItems: 'center',
-        marginBottom: 20,
         marginTop: 20,
         backgroundColor: backgroundColor,
-        height: height
 
 
     },

@@ -27,7 +27,7 @@ const ChipGroupComponent: React.FC<chipGroupInterface> = ({style}) => {
                 buttons={[
                     {
                         value: 'all',
-                        label: 'All',
+                        label: 'Style',
                         style: {
                             borderRadius: 0,
                             borderColor: 'transparent',

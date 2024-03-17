@@ -40,6 +40,10 @@ import TypeOfClothesScreen from "./src/Screens/TypeOfClothes/TypeOfClothesScreen
 import TransactionDetailScreen from "./src/Screens/TransactionDetail/TransactionDetailScreen";
 import StyleOfClothesScreen from "./src/Screens/StyleOfClothes/StyleOfClothesScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import ListUserScreen from "./src/Screens/ListUser/ListUserScreen";
+import EditNewsScreen from "./src/Screens/News/EditNewsScreen";
+import NewsDetailScreen from "./src/Screens/News/NewsDetailScreen";
+import AddNewsScreen from "./src/Screens/News/AddNewsScreen";
 
 const Stack = createStackNavigator();
 
@@ -85,7 +89,8 @@ export default function App() {
                 component={OnboardingScreen}
                 options={{ headerShown: false }}
               />
-              {/* <Stack.Screen
+               {/*
+              <Stack.Screen
                 name='FirstLoadingPage'
                 component={FirstLoadingPage}
                 options={{ headerShown: false }}
@@ -272,6 +277,31 @@ export default function App() {
                 component={StyleOfClothesScreen}
                 options={{ headerShown: false }}
               />
+
+              <Stack.Screen
+                name="ListUserScreen"
+                component={ListUserScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="EditNewsScreen"
+                component={EditNewsScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="NewsDetailScreen"
+                component={NewsDetailScreen}
+                options={{ headerShown: false }}
+              />
+
+              <Stack.Screen
+                name="AddNewsScreen"
+                component={AddNewsScreen}
+                options={{ headerShown: false }}
+              />
+
 
             </Stack.Navigator>
           </View>

@@ -130,7 +130,7 @@ const AddingPostingsScreen = () => {
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
-    navigation.goBack();
+    navigation.replace('Social');
   }
 
   const handleTextChange = (text: any) => {
@@ -156,7 +156,7 @@ const AddingPostingsScreen = () => {
       userID: user?.userID,
       typeOfPosts: "POSTS",
       hashtag: hashtagArray,
-      date: convertDateFormat(new Date()),
+      // date: convertDateFormat(new Date()),
       status: 'UNACTIVE',
       content: textInput,
       image: clothesImagePostingUrl

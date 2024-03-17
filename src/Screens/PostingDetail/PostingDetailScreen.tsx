@@ -230,7 +230,7 @@ const PostingDetailScreen = () => {
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
-    navigation.replace('Social');
+    navigation.goBack();
   }
 
   const handleSearch = () => {
@@ -346,7 +346,7 @@ const PostingDetailScreen = () => {
                 <View style={{ flexDirection: 'row' }}>
                   <View>
                     <Text style={{ fontSize: spanTextSize * 0.8 }}>
-                      {postingObj?.date}
+                    {postingObj?.date?.split('T')[0]} {postingObj?.date?.split('.')[0].split('T')[1]}
                     </Text>
                   </View>
 

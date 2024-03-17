@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../../api/AxiosApiConfig';
 
 interface appBarProps {
-
+  isLoading?: boolean
 
 }
 type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
@@ -19,7 +19,7 @@ const notificationCount = 3;
 
 const UserListHoriziableComponent: React.FC<appBarProps> = (
   {
-
+    isLoading
   }) => {
 
   const navigation = useNavigation<ScreenNavigationProp>();
@@ -37,7 +37,7 @@ const UserListHoriziableComponent: React.FC<appBarProps> = (
           console.log('userParse: ', tokenString);
           const params = {}
           try {
-            const getData = await api.get(`/api/v1/user/get-all-user`, params, tokenString);
+            const getData = await api.get(`/api/v1/follow/get-all-notyet-following-user?userid=${userParse.userID}`, params, tokenString);
             // const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=1&based_userid=1`, params, tokenString);
 
             if (getData.success === 200) {
@@ -90,18 +90,27 @@ const UserListHoriziableComponent: React.FC<appBarProps> = (
 
   return (
     <View style={UserListHoriziableStyleComponent.container}>
-      <View style={UserListHoriziableStyleComponent.friendsTag} >
-        <IconButton icon={require('../../../assets/icon/user.png')} size={20} mode='contained' iconColor={primaryColor} containerColor={grayBackgroundColor}></IconButton>
-      </View>
+      {!isLoading && (
+        <View style={UserListHoriziableStyleComponent.friendsTag} >
+
+          <IconButton icon={require('../../../assets/icon/user.png')}
+            size={20}
+            mode='contained'
+            iconColor={primaryColor}
+            containerColor={grayBackgroundColor}
+            onPress={() => navigation.navigate('ListUserScreen')}
+          ></IconButton>
+        </View>
+      )}
       <FlatList
         style={UserListHoriziableStyleComponent.flatlist}
-        data={userFetch}
+        data={userFetch.slice(0, 10)}
         horizontal
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item: any) => item.userID}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleMoveToUserProfile(item.userID )}>
+          <TouchableOpacity onPress={() => handleMoveToUserProfile(item.userID)}>
             <View style={UserListHoriziableStyleComponent.avatar}>
               <IconButton onPress={() => handleFollow(item.userID)} style={UserListHoriziableStyleComponent.addBtn} icon={'plus'} size={20} iconColor={primaryColor} containerColor={grayBackgroundColor} ></IconButton>
               <Image source={{ uri: item.imgUrl }} style={UserListHoriziableStyleComponent.avatar}>

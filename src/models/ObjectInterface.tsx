@@ -63,21 +63,21 @@ export interface CollectionInterface {
 
 
 export interface NotificationInterface {
-    notiID?: string;
-    baseUserID?: string;
-    targetUserID?: string;
+    notiID?: any;
+    baseUserID?: UserInterFace;
+    targetUserID?: UserInterFace;
     messageType?: string;
     content?: string;
     sender?: string;
     action?: string;
-    actionID?: number;
+    actionID?: any;
     message?: string;
-    status?: string;
+    status?: boolean;
     dateTime?: string;
 }
 
 export interface PostingInterface {
-    postID?: number;
+    postID?: any;
     userResponse?: UserInterFace;
     typeOfPosts?: string;
     content?: string;
@@ -139,5 +139,24 @@ export interface OrderDataInterface {
     signature: string;
     checkoutUrl: string;
     qrCode: string;
+  }
+
+  export interface NewsItem {
+    newsID: number;
+    title: string;
+    content: string;
+    typeOfNews: string;
+    image: string[];
+    status: string;
+    date: string;
+    brandItems: BrandItems
+  }
+  
+  export interface BrandItems {
+    brandID: number,
+    brandName: string,
+    description: string,
+    address: string,
+    link: string
   }
 

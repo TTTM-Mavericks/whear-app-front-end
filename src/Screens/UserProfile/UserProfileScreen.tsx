@@ -16,7 +16,7 @@ import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarF
 import AddImageButtonComponent from '../../components/ImagePicker/AddImageButtonComponent';
 import api from '../../api/AxiosApiConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ClothesInterface, CollectionInterface, TransactionInterface, UserInterFace } from '../../models/ObjectInterface';
+import { ClothesInterface, CollectionInterface, PostingInterface, TransactionInterface, UserInterFace } from '../../models/ObjectInterface';
 import { setIsLogined, setUploadToFireBase } from '../../redux/State/Actions';
 import { clothesLogoUrlDefault, spanTextSize } from '../../root/Texts';
 import Toast from 'react-native-toast-message';
@@ -56,13 +56,15 @@ const UserProfileScreen = () => {
   const [visibleFollowerDialog, setVisibleFollowerDialog] = useState(false);
   const [isFollowedInFollowingUser, setIsFollowedInFollowingUser] = useState(true);
   const [selectedItems, setSelectedItems] = useState([] as string[]);
-  const [selectedTag, setSelectedTag] = useState('clothes');
+  const [selectedTag, setSelectedTag] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState('');
   const [userClothes, setUserColthes] = useState<ClothesInterface[]>([]);
   const [userCollection, setUserCollection] = useState<CollectionInterface[]>([]);
   const [data, setData] = useState<CollectionInterface[] | ClothesInterface[]>([]);
   const [history, setHistory] = useState<TransactionInterface[]>([]);
+  const [posting, setPosting] = useState<PostingInterface[]>([]);
+
 
 
 
@@ -82,6 +84,8 @@ const UserProfileScreen = () => {
    * Fetch data to get user by ID
    */
   useEffect(() => {
+
+    setSelectedTag('clothes');
 
     const fetchData = async () => {
       const userStorage = await AsyncStorage.getItem("userData");
@@ -122,6 +126,7 @@ const UserProfileScreen = () => {
    * Fetch data to render user avatar
    */
   useEffect(() => {
+    setSelectedTag('clothes');
     setAvatarImgUrl(imageUrl);
     if (isUploadedImage) {
       console.log('fetch');
@@ -168,6 +173,7 @@ const UserProfileScreen = () => {
    * Fetch data to get follower User
    */
   useEffect(() => {
+    setSelectedTag('clothes');
     const fetchData = async () => {
       try {
         const userIDParam = (route.params as { userID?: string })?.userID;
@@ -192,6 +198,7 @@ const UserProfileScreen = () => {
    * Fetch data to get following User
    */
   useEffect(() => {
+    setSelectedTag('clothes');
     setIsLoading(true);
     const fetchData = async () => {
       const userStorage = await AsyncStorage.getItem("userData");
@@ -204,7 +211,7 @@ const UserProfileScreen = () => {
           const response = await api.get(`/api/v1/follow/get-all-following-user?userid=${userIDParam}&base_userid=${userParse.userID}`);
           if (response.success === 200) {
             setFollowing(response.data);
-            console.log('edsdfsdfsdfS:',response.data);
+            console.log('edsdfsdfsdfS:', response.data);
             setIsLoading(false);
             Toast.show({
               type: 'success',
@@ -230,97 +237,104 @@ const UserProfileScreen = () => {
 
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      const params = {}
-      try {
-        // selectedTag === 'clothes'
-        // if (selectedTag === 'clothes') {
-        //   const getData = await api.get(`/api/v1/collection/get-all-by-userid?user_id=${userStorage?.userID}`, params, token);
-
-        //   if (getData.success === 200) {
-        //     setUserColthes(getData.data);
-        //     setTimeout(() => {
-        //       setIsLoading(false);
-        //     }, 1000)
-        //   }
-        //   else {
-        //     console.log(getData.data);
-        //     setTimeout(() => {
-        //       setIsLoading(false);
-        //     }, 1000)
-        //   }
-        // }
-
-        // selectedTag === 'collection'
-        if (selectedTag === 'collection') {
-          const getData = await api.get(`/api/v1/collection/get-all-by-userid?user_id=${userStorage?.userID}`, params, token);
-
-          if (getData.success === 200) {
-            setUserCollection(getData.data);
-            setData(getData.data);
-            console.log(getData.data);
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 1000)
-          }
-          else {
-            console.log(getData.data);
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 1000)
-          }
-        }
-
-        if (selectedTag === 'clothes') {
-          const getData = await api.get(`/api/v1/clothes/get-clothes-by-user-id?userId=${userStorage?.userID}`, params, token);
-          console.log(userStorage?.userID);
-          if (getData.success === 200) {
-            setUserColthes(getData.data);
-            setData(getData.data);
-            console.log(getData.data);
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 1000)
-          }
-          else {
-            console.log(getData.data);
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 1000)
-          }
-        }
-
-        if (selectedTag === 'history' && currentUser?.userID === userStorage?.userID) {
-          console.log('history');
-          const getData = await api.get(`/api/v1/payment/get-all-payment?userId=${userStorage?.userID}`, params, token);
-          console.log(userStorage?.userID);
-          if (getData.success === 200) {
-            setHistory(getData.data);
-            console.log(getData.data);
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 1000)
-          }
-          else {
-            console.log(getData.data);
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 1000)
-          }
-        }
-
-        if(selectedTag==='menu') {
-          setIsLoading(false);
-        }
-
-
-      } catch (error) {
-        console.error("An error occurred during data fetching:", error);
-      }
-    }
+    console.log('selectedTag: ', selectedTag);
+    setSelectedTag(selectedTag);
     fetchData();
-  }, [selectedTag])
+  }, [selectedTag]);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    const params = {}
+    try {
+      // selectedTag === 'clothes'
+      // if (selectedTag === 'clothes') {
+      //   const getData = await api.get(`/api/v1/collection/get-all-by-userid?user_id=${userStorage?.userID}`, params, token);
+
+      //   if (getData.success === 200) {
+      //     setUserColthes(getData.data);
+      //     setTimeout(() => {
+      //       setIsLoading(false);
+      //     }, 1000)
+      //   }
+      //   else {
+      //     console.log(getData.data);
+      //     setTimeout(() => {
+      //       setIsLoading(false);
+      //     }, 1000)
+      //   }
+      // }
+
+      // selectedTag === 'collection'
+      setSelectedTag(selectedTag);
+
+      if (selectedTag === 'clothes') {
+        console.log('selectedTag: ', 1);
+        const getData = await api.get(`/api/v1/clothes/get-clothes-by-user-id?userId=${currentUser?.userID}`, params, token);
+        console.log(userStorage?.userID);
+        if (getData.success === 200) {
+          setUserColthes(getData.data);
+          setData(getData.data);
+          console.log('hihihi: ', getData.data);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 1000)
+        }
+        else {
+          console.log(getData.data);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 1000)
+        }
+      }
+
+      if (selectedTag === 'posting') {
+        const getData = await api.get(`/api/v1/post/get-all-post-for-user?user_id=${currentUser?.userID}`, params, token);
+
+        if (getData.success === 200) {
+          setPosting(getData.data)
+          console.log(getData.data);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 1000)
+        }
+        else {
+          console.log(getData.data);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 1000)
+        }
+      }
+
+
+
+      if (selectedTag === 'history' && currentUser?.userID === userStorage?.userID) {
+        console.log('history');
+        const getData = await api.get(`/api/v1/payment/get-all-payment?userId=${userStorage?.userID}`, params, token);
+        console.log(userStorage?.userID);
+        if (getData.success === 200) {
+          setHistory(getData.data);
+          console.log(getData.data);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 1000)
+        }
+        else {
+          console.log(getData.data);
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 1000)
+        }
+      }
+
+      if (selectedTag === 'menu') {
+        setIsLoading(false);
+      }
+
+
+    } catch (error) {
+      console.error("An error occurred during data fetching:", error);
+    }
+  }
 
 
   /*-----------------Function handler-----------------*/
@@ -457,6 +471,10 @@ const UserProfileScreen = () => {
     }
   }
 
+  const handleMoveToPostDetail = (postID: any) => {
+    navigation.navigate('PostingDetail', { postID: postID })
+  }
+
   return (
     <View style={UserProfileStyleScreen.container}>
       <Toast
@@ -581,8 +599,8 @@ const UserProfileScreen = () => {
             uncheckedColor: '#808991',
           },
           {
-            value: 'collection',
-            icon: 'heart',
+            value: 'posting',
+            icon: require('../../assets/icon/hashtag.png'),
             style: {
               borderRadius: 0,
               borderColor: grayBorderColor,
@@ -639,18 +657,30 @@ const UserProfileScreen = () => {
         scrollEventThrottle={16}
       >
         <View style={UserProfileStyleScreen.scrollViewContent}>
-          {selectedTag === 'collection' ? userCollection.length > 0 ?
+          {selectedTag === 'posting' ? posting.length > 0 ?
             (
               <FlatList
                 style={UserProfileStyleScreen.flatlist}
-                data={userCollection}
-                keyExtractor={(item) => item.collectionID}
-                numColumns={2}
+                data={posting}
+                keyExtractor={(item) => item.postID}
+                numColumns={1}
                 renderItem={({ item }) => (
-                  <TouchableOpacity>
-                    <ListViewComponent data={[{ id: item.collectionID, imgUrl: item.imgUrl ? item.imgUrl : clothesLogoUrlDefault, }]} />
-                    <View style={{ position: 'absolute', backgroundColor: 'rgba(216,216,216, 0.3)', width: width * 0.9, height: 300, justifyContent: 'center', alignItems: 'center', borderRadius: 8, top: 10, left: 10 }}>
-                      <Text style={{ color: backgroundColor, fontSize: 40, fontWeight: 'bold' }}>{item.nameOfCollection}</Text>
+                  <TouchableOpacity key={item.postID} style={UserProfileStyleScreen.cardContentPost} onPress={() => handleMoveToPostDetail(item.postID)}>
+                    <View style={{ padding: 10, flexDirection: 'row', alignContent: 'center', justifyContent: 'center', alignItems: 'center' }} >
+                      <View style={[UserProfileStyleScreen.cardContentStatusPost]}>
+                        <Image style={[UserProfileStyleScreen.cardContentStatusPost]} source={{ uri: item.image ? item.image[0] : clothesLogoUrlDefault }}></Image>
+                      </View>
+                      <View style={UserProfileStyleScreen.cardContentDetailPost}>
+                        <Text>{item.content?.slice(0, 200)} ...</Text>
+                        <View style={{ padding: 0, flexDirection: 'row', alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}>
+                          <Icon source={require('../../assets/icon/heart.png')} size={15}></Icon>
+                          <Text style={{ paddingLeft: 10, fontSize: 15 }}>{item.react?.length}</Text>
+                        </View>
+                        <View style={{ padding: 0, flexDirection: 'row', alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}>
+                          <Icon source={require('../../assets/icon/talking.png')} size={15}></Icon>
+                          <Text style={{ paddingLeft: 10, fontSize: 15 }}>{item.comment?.length}</Text>
+                        </View>
+                      </View>
                     </View>
                   </TouchableOpacity>
                 )}
@@ -677,7 +707,7 @@ const UserProfileScreen = () => {
                 keyExtractor={(item) => item.clothesID}
                 numColumns={2}
                 renderItem={({ item }) => (
-                  <TouchableOpacity onPress={()=> navigation.navigate('ClothesDetailScreen', {clothID: item.clothesID})}>
+                  <TouchableOpacity onPress={() => navigation.navigate('ClothesDetailScreen', { clothID: item.clothesID })}>
                     <ListViewComponent data={[{ id: item.clothesID, imgUrl: item.clothesImages ? item.clothesImages[0] : clothesLogoUrlDefault, }]} />
                   </TouchableOpacity>
                 )}
@@ -741,7 +771,7 @@ const UserProfileScreen = () => {
                 contentStyle={Platform.OS === 'ios' ? { height: height * 0.05 } : { height: height * 0.04 }}
                 style={[UserProfileStyleScreen.buttonGroup_button, { backgroundColor: primaryColor, marginTop: 20 }]}
                 labelStyle={[UserProfileStyleScreen.buttonGroup_button_lable,]}
-                onPress={()=> navigation.navigate('UserProfileSetting')}
+                onPress={() => navigation.navigate('UserProfileSetting')}
               >
                 <Text style={{ fontWeight: '500', fontSize: 12 }}>Change info</Text>
               </Button>
@@ -790,7 +820,7 @@ const UserProfileScreen = () => {
                   <View>
                     <View style={{ flexDirection: 'row', marginBottom: 10 }}>
                       <Image source={{ uri: item.userResponse.imgUrl }} style={{ width: 40, height: 40, borderRadius: 90 }}></Image>
-                      <Text style={{ marginLeft: 10, marginTop: 40 * 0.3, fontSize: 13 }}> {item.userResponse.username.slice(0,10)}...</Text>
+                      <Text style={{ marginLeft: 10, marginTop: 40 * 0.3, fontSize: 13 }}> {item.userResponse.username.slice(0, 10)}...</Text>
                       <Button
                         mode='outlined'
                         contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
@@ -860,7 +890,7 @@ const UserProfileScreen = () => {
         </Portal>
       )}
       <AppBarFooterComponents isHide={scrollUp} centerIcon={require('../../assets/img/logo/logo.png')}></AppBarFooterComponents>
-    <LoadingComponent spinner={isLoading} ></LoadingComponent>
+      <LoadingComponent spinner={isLoading} ></LoadingComponent>
     </View >
 
 
