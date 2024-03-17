@@ -7,7 +7,7 @@ import { RootStackParamList } from '../../root/RootStackParams';
 import { StackNavigationProp } from '@react-navigation/stack';
 import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
 import { width } from '../../root/ResponsiveSize';
-import { primaryColor, secondaryColor } from '../../root/Colors';
+import { backgroundColor, fourthColor, primaryColor, secondaryColor } from '../../root/Colors';
 import { useDispatch } from 'react-redux';
 import { setOpenCreateClothesDialog } from '../../redux/State/Actions';
 import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarFooterComponents';
@@ -36,6 +36,68 @@ const NotificationScreen = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [currentDateTime, setCurrentDateTime] = useState(new Date());
   const [username, setUsername] = useState('');
+  const [user, setUser] = useState<UserInterFace>();
+  const [token, setToken] = useState('');
+  const [trigger, setTrigger] = useState(false);
+  const [data, setData] = useState<NotificationInterface[]>([]);
+  const [flag, setFlag] = useState(false);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const tokenStorage = await AsyncStorage.getItem('access_token');
+      const userStorage = await AsyncStorage.getItem('userData');
+      if (userStorage) {
+        const userParse: UserInterFace = JSON.parse(userStorage);
+        if (tokenStorage) {
+          const tokenString = JSON.parse(tokenStorage);
+          setToken(tokenString);
+          setUser(userParse)
+          // console.log('userParse: ', tokenString);
+          const params = {}
+          try {
+            const getData = await api.get(`/api/v1/notification/get-all-notification?userid=${userParse.userID}`, params, tokenString);
+            // const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=1&based_userid=1`, params, tokenString);
+
+            if (getData.success === 200) {
+              setData(getData.data)
+              console.log(userParse.userID);
+            }
+            else {
+              console.log(getData.data);
+            }
+          } catch (error) {
+            console.error("An error occurred during data fetching:", error);
+          }
+        }
+        // return WebSocketComponent;
+      }
+    }
+    fetchData();
+  }, []);
+
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch('https://be.mavericks-tttm.studio/api/v1/notification/get-all-notification?userid=1');
+  //       const result = await response.json();
+
+  //       if (result.success === 200) {
+  //         setData(result.data);
+  //       } else {
+  //         console.error('Error fetching data:', result.message);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+
+
 
 
   useEffect(() => {
@@ -179,6 +241,34 @@ const NotificationScreen = () => {
     fetchData();
   }
 
+  const handleReadInfor = async (noti: NotificationInterface) => {
+    const tokenStorage = await AsyncStorage.getItem('access_token');
+    const userStorage = await AsyncStorage.getItem('userData');
+    if (userStorage) {
+      const userParse: UserInterFace = JSON.parse(userStorage);
+      if (tokenStorage) {
+        const tokenString = JSON.parse(tokenStorage);
+        // console.log('userParse: ', tokenString);
+        const params = {}
+        try {
+          if (noti.status == false) {
+            const getData = await api.put(`/api/v1/notification/un-read-notification?noti_id=${noti.notiID}`, params, tokenString);
+
+            if (getData.success === 200) {
+              setData(getData.data)
+              // console.log(userParse.userID);
+            }
+            else {
+              console.log(getData.data);
+            }
+          }
+        } catch (error) {
+          console.error("An error occurred during data fetching:", error);
+        }
+      }
+    }
+  }
+
   const handleMarkIsRead = (event: NotificationInterface) => {
     const fetchData = async () => {
       const tokenStorage = await AsyncStorage.getItem('access_token');
@@ -207,62 +297,87 @@ const NotificationScreen = () => {
     }
     fetchData();
     if (event.action == 'FOLLOW') {
-      navigation.navigate('UserProfile', { userID: event.actionID })
+      handleReadInfor(event);
+      setTimeout(() => {
+        navigation.navigate('UserProfile', { userID: event.actionID })
+      }, 1000)
     } else {
-      navigation.navigate('PostingDetail', { postID: event.actionID })
+      handleReadInfor(event);
+      setTimeout(() => {
+        navigation.navigate('PostingDetail', { postID: event.actionID })
+      }, 1000)
     }
   }
 
-  const [data, setData] = useState<NotificationInterface[]>([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const tokenStorage = await AsyncStorage.getItem('access_token');
-      const userStorage = await AsyncStorage.getItem('userData');
-      if (userStorage) {
-        const userParse: UserInterFace = JSON.parse(userStorage);
-        if (tokenStorage) {
-          const tokenString = JSON.parse(tokenStorage);
-          // console.log('userParse: ', tokenString);
-          const params = {}
-          try {
-            const getData = await api.get(`/api/v1/notification/get-all-notification?userid=${userParse.userID}`, params, tokenString);
-            // const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=1&based_userid=1`, params, tokenString);
 
-            if (getData.success === 200) {
-              setData(getData.data)
-              console.log(userParse.userID);
-            }
-            else {
-              console.log(getData.data);
-            }
-          } catch (error) {
-            console.error("An error occurred during data fetching:", error);
+
+  // const handleReturnImgPost = (item: NotificationInterface) => {
+
+  //   if (item.action !== 'FOLLOW') {
+  //     var img: string = ''
+  //        const imgFecth = fetch(`https://host.whearapp.tech` + `/api/v1/post/get-post-by-postid?post_id=${item.actionID}&based_userid=${user?.userID}`,
+  //         {
+  //           method: 'GET',
+  //           headers: {
+  //             Authorization: `Bearer ${token}`
+  //           }
+  //         }
+  //       ).then((resp) =>
+  //         resp.json()
+  //       ).then((res: any) => {
+  //         console.log('res: ', res);
+  //         if (res.success === 200) {
+  //           console.log('res.data.image[0]: ', res.data.image[0]);
+  //           setTrigger(true);
+  //           img = res.data.image[0]
+  //           return res.data.image[0]
+  //         } 
+  //         img = res.data.image[0]
+  //         return res.data.image[0]
+  //       }).catch((error) => {
+  //         return 'https://cdn-icons-png.flaticon.com/128/15356/15356408.png';
+  //       })
+  //       const url = imgFecth
+  //       console.log('img: ', url);
+  //       return img;
+  //   }
+
+  // };
+
+  const [imageUrls, setImageUrls] = useState<{ [key: string]: string }>({}); // Store image URLs for each item
+
+  const handleReturnImgPost = async (item: NotificationInterface): Promise<void> => {
+    if (item.action !== 'FOLLOW') {
+      try {
+        const response = await fetch(`https://host.whearapp.tech/api/v1/post/get-post-by-postid?post_id=${item.actionID}&based_userid=${user?.userID}`, {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`
           }
+        });
+
+        const data = await response.json();
+
+        if (data.success === 200 && data.data.image.length > 0) {
+          // Store image URL for the item
+          setFlag(true);
+          setImageUrls(prevState => ({
+            ...prevState,
+            [item.notiID]: data.data.image[0]
+          }));
         }
-        // return WebSocketComponent;
+      } catch (error) {
+        console.error('Error fetching image:', error);
       }
     }
-    fetchData();
-  }, []);
+  };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch('https://be.mavericks-tttm.studio/api/v1/notification/get-all-notification?userid=1');
-  //       const result = await response.json();
+  useEffect(() => {
+    if (data && data.length > 0) {
+      data.forEach(item => handleReturnImgPost(item));
+    }
+  }, [data]);
 
-  //       if (result.success === 200) {
-  //         setData(result.data);
-  //       } else {
-  //         console.error('Error fetching data:', result.message);
-  //       }
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   return (
     <View style={NotificationStyleScreen.container}>
@@ -281,7 +396,7 @@ const NotificationScreen = () => {
                 end={{ x: 0, y: 1 }}
                 style={NotificationStyleScreen.linearBackground}
               >
-                <Text style={{ opacity: 0 }}>Home</Text>
+                <Text style={{ opacity: 0 }}>Notification</Text>
               </LinearGradient>
             </MaskedView>
           </View>
@@ -316,23 +431,41 @@ const NotificationScreen = () => {
             data={data}
             keyExtractor={(item) => item.notiID}
             renderItem={({ item }) => (
-              <View>
+              <View style={{ borderRadius: 8 }}>
                 <TouchableOpacity onPress={() => handleMarkIsRead(item)}
                   style={
                     [NotificationStyleScreen.notificationItem,
                     !item.status && {
-                      backgroundColor: '#cccc',
+                      backgroundColor: 'rgba(162,222,82,0.3)',
                     }
                     ]
                   }
                 >
-                  <Image source={{ uri: 'https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-1/312005200_492156716285456_5576474209424169461_n.jpg?stp=dst-jpg_p240x240&_nc_cat=1&ccb=1-7&_nc_sid=596444&_nc_ohc=h1cHhnm1hlgAX8Vn6yS&_nc_pt=1&_nc_ht=scontent.fsgn19-1.fna&oh=00_AfDTl7JJq-WWoGZsE0rpQgclB7x0aGj8o5d5fDLZqsbYyQ&oe=65D8D322' }} style={NotificationStyleScreen.circleImage} />
+                  {!item.status ? (
+                    <View style={{ position: 'absolute', top: 0, left: 0, backgroundColor: 'rgba(234,49,62,1)', borderTopStartRadius: 8, borderBottomEndRadius: 8 }}>
+                      <Text style={{ fontSize: 10, padding: 2, color: backgroundColor }}>New</Text>
+                    </View>
+                  ) :
+                    (
+                      <View style={{ position: 'absolute', top: 0, left: 0, backgroundColor: 'rgba(162,222,82,1)', borderTopStartRadius: 8, borderBottomEndRadius: 8 }}>
+                        <Text style={{ fontSize: 10, padding: 2, color: backgroundColor }}>Read</Text>
+                      </View>
+                    )}
+                  <Image source={{ uri: item.baseUserID?.imgUrl }} style={NotificationStyleScreen.circleImage} />
                   <View style={NotificationStyleScreen.content}>
-                    <Text>{item.baseUserID}</Text>
-                    <Text>{item.action} You</Text>
-                    <Text>{item.dateTime}</Text>
+                    <Text style={{ fontSize: 12, fontWeight: '500' }}>{item.baseUserID?.username}</Text>
+                    <Text style={{ fontSize: 11, fontWeight: '400' }}>{item.action === 'FOLLOW' ? `${item.action} You` : `${item.action} your post`}</Text>
+                    <Text style={{ fontSize: 11, fontWeight: '400' }}>{item.dateTime}</Text>
                   </View>
-                  <Image source={{ uri: 'https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-1/312005200_492156716285456_5576474209424169461_n.jpg?stp=dst-jpg_p240x240&_nc_cat=1&ccb=1-7&_nc_sid=596444&_nc_ohc=h1cHhnm1hlgAX8Vn6yS&_nc_pt=1&_nc_ht=scontent.fsgn19-1.fna&oh=00_AfDTl7JJq-WWoGZsE0rpQgclB7x0aGj8o5d5fDLZqsbYyQ&oe=65D8D322' }} style={NotificationStyleScreen.image} />
+                  {item.action === 'FOLLOW' && (
+                    <View style={NotificationStyleScreen.image} />
+                  )}
+
+                  {item.action !== 'FOLLOW' && (
+                    <View >
+                      <Image source={{ uri: imageUrls[item.notiID] || 'https://cdn-icons-png.flaticon.com/128/15356/15356408.png' }} style={NotificationStyleScreen.image} />
+                    </View>
+                  )}
                 </TouchableOpacity>
               </View>
             )}

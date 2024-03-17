@@ -199,7 +199,33 @@ const UserProfileStyleScreen = StyleSheet.create({
     alignItems: 'flex-start',
     borderRadius: 8,
     paddingLeft: 10
-  }
+  },
+  cardContentDetailPost: {
+    width: '70%',
+    alignContent: 'flex-start',
+    alignItems: 'flex-start',
+    textAlign: 'center',
+    justifyContent: 'center',
+    borderRadius: 8,
+    paddingLeft: 10,
+    paddingRight: 10
+  },
+  cardContentPost: {
+    width: width*0.9,
+    borderRadius: 8,
+    backgroundColor: grayBackgroundColor,
+    marginTop: 5
+
+  },
+  cardContentStatusPost: {
+    width: width*0.8*0.3,
+    height: 150,
+    borderRadius: 8,
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10
+  },
 
 
 

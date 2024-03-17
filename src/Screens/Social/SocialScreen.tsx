@@ -207,7 +207,7 @@ const SocialScreen = () => {
         scrollEventThrottle={16}
       >
         <View style={SocailStyleScreen.scrollViewContent}>
-          <UserListHoriziableComponent></UserListHoriziableComponent>
+          <UserListHoriziableComponent isLoading={isLoading}></UserListHoriziableComponent>
           <View style={SocailStyleScreen.postingEditorContainer}>
             
             <View style={{ marginTop: 20 }}>
@@ -278,7 +278,7 @@ const SocialScreen = () => {
                             {item.userResponse?.username}
                           </Text>
                           <Text style={{ fontSize: spanTextSize * 0.8 }}>
-                            {item.date}
+                            {item?.date?.split('T')[0]} {item?.date?.split('.')[0].split('T')[1]}
                           </Text>
                         </View>
                       </View>

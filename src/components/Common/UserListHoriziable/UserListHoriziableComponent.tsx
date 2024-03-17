@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../../api/AxiosApiConfig';
 
 interface appBarProps {
-
+  isLoading?: boolean
 
 }
 type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
@@ -19,7 +19,7 @@ const notificationCount = 3;
 
 const UserListHoriziableComponent: React.FC<appBarProps> = (
   {
-
+    isLoading
   }) => {
 
   const navigation = useNavigation<ScreenNavigationProp>();
@@ -90,24 +90,27 @@ const UserListHoriziableComponent: React.FC<appBarProps> = (
 
   return (
     <View style={UserListHoriziableStyleComponent.container}>
-      <View style={UserListHoriziableStyleComponent.friendsTag} >
-        <IconButton icon={require('../../../assets/icon/user.png')} 
-        size={20} 
-        mode='contained' 
-        iconColor={primaryColor} 
-        containerColor={grayBackgroundColor}
-        onPress={()=> navigation.navigate('ListUserScreen')}
-        ></IconButton>
-      </View>
+      {!isLoading && (
+        <View style={UserListHoriziableStyleComponent.friendsTag} >
+
+          <IconButton icon={require('../../../assets/icon/user.png')}
+            size={20}
+            mode='contained'
+            iconColor={primaryColor}
+            containerColor={grayBackgroundColor}
+            onPress={() => navigation.navigate('ListUserScreen')}
+          ></IconButton>
+        </View>
+      )}
       <FlatList
         style={UserListHoriziableStyleComponent.flatlist}
-        data={userFetch}
+        data={userFetch.slice(0, 10)}
         horizontal
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item: any) => item.userID}
         renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => handleMoveToUserProfile(item.userID )}>
+          <TouchableOpacity onPress={() => handleMoveToUserProfile(item.userID)}>
             <View style={UserListHoriziableStyleComponent.avatar}>
               <IconButton onPress={() => handleFollow(item.userID)} style={UserListHoriziableStyleComponent.addBtn} icon={'plus'} size={20} iconColor={primaryColor} containerColor={grayBackgroundColor} ></IconButton>
               <Image source={{ uri: item.imgUrl }} style={UserListHoriziableStyleComponent.avatar}>
