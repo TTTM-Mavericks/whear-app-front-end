@@ -6,7 +6,7 @@ import { ITEM_WIDTH } from '../../components/ListView/ListViewStyleComponent';
 const { width, height } = Dimensions.get('window');
 const containerPadding = 16;
 
-const NotificationStyleScreen = StyleSheet.create({
+const StyleOfClothesStyleScreen = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -44,11 +44,9 @@ const NotificationStyleScreen = StyleSheet.create({
   },
   flatlist: {
     backgroundColor: backgroundColor,
-    width: width * 0.9,
-    display: 'flex',
-    marginTop: 10,
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
+
   },
   homeSliderHorizotal: {
     width: width,
@@ -59,6 +57,7 @@ const NotificationStyleScreen = StyleSheet.create({
     backgroundColor: backgroundColor,
     flex: 1,
     borderRadius: 8,
+    marginBottom: 20,
   },
   filterGroup: {
     width: width * 0.85,
@@ -66,6 +65,41 @@ const NotificationStyleScreen = StyleSheet.create({
     backgroundColor: backgroundColor,
     textAlign: 'left',
     alignItems: 'flex-start'
+  },
+  buttonGroup: {
+    width: width,
+    margin: 0,
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    position: 'relative'
+
+  },
+  buttonGroup_button: {
+    width: '45%',
+    height: height * 0.04,
+    marginLeft: 5,
+    marginRight: 5,
+    borderRadius: 5,
+    borderWidth: 0,
+    flex: 1,
+    position: 'relative'
+
+
+  },
+  buttonGroup_button_lable: {
+    height: height * 0.04,
+    marginTop: height * 0.04 * 0.75,
+    fontSize: 13, 
+    fontWeight: '400',
+    color: 'black',
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 8
+
   },
   titlePage: {
     fontSize: 20,
@@ -78,38 +112,7 @@ const NotificationStyleScreen = StyleSheet.create({
     height: ITEM_HEIGHT,
     width: ITEM_WIDTH,
   },
-  notificationItem: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 2,
-    flex: 1,
-    flexDirection: 'row',
-    borderRadius: 8,
-  },
-  circleImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 90,
-  },
-  image: {
-    width: 80,
-    height: 80,
-    borderRadius: 8,
-    marginTop: 5,
-    marginBottom: 5
-  },
-  content: {
-    marginLeft: 10,
-    marginRight: 40,
-    borderRadius: 8
-  },
-  description: {
-    fontSize: 14,
-  },
-  time: {
-    fontSize: 12,
-    color: '#888',
-  },
+
 });
 
-export default NotificationStyleScreen;
+export default StyleOfClothesStyleScreen;

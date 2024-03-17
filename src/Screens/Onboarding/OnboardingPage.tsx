@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Animated, View } from 'react-native';
 import { Button, Text } from 'react-native-paper';
 import { dataSliderOnboarding } from './Data';
@@ -7,11 +7,13 @@ import VerticalMotion from './VerticalMotion';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../root/RootStackParams';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 type NavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 
 const OnboardingPage = () => {
   const fadeAnim = new Animated.Value(0);
   const navigation = useNavigation<NavigationProp>();
+  const [isLogin, setIsLogin] = useState(false);
 
   const handleGetStarted = () => {
     navigation.navigate('Introduce');
@@ -20,9 +22,28 @@ const OnboardingPage = () => {
   useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 4000,
+      duration: 2000,
       useNativeDriver: true,
-    }).start();
+    }).start(
+      () => {
+        const fetchData = async () => {
+          try {
+            const logined = await AsyncStorage.getItem('logined');
+            if (logined === 'true') {
+              setIsLogin(true);
+              navigation.navigate('Home');
+            } else {
+              setIsLogin(false);
+              navigation.navigate('SignIn');
+            }
+          } catch (error) {
+            setIsLogin(false);
+          }
+
+        }
+        fetchData();
+      }
+    );
   }, [fadeAnim]);
 
   return (
@@ -69,16 +90,18 @@ const OnboardingPage = () => {
       </View>
 
       <View style={OnboardingStyle.textContainer}>
-        <Text variant='headlineLarge'>
+        <Text variant='headlineLarge' style={{fontSize: 20, justifyContent: 'center', alignContent: 'center', alignItems: 'center', textAlign: 'center'}}>
           Start discorvering your unique fashion style
         </Text>
-        <Button
-          labelStyle={{ color: 'black', fontSize: 18 }}
-          style={OnboardingStyle.getStartedBtn}
-          onPress={handleGetStarted}
-        >
-          Get Started
-        </Button>
+        {isLogin && (
+          <Button
+            labelStyle={{ color: 'black', fontSize: 18 }}
+            style={OnboardingStyle.getStartedBtn}
+            onPress={handleGetStarted}
+          >
+            Get Started
+          </Button>
+        )}
       </View>
 
     </View>

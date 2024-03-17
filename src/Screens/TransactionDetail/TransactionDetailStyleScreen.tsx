@@ -32,8 +32,6 @@ const TransactionDetailStyleScreen = StyleSheet.create({
     },
     listItems: {
         marginTop: 40,
-        justifyContent: 'center',
-        alignItems: 'center',
         paddingHorizontal: 20,
         backgroundColor: backgroundColor,
     },
@@ -83,12 +81,12 @@ const TransactionDetailStyleScreen = StyleSheet.create({
         width: ITEM_WIDTH,
     },
     buttonGroup_button: {
-        width: width * 0.9,
+        width: width * 0.78,
         height: height * 0.05,
-        marginLeft: 5,
-        marginRight: 5,
-        borderRadius: 5,
+        marginTop: 20,
+        borderRadius: 8,
         borderWidth: 0,
+        marginBottom: 100
     },
     buttonGroup_button_lable: {
         height: height * 0.035,

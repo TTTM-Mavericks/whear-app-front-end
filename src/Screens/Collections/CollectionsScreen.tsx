@@ -12,7 +12,7 @@ import ChipGroupComponent from '../../components/Common/ChipGroup/ChipGroupCompo
 import { height, width } from '../../root/ResponsiveSize';
 import { backgroundColor, grayBackgroundColor, primaryColor, secondaryColor } from '../../root/Colors';
 import { useDispatch } from 'react-redux';
-import { setOpenAddToCollectionsDialog } from '../../redux/State/Actions';
+import { setOpenAddToCollectionsDialog, setOpenUpgradeRolesDialog } from '../../redux/State/Actions';
 import AddingToCollectionComponent from '../../components/Dialog/AddingToCollectionComponent';
 import CollectionsStyleScreen from './CollectionsStyleScreen';
 import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarFooterComponents';
@@ -84,6 +84,7 @@ const CollectionsScreen = () => {
   const [curentCollectionId, setCurrentCollectionId] = useState();
   const [user, setUser] = React.useState<UserInterFace>();
   const [clothesOfCollection, setClothesOfCollection] = React.useState<ClothesInterface[]>([]);
+  const [addedClothId, setAddedClothId] = useState();
 
 
 
@@ -113,11 +114,13 @@ const CollectionsScreen = () => {
 
             if (getData.success === 200) {
               setUserCollection(getData.data);
-              setCurrentCollectionId(getData.data[0].collectionID);
-              console.log('getData.data: ', getData.data);
-              setTimeout(() => {
-                setIsLoading(false);
-              }, 1000)
+              if (getData.data.length > 0) {
+                setCurrentCollectionId(getData.data[0].collectionID);
+                console.log('getData.data: ', getData.data);
+                setTimeout(() => {
+                  setIsLoading(false);
+                }, 1000)
+              }
             }
             else {
               console.log(getData.data);
@@ -135,30 +138,41 @@ const CollectionsScreen = () => {
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      const params = {}
-      try {
-        const getData = await api.get(`/api/v1/collection/get-collection-by-id?collection_id=${curentCollectionId}`, params, token);
-        // const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=1&based_userid=1`, params, tokenString);
-        if (getData.success === 200) {
-          setClothesOfCollection(getData.data.clothesList);
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 1000)
+    if (curentCollectionId) {
+      const fetchData = async () => {
+        setIsLoading(true);
+        const params = {}
+        try {
+          const getData = await api.get(`/api/v1/collection/get-collection-by-id?collection_id=${curentCollectionId}`, params, token);
+          // const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=1&based_userid=1`, params, tokenString);
+          if (getData.success === 200) {
+            setClothesOfCollection(getData.data.clothesList);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 1000)
+          }
+          else {
+            console.log(getData.data);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 1000)
+          }
+        } catch (error) {
+          console.error("An error occurred during data fetching:", error);
         }
-        else {
-          console.log(getData.data);
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 1000)
-        }
-      } catch (error) {
-        console.error("An error occurred during data fetching:", error);
       }
+      fetchData();
     }
-    fetchData();
   }, [curentCollectionId])
+
+  useEffect(() => {
+    // Filter clothesData to get only items with reacted set to true
+    const reactedItems = clothesOfCollection.filter((item) => item.reacted);
+    // Extract the clothesID from filtered items
+    const reactedItemIds = reactedItems.map((item) => item.clothesID);
+    // Update addedItems state with reacted item IDs
+    setAddedItems(reactedItemIds);
+  }, [clothesOfCollection]);
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
@@ -173,15 +187,47 @@ const CollectionsScreen = () => {
     alert('handleMore')
   }
 
-  const handleAddToCollection = (id: string) => {
+  const handleAddToCollection = (id: any) => {
     if (addItemToCollection) {
       dispatch(setOpenAddToCollectionsDialog(true));
+      setAddedClothId(id);
+      setAddedItems(addedItems.filter((item) => item !== id));
     }
   }
 
-  const handleChangeIconAdded = (id: string) => {
-    setAddItemToCollection(!addItemToCollection);
-    handleAddToCollection(id);
+  const handleChangeIconAdded = async (id: any, reacted: boolean | undefined) => {
+    if (!reacted) {
+      console.log('reacted: ', reacted);
+      const selectedItem = clothesOfCollection.find((item) => item.clothesID !== id);
+      if (selectedItem) {
+        if (addedItems.includes(id)) {
+          const selectedItem = clothesOfCollection.find((item) => item.clothesID === id);
+          if (selectedItem) {
+            setAddedItems([...addedItems, id]);
+          }
+        } else {
+          handleAddToCollection(id);
+
+        }
+      } else {
+        const selectedItem = clothesOfCollection.find((item) => item.clothesID === id);
+        if (selectedItem) {
+          setAddedItems([...addedItems, id]);
+        }
+      }
+
+
+    }
+    else {
+      const selectedItem = clothesOfCollection.find((item) => item.clothesID === id);
+      if (selectedItem) {
+        setAddedItems([...addedItems, id]);
+      }
+    }
+    // if (!reacted) {
+    //   handleAddToCollection(id);
+    // }
+
   }
 
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -204,8 +250,8 @@ const CollectionsScreen = () => {
     alert('add')
   }
 
-  const handleSetCurrentList = (collectionId: any) => {
-
+  const handleOpenUpgradeDialog = () => {
+    dispatch(setOpenUpgradeRolesDialog(true));
   }
 
 
@@ -232,6 +278,7 @@ const CollectionsScreen = () => {
             </MaskedView>
           </View>
         }
+        isLogo={true}
         backAction={() => hanldeGoBack()}
       >
       </AppBarHeaderComponent>
@@ -313,16 +360,17 @@ const CollectionsScreen = () => {
                 renderItem={({ item }) => (
                   <ListViewComponent data={[{ id: item.clothesID, imgUrl: item.clothesImages ? item.clothesImages[0] : clothesLogoUrlDefault, }]} child={
                     <IconButton
-                      mode='outlined'
-                      icon={'heart'}
-                      style={[CollectionsStyleScreen.iconCard, {}]}
-                      size={15}
-                      iconColor={addedItems.includes(item.clothesID) ? '#C90801' : '#C3C3C3'}
-                      onPress={() => {
-                        handleChangeIconAdded(item.clothesID);
-                      }}
+                    mode='outlined'
+                    icon={'heart'}
+                    style={[CollectionsStyleScreen.iconCard, {}]}
+                    size={15}
+                    underlayColor='black'
+                    iconColor={addedItems.includes(item.clothesID) ? '#C90801' : 'black'}
+                    onPress={() => {
+                      handleChangeIconAdded(item.clothesID, item.reacted);
+                    }}
 
-                    />
+                  />
                   } />
                 )}
                 contentContainerStyle={{ paddingRight: 0 }}
@@ -341,8 +389,13 @@ const CollectionsScreen = () => {
             )}
 
 
-          <AddingToCollectionComponent></AddingToCollectionComponent>
-          <Button icon={require('../../assets/img/logo/logo.png')} mode='outlined' style={{ width: width * 0.8, margin: 20, borderRadius: 8, backgroundColor: primaryColor, borderWidth: 0 }} textColor='black' >
+          <Button
+            icon={require('../../assets/img/logo/logo.png')}
+            mode='outlined'
+            style={{ width: width * 0.8, margin: 20, borderRadius: 8, backgroundColor: primaryColor, borderWidth: 0 }}
+            textColor='black'
+            onPress={() => handleOpenUpgradeDialog()}
+          >
             <Text style={{ fontSize: 12.5, fontWeight: '500' }}>
               Upgrade to add more
             </Text>
@@ -354,6 +407,7 @@ const CollectionsScreen = () => {
           </View>
         )}
       </ScrollView >
+      <AddingToCollectionComponent clothID={addedClothId}></AddingToCollectionComponent>
 
       {(<AppBarFooterComponents centerIcon='plus' isHide={scrollUp} ></AppBarFooterComponents>)}
       <View>

@@ -22,7 +22,7 @@ const HorizontalCarouselCardItem: React.FC<HorizontalCarouselItemProps> = ({ ite
     <View style={styles.container} key={index}>
       <Image source={{ uri: item.imgUrl }} style={styles.image} />
       {item.body && (
-        <View style={{ position: 'absolute', bottom: 0, width: '80%', backgroundColor: 'rgba(169, 169, 169, 0.7)', borderTopEndRadius: 10, borderBottomEndRadius: 10 }}>
+        <View style={{ position: 'absolute', bottom: 0, width: '80%', backgroundColor: 'rgba(169, 169, 169, 0.7)', borderTopEndRadius: 10, borderBottomStartRadius: 10 }}>
           <Text style={styles.title}>{item.title && item.title.substring(0, 60)}</Text>
           <Text style={styles.body}>{item.body.substring(0, 80)}...</Text>
         </View>

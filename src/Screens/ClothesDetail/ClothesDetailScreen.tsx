@@ -12,7 +12,7 @@ import { iconAvatarPostingSize, iconAvatarSize } from '../../root/Icon';
 import ClothesDetailStyleScreen from './ClothesDetailStyleScreen';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
 import Swiper from 'react-native-swiper';
-import { backgroundColor, colorsArayList, grayBackgroundColor, primaryColor, secondaryColor } from '../../root/Colors';
+import { backgroundColor, colorsArayList, fourthColor, grayBackgroundColor, primaryColor, secondaryColor } from '../../root/Colors';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import TouchabaleActiveActionButton from '../../components/Common/TouchableActive/TouchabaleActiveActionButton';
@@ -20,6 +20,8 @@ import { ClothesInterface, UserInterFace } from '../../models/ObjectInterface';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../api/AxiosApiConfig';
 import LoadingComponent from '../../components/Common/Loading/LoadingComponent';
+import { setOpenAddToCollectionsDialog } from '../../redux/State/Actions';
+import AddingToCollectionComponent from '../../components/Dialog/AddingToCollectionComponent';
 
 
 
@@ -150,6 +152,12 @@ const ClothesDetailScreen = () => {
   const [clothData, setClothData] = useState<ClothesInterface>();
   const [isLoading, setIsLoading] = useState(true);
   const [userCreate, setUserCreate] = useState<UserInterFace>();
+  const [addedItems, setAddedItems] = useState<string[]>([]);
+  const [addedClothId, setAddedClothId] = useState();
+  const [added, setAdded] = useState(false);
+
+
+
 
 
   /*-----------------Usable variable-----------------*/
@@ -161,43 +169,55 @@ const ClothesDetailScreen = () => {
   /*-----------------UseEffect-----------------*/
   useEffect(() => {
     console.log('clothID: ', clothID);
-    const fetchData = async () => {
-      const tokenStorage = await AsyncStorage.getItem('access_token');
-      const userStorage = await AsyncStorage.getItem('userData');
-      setIsLoading(true);
-      if (userStorage) {
-        const userParse: UserInterFace = JSON.parse(userStorage);
-        if (tokenStorage) {
-          const tokenString = JSON.parse(tokenStorage);
-          console.log('userParse: ', tokenString);
-          const params = {}
-          try {
-            const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=${clothID}&based_userid=${userParse.userID}`, params, tokenString);
-            // const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=1&based_userid=1`, params, tokenString);
-
-            if (getData.success === 200) {
-              setUserCreate(getData.data.user)
-              setClothData(getData.data);
-              setTimeout(() => {
-                setIsLoading(false);
-              }, 1000)
-            }
-            else {
-              console.log(getData.data);
-              setTimeout(() => {
-                setIsLoading(false);
-              }, 1000)
-            }
-          } catch (error) {
-            console.error("An error occurred during data fetching:", error);
-          }
-        }
-      }
-    }
+    
     fetchData();
   }, [clothID]);
 
+
+  const fetchData = async () => {
+    const tokenStorage = await AsyncStorage.getItem('access_token');
+    const userStorage = await AsyncStorage.getItem('userData');
+    setIsLoading(true);
+    if (userStorage) {
+      const userParse: UserInterFace = JSON.parse(userStorage);
+      if (tokenStorage) {
+        const tokenString = JSON.parse(tokenStorage);
+        console.log('userParse: ', tokenString);
+        const params = {}
+        try {
+          const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=${clothID}&based_userid=${userParse.userID}`, params, tokenString);
+          // const getData = await api.get(`/api/v1/clothes/get-clothes-by-id?clothes_id=1&based_userid=1`, params, tokenString);
+
+          if (getData.success === 200) {
+            setUserCreate(getData.data.user)
+            setClothData(getData.data);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 1000)
+          }
+          else {
+            console.log(getData.data);
+            setTimeout(() => {
+              setIsLoading(false);
+            }, 1000)
+          }
+        } catch (error) {
+          console.error("An error occurred during data fetching:", error);
+        }
+      }
+    }
+  }
+
   /*-----------------Function handler-----------------*/
+
+  const handleAddToCollection = (id: any) => {
+      dispatch(setOpenAddToCollectionsDialog(true));
+      setAddedClothId(id);
+      setAdded(true);
+  }
+
+  
+
   function hanldeGoBack(): void {
     navigation.goBack();
   }
@@ -373,14 +393,17 @@ const ClothesDetailScreen = () => {
 
                   <View style={{ flexDirection: 'row', width: 80, position: 'absolute', right: 0, top: 0 }}>
                     <IconButton
-                      icon={require('../../assets/icon/heart.png')}
-                      iconColor={'black'}
-                      size={17}
+                      icon={'heart'}
+                      iconColor={clothData?.reacted ? '#C90801' : 'black'}
+                      onPress={() => {
+                        handleAddToCollection(clothData?.clothesID);
+                      }}
+                      size={18}
                       borderless
                     ></IconButton>
                     <View>
-                      <Text style={{ color: 'black', fontSize: 12, marginLeft: -10, paddingTop: width * 0.04 }}>
-                        {100}
+                      <Text style={{ color: 'black', fontSize: 14, marginLeft: -10, paddingTop: width * 0.04 }}>
+                        {clothData?.reactPerClothes}
                       </Text>
                     </View>
                     <IconButton
@@ -424,7 +447,7 @@ const ClothesDetailScreen = () => {
                 </View>
               )}
 
-              <View style={[ClothesDetailStyleScreen.container_postingBar, {marginTop: 10}]}>
+              <View style={[ClothesDetailStyleScreen.container_postingBar, { marginTop: 10 }]}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10, paddingLeft: 10 }}>
                   {clothData?.hashtag?.map((item, key) => (<Chip style={{ marginRight: 5, backgroundColor: grayBackgroundColor }} key={key} mode='flat'>{item}</Chip>))}
                 </View>
@@ -559,6 +582,7 @@ const ClothesDetailScreen = () => {
           <LoadingComponent spinner={true}></LoadingComponent>
         )}
       </ScrollView >
+      <AddingToCollectionComponent clothID={addedClothId}></AddingToCollectionComponent>
 
     </View >
 

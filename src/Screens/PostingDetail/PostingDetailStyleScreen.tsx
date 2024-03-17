@@ -24,7 +24,6 @@ const PostingDetailStyleScreen = StyleSheet.create({
   },
   post_imageContainter: {
     height: 'auto',
-    backgroundColor: 'green',
   },
   post_image: {
     width: width,
