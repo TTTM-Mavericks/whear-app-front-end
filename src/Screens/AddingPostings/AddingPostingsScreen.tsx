@@ -156,7 +156,7 @@ const AddingPostingsScreen = () => {
       userID: user?.userID,
       typeOfPosts: "POSTS",
       hashtag: hashtagArray,
-      date: convertDateFormat(new Date()),
+      // date: convertDateFormat(new Date()),
       status: 'UNACTIVE',
       content: textInput,
       image: clothesImagePostingUrl

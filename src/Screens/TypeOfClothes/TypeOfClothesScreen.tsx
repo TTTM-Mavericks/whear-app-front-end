@@ -70,6 +70,8 @@ const TypeOfClothesScreen = () => {
   const [curentCollectionId, setCurrentCollectionId] = useState('');
   const [user, setUser] = React.useState<UserInterFace>();
   const [clothesOfTypes, setClothesOfTypes] = React.useState<ClothesInterface[]>([]);
+  const [clothesOfCollection, setClothesOfCollection] = React.useState<ClothesInterface[]>([]);
+  const [addedClothId, setAddedClothId] = useState();
   const [typesShow, setTypesShows] = useState<{
     label: string,
     value: string,
@@ -188,7 +190,17 @@ const TypeOfClothesScreen = () => {
       // }
     }
     fetchData();
-  }, [curentCollectionId])
+  }, [curentCollectionId]);
+
+  useEffect(() => {
+    // Filter clothesData to get only items with reacted set to true
+    const reactedItems = clothesOfTypes.filter((item) => item.reacted);
+    // Extract the clothesID from filtered items
+    const reactedItemIds = reactedItems.map((item) => item.clothesID);
+    // Update addedItems state with reacted item IDs
+    console.log('reactedItemIds: ', reactedItemIds);
+    setAddedItems(reactedItemIds);
+  }, [clothesOfTypes]);
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
@@ -203,15 +215,45 @@ const TypeOfClothesScreen = () => {
     alert('handleMore')
   }
 
-  const handleAddToCollection = (id: string) => {
+  const handleAddToCollection = (id: any) => {
     if (addItemToCollection) {
       dispatch(setOpenAddToCollectionsDialog(true));
+      setAddedClothId(id);
+      setAddedItems(addedItems.filter((item) => item !== id));
     }
   }
 
-  const handleChangeIconAdded = (id: string) => {
-    setAddItemToCollection(!addItemToCollection);
-    handleAddToCollection(id);
+  const handleChangeIconAdded = async (id: any, reacted: boolean | undefined) => {
+    if (!reacted) {
+      console.log('reacted: ', reacted);
+      const selectedItem = clothesOfTypes.find((item) => item.clothesID !== id);
+      if (selectedItem) {
+        if (addedItems.includes(id)) {
+          const selectedItem = clothesOfTypes.find((item) => item.clothesID === id);
+          if (selectedItem) {
+            setAddedItems([...addedItems, id]);
+          }
+        } else {
+          handleAddToCollection(id);
+
+        }
+      } else {
+        const selectedItem = clothesOfTypes.find((item) => item.clothesID === id);
+        if (selectedItem) {
+          setAddedItems([...addedItems, id]);
+        }
+      }
+    }
+    else {
+      const selectedItem = clothesOfTypes.find((item) => item.clothesID === id);
+      if (selectedItem) {
+        setAddedItems([...addedItems, id]);
+      }
+    }
+    // if (!reacted) {
+    //   handleAddToCollection(id);
+    // }
+
   }
 
   const [prevScrollPos, setPrevScrollPos] = useState(0);
@@ -341,16 +383,17 @@ const TypeOfClothesScreen = () => {
                 renderItem={({ item }) => (
                   <ListViewComponent data={[{ id: item.clothesID, imgUrl: item.clothesImages ? item.clothesImages[0] : clothesLogoUrlDefault, }]} child={
                     <IconButton
-                      mode='outlined'
-                      icon={'heart'}
-                      style={[TypeOfClothesStyleScreen.iconCard, {}]}
-                      size={15}
-                      iconColor={addedItems.includes(item.clothesID) ? '#C90801' : '#C3C3C3'}
-                      onPress={() => {
-                        handleChangeIconAdded(item.clothesID);
-                      }}
+                    mode='outlined'
+                    icon={'heart'}
+                    style={[TypeOfClothesStyleScreen.iconCard, {}]}
+                    size={15}
+                    underlayColor='black'
+                    iconColor={addedItems.includes(item.clothesID) ? '#C90801' : 'black'}
+                    onPress={() => {
+                      handleChangeIconAdded(item.clothesID, item.reacted);
+                    }}
 
-                    />
+                  />
                   } />
                 )}
                 contentContainerStyle={{ paddingRight: 0 }}
@@ -369,7 +412,6 @@ const TypeOfClothesScreen = () => {
             )}
 
 
-          <AddingToCollectionComponent></AddingToCollectionComponent>
           <Button icon={require('../../assets/img/logo/logo.png')} mode='outlined' style={{ width: width * 0.8, margin: 20, borderRadius: 8, backgroundColor: primaryColor, borderWidth: 0 }} textColor='black' >
             <Text style={{ fontSize: 12.5, fontWeight: '500' }}>
               Upgrade to add more
@@ -387,6 +429,8 @@ const TypeOfClothesScreen = () => {
       <View>
 
       </View>
+      <AddingToCollectionComponent clothID={addedClothId}></AddingToCollectionComponent>
+
       <LoadingComponent spinner={isLoading} ></LoadingComponent>
 
     </View >

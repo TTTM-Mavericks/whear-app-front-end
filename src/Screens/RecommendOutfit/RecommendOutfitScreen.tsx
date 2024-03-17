@@ -697,7 +697,6 @@ const RecommendOutfitScreen = () => {
             && (
               <ActivityIndicator animating={true} color={primaryColor} style={{ marginTop: 50, marginBottom: 50 }} />
             )}
-          <AddingToCollectionComponent></AddingToCollectionComponent>
           <View style={{ alignContent: 'center', alignItems: 'center', justifyContent: 'center' }}>
             <Button icon={require('../../assets/img/logo/logo.png')} mode='outlined' style={{ width: width * 0.8, margin: 20, borderRadius: 8, backgroundColor: primaryColor, borderWidth: 0 }} textColor='black' >
               <Text style={{ fontSize: 12.5, fontWeight: '500' }}>

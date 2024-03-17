@@ -22,6 +22,7 @@ const SignInStylesComponent = StyleSheet.create({
   },
   input: {
     backgroundColor: 'transparent',
+    marginBottom: 10
   },
   button: {
     textAlign: 'center',

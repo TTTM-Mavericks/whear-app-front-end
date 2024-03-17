@@ -16,7 +16,7 @@ import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarF
 import AddImageButtonComponent from '../../components/ImagePicker/AddImageButtonComponent';
 import api from '../../api/AxiosApiConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ClothesInterface, CollectionInterface, TransactionInterface, UserInterFace } from '../../models/ObjectInterface';
+import { ClothesInterface, CollectionInterface, PostingInterface, TransactionInterface, UserInterFace } from '../../models/ObjectInterface';
 import { setIsLogined, setUploadToFireBase } from '../../redux/State/Actions';
 import { clothesLogoUrlDefault, spanTextSize } from '../../root/Texts';
 import Toast from 'react-native-toast-message';
@@ -56,13 +56,15 @@ const UserProfileScreen = () => {
   const [visibleFollowerDialog, setVisibleFollowerDialog] = useState(false);
   const [isFollowedInFollowingUser, setIsFollowedInFollowingUser] = useState(true);
   const [selectedItems, setSelectedItems] = useState([] as string[]);
-  const [selectedTag, setSelectedTag] = useState('clothes');
+  const [selectedTag, setSelectedTag] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState('');
   const [userClothes, setUserColthes] = useState<ClothesInterface[]>([]);
   const [userCollection, setUserCollection] = useState<CollectionInterface[]>([]);
   const [data, setData] = useState<CollectionInterface[] | ClothesInterface[]>([]);
   const [history, setHistory] = useState<TransactionInterface[]>([]);
+  const [posting, setPosting] = useState<PostingInterface[]>([]);
+
 
 
 
@@ -124,6 +126,7 @@ const UserProfileScreen = () => {
    * Fetch data to render user avatar
    */
   useEffect(() => {
+    setSelectedTag('clothes');
     setAvatarImgUrl(imageUrl);
     if (isUploadedImage) {
       console.log('fetch');
@@ -170,6 +173,7 @@ const UserProfileScreen = () => {
    * Fetch data to get follower User
    */
   useEffect(() => {
+    setSelectedTag('clothes');
     const fetchData = async () => {
       try {
         const userIDParam = (route.params as { userID?: string })?.userID;
@@ -194,6 +198,7 @@ const UserProfileScreen = () => {
    * Fetch data to get following User
    */
   useEffect(() => {
+    setSelectedTag('clothes');
     setIsLoading(true);
     const fetchData = async () => {
       const userStorage = await AsyncStorage.getItem("userData");
@@ -260,6 +265,7 @@ const UserProfileScreen = () => {
       // }
 
       // selectedTag === 'collection'
+      setSelectedTag(selectedTag);
 
       if (selectedTag === 'clothes') {
         console.log('selectedTag: ', 1);
@@ -268,7 +274,7 @@ const UserProfileScreen = () => {
         if (getData.success === 200) {
           setUserColthes(getData.data);
           setData(getData.data);
-          console.log('hihihi: ',getData.data);
+          console.log('hihihi: ', getData.data);
           setTimeout(() => {
             setIsLoading(false);
           }, 1000)
@@ -281,12 +287,11 @@ const UserProfileScreen = () => {
         }
       }
 
-      if (selectedTag === 'collection') {
-        const getData = await api.get(`/api/v1/collection/get-all-by-userid?user_id=${userStorage?.userID}`, params, token);
+      if (selectedTag === 'posting') {
+        const getData = await api.get(`/api/v1/post/get-all-post-for-user?user_id=${currentUser?.userID}`, params, token);
 
         if (getData.success === 200) {
-          setUserCollection(getData.data);
-          setData(getData.data);
+          setPosting(getData.data)
           console.log(getData.data);
           setTimeout(() => {
             setIsLoading(false);
@@ -300,7 +305,7 @@ const UserProfileScreen = () => {
         }
       }
 
-      
+
 
       if (selectedTag === 'history' && currentUser?.userID === userStorage?.userID) {
         console.log('history');
@@ -466,6 +471,10 @@ const UserProfileScreen = () => {
     }
   }
 
+  const handleMoveToPostDetail = (postID: any) => {
+    navigation.navigate('PostingDetail', { postID: postID })
+  }
+
   return (
     <View style={UserProfileStyleScreen.container}>
       <Toast
@@ -590,8 +599,8 @@ const UserProfileScreen = () => {
             uncheckedColor: '#808991',
           },
           {
-            value: 'collection',
-            icon: 'heart',
+            value: 'posting',
+            icon: require('../../assets/icon/hashtag.png'),
             style: {
               borderRadius: 0,
               borderColor: grayBorderColor,
@@ -648,18 +657,30 @@ const UserProfileScreen = () => {
         scrollEventThrottle={16}
       >
         <View style={UserProfileStyleScreen.scrollViewContent}>
-          {selectedTag === 'collection' ? userCollection.length > 0 ?
+          {selectedTag === 'posting' ? posting.length > 0 ?
             (
               <FlatList
                 style={UserProfileStyleScreen.flatlist}
-                data={userCollection}
-                keyExtractor={(item) => item.collectionID}
-                numColumns={2}
+                data={posting}
+                keyExtractor={(item) => item.postID}
+                numColumns={1}
                 renderItem={({ item }) => (
-                  <TouchableOpacity>
-                    <ListViewComponent data={[{ id: item.collectionID, imgUrl: item.imgUrl ? item.imgUrl : clothesLogoUrlDefault, }]} />
-                    <View style={{ position: 'absolute', backgroundColor: 'rgba(216,216,216, 0.3)', width: width * 0.9, height: 300, justifyContent: 'center', alignItems: 'center', borderRadius: 8, top: 10, left: 10 }}>
-                      <Text style={{ color: backgroundColor, fontSize: 40, fontWeight: 'bold' }}>{item.nameOfCollection}</Text>
+                  <TouchableOpacity key={item.postID} style={UserProfileStyleScreen.cardContentPost} onPress={() => handleMoveToPostDetail(item.postID)}>
+                    <View style={{ padding: 10, flexDirection: 'row', alignContent: 'center', justifyContent: 'center', alignItems: 'center' }} >
+                      <View style={[UserProfileStyleScreen.cardContentStatusPost]}>
+                        <Image style={[UserProfileStyleScreen.cardContentStatusPost]} source={{ uri: item.image ? item.image[0] : clothesLogoUrlDefault }}></Image>
+                      </View>
+                      <View style={UserProfileStyleScreen.cardContentDetailPost}>
+                        <Text>{item.content?.slice(0, 200)} ...</Text>
+                        <View style={{ padding: 0, flexDirection: 'row', alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}>
+                          <Icon source={require('../../assets/icon/heart.png')} size={15}></Icon>
+                          <Text style={{ paddingLeft: 10, fontSize: 15 }}>{item.react?.length}</Text>
+                        </View>
+                        <View style={{ padding: 0, flexDirection: 'row', alignContent: 'center', justifyContent: 'center', alignItems: 'center' }}>
+                          <Icon source={require('../../assets/icon/talking.png')} size={15}></Icon>
+                          <Text style={{ paddingLeft: 10, fontSize: 15 }}>{item.comment?.length}</Text>
+                        </View>
+                      </View>
                     </View>
                   </TouchableOpacity>
                 )}

@@ -79,27 +79,29 @@ const NotificationStyleScreen = StyleSheet.create({
     width: ITEM_WIDTH,
   },
   notificationItem: {
-    height: height * 0.15,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 2,
     flex: 1,
     flexDirection: 'row',
-    padding:5,
-    marginBottom: 10,
-    borderWidth:0.2,
+    borderRadius: 8,
   },
   circleImage: {
     width: 50,
     height: 50,
-    borderRadius: 50,
+    borderRadius: 90,
   },
   image: {
     width: 80,
-    height: 50,
+    height: 80,
+    borderRadius: 8,
+    marginTop: 5,
+    marginBottom: 5
   },
   content: {
     marginLeft: 10,
+    marginRight: 40,
+    borderRadius: 8
   },
   description: {
     fontSize: 14,

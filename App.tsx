@@ -84,22 +84,23 @@ export default function App() {
         <NavigationContainer>
           <View style={styles.container}>
             <Stack.Navigator>
-              {/* <Stack.Screen
+              <Stack.Screen
                 name="Onboarding"
                 component={OnboardingScreen}
                 options={{ headerShown: false }}
               />
+               {/*
               <Stack.Screen
                 name='FirstLoadingPage'
                 component={FirstLoadingPage}
                 options={{ headerShown: false }}
               /> */}
 
-              {/* <Stack.Screen
+              <Stack.Screen
                 name='SignIn'
                 component={SignInComponent}
                 options={{ headerShown: false }}
-              /> */}
+              />
 
               <Stack.Screen
                 name="Home"

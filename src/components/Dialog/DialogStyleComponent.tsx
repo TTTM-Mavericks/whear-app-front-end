@@ -182,7 +182,6 @@ const DialogStylesComponent = StyleSheet.create({
     clothesAddingArea: {
         width: width,
         flexDirection: 'row',
-        backgroundColor: 'green',
         justifyContent: 'center',
         alignItems: 'center',
 
