@@ -39,7 +39,7 @@
     "expo-notifications": "~0.20.1",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
-    "firebase": "^10.7.1",
+    "firebase": "^10.9.0",
     "moment": "^2.30.1",
     "patch-package": "^8.0.0",
     "react": "18.2.0",
