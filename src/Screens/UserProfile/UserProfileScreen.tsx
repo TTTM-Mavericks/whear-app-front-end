@@ -21,6 +21,7 @@ import { setIsLogined, setOpenUpgradeRolesDialog, setUploadToFireBase } from '..
 import { clothesLogoUrlDefault, spanTextSize } from '../../root/Texts';
 import Toast from 'react-native-toast-message';
 import LoadingComponent from '../../components/Common/Loading/LoadingComponent';
+import UpgradeRoleDialogComponent from '../../components/Dialog/UpgradeRoleDialogComponent';
 
 interface ListItem {
   id: string;
@@ -489,7 +490,9 @@ const UserProfileScreen = () => {
         <IconButton icon={require('../../assets/icon/backarrow.png')} onPress={() => navigation.navigate('Social')}></IconButton>
         <TouchableOpacity onPress={hanleOpenUpgrade} style={UserProfileStyleScreen.upgradeBanner} >
           <Icon source={require('../../assets/img/logo/logo.png')} size={40}></Icon>
-          <Text style={{ fontSize: 12, fontWeight: 'bold', marginRight: 10 }}>Upgrade to Premium</Text>
+          <TouchableOpacity onPress={hanleOpenUpgrade}>
+            <Text style={{ fontSize: 12, fontWeight: 'bold', marginRight: 10 }}>Upgrade to Premium</Text>
+          </TouchableOpacity>
         </TouchableOpacity>
       </View>
       <View style={[UserProfileStyleScreen.backGroundImg, Platform.OS === 'ios' ? { marginTop: -width * 0.88 } : { marginTop: -width * 1.05 }]}>
@@ -896,6 +899,7 @@ const UserProfileScreen = () => {
       )}
       <AppBarFooterComponents isHide={scrollUp} centerIcon={require('../../assets/img/logo/logo.png')}></AppBarFooterComponents>
       <LoadingComponent spinner={isLoading} ></LoadingComponent>
+      <UpgradeRoleDialogComponent></UpgradeRoleDialogComponent>
     </View >
 
 
