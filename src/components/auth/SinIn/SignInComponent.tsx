@@ -125,7 +125,7 @@ const SignInComponent = () => {
           setTimeout(() => {
             setIsLoading(false);
             navigation.replace('Home');
-          }, 500)
+          }, 200)
         } else {
           setIsLoading(false);
           Toast.show({

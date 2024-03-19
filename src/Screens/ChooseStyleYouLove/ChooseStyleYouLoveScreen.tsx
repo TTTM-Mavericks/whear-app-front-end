@@ -152,7 +152,7 @@ const ChooseStyleYouLoveScreen = () => {
 
   const handleMoveToHomeScreen = async () => {
     console.log('styleDefault: ', styleDefault);
-    if (selectedItems.length >= 2) {
+    if (selectedItems.length >= 3) {
       navigation.navigate('Home');
       const response = await api.post('/api/v1/user-style/create-style-and-body-shape', styleDefault);
       if (response.success === 200) {
@@ -215,8 +215,8 @@ const ChooseStyleYouLoveScreen = () => {
           provide.
         </Text>
 
-        <Text style={[ChooseStyleYouLoveStyleScreen.subTitle, { color: selectedItems.length >= 2 ? primaryColor : fourthColor }]}>
-          At least 2 pieces
+        <Text style={[ChooseStyleYouLoveStyleScreen.subTitle, { color: selectedItems.length >= 3 ? primaryColor : fourthColor }]}>
+          At least 3 pieces
         </Text>
       </View>
       <ScrollView

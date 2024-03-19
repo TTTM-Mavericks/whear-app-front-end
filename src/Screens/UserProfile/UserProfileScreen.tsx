@@ -143,7 +143,7 @@ const UserProfileScreen = () => {
           if (response.success === 200) {
             setUserStorage(response.data);
             const data = response.data
-            AsyncStorage.setItem('userData', JSON.stringify(data));
+            // AsyncStorage.setItem('userData', JSON.stringify(data));
             dispatch(setUploadToFireBase(false));
             Toast.show({
               type: 'success',

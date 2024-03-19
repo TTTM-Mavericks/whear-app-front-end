@@ -16,6 +16,7 @@ import { UserInterFace } from '../../models/ObjectInterface';
 import api from '../../api/AxiosApiConfig';
 import Toast from 'react-native-toast-message';
 import UpgradeRoleDialogComponent from './UpgradeRoleDialogComponent';
+import LoadingComponent from '../Common/Loading/LoadingComponent';
 
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
@@ -85,6 +86,7 @@ const CreateCollectionDialogComponents = () => {
 
     /*-----------------UseEffect-----------------*/
     React.useEffect(() => {
+        setIsLoadingImage(false);
         const fetchData = async () => {
             const tokenStorage = await AsyncStorage.getItem('access_token');
             const userString = await AsyncStorage.getItem('userData');
@@ -113,13 +115,19 @@ const CreateCollectionDialogComponents = () => {
     }, [openDialog]);
 
     React.useEffect(() => {
-        if (isUploadedImage) {
-            setIsLoadingImage(false);
+        console.log('isUploadedImage: ', isUploadedImage);
+        setIsLoadingImage(false);
+        if (!isUploadedImage) {
             setCollectionImageUrl(imageUrlState);
+
         } else {
             setIsLoadingImage(true);
         }
     }, [imageUrlState]);
+
+    React.useEffect(()=> {
+        setIsLoadingImage(false);
+    }, [collectionImageUrl])
 
     /*-----------------Function handler-----------------*/
     const hideDialog = () => {
@@ -277,6 +285,7 @@ const CreateCollectionDialogComponents = () => {
                                 <AddImageButtonComponent width={9} height={9} isCollectionImage={true} iconColor={primaryColor}></AddImageButtonComponent>
                             </View>
                         </View>
+                        
                     </Dialog.Content>
 
                     <View style={{ backgroundColor: backgroundColor, width: '100%', justifyContent: 'center', alignItems: 'center', borderBottomStartRadius: 10, borderBottomEndRadius: 10, marginTop: 20 }} >
@@ -342,6 +351,7 @@ const CreateCollectionDialogComponents = () => {
                     </Dialog.Actions>
                 </Dialog>
             </Portal>
+            <LoadingComponent spinner={isLoadingImage}></LoadingComponent>
 
         </View>
 

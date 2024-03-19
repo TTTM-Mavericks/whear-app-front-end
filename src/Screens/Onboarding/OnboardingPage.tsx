@@ -90,7 +90,7 @@ const OnboardingPage = () => {
       </View>
 
       <View style={OnboardingStyle.textContainer}>
-        <Text variant='headlineLarge' style={{fontSize: 18, justifyContent: 'center', alignContent: 'center', alignItems: 'center', textAlign: 'center'}}>
+        <Text variant='headlineLarge' style={{fontSize: 16, justifyContent: 'center', alignContent: 'center', alignItems: 'center', textAlign: 'center'}}>
           Start discorvering your unique fashion style
         </Text>
         {isLogin && (

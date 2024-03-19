@@ -41,6 +41,22 @@ export const colorsArayList = [
   { value: "LIGHT_YELLOW", label: "#FFFFE0" },
   { value: "DARK_ORANGE", label: "#FF8C00" },
   { value: "IVORY", label: "#FFFFF0" },
+  { value: "DARK_BLUE", label: "#000080" }, // Navy blue
+  { value: "DARK_GREEN", label: "#006400" }, // Dark green
+  { value: "DARK_PURPLE", label: "#800080" }, // Purple
+  { value: "TEAL", label: "#008080" }, // Teal
+  { value: "LIGHT_BROWN", label: "#CDBA96" }, // Light tan
+  { value: "LIGHT_GRAY", label: "#D3D3D3" }, // Light gray
+  { value: "NEON_GREEN", label: "#00FF00" }, // Adjust the hue from #00FF00 (lime green)
+  { value: "NEON_PINK", label: "#FF00FF" }, // Adjust the hue from #FF00FF (magenta)
+  { value: "BURNING_RED", label: "#FF0000" }, // Red
+  { value: "AQUA_NEON", label: "#40FFFF" }, // Teal
+  { value: "YELLOW_NEON", label: "#FFFF00" }, // Yellow
+  { value: "BURGUNDY_RED", label: "#90003F" }, // Maroon
+  { value: "WHITE_CREAM", label: "#FFFFF0" }, // Ivory
+  { value: "PASTEL_BLUE", label: "#AACCFF" }, // Light blue
+  { value: "PASTEL_PINK", label: "#FFD1DC" }, // Pink
+  { value: "NEON_ORANGE", label: "#FFA500" }, 
 ];
 
 export const theme = {

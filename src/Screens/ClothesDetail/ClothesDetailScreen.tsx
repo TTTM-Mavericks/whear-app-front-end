@@ -33,27 +33,6 @@ interface ListItem {
 }
 
 
-const data =
-
-{
-  clothesID: '1',
-  nameOfProduct: "Áo thun con Thỏ",
-  userID: {
-    id: '1',
-    imgUrl: 'https://dntt.mediacdn.vn/197608888129458176/2020/10/9/dsj7695xssw-1602235317180-16022353176351525365665.jpg',
-    userName: 'Nguyễn Minh Tú'
-  },
-  typeOfClothes: "Áo thun",
-  shape: "Regular Fit",
-  seasons: "Mùa đông",
-  description: "Áo thun với chất liệu 100% cotton thiên nhiên gì gì đó, xuất sứ từ Việt Nam sẽ đem lại cảm giác blabla,.....",
-  link: "dán link shopee vào đây nếu có",
-  rating: 0,
-  materials: "Cotton",
-  clothesImages: ["https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2F1705425025030?alt=media&token=726d6aee-d0b7-4798-abd0-76d81d2060a7", "https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2F1705387327562?alt=media&token=fb48d7ba-a875-468e-b8ca-4ce0ae8b6364", "https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2F1705425025030?alt=media&token=726d6aee-d0b7-4798-abd0-76d81d2060a7"],
-  clothesSizes: ["S", "M", "L", "XL"],
-  clothesColors: ["black", "white"]
-}
 
 
 const dataReference = [
