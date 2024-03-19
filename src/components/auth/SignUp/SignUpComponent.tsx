@@ -241,10 +241,14 @@ const SignUpComponent = () => {
     return (
         <View style={{ backgroundColor: backgroundColor, height: 'auto', flex: 1 }}>
             <ScrollView contentContainerStyle={{ backgroundColor: backgroundColor, height: 'auto' }}>
+
                 <ImageBackground style={{
                     width: width,
-                    height: height,
+                    height: height * 1.2,
                 }} source={require('../../../assets/img/logo/background.png')}>
+                    <View style={{ position: 'absolute', zIndex: 9999, top: 50 }}>
+                        <IconButton icon={require('../../../assets/icon/backarrow.png')} onPress={() => navigation.navigate('SignIn')}></IconButton>
+                    </View>
 
                     <View style={SignUpStylesComponent.container}>
                         <Text style={SignUpStylesComponent.title}>Sign Up</Text>
@@ -451,12 +455,14 @@ const SignUpComponent = () => {
                         <Button
                             mode='outlined'
                             contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
-                            style={[SignUpStylesComponent.buttonGroup_button, { backgroundColor: primaryColor, marginBottom: 100 }]}
+                            style={[SignUpStylesComponent.buttonGroup_button, { backgroundColor: primaryColor, marginBottom: 10 }]}
                             labelStyle={[SignUpStylesComponent.buttonGroup_button_lable,]}
                             onPress={() => handleSignUp()}
                         >
                             <Text style={{ fontWeight: '500', fontSize: 15 }}>Sign Up</Text>
                         </Button>
+
+                        
 
 
                     </View>

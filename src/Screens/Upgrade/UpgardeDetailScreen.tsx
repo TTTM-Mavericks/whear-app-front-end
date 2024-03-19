@@ -6,7 +6,7 @@ import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHe
 import MaskedView from '@react-native-masked-view/masked-view';
 import UpgradeStyleScreen from './UpgradeStyleScreen';
 import { LinearGradient } from 'expo-linear-gradient';
-import { primaryColor, secondaryColor } from '../../root/Colors';
+import { fourthColor, grayBackgroundColor, primaryColor, secondaryColor } from '../../root/Colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-paper';
@@ -200,6 +200,29 @@ const UpgardeDetailScreen = () => {
                     >
                         <Text style={{ fontWeight: '500', fontSize: 15 }}>Pay Now</Text>
                     </Button>
+                    <View style={{ alignContent: 'center', alignItems: 'center', justifyContent: 'center', marginTop: 20, marginBottom: 50 }}>
+                        <Text style={{ fontSize: 12, color: fourthColor }}>If you paid the transaction, you must logout to update new role!</Text>
+                            <Button
+                                mode='outlined'
+                                contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
+                                style={[UpgradeStyleScreen.buttonGroup_button, { backgroundColor: grayBackgroundColor, width: 140 }]}
+                                labelStyle={[UpgradeStyleScreen.buttonGroup_button_lable,]}
+                                onPress={() => handleLinkPress(checkoutUrl)}
+                            >
+                                <Text style={{ fontWeight: '500', fontSize: 15 }}>Logout</Text>
+                            </Button>
+                            <Text style={{ margin: 10 }}>Or</Text>
+                            <Button
+                                mode='outlined'
+                                contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
+                                style={[UpgradeStyleScreen.buttonGroup_button, { backgroundColor: primaryColor, width: 140, marginBottom: 200 }]}
+                                labelStyle={[UpgradeStyleScreen.buttonGroup_button_lable,]}
+                                onPress={() => navigation.navigate('Home')}
+                            >
+                                <Text style={{ fontWeight: '500', fontSize: 15 }}>Home</Text>
+                            </Button>
+
+                    </View>
                 </View>
             )}
         </View>

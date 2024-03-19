@@ -31,6 +31,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import RadioButtonAndroid from 'react-native-paper/lib/typescript/components/RadioButton/RadioButtonAndroid';
 import api from '../../api/AxiosApiConfig';
 import Toast from 'react-native-toast-message'
+import LoadingComponent from '../../components/Common/Loading/LoadingComponent';
 
 
 const colors = [
@@ -1020,6 +1021,7 @@ const AddingClothesScreen = () => {
           </TouchableOpacity>
         </Dialog.Actions>
       </Dialog>
+      <LoadingComponent spinner={isLoading}></LoadingComponent>
 
 
     </View >

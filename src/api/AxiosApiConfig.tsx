@@ -1,5 +1,8 @@
 
+import { StackNavigationProp } from '@react-navigation/stack';
 import axios, { AxiosRequestConfig } from 'axios';
+import { RootStackParamList } from '../root/RootStackParams';
+import { useNavigation } from '@react-navigation/native';
 
 // const baseURL = 'https://whear-app.azurewebsites.net';
 // const baseURL = 'https://tam.mavericks-tttm.studio';
@@ -54,7 +57,10 @@ const api = {
 
 const handleRequestError = (error: any) => {
   console.error('API Request Error:', error);
-  
+  type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
+  const navigation = useNavigation<ScreenNavigationProp>();
+  navigation.navigate('SignIn');
+
   throw error;
 };
 

@@ -149,7 +149,7 @@ const AppBarHeaderComponent: React.FC<appBarProps> = (
       {isLogo ? (
         <View>
           <Appbar.BackAction color='transparent' onPress={() => { backAction; setNumberOfNotification(numberOfNotification + 1) }} style={styles} />
-          <Appbar.Action size={45} style={{ position: 'absolute', top: -10 }} color={primaryColor} icon={require('../../../assets/img/logo/logo.png')} />
+          <Appbar.Action onPress={()=> navigation.navigate('Home')} size={45} style={{ position: 'absolute', top: -10 }} color={primaryColor} icon={require('../../../assets/img/logo/logo.png')} />
         </View>
       ) : (
 

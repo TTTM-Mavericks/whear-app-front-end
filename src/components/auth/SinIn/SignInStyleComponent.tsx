@@ -39,7 +39,7 @@ const SignInStylesComponent = StyleSheet.create({
   optionSignIn: {
     fontSize: 15,
     marginBottom: 20,
-    marginTop: 20,
+    paddingTop: 20,
     textAlign: 'center',
     justifyContent: 'center',
     alignItems: 'center',

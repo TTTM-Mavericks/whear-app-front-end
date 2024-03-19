@@ -23,7 +23,7 @@ import Toast from "react-native-toast-message";
 
 type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 
-const bodyShape = [
+const bodyShapeFemale = [
   { label: 'Hourglass', value: 'HOURGLASS_SHAPE', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FHOURGLASS_SHAPE.jpg?alt=media&token=e6b15e6f-7831-4ed8-b047-bada54a956e7' },
   { label: 'Pear', value: 'PEAR_SHAPE', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FPEAR_SHAPE.jpg?alt=media&token=9950b853-fedc-4a70-8641-5cfbcf07a354' },
   { label: 'Apple', value: 'APPLE_SHAPE', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FAPPLE_SHAPE.jpg?alt=media&token=56a568fc-68a3-4d42-9a09-2db6564a2ed6' },
@@ -31,10 +31,20 @@ const bodyShape = [
   { label: 'Inverted triangle', value: 'INVERTED_TRIANGLE_SHAPE', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FINVERTED_TRIANGLE_SHAPE.jpg?alt=media&token=12481c09-e880-431c-a9dc-84e16b7ca81e' },
   { label: 'Lean or slim', value: 'LEAN_OR_SLIM_SHAPE', imgUrl: 'https://firebasestorage.googleapis.com/v0/b/whear-app-1f70d.appspot.com/o/Stuff%2FHOURGLASS_SHAPE.jpg?alt=media&token=e6b15e6f-7831-4ed8-b047-bada54a956e7' },
 ]
+
+const bodyShapeMale = [
+  { label: 'Trapezoid', value: 'HOURGLASS_SHAPE', imgUrl: 'https://i.pinimg.com/236x/78/f0/86/78f0866354d25d1c24087cb0202ed292.jpg' },
+  { label: 'Pear', value: 'PEAR_SHAPE', imgUrl: 'https://i.pinimg.com/236x/a3/67/96/a36796d6ff64e5d972e5c9971cc36d4d.jpg' },
+  { label: 'Apple', value: 'APPLE_SHAPE', imgUrl: 'https://i.pinimg.com/236x/15/dd/94/15dd943fb1b77f83dfbe7f66f370591f.jpg' },
+  { label: 'Reactangle', value: 'RECTANGLE_SHAPE', imgUrl: 'https://i.pinimg.com/236x/b9/5f/88/b95f8873becd1da6815e4f35d90424f2.jpg' },
+  { label: 'Inverted triangle', value: 'INVERTED_TRIANGLE_SHAPE', imgUrl: 'https://i.pinimg.com/236x/dd/e7/b1/dde7b1bfeaaf6474a62e5c3af4326ae0.jpg' },
+  { label: 'Lean or slim', value: 'LEAN_OR_SLIM_SHAPE', imgUrl: 'https://i.pinimg.com/236x/b9/5f/88/b95f8873becd1da6815e4f35d90424f2.jpg' },
+]
 export default function BasicInformationScreen() {
   const [checked, setChecked] = React.useState("first");
   const [selectedBodyShape, setSelectedTypeOfClothes] = useState('');
   const [userStorage, setUserStorage] = useState<UserInterFace>();
+  const [bodyShape, setBodyShape] = useState<{label: string, value: string, imgUrl: string}[]>([]);
 
 
   const navigation = useNavigation<ScreenNavigationProp>();
@@ -44,8 +54,13 @@ export default function BasicInformationScreen() {
     const fetchData = async () => {
       const user = await AsyncStorage.getItem('userData');
       if (user) {
-        const userParse = JSON.parse(user);
+        const userParse: UserInterFace = JSON.parse(user);
         setUserStorage(userParse);
+        if (userParse.gender) {
+          setBodyShape(bodyShapeMale)
+        } else {
+          setBodyShape(bodyShapeFemale)
+        }
       }
     }
     fetchData();
@@ -193,9 +208,9 @@ export default function BasicInformationScreen() {
                     status={selectedBodyShape === type.value ? 'checked' : 'unchecked'}
                     onPress={() => handleTypeOfClothChange(type.value)}
                   /> */}
-              <View style={{ width: width * 0.40, height: 150, alignItems: 'center' }}>
-                <View style={{ width: width * 0.3, height: 150, borderRadius: 20 }} >
-                  <Image source={{ uri: type.imgUrl }} style={{ width: width * 0.3, height: 150, borderRadius: 20 }} />
+              <View style={{ width: width * 0.385, height: 150, alignContent: 'center', alignItems: 'center', justifyContent: 'center'}}>
+                <View style={{ width: width * 0.3, height: 150, borderRadius: 20, alignContent: 'center', alignItems: 'center', justifyContent: 'center' }} >
+                  <Image source={{ uri: type.imgUrl }} style={{ width: width * 0.2, height: 150, borderRadius: 20 }} />
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20, alignContent: 'flex-start' }}>
                   <RadioButton
@@ -205,7 +220,7 @@ export default function BasicInformationScreen() {
                     status={selectedBodyShape === type.value ? 'checked' : 'unchecked'}
                     onPress={() => handleTypeOfClothChange(type.value)}
                   />
-                  <Text style={{ fontSize: 14 }}>{type.label}</Text>
+                  <Text style={{ fontSize: 13 }}>{type.label}</Text>
                 </View>
               </View>
             </View>

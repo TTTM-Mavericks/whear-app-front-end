@@ -182,11 +182,11 @@ const SignInComponent = () => {
         justifyContent: 'center',
         alignItems: 'center',
         width: width,
-        height: height,
+        height: height*1.2,
         padding: 16
       }} source={require('../../../assets/img/logo/background.png')}>
         <Image source={require('../../../assets/img/logo/logo.png')} style={{width: 150, height: 150, marginTop: 35}}></Image>
-        <View style={{marginTop: 50}}>
+        <View style={{marginTop: 20}}>
           <Text style={SigInStylesComponent.title}>Sign In</Text>
           <TextInput
             label="Email"

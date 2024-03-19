@@ -158,7 +158,7 @@ const UpgradeScreen = () => {
         setIsLoading(true);
         try {
             const paymentRequestBody = {
-                description: description,
+                description: `${buyerEmail}: upgrade Premium role`,
                 buyerName: buyerName,
                 buyerEmail: buyerEmail,
                 buyerPhone: buyerPhone,
