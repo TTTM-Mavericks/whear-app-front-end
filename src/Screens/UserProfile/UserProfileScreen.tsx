@@ -289,7 +289,7 @@ const UserProfileScreen = () => {
       }
 
       if (selectedTag === 'posting') {
-        const getData = await api.get(`/api/v1/post/get-all-post-for-user?user_id=${currentUser?.userID}`, params, token);
+        const getData = await api.get(`/api/v1/post/get-all-post-of-user?user_id=${currentUser?.userID}`, params, token);
 
         if (getData.success === 200) {
           setPosting(getData.data)
