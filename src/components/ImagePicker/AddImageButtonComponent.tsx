@@ -84,6 +84,7 @@ const AddImageButtonComponent: React.FC<ImageButtonProps> = (
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
+      dispatch(setUploadToFireBase(true));
       await uploadImage(result.assets[0].uri, "image");
     }
   }
@@ -164,7 +165,7 @@ const AddImageButtonComponent: React.FC<ImageButtonProps> = (
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL: string) => {
           console.log("File available at", downloadURL);
-          dispatch(setUploadToFireBase(true));
+          dispatch(setUploadToFireBase(false));
           if (isAddNewImage) {
             dispatch(saveImageCreatingUrl(downloadURL));
           }

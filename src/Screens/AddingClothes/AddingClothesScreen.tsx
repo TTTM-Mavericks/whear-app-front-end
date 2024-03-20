@@ -157,7 +157,7 @@ const dropdownData = {
     { value: 'IVORY', label: '#FFFFF0' },
   ],
 
-  fashionStyles: [
+  fashionStylesMale: [
     { label: 'CYBERPUNK', value: 'CYBERPUNK', imgUrl: 'https://i.pinimg.com/564x/be/6e/92/be6e928031d63b318a3e40838d1a521e.jpg' },
     { label: 'CLASSIC', value: 'CLASSIC', imgUrl: 'https://i.pinimg.com/564x/6b/53/4b/6b534b415ac978d559b388dfc775227a.jpg' },
     { label: 'VINTAGE', value: 'VINTAGE', imgUrl: 'https://i.pinimg.com/564x/c3/8f/47/c38f47fc4cf06e4d17c819514774fa73.jpg' },
@@ -208,9 +208,9 @@ const dropdownData = {
   ],
 
   gender: [
-    {label: 'Male', value: 'MALE'},
-    {label: 'Female', value: 'FEMALE'},
-    {label: 'Other', value: 'OTHER'},
+    { label: 'Male', value: 'MALE' },
+    { label: 'Female', value: 'FEMALE' },
+    { label: 'Other', value: 'OTHER' },
 
 
   ]
@@ -246,7 +246,7 @@ const AddingClothesScreen = () => {
   const [multilineText, setMultilineText] = useState('');
   const [clothesImageUrl, setClothesImageUrl] = useState<string[]>([]);
   const [clothDetail, setClothDetail] = useState('');
-  const [shopLink, setShopLink] = useState('');
+  const [shopLink, setShopLink] = useState('https://whearapp.tech/');
   const [hashtagTxt, setHashtagTxt] = useState('');
   const [hashtagArr, setHashtagArr] = useState<string[]>([]);
   const [newCloth, setNewCloth] = useState<ClothesInterface>();
@@ -262,6 +262,7 @@ const AddingClothesScreen = () => {
   const [canAdd, setCanAdd] = useState(false);
   const [isKeyBoardOpen, setIskeyboardOpen] = useState(false);
   const [heightOfKeyBoard, setHeightOfKeyBoard] = useState(0);
+  const [fashionStyles, setFashionStyles] = useState<{label: string, value: string, imgUrl: string}[]>([])
 
 
 
@@ -297,6 +298,7 @@ const AddingClothesScreen = () => {
 
 
   React.useEffect(() => {
+    setIsLoading(false);
     const fetchData = async () => {
       const tokenStorage = await AsyncStorage.getItem('access_token');
       if (tokenStorage) {
@@ -308,7 +310,6 @@ const AddingClothesScreen = () => {
   }, []);
 
   React.useEffect(() => {
-    setIsLoadingImage(false);
     dispatch(saveImageCreatingUrl(clothesLogoUrlDefault));
     const getData = async () => {
       try {
@@ -317,6 +318,11 @@ const AddingClothesScreen = () => {
         if (userString) {
           const user = JSON.parse(userString);
           const userID = user.userID;
+          if(user.gender) {
+            setFashionStyles(dropdownData.fashionStylesMale);
+          } else {
+            setFashionStyles(dropdownData.fashionStylesFemale);
+          }
           setUserID(userID);
         } else {
           console.warn('User data not found in AsyncStorage.');
@@ -329,9 +335,9 @@ const AddingClothesScreen = () => {
   }, [])
 
   React.useEffect(() => {
+    setClothesImageUrl((prev) => [imageUrlState]);
     if (isUploadedImage) {
       setIsLoadingImage(false);
-      setClothesImageUrl((prev) => [imageUrlState]);
     } else {
       setIsLoadingImage(true);
     }
@@ -376,7 +382,7 @@ const AddingClothesScreen = () => {
 
   /*-----------------Function handler-----------------*/
   function hanldeGoBack(): void {
-    navigation.goBack();
+    navigation.navigate('Home');
   }
 
   const openMenu = () => setVisible(true);
@@ -452,7 +458,7 @@ const AddingClothesScreen = () => {
      * SignUp handler
      */
   const handleCreateCloth = async () => {
-    setIsLoading(true);
+    setIsLoading(false);
     try {
       const hashtagArray = hashtagTxt.split(',');
       let gender;
@@ -492,14 +498,13 @@ const AddingClothesScreen = () => {
         });
         setIsLoading(false);
         const clothID = response.data.clothesID
-          navigation.navigate('ClothesDetailScreen', { clothID });
+        navigation.navigate('ClothesDetailScreen', { clothID });
       } else {
         Toast.show({
           type: 'error',
           text1: JSON.stringify(response.message),
           position: 'top'
         });
-        setIsLoading(false);
 
       }
     } catch (error: any) {
@@ -761,7 +766,7 @@ const AddingClothesScreen = () => {
                   rowTextForSelection={(item, index) => item.label}
                 />
               </View>
-              <View style={{paddingTop: -20, marginBottom: 30}}>
+              <View style={{ paddingTop: -20, marginBottom: 30 }}>
                 <Text style={AddingClothesStyleScreen.lableDropDown}>Hashtag</Text>
                 <TextInput
                   value={hashtagTxt}
@@ -845,9 +850,9 @@ const AddingClothesScreen = () => {
                     onPress={() => handleTypeOfClothChange(type.value)}
                   /> */}
                 <View style={{ width: width * 0.40, height: 150, alignItems: 'center' }}>
-                  <View style={{ width: width * 0.3, height: 150, borderRadius: 20 }} >
+                  <TouchableOpacity onPress={() => handleTypeOfClothChange(type.value)} style={{ width: width * 0.3, height: 150, borderRadius: 20 }} >
                     <Image source={{ uri: type.imgUrl }} style={{ width: width * 0.3, height: 150, borderRadius: 20 }} />
-                  </View>
+                  </TouchableOpacity>
                   <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20, alignContent: 'flex-start' }}>
                     <RadioButton
                       key={key}
@@ -878,9 +883,9 @@ const AddingClothesScreen = () => {
             {dropdownData.shape.map((type, key) => (
               <View key={type.value} style={{ flexDirection: 'row', marginBottom: 50, alignItems: 'center' }}>
                 <View key={type.value} style={{ width: width * 0.40, height: 150, alignItems: 'center' }}>
-                  <View style={{ width: width * 0.3, height: 150, borderRadius: 20 }} >
+                  <TouchableOpacity  onPress={() => handlePickShape(type.value)} style={{ width: width * 0.3, height: 150, borderRadius: 20 }} >
                     <Image source={{ uri: type.imgUrl }} style={{ width: width * 0.3, height: 150, borderRadius: 20 }} />
-                  </View>
+                  </TouchableOpacity>
                   <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20, alignContent: 'flex-start' }}>
                     <RadioButton
                       key={type.value}
@@ -911,9 +916,9 @@ const AddingClothesScreen = () => {
             {dropdownData.seasons.map((season, key1) => (
               <View key={season.value} style={{ flexDirection: 'row', marginBottom: 50, alignItems: 'center' }}>
                 <View key={season.value} style={{ width: width * 0.40, height: 150, alignItems: 'center' }}>
-                  <View style={{ width: width * 0.3, height: 150, borderRadius: 20 }} >
+                  <TouchableOpacity  onPress={() => handleSeasonChange(season.value)} style={{ width: width * 0.3, height: 150, borderRadius: 20 }} >
                     <Image source={{ uri: season.imgUrl }} style={{ width: width * 0.3, height: 150, borderRadius: 20 }} />
-                  </View>
+                  </TouchableOpacity>
                   <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20, alignContent: 'flex-start' }}>
                     {Platform.OS === 'ios' ? (
                       <RadioButton.IOS
@@ -953,12 +958,12 @@ const AddingClothesScreen = () => {
         <Dialog.Title style={{ fontSize: 15 }}>Style</Dialog.Title>
         <ScrollView style={{ height: 400 }}>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', alignContent: 'center', alignItems: 'center', marginLeft: 10, marginBottom: 20 }}>
-            {dropdownData.fashionStyles.map((style, key1) => (
+            {fashionStyles.map((style, key1) => (
               <View key={style.value} style={{ flexDirection: 'row', marginBottom: 50, alignItems: 'center' }}>
                 <View key={style.value} style={{ width: width * 0.40, height: 150, alignItems: 'center' }}>
-                  <View style={{ width: width * 0.3, height: 150, borderRadius: 20 }} >
+                  <TouchableOpacity onPress={() => handleStyleonChange(style.value)} style={{ width: width * 0.3, height: 150, borderRadius: 20 }} >
                     <Image source={{ uri: style.imgUrl }} style={{ width: width * 0.3, height: 150, borderRadius: 20 }} />
-                  </View>
+                  </TouchableOpacity>
                   <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20, alignContent: 'flex-start' }}>
                     {Platform.OS === 'ios' ? (
                       <RadioButton.IOS

@@ -158,7 +158,7 @@ const UpgradeScreen = () => {
         setIsLoading(true);
         try {
             const paymentRequestBody = {
-                description: `${buyerEmail}: upgrade Premium role`,
+                description: `Upgrade Premium role`,
                 buyerName: buyerName,
                 buyerEmail: buyerEmail,
                 buyerPhone: buyerPhone,
@@ -235,7 +235,7 @@ const UpgradeScreen = () => {
 
     // GO BACK TO HOME SCREEN
     function handleGoBack(): void {
-        navigation.goBack();
+        navigation.navigate('Home');
     }
 
     return (

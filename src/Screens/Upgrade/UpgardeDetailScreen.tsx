@@ -12,6 +12,8 @@ import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-paper';
 import { height } from '../../root/ResponsiveSize';
 import { ALERT_TYPE, Dialog, AlertNotificationRoot } from 'react-native-alert-notification';
+import { setIsLogined } from '../../redux/State/Actions';
+import { useDispatch } from 'react-redux';
 
 type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Route'>;
 
@@ -126,7 +128,28 @@ const UpgardeDetailScreen = () => {
         } else {
             console.error(`Don't know how to open Url`);
         }
+
+        
     }
+
+    const dispatch = useDispatch();
+
+    const handleLogout = async () => {
+        try {
+          await AsyncStorage.removeItem('access_token');
+          await AsyncStorage.removeItem('userData');
+          // Optional: Perform any other logout-related actions
+          console.log('Items cleared successfully');
+          console.log('AsyncStorage cleared successfully');
+          dispatch(setIsLogined(false));
+          AsyncStorage.setItem('logined', 'false');
+          setTimeout(() => {
+            navigation.navigate('SignIn');
+          }, 500)
+        } catch (error) {
+          console.error('Error clearing AsyncStorage:', error);
+        }
+      }
 
 
     return (
@@ -207,7 +230,7 @@ const UpgardeDetailScreen = () => {
                                 contentStyle={Platform.OS === 'ios' ? { height: height * 0.045 } : { height: height * 0.04 }}
                                 style={[UpgradeStyleScreen.buttonGroup_button, { backgroundColor: grayBackgroundColor, width: 140 }]}
                                 labelStyle={[UpgradeStyleScreen.buttonGroup_button_lable,]}
-                                onPress={() => handleLinkPress(checkoutUrl)}
+                                onPress={() => handleLogout()}
                             >
                                 <Text style={{ fontWeight: '500', fontSize: 15 }}>Logout</Text>
                             </Button>

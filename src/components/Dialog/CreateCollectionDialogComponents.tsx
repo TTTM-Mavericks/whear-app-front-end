@@ -56,8 +56,8 @@ const CreateCollectionDialogComponents = () => {
     const navigation = useNavigation<SignInScreenNavigationProp>();
     const [nameOfCollection, setNameOfCollection] = React.useState('');
     const [openStyle, setOpenStyle] = React.useState(false);
-    const [selectedStyle, setSelectedStyle] = React.useState<string>();
-    const [collectionImageUrl, setCollectionImageUrl] = React.useState<string>();
+    const [selectedStyle, setSelectedStyle] = React.useState<string>('');
+    const [collectionImageUrl, setCollectionImageUrl] = React.useState<string>('');
     const [isLoadingImage, setIsLoadingImage] = React.useState(false);
     const [user, setUser] = React.useState<UserInterFace>();
     const [subrole, setSubRole] = React.useState('');
@@ -107,6 +107,10 @@ const CreateCollectionDialogComponents = () => {
 
     React.useEffect(() => {
         if (openDialog) {
+            setNameOfCollection('')
+            setSelectedStyle('')
+            setCollectionImageUrl('')
+            setMessageAdded('')
             showAnimation()
             setIsOpen(openDialog);
         } else {
@@ -125,7 +129,7 @@ const CreateCollectionDialogComponents = () => {
         }
     }, [imageUrlState]);
 
-    React.useEffect(()=> {
+    React.useEffect(() => {
         setIsLoadingImage(false);
     }, [collectionImageUrl])
 
@@ -285,7 +289,7 @@ const CreateCollectionDialogComponents = () => {
                                 <AddImageButtonComponent width={9} height={9} isCollectionImage={true} iconColor={primaryColor}></AddImageButtonComponent>
                             </View>
                         </View>
-                        
+
                     </Dialog.Content>
 
                     <View style={{ backgroundColor: backgroundColor, width: '100%', justifyContent: 'center', alignItems: 'center', borderBottomStartRadius: 10, borderBottomEndRadius: 10, marginTop: 20 }} >
@@ -314,9 +318,9 @@ const CreateCollectionDialogComponents = () => {
                             {dropdownData.fashionStyles.map((style, key1) => (
                                 <View key={style.value} style={{ flexDirection: 'row', marginBottom: 50, alignItems: 'center' }}>
                                     <View key={style.value} style={{ width: width * 0.40, height: 150, alignItems: 'center' }}>
-                                        <View style={{ width: width * 0.3, height: 150, borderRadius: 20 }} >
+                                        <TouchableOpacity onPress={() => handleStyleonChange(style.value)} style={{ width: width * 0.3, height: 150, borderRadius: 20 }} >
                                             <Image source={{ uri: style.imgUrl }} style={{ width: width * 0.3, height: 150, borderRadius: 20 }} />
-                                        </View>
+                                        </TouchableOpacity>
                                         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 20, alignContent: 'flex-start' }}>
                                             {Platform.OS === 'ios' ? (
                                                 <RadioButton.IOS

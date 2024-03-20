@@ -48,6 +48,7 @@ const AddingToCollectionComponent: React.FC<{ clothID?: any }> = ({ clothID }) =
     /*-----------------UseEffect-----------------*/
     React.useEffect(() => {
         if (openDialog) {
+            setMessageAdded('')
             showAnimation()
             setIsOpen(openDialog);
         } else {
