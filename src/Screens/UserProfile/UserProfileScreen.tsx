@@ -17,10 +17,11 @@ import AddImageButtonComponent from '../../components/ImagePicker/AddImageButton
 import api from '../../api/AxiosApiConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ClothesInterface, CollectionInterface, PostingInterface, TransactionInterface, UserInterFace } from '../../models/ObjectInterface';
-import { setIsLogined, setUploadToFireBase } from '../../redux/State/Actions';
+import { setIsLogined, setOpenUpgradeRolesDialog, setUploadToFireBase } from '../../redux/State/Actions';
 import { clothesLogoUrlDefault, spanTextSize } from '../../root/Texts';
 import Toast from 'react-native-toast-message';
 import LoadingComponent from '../../components/Common/Loading/LoadingComponent';
+import UpgradeRoleDialogComponent from '../../components/Dialog/UpgradeRoleDialogComponent';
 
 interface ListItem {
   id: string;
@@ -142,7 +143,7 @@ const UserProfileScreen = () => {
           if (response.success === 200) {
             setUserStorage(response.data);
             const data = response.data
-            AsyncStorage.setItem('userData', JSON.stringify(data));
+            // AsyncStorage.setItem('userData', JSON.stringify(data));
             dispatch(setUploadToFireBase(false));
             Toast.show({
               type: 'success',
@@ -288,7 +289,7 @@ const UserProfileScreen = () => {
       }
 
       if (selectedTag === 'posting') {
-        const getData = await api.get(`/api/v1/post/get-all-post-for-user?user_id=${currentUser?.userID}`, params, token);
+        const getData = await api.get(`/api/v1/post/get-all-post-of-user?user_id=${currentUser?.userID}`, params, token);
 
         if (getData.success === 200) {
           setPosting(getData.data)
@@ -474,6 +475,9 @@ const UserProfileScreen = () => {
   const handleMoveToPostDetail = (postID: any) => {
     navigation.navigate('PostingDetail', { postID: postID })
   }
+  const hanleOpenUpgrade = () => {
+    dispatch(setOpenUpgradeRolesDialog(true));
+  }
 
   return (
     <View style={UserProfileStyleScreen.container}>
@@ -484,10 +488,12 @@ const UserProfileScreen = () => {
       />
       <View style={UserProfileStyleScreen.header}>
         <IconButton icon={require('../../assets/icon/backarrow.png')} onPress={() => navigation.navigate('Social')}></IconButton>
-        <View style={UserProfileStyleScreen.upgradeBanner} >
+        <TouchableOpacity onPress={hanleOpenUpgrade} style={UserProfileStyleScreen.upgradeBanner} >
           <Icon source={require('../../assets/img/logo/logo.png')} size={40}></Icon>
-          <Text style={{ fontSize: 12, fontWeight: 'bold', marginRight: 10 }}>Upgrade to Store</Text>
-        </View>
+          <TouchableOpacity onPress={hanleOpenUpgrade}>
+            <Text style={{ fontSize: 12, fontWeight: 'bold', marginRight: 10 }}>Upgrade to Premium</Text>
+          </TouchableOpacity>
+        </TouchableOpacity>
       </View>
       <View style={[UserProfileStyleScreen.backGroundImg, Platform.OS === 'ios' ? { marginTop: -width * 0.88 } : { marginTop: -width * 1.05 }]}>
         <View style={UserProfileStyleScreen.avatarImg}>
@@ -525,7 +531,9 @@ const UserProfileScreen = () => {
           alignItems: 'center',
         }}>
           <Text style={UserProfileStyleScreen.fullname}>{currentUser?.username}</Text>
-          <IconButton icon={require('../../assets/icon/upgrade.png')} iconColor={'black'} size={25} style={{ position: 'absolute', right: -50 }}></IconButton>
+          {currentUser?.subRole === 'LV2' && (
+            <IconButton icon={require('../../assets/icon/upgrade.png')} iconColor={'black'} size={25} style={{ position: 'absolute', right: -50 }}></IconButton>
+          )}
 
         </View>
 
@@ -891,6 +899,7 @@ const UserProfileScreen = () => {
       )}
       <AppBarFooterComponents isHide={scrollUp} centerIcon={require('../../assets/img/logo/logo.png')}></AppBarFooterComponents>
       <LoadingComponent spinner={isLoading} ></LoadingComponent>
+      <UpgradeRoleDialogComponent></UpgradeRoleDialogComponent>
     </View >
 
 

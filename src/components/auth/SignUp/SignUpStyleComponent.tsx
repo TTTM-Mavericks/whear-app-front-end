@@ -8,10 +8,10 @@ const containerPadding = 16;
 const SignUpStylesComponent = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 150,
+    marginTop: 10,
     justifyContent: 'center',
     padding: containerPadding,
-    backgroundColor: backgroundColor
+    backgroundColor: 'transparent'
   },
   title: {
     fontSize: width * titleTextSize,

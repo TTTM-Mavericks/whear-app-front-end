@@ -161,6 +161,8 @@ const HomeScreen = () => {
           }
           else {
             console.log(getData.data);
+            navigation.navigate('SignIn');
+
           }
 
         } catch (error) {
@@ -242,6 +244,7 @@ const HomeScreen = () => {
 
         } else {
           console.log(getData.data);
+
         }
       }
     } catch (error) {
@@ -414,17 +417,17 @@ const HomeScreen = () => {
         scrollEventThrottle={16}
       >
         <View style={HomeStylesComponent.scrollViewContent}>
-          <HorizontalCarouselComponent data={seperateData.length>0 ? seperateData : dataSliderIntro}></HorizontalCarouselComponent>
+          <HorizontalCarouselComponent data={seperateData.length > 0 ? seperateData : dataSliderIntro}></HorizontalCarouselComponent>
           <ChipGroupComponent></ChipGroupComponent>
 
           {/* Horizontal FlatList */}
           <FlatList
             horizontal={true}
             style={HomeStylesComponent.homeSliderHorizotalContent}
-            data={listStyle.slice(0,5)}
+            data={listStyle.slice(0, 5)}
             keyExtractor={(item) => item.value}
             renderItem={({ item }) => (
-              <ListViewComponent onPress={()=> navigation.navigate('StyleOfClothesScreen', {stylesOfClothes: item.value})} cardStyleContent={{ width: (width + 55) * 0.4, height: 300, borderRadius: 8 }} cardStyleContainer={{ margin: 5, alignContent: 'center', width: (width + 55) * 0.4, height: 300, borderRadius: 8 }} data={[{ id: item.value, imgUrl: item.imgUrl, }]} />
+              <ListViewComponent onPress={() => navigation.navigate('StyleOfClothesScreen', { stylesOfClothes: item.value })} cardStyleContent={{ width: (width + 55) * 0.4, height: 300, borderRadius: 8 }} cardStyleContainer={{ margin: 5, alignContent: 'center', width: (width + 55) * 0.4, height: 300, borderRadius: 8 }} data={[{ id: item.value, imgUrl: item.imgUrl, }]} />
             )}
             contentContainerStyle={{ paddingRight: 0 }}
             showsVerticalScrollIndicator={false}

@@ -1,6 +1,7 @@
 import { StyleSheet, Dimensions } from "react-native";
 import { backgroundColor } from "../../root/Colors";
-import { ITEM_HEIGHT, ITEM_WIDTH } from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
+import { ITEM_HEIGHT } from '../../components/Common/AppBarHeader/AppBarHeaderStyleComponent';
+import { ITEM_WIDTH } from '../../components/ListView/ListViewStyleComponent';
 
 const { width, height } = Dimensions.get("window");
 const containerPadding = 16;
