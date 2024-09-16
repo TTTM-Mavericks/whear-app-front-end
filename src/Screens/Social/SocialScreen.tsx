@@ -141,7 +141,7 @@ const SocialScreen = () => {
   };
   const handleNumberOfComment = async (postID: number, postComment: CommentsInterface[]) => {
     let posting = [...currentPosting]
-     posting.forEach((item) => {
+    posting.forEach((item) => {
       if (item.postID === postID) {
         item.comment = postComment;
       }
@@ -209,7 +209,7 @@ const SocialScreen = () => {
         <View style={SocailStyleScreen.scrollViewContent}>
           <UserListHoriziableComponent isLoading={isLoading}></UserListHoriziableComponent>
           <View style={SocailStyleScreen.postingEditorContainer}>
-            
+
             <View style={{ marginTop: 20 }}>
               <TextInput
                 value='What are you thinking?'
@@ -228,121 +228,132 @@ const SocialScreen = () => {
           </View>
 
           {/* Regular FlatList */}
-          <FlatList
-            style={SocailStyleScreen.flatlist}
-            data={currentPosting}
-            keyExtractor={(item: any) => item.postID}
-            renderItem={({ item }) => (
-              <ListViewComponent
-                key={item.postID}
-                data={[{ id: item.postID, imgUrl: '#' }]}
-                extendImgUrl={item.image && item.image[0]}
-                cardStyleContainer={SocailStyleScreen.container_cardContainer}
-                cardStyleContent={SocailStyleScreen.container_cardContent}
-                onPress={() => handleMoveToPostingDetail(item.postID)}
-                extendHeaderChild={
-                  <View
-                    key={item.postID}
-                    style={[
-                      SocailStyleScreen.container_postingBar,
-                      { marginTop: 20 },
-                    ]}
-                  >
-                    <TouchableOpacity
-                      onPress={() => handleMoveToUserProfile(item?.userResponse?.userID)}
+          {currentPosting.length > 0 ? (
+            <FlatList
+              style={SocailStyleScreen.flatlist}
+              data={currentPosting}
+              keyExtractor={(item: any) => item.postID}
+              renderItem={({ item }) => (
+                <ListViewComponent
+                  key={item.postID}
+                  data={[{ id: item.postID, imgUrl: '#' }]}
+                  extendImgUrl={item.image && item.image[0]}
+                  cardStyleContainer={SocailStyleScreen.container_cardContainer}
+                  cardStyleContent={SocailStyleScreen.container_cardContent}
+                  onPress={() => handleMoveToPostingDetail(item.postID)}
+                  extendHeaderChild={
+                    <View
+                      key={item.postID}
+                      style={[
+                        SocailStyleScreen.container_postingBar,
+                        { marginTop: 20 },
+                      ]}
                     >
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          width: width * 0.8,
-                          height: 'auto',
-                        }}
+                      <TouchableOpacity
+                        onPress={() => handleMoveToUserProfile(item?.userResponse?.userID)}
                       >
-                        <Avatar.Image
-                          size={iconAvatarPostingSize}
-                          source={{ uri: item?.userResponse?.imgUrl }}
-                          style={{ marginLeft: 10 }}
-                        />
                         <View
                           style={{
-                            marginLeft: 10,
-                            marginTop: 5,
+                            flexDirection: 'row',
+                            width: width * 0.8,
+                            height: 'auto',
                           }}
                         >
-                          <Text
+                          <Avatar.Image
+                            size={iconAvatarPostingSize}
+                            source={{ uri: item?.userResponse?.imgUrl }}
+                            style={{ marginLeft: 10 }}
+                          />
+                          <View
                             style={{
-                              fontWeight: 'bold',
-                              paddingTop: iconAvatarPostingSize * 0.05,
+                              marginLeft: 10,
+                              marginTop: 5,
                             }}
                           >
-                            {item.userResponse?.username}
-                          </Text>
-                          <Text style={{ fontSize: spanTextSize * 0.8 }}>
-                            {item?.date?.split('T')[0]} {item?.date?.split('.')[0].split('T')[1]}
-                          </Text>
-                        </View>
-                      </View>
-                    </TouchableOpacity>
-                    <View style={{ position: 'absolute', right: 0 }}>
-                      <IconButton icon={require('../../assets/icon/3dotmenu.png')} size={20}></IconButton>
-                    </View>
-                  </View>
-                }
-                extendChild={
-                  <View key={item.postID} style={SocailStyleScreen.post__content}>
-
-                    <PostContentComponent key={item.postID} props={item} user={user} isReact={item.reacted} />
-
-                    <View style={SocailStyleScreen.post__content_child}>
-                      {item.content && (
-                        <Text style={{ color: 'black', fontSize: 15 }}>
-                          {showFullContent
-                            ? item.content
-                            : item?.content.substring(0, 150) + '...'}
-                          {"  "}
-                          {item.content.length > 150 && (
                             <Text
-                              onPress={handleToggleContent}
-                              style={{ color: 'black', fontSize: 15, textDecorationLine: 'underline' }}
+                              style={{
+                                fontWeight: 'bold',
+                                paddingTop: iconAvatarPostingSize * 0.05,
+                              }}
                             >
-                              {showFullContent ? 'See less' : 'See more'}
+                              {item.userResponse?.username}
                             </Text>
-                          )}
-                        </Text>
-                      )}
-
-
-
-                      {user && item.postID === selectedItem && (
-                        <SafeAreaView >
-                          {item.comment && (
-                            <CommentsDetailDialogComponent
-                              postId={item.postID}
-                              comments={item.comment}
-                              user={user}
-                              handleNumberOfComment={handleNumberOfComment}
-                            ></CommentsDetailDialogComponent>
-                          )}
-                        </SafeAreaView>
-                      )}
-                    </View>
-                    <View style={{ paddingVertical: 5 }}>
-                      <TouchableOpacity onPress={() => handleOpenCommentsDialog(item.postID)}>
-                        <Text
-                          style={{ color: 'gray', fontSize: 15 }}
-                        >
-                          See all {item.comment ? item.comment.length : '0'} comments
-                        </Text>
+                            <Text style={{ fontSize: spanTextSize * 0.8 }}>
+                              {item?.date?.split('T')[0]} {item?.date?.split('.')[0].split('T')[1]}
+                            </Text>
+                          </View>
+                        </View>
                       </TouchableOpacity>
+                      <View style={{ position: 'absolute', right: 0 }}>
+                        <IconButton icon={require('../../assets/icon/3dotmenu.png')} size={20}></IconButton>
+                      </View>
                     </View>
-                  </View>
-                }
-              />
+                  }
+                  extendChild={
+                    <View key={item.postID} style={SocailStyleScreen.post__content}>
+
+                      <PostContentComponent key={item.postID} props={item} user={user} isReact={item.reacted} />
+
+                      <View style={SocailStyleScreen.post__content_child}>
+                        {item.content && (
+                          <Text style={{ color: 'black', fontSize: 15 }}>
+                            {showFullContent
+                              ? item.content
+                              : item?.content.substring(0, 150) + '...'}
+                            {"  "}
+                            {item.content.length > 150 && (
+                              <Text
+                                onPress={handleToggleContent}
+                                style={{ color: 'black', fontSize: 15, textDecorationLine: 'underline' }}
+                              >
+                                {showFullContent ? 'See less' : 'See more'}
+                              </Text>
+                            )}
+                          </Text>
+                        )}
+
+
+
+                        {user && item.postID === selectedItem && (
+                          <SafeAreaView >
+                            {item.comment && (
+                              <CommentsDetailDialogComponent
+                                postId={item.postID}
+                                comments={item.comment}
+                                user={user}
+                                handleNumberOfComment={handleNumberOfComment}
+                              ></CommentsDetailDialogComponent>
+                            )}
+                          </SafeAreaView>
+                        )}
+                      </View>
+                      <View style={{ paddingVertical: 5 }}>
+                        <TouchableOpacity onPress={() => handleOpenCommentsDialog(item.postID)}>
+                          <Text
+                            style={{ color: 'gray', fontSize: 15 }}
+                          >
+                            See all {item.comment ? item.comment.length : '0'} comments
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  }
+                />
+              )}
+              contentContainerStyle={{ paddingRight: 0 }}
+              showsVerticalScrollIndicator={false}
+              scrollEnabled={false}
+            />
+          )
+            : (
+              <View style={{alignContent: 'center', alignItems:'center', justifyContent: 'center', paddingTop: 50}}>
+                <IconButton style={{alignContent: 'center', alignItems:'center', justifyContent: 'center', marginTop: 50}} icon={require('../../assets/icon/user.png')} mode='outlined' size={40}></IconButton>
+                <View>
+                  <Text style={{color:' black', fontSize: 13}}>Add more friend to see their posts.</Text>
+                </View>
+              </View>
             )}
-            contentContainerStyle={{ paddingRight: 0 }}
-            showsVerticalScrollIndicator={false}
-            scrollEnabled={false}
-          />
+
           {/* <PostingDialogComponent></PostingDialogComponent> */}
         </View>
       </ScrollView>

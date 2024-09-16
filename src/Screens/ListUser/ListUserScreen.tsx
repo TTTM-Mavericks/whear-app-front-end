@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, FlatList, ActivityIndicator, Text } from 'react-native';
+import { View, FlatList, ActivityIndicator, Text, TouchableOpacity } from 'react-native';
 import { ListUserStyleScreen } from './ListUserStyleScreen';
 import { UserInterFace } from '../../models/ObjectInterface';
 import api from '../../api/AxiosApiConfig';
@@ -7,7 +7,7 @@ import { List, Button, Avatar } from 'react-native-paper';
 import AppBarHeaderComponent from '../../components/Common/AppBarHeader/AppBarHeaderComponent';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaskedView from '@react-native-masked-view/masked-view';
-import { primaryColor, secondaryColor } from '../../root/Colors';
+import { backgroundColor, primaryColor, secondaryColor } from '../../root/Colors';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../../root/RootStackParams';
 import { useNavigation } from '@react-navigation/native';
@@ -23,6 +23,7 @@ const ListUserScreen: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   React.useEffect(() => {
+    setIsLoading(true);
     const fetchData = async () => {
       const tokenStorage = await AsyncStorage.getItem('access_token');
       const userStorage = await AsyncStorage.getItem('userData');
@@ -38,6 +39,7 @@ const ListUserScreen: React.FC = () => {
 
             if (getData.success === 200) {
               setUsers(getData.data.filter((user: UserInterFace) => user.userID !== userParse.userID));
+              setIsLoading(false)
             }
             else {
               console.log(getData.data);
@@ -64,22 +66,22 @@ const ListUserScreen: React.FC = () => {
   };
 
   const renderItem = ({ item }: { item: UserInterFace }) => (
-    <View style={{ flexDirection: 'row', alignItems: 'center', alignContent: 'center', justifyContent: 'center', marginLeft: 20 }}>
+    <TouchableOpacity onPress={()=>navigation.navigate('UserProfile', {userID: item.userID})} style={{ flexDirection: 'row', alignItems: 'center', alignContent: 'center', justifyContent: 'center' }}>
       <Avatar.Image size={60} source={{ uri: item.imgUrl }} style={{ marginRight: 20 }} />
       <View style={{ flex: 1 }}>
         <List.Item
           title={item.username}
         />
         <View style={{ flexDirection: 'row' }}>
-          <Button mode="elevated" style={[ListUserStyleScreen.acceptButton, { width: 110 }]} onPress={() => handleAccept(item.userID)}>
+          <Button labelStyle={{color: backgroundColor}} mode="elevated" style={[ListUserStyleScreen.acceptButton, { width: 110 }]} onPress={()=>navigation.navigate('UserProfile', {userID: item.userID})}>
             Follow
           </Button>
-          <Button mode="elevated" style={[ListUserStyleScreen.rejectButton, { width: 110 }]} onPress={() => handleReject(item.userID)}>
+          <Button labelStyle={{color: backgroundColor}}  mode="elevated" style={[ListUserStyleScreen.rejectButton, { width: 110 }]} onPress={() => handleReject(item.userID)}>
             Remove
           </Button>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -124,6 +126,7 @@ const ListUserScreen: React.FC = () => {
           showsVerticalScrollIndicator={false}
         />
       )}
+      <LoadingComponent spinner={isLoading}></LoadingComponent>
     </View>
   );
 };

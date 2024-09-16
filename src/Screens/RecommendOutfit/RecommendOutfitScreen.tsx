@@ -13,15 +13,12 @@ import { height, width } from '../../root/ResponsiveSize';
 import { backgroundColor, fourthColor, grayBackgroundColor, primaryColor, secondaryColor, thirthColor } from '../../root/Colors';
 import { useDispatch } from 'react-redux';
 import { setOpenAddToCollectionsDialog, setOpenUpgradeRolesDialog } from '../../redux/State/Actions';
-import AddingToCollectionComponent from '../../components/Dialog/AddingToCollectionComponent';
 import RecommendOutfitStyleScreen from './RecommendOutfitStyleScreen';
 import AppBarFooterComponents from '../../components/Common/AppBarFooter/AppBarFooterComponents';
 import { LinearGradient } from 'expo-linear-gradient';
 import MaskedView from '@react-native-masked-view/masked-view';
-import TouchabaleActiveActionButton from '../../components/Common/TouchableActive/TouchabaleActiveActionButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../api/AxiosApiConfig';
-import { clothesLogoUrlDefault } from '../../root/Texts';
 import { UserInterFace } from '../../models/ObjectInterface';
 import UpgradeRoleDialogComponent from '../../components/Dialog/UpgradeRoleDialogComponent';
 import { getIconClothImage } from '../../components/Common/Functions/CommonFunctionComponents';
@@ -157,7 +154,6 @@ const RecommendOutfitScreen = () => {
 
           if (getData.success === 200) {
             setData(getData.data)
-            console.log('1111111111111111111111111111111', getData.data);
             setIsLoading(false);
             setCurrentDay('2');
           }
@@ -412,7 +408,6 @@ const RecommendOutfitScreen = () => {
 
         </View>
         <View style={{ alignItems: 'flex-start', marginLeft: 10, marginTop: 10, marginBottom: 0 }}>
-          <Text style={{ fontSize: 13, color: 'black', fontWeight: '500' }}>{data1.length} / {MAX_COLLECTIONS} collections</Text>
         </View>
         <View style={RecommendOutfitStyleScreen.scrollViewContent}>
 
@@ -591,8 +586,10 @@ const RecommendOutfitScreen = () => {
               paddingBottom: 20
             }} source={require('../../assets/img/radian_background_color.png')} />
             <View style={{ flex: 1, }}>
-              <View style={{ margin: 20 }}>
-                <Text>Style: {oufitStyleName}</Text>
+              <View style={{ marginTop: 20, marginBottom: 20, flexDirection: 'row' }}>
+                <View style={[RecommendOutfitStyleScreen.outfitTag, {width: 'auto', backgroundColor: fourthColor}]}>
+                  <Text style={{ fontSize: 14, color: backgroundColor, paddingLeft: 15, paddingRight: 15, padding: 5, fontWeight: '500' }}>Style: {oufitStyleName}</Text>
+                </View>
               </View>
               {aiStylistResponseChild && aiStylistResponseChild.outfits.map((clothesData, key: number) => (
                 <View key={key} style={{ marginTop: 0, marginBottom: 10, backgroundColor: 'transparent' }}>

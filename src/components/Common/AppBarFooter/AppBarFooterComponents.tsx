@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Drawer, FAB, IconButton, Portal } from 'react-native-paper';
 import { Animated, View } from 'react-native';
@@ -25,8 +25,20 @@ const AppBarFooterComponents: React.FC<footerProperties> = ({ isHide, centerIcon
 
     const navigation = useNavigation<RouteNavigationProp>();
 
-    const [value, setValue] = React.useState('');
+    const [value, setValue] = React.useState(false);
     const [isFabGroupVisible, setFabGroupVisible] = React.useState(false);
+
+    useEffect(() => {
+        if (isHide === true) {
+            setTimeout(() => {
+                setValue(true);
+            }, 500);
+        } else {
+            setTimeout(() => {
+                setValue(false);
+            }, 700);
+        }
+    }, [isHide])
 
 
     const scrollY = new Animated.Value(0);
@@ -99,7 +111,7 @@ const AppBarFooterComponents: React.FC<footerProperties> = ({ isHide, centerIcon
         <Animated.View
             style={[
                 AppBarFooterStyleComponents.footerContainer,
-                { display: !isHide ? 'none' : 'flex' },
+                { display: !value ? 'none' : 'flex' },
                 ,
 
             ]}
